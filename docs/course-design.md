@@ -94,3 +94,42 @@ Even when Python executes on your own servers, the LLM still needs to see result
 **Approach 4: Schema-only with sanitized errors.** The LLM only sees database schemas and synthetic sample rows, never real data. It generates all code blind. Results go directly to the user. For the debug loop, error messages are sanitized before being sent back (strip data values from tracebacks, keep only error types and line numbers). A practical middle ground used by some financial services companies.
 
 **The key insight for executives:** This is a policy decision, not a technology problem. The technology to filter, redact, or restrict is straightforward. The hard part is deciding what level of data exposure to the LLM is acceptable for your organization — and that depends on your industry, your regulators, and your risk tolerance.
+
+### 8. Hands-On Building: The Linux Server + Claude Code
+
+Students use two tools in the course. The **Meridian Corp web app** is the polished end-user experience (Weeks 1-2). A **Linux server with Claude Code** is the builder experience (Weeks 3-4), where students create small working agents themselves — with AI assistance.
+
+**Why this matters:** When executives see that the core agent loop is ~50 lines of Python, they stop thinking "we need to hire a team of AI consultants" and start thinking "our internal developer could build this." They also experience being the "checker" while AI is the "maker" — the central skill shift the course teaches.
+
+#### Two-Tool Structure
+
+| Tool | Used in | Purpose |
+|---|---|---|
+| Meridian Corp web app | Weeks 1-2 | The end-user experience. "This is what your employees would use." |
+| Linux server + Claude Code | Weeks 3-4 | The builder experience. "Here's how you'd create this." |
+
+#### Build Exercises (scaffolded, AI-assisted)
+
+**Exercise 1: "Hello World" agent (~30 min).** A Python script that takes a question, sends it to Claude with a schema description, gets back SQL, runs it against a single parquet file, returns the answer. Students use Claude Code to help write it. The parquet file is pre-loaded; they just write the agent loop.
+
+**Exercise 2: Add a second database (~30 min).** Modify the script to handle two databases (e.g., CRM + HR). Claude must query each separately and merge with pandas. The "aha" moment — they see the multi-system merge happen in code they wrote.
+
+**Exercise 3: Add a web interface (~45 min).** Wrap the agent in a simple FastAPI endpoint. Claude Code generates most of it — the student provides direction. They end up with a working chat app built (with AI help) in under an hour.
+
+**Exercise 4: Red-team your agent (~30 min).** Try to break the agent: SQL injection, asking for data they shouldn't see, nonsensical questions. Discover what guardrails are missing and add them.
+
+#### What This Teaches That the App Alone Doesn't
+
+1. **The agent loop is simple** — plan, execute, observe, repeat. Not magic.
+2. **The hard part is prompt engineering** — the system prompt describing the schema is what makes SQL accurate.
+3. **Guardrails are not automatic** — the first version has no SQL validation, no row limits, no error handling. Students discover vulnerabilities by testing.
+4. **AI writes most of the code** — students direct Claude Code, experiencing the maker/checker dynamic firsthand.
+
+#### Server Setup
+
+- Ubuntu VM with Claude Code pre-installed
+- One user account per student, shared API key
+- Pre-loaded parquet files in a shared directory
+- Starter templates with blanks for students to fill in
+- Per-user working directories
+- API costs: ~$1-2 per student for the build exercises
