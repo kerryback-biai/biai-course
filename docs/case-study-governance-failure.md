@@ -1,56 +1,50 @@
-# Case Study: Air Canada — When the Chatbot Makes a Promise the Company Can't Keep
+# Case Study: Deloitte Australia — When Nobody Checks the AI's Work
 
-*For use in Session 6: "Can You Trust It?" — Reliability, Verification, and Governance*
+*For use in Session 6: "Can You Trust It?" — Failure Modes, Verification, and Data Governance*
 
 ---
 
 ## The Story
 
-In November 2022, Jake Moffatt visited the Air Canada website to book a last-minute flight from Vancouver to Toronto after the death of a close family member. Like many airlines, Air Canada offers reduced bereavement fares — but the rules about how and when to apply for them were buried across multiple pages of the airline's website. Rather than hunt through the site, Moffatt did what an increasing number of customers do: he asked the chatbot.
+In December 2024, Australia's Department of Employment and Workplace Relations awarded Deloitte a AU$439,000 contract to conduct an "independent assurance review" of its Targeted Compliance Framework — the controversial system the government uses to flag and penalize welfare recipients for missed appointments and reporting failures. The review was meant to be an authoritative, third-party assessment of whether the system was working fairly. It was, by design, a trust document: something a government minister could point to and say, "an independent expert looked at this."
 
-The chatbot responded clearly and confidently. It told Moffatt that if he needed to travel immediately, he could book a full-price ticket and then submit it for a reduced bereavement rate within 90 days by completing a Ticket Refund Application form. It even provided a link. Moffatt booked a round-trip ticket for C$1,640.36 and, after returning home, filed for the bereavement discount as the chatbot had instructed. Air Canada denied his claim. The reason: the airline's actual bereavement policy, stated on a separate page of the same website, explicitly prohibited retroactive applications. The chatbot had fabricated a policy that did not exist.
+Deloitte delivered a 237-page report, published in July 2025. It was dense, credentialed, and footnoted — exactly what you would expect from a Big Four consulting engagement. What nobody at Deloitte or the department caught before publication was that approximately 20 of those footnotes were fabricated. Twelve citations referred to a made-up report attributed to University of Sydney law professor Lisa Burton Crawford. Additional references pointed to a non-existent study by a Swedish academic at Lund University. Most striking was a direct quote attributed to Federal Court Justice Jennifer Davies from a ruling that never existed. The report had been generated using Microsoft Azure OpenAI (GPT-4o), a fact disclosed nowhere in the original document.
 
-Moffatt filed a complaint with British Columbia's Civil Resolution Tribunal. Air Canada's defense was remarkable in its candor about the state of enterprise AI governance: the airline argued it could not be held liable for information provided by its chatbot because the chatbot was "a separate legal entity that is responsible for its own actions." The tribunal rejected this outright. Member Christopher Rivers wrote: "While a chatbot has an interactive component, it is still just a part of Air Canada's website. It should be obvious to Air Canada that it is responsible for all the information on its website. It makes no difference whether the information comes from a static page or a chatbot."
-
-In February 2024, the tribunal ordered Air Canada to pay C$812.02 — the fare difference of C$650.88, plus interest and tribunal fees. The dollar amount was small. The precedent was not. The ruling established that companies are legally responsible for the outputs of their AI systems, whether those outputs are accurate or not.
+The errors were discovered not by Deloitte's quality assurance process, not by the government department that commissioned the work, but by Dr. Chris Rudge, a University of Sydney law researcher who recognized that the citations attributed to his colleague Professor Burton Crawford did not correspond to any real publication. Rudge alerted media, and the story broke in October 2025. Deloitte acknowledged the failures, refunded AU$97,000 — the final installment of the contract — and published a corrected version with an AI disclosure added after the fact. Critics, including several members of Parliament, argued that a partial refund was insufficient for a report whose fundamental credibility had been destroyed. The case became a global cautionary tale, covered by Fortune, The Register, and CFO Dive as a "wake-up call" for any firm using generative AI in professional deliverables.
 
 ---
 
 ## What Went Wrong
 
-**Failure mode: Hallucination in a customer-facing AI system.** The chatbot generated a plausible but entirely fabricated refund policy. It did not retrieve the correct bereavement policy from Air Canada's own documentation — it constructed an answer that sounded reasonable but contradicted the airline's actual rules.
+**Failure mode: AI hallucination in a high-stakes professional deliverable.** GPT-4o fabricated citations, invented academic publications, and generated a fake judicial quote — all presented as real evidence in a government-commissioned report. The hallucinations were not random noise; they were structurally plausible, which made them harder to catch on a casual read.
 
-**Why the error was not caught:** Air Canada deployed the chatbot without a verification layer between the AI's responses and the customer. There was no maker/checker process. No one reviewed what the chatbot was telling customers about specific policies. No one tested it against the actual bereavement fare rules. The chatbot operated autonomously on high-stakes topics — refund eligibility, fare policies, passenger rights — with no human in the loop and no automated policy-checking guardrail.
+**The missing verification layer.** Deloitte's quality assurance processes failed at every stage. No one verified the citations against actual academic databases or court records. No one cross-checked the AI-generated references with the named authors. No one flagged that a Federal Court quote could not be traced to a real ruling. The report passed through whatever internal review Deloitte applied and was delivered to the government as finished work product. The firm itself admitted its QA processes failed.
 
-**Contributing factor: Over-trust in AI output.** Air Canada appears to have treated the chatbot as a deflection tool (reduce call center volume) rather than as a system that could create binding commitments. The company did not anticipate that a customer would reasonably rely on chatbot statements the same way they would rely on a human agent's statements — even though, from the customer's perspective, both are representatives of the airline.
+**Undisclosed AI use compounded the damage.** The original report contained no mention that generative AI had been used in its production. When the fabrications surfaced, the missing disclosure turned a quality failure into a transparency crisis. The public learned simultaneously that the report contained invented evidence *and* that the tool responsible had been hidden from the client.
 
 ---
 
 ## The Governance Lesson
 
-The Air Canada case is a textbook example of deploying AI as a "maker" with no "checker." The chatbot produced answers. No system or person verified them before they reached the customer. And the company learned — via a legal ruling — that AI-generated output carries the same weight as any other official company communication.
+This case is the maker/checker framework at its starkest. AI was the maker — it drafted text, generated citations, and produced what looked like a rigorously sourced consulting report. But nobody was the checker. No human verified the AI's outputs against ground truth before the document left the building.
 
-For enterprise data agents, the lesson generalizes directly. When an AI agent generates a financial report, a customer analysis, or a supply chain recommendation, the output is not a draft until someone treats it as one. Without an explicit verification step — whether that is a human reviewer, an automated cross-check against source data, or a second AI system validating the first — the organization is accepting AI output as ground truth. The Air Canada tribunal ruling makes clear that "the AI said it" is not a defense. The organization owns the output.
-
-The governance minimum for any customer-facing or decision-driving AI system is straightforward: define which topics require verification before the output reaches a human decision-maker or customer, assign accountability for that verification to a specific role, and log both the AI output and the verification decision for audit purposes.
+For executives deploying AI agents on enterprise data, the Deloitte case illustrates three principles. First, AI-generated content that *looks* authoritative is the most dangerous kind — hallucinated citations embedded in a 237-page report are far harder to catch than an obviously wrong number on a dashboard. Second, verification cannot be generic; it must target the specific failure modes of the tool being used, and fabricated references are a known, well-documented failure mode of large language models. Third, disclosure is not optional. When AI contributes to a deliverable, stakeholders need to know — not because AI is inherently untrustworthy, but because knowing the tool was used is what triggers the right verification questions. Deloitte's AU$97,000 refund and reputational damage were the cost of learning these lessons after delivery rather than before.
 
 ---
 
 ## Discussion Questions
 
-1. **Accountability mapping.** Air Canada argued the chatbot was "a separate legal entity." Who in your organization would be accountable if an AI system gave a customer or a regulator wrong information? Is that accountability currently documented, or would you discover the answer only after an incident?
+1. **Accountability and contracts.** Deloitte refunded AU$97,000 of the AU$439,000 contract. Critics demanded a full refund. If your organization delivered an AI-assisted report to a client or regulator and fabricated content was later discovered, who would be accountable — the team that used the AI, the partner who signed off, or the firm? How would your current contracts and review processes handle this scenario?
 
-2. **The verification cost tradeoff.** Adding a human verification layer to Air Canada's chatbot would have slowed response times and increased costs — exactly the metrics the chatbot was deployed to improve. How do you decide which AI outputs require human verification and which can be delivered directly? What criteria would you use to draw that line?
+2. **Verification design.** Citation fabrication is a known failure mode of large language models, yet Deloitte's QA process did not catch it. For AI-generated analysis in your organization — financial models, compliance reports, board materials — what specific verification steps would you build into the workflow? How do you verify the parts of AI output that are hardest to check (references, quotes, statistics)?
 
-3. **Testing for failure modes.** Air Canada apparently never tested the chatbot against its own bereavement policy. For the AI agent you are scoping in your capstone project, what are the three most likely ways it could produce a confidently wrong answer — and how would you test for each before deployment?
+3. **Disclosure requirements.** Deloitte did not disclose AI use in the original report. Some organizations now require mandatory AI disclosure on all deliverables; others leave it to team discretion. What should your organization's policy be — and would you require the same disclosure from your vendors and consultants?
 
 ---
 
 ## Sources
 
-- Moffatt v. Air Canada, 2024 BCCRT 149, British Columbia Civil Resolution Tribunal, February 14, 2024.
-- "Air Canada chatbot promised a discount. Now the airline has to pay it." *The Washington Post*, February 18, 2024. [Link](https://www.washingtonpost.com/travel/2024/02/18/air-canada-airline-chatbot-ruling/)
-- "How can I mislead you? Air Canada found liable for chatbot's bad advice on bereavement rates." *CBC News*, February 2024. [Link](https://www.cbc.ca/news/canada/british-columbia/air-canada-chatbot-lawsuit-1.7116416)
-- "BC Tribunal Confirms Companies Remain Liable for Information Provided by AI Chatbot." *American Bar Association — Business Law Today*, February 2024. [Link](https://www.americanbar.org/groups/business_law/resources/business-law-today/2024-february/bc-tribunal-confirms-companies-remain-liable-information-provided-ai-chatbot/)
-- "Moffatt v. Air Canada: A Misrepresentation by an AI Chatbot." *McCarthy Tetrault — TechLex*, 2024. [Link](https://www.mccarthy.ca/en/insights/blogs/techlex/moffatt-v-air-canada-misrepresentation-ai-chatbot)
-- "The Risks of Relying on AI: Lessons from Air Canada's Chatbot Debacle." *Cloud Security Alliance*, June 2024. [Link](https://cloudsecurityalliance.org/blog/2024/06/05/the-risks-of-relying-on-ai-lessons-from-air-canada-s-chatbot-debacle)
+- "Deloitte refunds Australian government nearly $290,000 after AI-generated report contained fabricated references." *Fortune*, October 7, 2025. [Link](https://fortune.com/2025/10/07/deloitte-ai-australia-government-report-hallucinations-technology-290000-refund/)
+- "Law Professor Catches Deloitte Using Made-Up AI Hallucinations in Government Report." *Above the Law*, October 2025. [Link](https://abovethelaw.com/2025/10/law-professor-catches-deloitte-using-made-up-ai-hallucinations-in-government-report/)
+- "Deloitte AI debacle seen as 'wake-up call' for corporate finance." *CFO Dive*, 2025. [Link](https://www.cfodive.com/news/deloitte-ai-debacle-seen-wake-up-call-corporate-finance/802674/)
+- "Deloitte AI report for Australian government littered with hallucinations." *The Register*, October 6, 2025. [Link](https://www.theregister.com/2025/10/06/deloitte_ai_report_australia/)
