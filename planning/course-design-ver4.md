@@ -83,7 +83,7 @@ Pre-record fallback versions of the highest-risk live demos (Session 1 Dashboard
 ---
 
 ### SESSION 1: "Exploring Data with AI"
-**Week 1 / Tuesday — From Questions to Answers in Seconds**
+**Monday, May 4 — From Questions to Answers in Seconds**
 
 **Learning objectives:**
 - Understand why AI agents matter now — the market signal and the opportunity
@@ -108,7 +108,7 @@ Pre-record fallback versions of the highest-risk live demos (Session 1 Dashboard
 ---
 
 ### SESSION 2: "Our Data Is Everywhere"
-**Week 1 / Thursday — The Cross-System Problem**
+**Wednesday, May 6 — The Cross-System Problem**
 
 **Learning objectives:**
 - Understand why enterprise data is scattered and why consolidation costs millions
@@ -133,7 +133,7 @@ Pre-record fallback versions of the highest-risk live demos (Session 1 Dashboard
 ---
 
 ### SESSION 3: "How Does This Actually Work?"
-**Week 2 / Tuesday — Inside the Agent Loop**
+**Monday, May 11 — Inside the Agent Loop**
 
 **Learning objectives:**
 - Understand the agent loop as an orchestrated test-and-review cycle between the LLM and code execution
@@ -159,7 +159,7 @@ Pre-record fallback versions of the highest-risk live demos (Session 1 Dashboard
 ---
 
 ### SESSION 4: "From Data to Deliverable"
-**Week 2 / Thursday — Reporting Pipelines**
+**Wednesday, May 13 — Reporting Pipelines**
 
 **Learning objectives:**
 - See the full pipeline: data → chart → narrative → board-ready memo
@@ -184,7 +184,7 @@ Pre-record fallback versions of the highest-risk live demos (Session 1 Dashboard
 ---
 
 ### SESSION 5: "What Does Deployment Look Like?"
-**Week 3 / Tuesday — Architecture, Data Security, and Build vs. Buy**
+**Monday, May 18 — Architecture, Data Security, and Build vs. Buy**
 
 **Learning objectives:**
 - Understand LLM deployment options and their tradeoffs (cloud API vs. on-premise)
@@ -219,7 +219,7 @@ Students arrive having read the deployment options, data security approaches, an
 ---
 
 ### SESSION 6: "Can You Trust It?"
-**Week 3 / Thursday — Reliability, Verification, and Governance**
+**Wednesday, May 20 — Reliability, Verification, and Governance**
 
 **Learning objectives:**
 - Identify failure modes of AI data agents (hallucination, wrong joins, misleading aggregations)
@@ -245,7 +245,7 @@ Students arrive having read the deployment options, data security approaches, an
 ---
 
 ### SESSION 7: "Document AI — Answers from Your Own Files"
-**Week 4 / Tuesday — Retrieval-Augmented Generation (RAG)**
+**Wednesday, May 27 — Retrieval-Augmented Generation (RAG)**
 
 **Learning objectives:**
 - Understand how AI can answer questions grounded in company documents with citations
@@ -270,7 +270,7 @@ Students arrive having read the deployment options, data security approaches, an
 ---
 
 ### SESSION 8: "Your AI Strategy"
-**Week 4 / Thursday — Capstone and Synthesis**
+**Monday, June 1 — Capstone and Synthesis**
 
 **Learning objectives:**
 - Present a credible, scoped AI adoption strategy to peers

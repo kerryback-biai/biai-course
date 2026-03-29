@@ -1,0 +1,326 @@
+---
+title: "From BI to AI: Data-Driven Decision Making with Agentic AI"
+subtitle: "8-Session Executive Program --- 4 Weeks, 90 Minutes Each, Zoom"
+author: "Kerry Back"
+date: "2026-03-28"
+format:
+  pdf:
+    documentclass: article
+    geometry:
+      - margin=1in
+    fontsize: 11pt
+    toc: true
+    toc-depth: 2
+    number-sections: false
+    colorlinks: true
+    urlcolor: blue
+    header-includes: |
+      \usepackage{booktabs}
+      \usepackage{longtable}
+      \usepackage{array}
+      \usepackage{enumitem}
+      \setlist{nosep}
+      \renewcommand{\arraystretch}{1.3}
+---
+
+\newpage
+
+# Pre-Program Video
+
+Before Session 1, participants watch a 15--20 minute video covering:
+
+- What AI agents are and why they matter for data-driven decision making
+- The Meridian Corp simulation: a \$500M distributor with 10 enterprise systems across 3 divisions
+- The Linux VM: an optional hands-on environment for those who want to build agents themselves
+- The course arc: a session-by-session overview so students know where they're headed
+- How to log in to both tools and what to expect in Session 1
+
+This allows Session 1 to begin immediately with hands-on work.
+
+\newpage
+
+# Session 1: "Exploring Data with AI"
+
+**Monday, May 4 --- From Questions to Answers in Seconds**
+
+**Learning objectives:** Understand why AI agents matter now. Experience conversational data access vs.\ traditional dashboards. Ask business questions in plain English and get instant answers with charts.
+
+| Min | Segment | Format |
+|:------|:------------------------------------------------|:----------------|
+| 0--15 | Course Overview and the "Why Now" | Lecture + Q&A |
+| 15--20 | Cold open: the 3-week email chain | Provocation |
+| 20--28 | Demo: Dashboard vs.\ Chat | Live demo |
+| 28--38 | The Business Lens | Discussion |
+| 38--58 | Hands-on: Your First Queries | Hands-on |
+| 58--70 | Open Exploration | Hands-on |
+| 70--85 | Breakout Discussion (groups of 3--4) | Breakout rooms |
+| 85--90 | Homework | Wrap |
+
+**Homework:** Log into the Meridian app and ask 10 business questions against any single system. Write down one question the agent answered well and one where it was unsatisfying or wrong. Bring both to Session 2.
+
+\newpage
+
+# Session 2: "Our Data Is Everywhere"
+
+**Wednesday, May 6 --- The Cross-System Problem**
+
+**Learning objectives:** Understand why enterprise data is scattered and why consolidation costs millions. Watch AI query multiple systems and merge results in real time. Map your own company's data landscape.
+
+| Min | Segment | Format |
+|:------|:------------------------------------------------|:----------------|
+| 0--10 | Homework debrief | Discussion |
+| 10--30 | Demo: The Cross-System Merge | Live demo |
+| 30--42 | How Data Moves Today | Lecture |
+| 42--58 | Hands-on: Cross-System Exploration | Hands-on |
+| 58--68 | Workshop: Your Company's Data Map | Individual work |
+| 68--82 | Breakout: How Scattered Is Your Data? | Breakout rooms |
+| 82--88 | What We're Skipping | Lecture |
+| 88--90 | Homework | Wrap |
+
+**Homework:** (1) Read enterprise systems background document. (2) Complete your data map: list at least 5 systems your company uses and the top 3 cross-system questions you can't answer today.
+
+\newpage
+
+# Session 3: "How Does This Actually Work?"
+
+**Monday, May 11 --- Inside the Agent Loop**
+
+**Learning objectives:** Understand the agent loop as an orchestrated test-and-review cycle. See the 50 lines of code that power the core of the app. Understand where code executes and why that's an architectural decision.
+
+| Min | Segment | Format |
+|:------|:------------------------------------------------|:----------------|
+| 0--10 | Bridge: from user to builder | Lecture |
+| 10--30 | Demo: The Agent Loop, Deconstructed | Live demo |
+| 30--45 | The System Prompt Is the Secret | Live demo |
+| 45--60 | Where Does the Code Run? | Lecture |
+| 60--72 | Discussion: The Complexity Iceberg | Lecture + Q&A |
+| 72--85 | Live Walkthrough: Building an Agent from Scratch | Live demo |
+| 85--90 | Homework | Wrap |
+
+**Homework:** (1) Optional: SSH into the Linux server and try Exercise 1 (hello-world agent) and Exercise 2 (multi-system agent). Claude Code will help --- you direct it in English. (2) Required: For your Session 2 use case, what data quality issues would you expect? What pre-work is needed? (3) Optional reading: a16z CIO survey and DUNNIXER vendor scorecard (links provided).
+
+\newpage
+
+# Session 4: "From Data to Deliverable"
+
+**Wednesday, May 13 --- Reporting Pipelines**
+
+**Learning objectives:** See the full pipeline: data $\to$ chart $\to$ narrative $\to$ board-ready memo. Understand how to chain AI steps into automated workflows. Produce a deliverable and iterate on quality.
+
+| Min | Segment | Format |
+|:------|:------------------------------------------------|:----------------|
+| 0--10 | Check-in on Linux server exercises | Discussion |
+| 10--25 | Demo: The Full Pipeline | Live demo |
+| 25--38 | Anatomy of a Reporting Pipeline | Lecture + demo |
+| 38--43 | Demo: The Art of Iteration | Live demo |
+| 43--60 | Hands-on: Build Your Own Report | Hands-on |
+| 60--72 | From Ad Hoc to Automated (incl.\ HPE case) | Lecture |
+| 72--85 | Workshop: Your Reporting Candidates | Workshop |
+| 85--90 | Homework | Wrap |
+
+The "From Ad Hoc to Automated" segment includes a real-world example: HPE's CFO Marie Myers used an AI agent to replace a 100-slide weekly performance review. Results: 40% faster reporting cycle, 25% lower processing costs, 90% reduction in manual prep.
+
+**Homework:** (1) Produce one complete deliverable using the Meridian app. Bring it to Session 5. (2) Pre-reading for Session 5 (\textasciitilde 35 min): Morgan Stanley case study, AIMultiple deployment options article, and "What Does Your AI Actually See?" data security primer (all provided). (3) If not read yet, read the a16z and DUNNIXER articles from Session 3 homework.
+
+\newpage
+
+# Session 5: "What Does Deployment Look Like?"
+
+**Monday, May 18 --- Architecture, Data Security, and Build vs.\ Buy**
+
+**Learning objectives:** Understand LLM deployment options (cloud API vs.\ on-premise). Grasp the data security problem: what the LLM sees and how to control it. Evaluate build vs.\ buy vs.\ extend.
+
+*This is a flipped session. Students arrive having read the deployment options, data security approaches, and a real case. Session time is discussion, demo, and application --- not lecture.*
+
+| Min | Segment | Format |
+|:------|:------------------------------------------------|:----------------|
+| 0--8 | Homework debrief | Discussion |
+| 8--20 | Case Study: Morgan Stanley | Discussion |
+| 20--25 | Bridge from Session 3 | Lecture |
+| 25--33 | Demo: Data Security in Action | Live demo |
+| 33--45 | Discussion: Deployment Options and Data Security | Discussion |
+| 45--58 | Build vs.\ Buy: Applying the DUNNIXER Framework | Group exercise |
+| 58--72 | Breakout: Your Deployment Decisions | Breakout rooms |
+| 72--85 | Hands-on: Your Deployment Profile | Individual work |
+| 85--90 | Preview: trust and verification | Wrap |
+
+**Homework:** (1) For your use case: what governance requirements would your compliance team impose? Top 3 concerns. (2) Who would need to approve an AI agent deployment, and what objections would they raise?
+
+\newpage
+
+# Session 6: "Can You Trust It?"
+
+**Wednesday, May 20 --- Reliability, Verification, and Governance**
+
+**Learning objectives:** Identify failure modes of AI data agents. Apply the maker/checker framework. Understand data governance and regulatory requirements.
+
+| Min | Segment | Format |
+|:------|:------------------------------------------------|:----------------|
+| 0--10 | Homework debrief: governance concerns | Discussion |
+| 10--12 | Bridge from Session 5 | Lecture |
+| 12--28 | Demo: When the Agent Gets It Wrong | Live demo |
+| 28--38 | The Maker/Checker Framework | Lecture + discussion |
+| 38--55 | Hands-on: Red-Team the Meridian App | Hands-on |
+| 55--60 | Debrief: What Did You Find? | Discussion |
+| 60--73 | Data Governance and Regulatory Exposure | Lecture + Q&A |
+| 73--85 | Breakout: Your Governance Requirements | Breakout rooms |
+| 85--90 | Homework | Wrap |
+
+**Homework:** (1) Read Atherton Financial case study (provided). Come prepared to discuss deployment failures. (2) Begin drafting capstone strategy (template and rubric provided). (3) Write down the 3 most likely failure modes for your use case and mitigations.
+
+\newpage
+
+# Session 7: "Document AI --- Answers from Your Own Files"
+
+**Wednesday, May 27 --- Retrieval-Augmented Generation (RAG)**
+
+**Learning objectives:** Understand how AI answers questions from company documents with citations. Distinguish database AI from document AI. Experience RAG hands-on and understand deployment decisions.
+
+| Min | Segment | Format |
+|:------|:------------------------------------------------|:----------------|
+| 0--10 | Bridge + Atherton Case Debrief | Discussion |
+| 10--22 | Demo: Document-Based Q\&A | Live demo |
+| 22--32 | How RAG Works | Lecture |
+| 32--52 | Hands-on: Query the Document Collection | Hands-on |
+| 52--62 | Reliability of Document AI | Lecture + demo |
+| 62--75 | Deploying RAG | Lecture + Q&A |
+| 75--87 | Breakout: Where Is Knowledge Trapped? | Breakout rooms |
+| 87--90 | Capstone preview | Wrap |
+
+**Homework:** Finalize your strategy document (1--2 pages). Prepare a 5-minute presentation. Use the evaluation rubric to self-check.
+
+\newpage
+
+# Session 8: "Your AI Strategy"
+
+**Monday, June 1 --- Capstone and Synthesis**
+
+**Learning objectives:** Present a credible, scoped AI adoption strategy to peers. Synthesize the technical, strategic, and organizational dimensions. Leave with a concrete next step.
+
+| Min | Segment | Format |
+|:------|:------------------------------------------------|:----------------|
+| 0--3 | Setup and framing | Framing |
+| 3--30 | Breakout pitches (all students present) | Breakout rooms |
+| 30--70 | Plenary: 5 winning strategies | Presentations |
+| 70--78 | Synthesis: What You Now Know | Lecture |
+| 78--86 | Beyond Data: AI as Thinking Partner | Live demo |
+| 86--88 | Monday Morning Actions | Lecture |
+| 88--90 | Close | Wrap |
+
+\newpage
+
+# The Meridian Corp Simulation
+
+The Meridian Corp app is a browser-based AI data assistant that simulates a real enterprise data environment. Students log in and ask questions in plain English. The app connects to **10 enterprise systems** for a fictional \$500M B2B industrial supplies distributor with three operating divisions:
+
+- **Industrial Division** (\textasciitilde\$250M): Salesforce CRM, NetSuite Finance, SAP Operations
+- **Energy Division** (\textasciitilde\$150M): Legacy CRM (custom-built), QuickBooks Finance, Oracle SCM
+- **Safety Division** (\textasciitilde\$100M): HubSpot CRM, shared NetSuite Finance
+- **Corporate HQ**: Workday HR (all divisions), NetSuite Consolidation, Zendesk Support
+
+The data includes realistic cross-system friction:
+
+- Salesforce uses CamelCase column names; the Legacy CRM uses snake\_case
+- The Legacy CRM stores dates as text strings ("MM/DD/YYYY") instead of proper dates
+- Approximately 25 customers appear under different names across divisions (e.g., "General Electric" in Salesforce, "GE Industrial Solutions" in the Legacy CRM, "GE Safety Division" in HubSpot)
+
+The AI agent queries each system separately --- it cannot join across systems in a single query. For cross-system questions, it pulls data from each system, then uses Python to merge, reconcile, and analyze the combined results. This mirrors how a real enterprise AI tool would work.
+
+Beyond answering questions, the agent generates deliverables: charts, written analyses, Word documents, Excel workbooks, and PowerPoint decks --- all grounded in the fictional company's data. Students can go from a plain English question to a board-ready artifact in a single conversation.
+
+**41 tables, 26,000+ rows, 3 years of data (2023--2025).** Students can query sales pipelines, financial statements, employee compensation, supply chain performance, and support tickets --- and combine data across all of them.
+
+\newpage
+
+# The Linux Server
+
+A shared Linux server with individual student accounts, pre-installed with Claude Code (an AI coding assistant). Each account is preconfigured to use the course's Anthropic API key for billing --- students incur no cost. Students who want hands-on experience can SSH in and build working data agents with AI assistance --- they type directions in English, and the AI writes the Python code.
+
+Four scaffolded exercises are pre-loaded:
+
+| Exercise | Description | Time |
+|:---------|:----------------------------------------------------|:---------|
+| 1 | Build a 50-line agent that queries one database | \textasciitilde 30 min |
+| 2 | Extend it to query two systems and merge results | \textasciitilde 30 min |
+| 3 | Wrap it in a web interface | \textasciitilde 45 min |
+| 4 | Red-team the agent for security vulnerabilities | \textasciitilde 30 min |
+
+The server exercises are optional throughout the course. They are demonstrated by the instructor in Session 3 and available for self-paced exploration. Students who complete them gain a deeper understanding of how agents work, but the course does not require terminal or coding experience.
+
+Seven pre-recorded demo videos (totaling \textasciitilde 2 hours) walk through the full build journey from a blank file to a production-style system. Links are provided in homework for the paired session.
+
+\newpage
+
+# Capstone Template
+
+Students submit a 1--2 page strategy document and deliver a 5-minute presentation in Session 8.
+
+1. **The Problem:** What question can't be answered today? What's the business impact?
+2. **The Solution:** Database AI, document AI, or both --- which systems and document collections, build/buy/extend decision
+3. **Deployment Approach:** Cloud vs.\ on-premise vs.\ hybrid; data security approach; for document AI, managed platform vs.\ custom build
+4. **The 90-Day Pilot:** Team, data sources, week-by-week timeline, governance minimum
+5. **Success Metrics:** Time-to-insight, decisions enabled, error reduction, adoption rate
+6. **Risks and Mitigations:** Data quality, data security, regulatory requirements
+7. **The Ask:** Budget, headcount, executive sponsor
+8. **Day 1 Action:** The one thing you will do Monday morning
+
+## Evaluation Rubric
+
+| Dimension | Strong | Needs Work |
+|:------------------|:-----------------------------------------------|:--------------------------------------|
+| Pilot scope | One use case, 1--3 systems, clear metric | Too broad or too vague |
+| Deployment approach | Specific choice with industry rationale | Generic or no justification |
+| Success metrics | Measurable KPIs tied to business impact | Vague or absent |
+| Governance | Access control, verification, audit identified | Governance mentioned but not specific |
+| Risk mitigation | Specific mitigations with owners | Risks listed without mitigations |
+| Day 1 action | Specific person, task, and date | Aspirational |
+
+\newpage
+
+# Supplementary Materials
+
+## Pre-Session Readings
+
+The following readings are assigned as homework before the indicated session. Total async reading load is approximately 90 minutes across the full program.
+
+### Before Session 2
+
+- **Enterprise Systems Background Document** (provided) --- What Salesforce, SAP, Workday, NetSuite, and other enterprise systems actually do. Why every company has 5--15 systems.
+
+### Before Session 5 (assigned in Sessions 3--4 homework)
+
+Required (\textasciitilde 35 min):
+
+- **Morgan Stanley Case Study** (provided) --- How a regulated financial firm deployed AI for 16,000 advisors under SEC/FINRA constraints. Cloud API with zero data retention agreement.
+- **AIMultiple: "Cloud LLM vs Local LLMs"** --- The three deployment options (cloud API, on-premise, hybrid) and their tradeoffs. Free at: [aimultiple.com/cloud-llm](https://aimultiple.com/cloud-llm)
+- **"What Does Your AI Actually See?"** (provided) --- Four approaches to data security when AI agents access enterprise data. A 5-minute read covering the core policy decision.
+
+Optional (assigned Session 3, useful by Session 5):
+
+- **a16z: "How 100 Enterprise CIOs Are Building and Buying Gen AI in 2025"** --- Survey data on deployment trends and the shift from building to buying. Free at: [a16z.com/ai-enterprise-2025](https://a16z.com/ai-enterprise-2025/)
+- **DUNNIXER: "6 AI Vendor Evaluation Dimensions for Enterprise RFPs"** --- A practical scorecard framework for evaluating AI vendors. Keep this as a reference tool. Free at: [dunnixer.com](https://www.dunnixer.com/insights/articles/the-six-dimensions-of-ai-vendor-evaluation-that-matter-most)
+
+### Before Session 7 (assigned in Session 6 homework)
+
+- **Atherton Financial Case Study** (provided) --- A wealth management firm deployed document AI and hit chunking failures, access control gaps, and stale documents. Composite case based on real deployments.
+
+## Case Studies
+
+| Case Study | Session | Theme |
+|:------------------------------|:----------|:--------------------------------------|
+| Morgan Stanley AI Assistant | 5 | Deployment decisions in regulated finance |
+| Atherton Financial (composite) | 7 | Document AI deployment challenges |
+
+\newpage
+
+## Recorded Demo Videos
+
+| Demo | Title | Runtime | Pairs With |
+|:-----|:--------------------------------------|:---------|:-----------|
+| 1 | Hello World Agent | 15 min | Session 3 |
+| 2 | Adding a Second System | 15 min | Sessions 2--3 |
+| 3 | Wrapping It in a Web App | 15 min | Session 4 |
+| 4 | Building a Reporting Pipeline | 20 min | Session 4 |
+| 5 | Red-Teaming Your Agent | 15 min | Session 6 |
+| 6 | Building a RAG System | 20 min | Session 7 |
+| 7 | Combining Database + Document AI | 15 min | Session 7 |
