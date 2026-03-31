@@ -403,12 +403,12 @@ Kerry Back, Rice University
 </div>
 </div>
 <div class="explainer">
-<p>The agent writes and executes SQL against each system, then uses Python with fuzzy string matching to reconcile customer names. No warehouse. No ETL pipeline. No 3-week wait.</p>
+<p>The agent writes and executes SQL against each system, then uses Python with fuzzy string matching to reconcile customer names — all in under a minute.</p>
 </div>
 <aside class="notes">
 <p>Open the XYZ app and type: “Which customers buy from multiple divisions?” Watch what happens. Narrate each step as the agent works through it.</p>
 <p>Step one: the agent queries Salesforce to pull Industrial division customers and their revenue. Step two: it queries the Legacy CRM for Energy division customers. Step three: it queries HubSpot for Safety division customers. And here is the critical part — step four: it uses Python with fuzzy string matching to reconcile customer names across all three systems. “General Electric” in Salesforce, “GE Industrial Solutions” in the Legacy CRM, “GE Safety Division” in HubSpot — the agent figures out these are the same company and merges the data.</p>
-<p>No data warehouse. No ETL pipeline. No three-week wait. The agent queried three separate systems, pulled the data into Python, matched customer names using fuzzy logic, and gave us a unified answer. Point out the SQL the agent generated for each system — it is visible in the response. Point out the matching logic. This transparency is important because it lets you verify the answer.</p>
+<p>The agent queried three separate systems, pulled the data into Python, matched customer names using fuzzy logic, and gave us a unified answer — in under a minute. Point out the SQL the agent generated for each system — it is visible in the response. Point out the matching logic. This transparency is important because it lets you verify the answer.</p>
 <p>Now, I want to be honest about what just happened. The fuzzy matching is not perfect. It catches about 80 percent of cases. Some matches might be wrong — is “Honeywell Safety Products” the same entity as “Honeywell International”? That is a business judgment call. We will talk more about this kind of friction later in the session.</p>
 <p>If the XYZ app is down or slow, switch to the pre-recorded fallback demo and narrate over it.</p>
 <style type="text/css">
@@ -685,13 +685,13 @@ Kerry Back, Rice University
 </div>
 </div>
 <div class="explainer">
-<p>Two questions. Four systems. Both answered in under a minute. But how does this actually work?</p>
+<p>Two questions. Four systems. Both answered in under a minute. The AI agent is the interface — but where should the data live?</p>
 </div>
 <aside class="notes">
 <p>Now let’s ask a second cross-system question. Type into the XYZ app: “What is the revenue per employee by division?” This one is interesting because it requires data from two completely different kinds of systems.</p>
 <p>On the left, we need revenue data, which lives in the CRMs — Salesforce, the Legacy CRM, and HubSpot. On the right, we need headcount data, which lives in Workday. The agent queries revenue from each CRM, queries headcount from Workday, merges on division, calculates revenue per employee, and returns a table and a bar chart.</p>
-<p>Two questions. Four systems. Both answered in under a minute. Compare that to what it would take to get these answers through traditional channels at most organizations. Someone would need to pull reports from each system, manually reconcile the data in a spreadsheet, and deliver it — probably in a few days if it is a priority, longer if it is not.</p>
-<p>Now, the question you should be asking is: how does this actually work? What is happening behind the scenes? We will get deep into that in Session 3. But for today, I want to focus on the business implications and the data integration landscape.</p>
+<p>Two questions. Four systems. Both answered in under a minute. Compare that to what it would take to get these answers through traditional channels at most organizations. Someone would need to pull reports from each system, manually reconcile the data in a spreadsheet, and deliver it — probably a few days if it is a priority, longer if it is not.</p>
+<p>Now, an important question: where should this data actually live? In our demo, the agent is querying each source system directly. In a mature enterprise, much of this data would already be consolidated in a warehouse — and the agent would query that instead. The AI layer works either way. We will dig into that distinction in a few slides, and deep into the mechanics in Session 3. For now, let’s focus on the data integration landscape.</p>
 <p>The reason I am showing you these two demos is that they represent the most common cross-system question patterns in enterprises: customer overlap across business units, and efficiency metrics that combine financial and operational data.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -776,10 +776,10 @@ Kerry Back, Rice University
 </ul>
 </div>
 <div class="highlight-box">
-<p>Four systems. One question. Under a minute. The same analysis through traditional channels would require pulling reports from each system and reconciling in a spreadsheet — probably a few days at best.</p>
+<p>Four systems. One question. Under a minute. Whether the data lives in a warehouse or in the source systems, the AI layer turns a multi-day analyst request into a conversation.</p>
 </div>
 <aside class="notes">
-<p>The bar chart the agent produced shows all three divisions clustered tightly around 390 to 400 thousand dollars per employee. That is actually a surprising finding — it suggests headcount has been scaled roughly in proportion to revenue across the business. Energy lags slightly, which could reflect the heavier field-service component of that division. The company-wide figure is dragged down by Corporate’s 43 employees who generate no direct revenue — that 8.9 percent corporate overhead is typical for a company this size. The important thing is not just the numbers but how fast we got them. Four systems, one question, under a minute. That is the power of the cross-system merge.</p>
+<p>The bar chart the agent produced shows all three divisions clustered tightly around 390 to 400 thousand dollars per employee. That is actually a surprising finding — it suggests headcount has been scaled roughly in proportion to revenue across the business. Energy lags slightly, which could reflect the heavier field-service component of that division. The company-wide figure is dragged down by Corporate’s 43 employees who generate no direct revenue — that 8.9 percent corporate overhead is typical for a company this size. The important thing is not just the numbers but how fast we got them. Four systems, one question, under a minute. Whether this data lives in source systems or a warehouse, the AI layer is what turns a multi-day analyst request into a conversation.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -795,7 +795,7 @@ Kerry Back, Rice University
 <section id="how-data-moves-today" class="slide level2 section-divider center">
 <h2>How Data Moves Today</h2>
 <aside class="notes">
-<p>Now let’s step back and understand the landscape. What you just saw — an AI agent querying multiple systems and merging results on the fly — is one approach to data integration. But it is not the only one, and it is not always the right one. Let me walk you through how data moves in enterprises today so you can understand where this new approach fits.</p>
+<p>Now let’s step back and understand the landscape. What you just saw — an AI agent querying multiple systems and merging results on the fly — is impressive. But it is one pattern among several, and understanding where it fits requires knowing how data moves in enterprises today.</p>
 <p>This lecture segment should take about 12 minutes.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -898,12 +898,12 @@ Kerry Back, Rice University
 </div>
 </div>
 <div class="explainer">
-<p>The warehouse is the gold standard — but the cost, timeline, and failure rate are why most mid-market companies don’t have one. The alternative: <span class="accent">query each system where it lives</span> and merge on the fly.</p>
+<p>The warehouse is the gold standard — and it is not going away. But the cost and timeline explain why many mid-market companies don’t have one yet. The question is: <span class="accent">what does AI add</span> at every level of data maturity?</p>
 </div>
 <aside class="notes">
 <p>Let these numbers land. 500K to 5 million dollars to build a data warehouse. Six to eighteen months before it is in production. And 60 to 70 percent of data warehouse projects stall or underdeliver — that is an industry estimate, not something I am making up.</p>
-<p>The data warehouse is the gold standard for a reason. It gives you a single schema, a single source of truth, strong governance, and fast queries because the data is pre-modeled. But the cost, the timeline, and the failure rate are exactly why most mid-market companies do not have one. If you are a 500-million-dollar distributor like XYZ — or even a billion-dollar company — spending 5 million and 18 months on a warehouse that has a better-than-coin-flip chance of stalling is a hard sell to the board.</p>
-<p>The alternative is what you just saw: query each system where it lives and merge on the fly. No warehouse. No ETL. No 18-month timeline. But there are real tradeoffs, and I want to be honest about them.</p>
+<p>I want to be clear about something: the data warehouse is the gold standard for a reason, and it is not going away. It gives you a single schema, a single source of truth, strong governance, and fast queries because the data is pre-modeled. Companies that have invested in a warehouse — and use it well — are not going to rip it out.</p>
+<p>But these numbers explain why many mid-market companies do not have one yet. If you are a 500-million-dollar distributor like XYZ, spending 5 million and 18 months on a warehouse that has a better-than-coin-flip chance of stalling is a hard sell to the board. So the real question is not “warehouse or AI” — it is “what does AI add at every level of data maturity?” Let me show you a framework for thinking about that.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -916,68 +916,68 @@ Kerry Back, Rice University
           display:block!important;
       }</style></aside>
 </section>
-<section id="two-approaches-real-tradeoffs" class="slide level2 shrink center">
-<h2>Two Approaches, Real Tradeoffs</h2>
+<section id="where-ai-fits-three-tiers" class="slide level2 shrink center">
+<h2>Where AI Fits: Three Tiers</h2>
 <div class="comparison-table">
 <table class="caption-top">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
 <thead>
 <tr class="header">
 <th></th>
-<th>Data Warehouse</th>
-<th>AI Agent (Query-in-Place)</th>
+<th>No Warehouse</th>
+<th>Warehouse + Dashboards</th>
+<th>Warehouse + AI Agent</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>Setup cost</strong></td>
-<td>$500K–$5M</td>
-<td>Low (API credentials + schema docs)</td>
+<td><strong>Who</strong></td>
+<td>Small/mid-market, no data team</td>
+<td>Established enterprises</td>
+<td>Companies at any stage</td>
 </tr>
 <tr class="even">
-<td><strong>Time to first answer</strong></td>
-<td>6–18 months</td>
-<td>Days to weeks</td>
+<td><strong>How it works</strong></td>
+<td>Agent queries vendor APIs/files directly</td>
+<td>Traditional ETL into Snowflake/BigQuery</td>
+<td>Agent queries the warehouse via natural language</td>
 </tr>
 <tr class="odd">
-<td><strong>Data freshness</strong></td>
-<td>Batch (hourly/daily)</td>
-<td>Real-time queries</td>
+<td><strong>Strengths</strong></td>
+<td>Fast start, low cost, immediate value</td>
+<td>Governance, compliance, audit trail</td>
+<td>Long-tail questions, ad hoc analysis, cross-system exploration</td>
 </tr>
 <tr class="even">
-<td><strong>Governance</strong></td>
-<td>Strong (single schema)</td>
-<td>Weaker (distributed)</td>
+<td><strong>Limitations</strong></td>
+<td>Weaker governance, API rate limits</td>
+<td>Slow to build, rigid, expensive</td>
+<td>Requires warehouse or data readiness</td>
 </tr>
 <tr class="odd">
-<td><strong>Complex joins</strong></td>
-<td>Fast (pre-modeled)</td>
-<td>Slower (runtime merge)</td>
-</tr>
-<tr class="even">
-<td><strong>Scalability</strong></td>
-<td>Excellent</td>
-<td>Limited by API rate limits</td>
-</tr>
-<tr class="odd">
-<td><strong>Best for</strong></td>
-<td>Regulated, high-volume</td>
-<td>Exploratory, ad hoc</td>
-</tr>
-<tr class="even">
-<td><strong>Audit trail</strong></td>
-<td>Built-in</td>
-<td>Requires custom logging</td>
+<td><strong>What AI adds</strong></td>
+<td>The entire analytics layer</td>
+<td>Natural language interface to existing data</td>
+<td>Answers the 80% of questions that never justified a dashboard</td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="explainer">
-<p>This is not either/or. Most companies will use both — warehouses for governance-critical reporting, agents for the <span class="accent">long tail of questions</span> that never justified a dashboard.</p>
+<p>AI is not a substitute for a warehouse. It is the <span class="accent">last mile</span> between your data — wherever it lives — and the business user who needs an answer.</p>
 </div>
 <aside class="notes">
-<p>Take a minute to read through this comparison table. The data warehouse wins on governance, complex joins, scalability, and audit trail. It is the right answer for regulated reporting, for metrics you run every day, for anything that goes to the board or to a regulator. The AI agent wins on setup cost, time to first answer, and data freshness. It queries systems in real time — no batch lag.</p>
-<p>The key insight is at the bottom of the slide: this is not either/or. Most companies will use both. Warehouses for governance-critical reporting — the numbers that go in your 10-K, the metrics your regulators audit. And AI agents for the long tail of questions that never justified building a dashboard or a data pipeline. The ad hoc questions. The “I wonder if…” questions. The CEO’s Monday morning question that the BI team says will take three weeks.</p>
-<p>Think of the agent as the complement to the warehouse, not the replacement. The warehouse handles the 20 percent of questions that account for 80 percent of regulatory and operational importance. The agent handles the other 80 percent of questions that nobody was asking because the cost was too high.</p>
+<p>Let me give you a framework for thinking about where AI fits. There are really three tiers, and AI adds value at every one.</p>
+<p>Tier one: no warehouse. This is where XYZ Corp is in our simulation, and where many mid-market companies are today. The agent queries each vendor system directly and merges results on the fly. This gives you immediate value — fast start, low cost — but governance is weaker and you are limited by API rate limits.</p>
+<p>Tier two: warehouse plus dashboards. This is the traditional enterprise setup. You have invested in Snowflake or BigQuery, you have Fivetran or Airbyte syncing your data, and you have dashboards in Tableau or Power BI. The warehouse is not going away — it gives you governance, compliance, and an audit trail that no other approach can match.</p>
+<p>Tier three: warehouse plus AI agent. This is where the industry is heading. The agent sits on top of the warehouse and gives business users a natural language interface to the data that is already consolidated. Instead of writing SQL or waiting for an analyst to build a dashboard, you ask a question in English. The agent writes the query, runs it against the warehouse, and gives you an answer.</p>
+<p>The key insight is the last row of the table. AI is not a substitute for the warehouse. It is the last mile between your data — wherever it lives — and the business user who needs an answer. For companies without a warehouse, AI can serve as the analytics layer. For companies with a warehouse, AI handles the long tail of questions — the 80 percent of ad hoc questions that never justified building a dashboard.</p>
+<p>Think about it this way: your warehouse powers the 50 dashboards that everyone checks every morning. The AI agent handles the 500 one-off questions that used to require an analyst and a two-week turnaround.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1316,7 +1316,7 @@ Kerry Back, Rice University
 <aside class="notes">
 <p>Before we wrap up, I want to name something important that the demos do not show. Before any AI agent can query your real systems — not the XYZ simulation, but your actual production systems — someone has to do a significant amount of pre-work.</p>
 <p>You need to catalog the data: what tables exist, what do the columns mean? You need to document the schemas: data types, relationships, business rules. You need to provision API access: authentication, rate limits, permissions. And you need to classify PII: which fields contain personal data, and what are the retention rules?</p>
-<p>Look at these numbers. Sixty to ninety days of typical pre-work before an agent touches real data. Five to ten people typically involved in data readiness. And zero — zero — vendors who mention this in their demos. I am naming this now because I want to calibrate your expectations. The demos make this look easy — and the technology part genuinely is easier than it used to be. But the organizational pre-work is real, and no vendor will mention it in their sales pitch. When you evaluate vendors in Session 5, remember this slide.</p>
+<p>Look at these numbers. Sixty to ninety days of typical pre-work before an agent touches real data. Five to ten people typically involved in data readiness. And zero — zero — vendors who mention this in their demos. I am naming this now because I want to calibrate your expectations. The demos make this look easy — and the technology part genuinely is easier than it used to be. But the organizational pre-work is real whether you are connecting an AI agent directly to vendor systems or layering it on top of an existing warehouse. And no vendor will mention it in their sales pitch. When you evaluate vendors in Session 5, remember this slide.</p>
 <p>This segment should take about 6 minutes.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {

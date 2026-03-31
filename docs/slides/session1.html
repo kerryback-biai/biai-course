@@ -145,19 +145,20 @@ Kerry Back, Rice University
 </div>
 
 </section>
-<section id="the-day-ai-came-for-software" class="slide level2 quote-slide center">
-<h2>The Day AI Came for Software</h2>
+<section id="the-saaspocalypse" class="slide level2 quote-slide center">
+<h2>The SaaSpocalypse</h2>
 <div class="quote-text">
-<p>“In February 2026, <span class="amber">AI agents</span> wiped <strong>$2 trillion</strong> from software company valuations in a single week. Investors began betting that AI could replace BI dashboards, workflow tools, reporting layers, and Tier 1 support.”</p>
+<p>“In late January 2026, Anthropic announced Claude Cowork — autonomous agent plugins. By February, roughly <span class="amber"><strong>$2 trillion</strong></span> in SaaS market cap had evaporated. The press called it the SaaSpocalypse.”</p>
 </div>
 <div class="quote-source">
-<p>— The market signal, February 2026</p>
+<p>— CNBC, “AI fears pummel software stocks,” February 2026; TechCrunch, “SaaS in, SaaS out,” March 2026</p>
 </div>
 <aside class="notes">
-<p>Welcome, everyone. Let me start with a story that sets the stage for everything we are going to do over the next four weeks. In February 2026, AI agents wiped two trillion dollars from software company valuations in a single week. Two trillion. That is not a typo. Investors decided, almost overnight, that AI could replace large categories of enterprise software — BI dashboards, workflow tools, reporting layers, even Tier 1 support.</p>
-<p>Now, whether or not you agree with the market’s verdict, the technology behind that bet is real, and it is what we are going to be working with for the next four weeks. This course teaches you to use it, understand how it works, evaluate its reliability, and build a strategy for deploying it at your organization.</p>
-<p>Before we dive in, a quick reminder of what the pre-program video covered: we have the XYZ Corp simulation, which is a realistic enterprise data environment with ten systems, and for those who want to go deeper, the Linux VM for hands-on building. Today, we start as users. We will get our hands dirty with data right away. Any questions about the course arc or logistics before we begin?</p>
-<p>This opening segment should take about 10-12 minutes. Keep the energy high — this is the hook for the entire course.</p>
+<p>Welcome, everyone. Let me start with the event that sets the stage for everything we are going to do over the next four weeks.</p>
+<p>In late January 2026, Anthropic announced Claude Cowork — autonomous agent plugins that let AI take actions inside enterprise software. Within weeks, roughly two trillion dollars in SaaS market cap evaporated. The press called it the SaaSpocalypse. Salesforce dropped 31 percent. Adobe dropped 32. Atlassian dropped 35.</p>
+<p>Now, whether or not you agree with the market’s verdict, the technology behind that bet is real, and it is what we will be working with for the next four weeks. This course teaches you to use it, understand how it works, evaluate its reliability, and build a strategy for deploying it.</p>
+<p>Before we dive in, a quick reminder of what the pre-program video covered: the Meridian Corp simulation with ten enterprise systems, and the optional Linux VM for hands-on building. Today, we start as users.</p>
+<p>This opening segment should take about 12-15 minutes including the next few slides. Keep the energy high — this is the hook for the entire course.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -170,40 +171,150 @@ Kerry Back, Rice University
           display:block!important;
       }</style></aside>
 </section>
-<section id="the-market-signal" class="slide level2 shrink center">
-<h2>The Market Signal</h2>
+<section id="the-damage" class="slide level2 shrink center">
+<h2>The Damage</h2>
 <div class="stat-cards">
+<div class="stat-card">
+<div class="stat-number">
+<p>-31%</p>
+</div>
+<div class="stat-label">
+<p>Salesforce</p>
+</div>
+</div>
+<div class="stat-card">
+<div class="stat-number">
+<p>-32%</p>
+</div>
+<div class="stat-label">
+<p>Adobe</p>
+</div>
+</div>
+<div class="stat-card">
+<div class="stat-number">
+<p>-35%</p>
+</div>
+<div class="stat-label">
+<p>Atlassian</p>
+</div>
+</div>
+</div>
+<div class="stat-cards">
+<div class="stat-card">
+<div class="stat-number">
+<p>-11%</p>
+</div>
+<div class="stat-label">
+<p>Intuit</p>
+</div>
+</div>
 <div class="stat-card">
 <div class="stat-number">
 <p>$2T</p>
 </div>
 <div class="stat-label">
-<p>Market cap erased from software companies</p>
+<p>Total SaaS market cap erased</p>
 </div>
 </div>
 <div class="stat-card">
 <div class="stat-number">
-<p>70%</p>
+<p>~6 wks</p>
 </div>
 <div class="stat-label">
-<p>Of BI dashboards estimated to go unused</p>
-</div>
-</div>
-<div class="stat-card">
-<div class="stat-number">
-<p>3 wks</p>
-</div>
-<div class="stat-label">
-<p>Typical wait for a custom report at many organizations</p>
+<p>January–February 2026</p>
 </div>
 </div>
 </div>
 <div class="explainer">
-<p>The market is betting that <span class="accent">conversational data access</span> will replace the tools you buy today. What does that mean for your company?</p>
+<p>ServiceNow and Workday were also hit hard. These are not speculative startups — they are the software backbone of most enterprises.</p>
 </div>
 <aside class="notes">
-<p>Let these numbers sink in for a moment. Two trillion dollars in market cap erased from software companies. Seventy percent of BI dashboards estimated to go unused — that is not my number, that is industry research. And three weeks is a typical wait for a custom report at many organizations. Three weeks to answer a question your CEO has right now.</p>
-<p>The market is making a very specific bet: that conversational data access — asking questions in plain English and getting instant answers — will replace the tools companies buy today. Dashboards, reporting layers, even some of the analyst headcount that supports them. Whether that bet is right or wrong, the technology is here, and it is what we are going to experience firsthand today. So the question for each of you is: what does this mean for your company? We will come back to that question throughout the session.</p>
+<p>Look at these numbers. Salesforce, down 31 percent. Adobe, 32. Atlassian, 35. Intuit, 11. And those are just the biggest names — ServiceNow, Workday, and dozens of others were hit too. Two trillion dollars in total, over about six weeks.</p>
+<p>These are not speculative startups. These are the companies that run your CRM, your project management, your financial reporting, your HR systems. The market is saying: AI agents are coming for the software you use every day. Let me explain why.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="what-ai-is-replacing" class="slide level2 shrink center">
+<h2>What AI Is Replacing</h2>
+<div class="three-cards">
+<div class="card card-dark">
+<div class="card-title">
+<p>The Interface Layer</p>
+</div>
+<p>Most SaaS products are forms, dashboards, and screens sitting on top of databases. AI agents let users skip navigating “20 screens” and state what they want in plain English. The interface becomes the agent, not the app.</p>
+</div>
+<div class="card card-light">
+<div class="card-title">
+<p>Simple Workflow Automation</p>
+</div>
+<p>Task tracking, status updates, if-then automations, data transfers between systems. These are exactly what AI agents do natively — no SaaS subscription required.</p>
+</div>
+<div class="card card-light">
+<div class="card-title">
+<p>Per-Seat Economics</p>
+</div>
+<p>If 10 AI agents do the work of 100 human reps, you need 10 Salesforce seats, not 100. The revenue model collapses even if the product is still used.</p>
+</div>
+</div>
+<aside class="notes">
+<p>So what exactly is AI replacing? Not the data. Not the databases. Three things.</p>
+<p>First, the interface layer. Think about what most SaaS products actually are: forms, dashboards, and screens sitting on top of databases. You navigate twenty screens to do something that could be stated in one sentence. AI agents let users skip the screens and just say what they want. The interface becomes the agent, not the app.</p>
+<p>Second, simple workflow automation. Task tracking, status updates, if-then rules, moving data between systems. These are things agents do natively. You do not need a SaaS subscription for a task that an AI can handle in seconds.</p>
+<p>Third, and this is the one that scares investors the most: per-seat economics. If ten AI agents can do the work of a hundred human reps, you need ten Salesforce seats, not a hundred. The product might still be useful, but the revenue model collapses.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="what-survives" class="slide level2 shrink center">
+<h2>What Survives</h2>
+<div class="highlight-box">
+<p>AI is not replacing the database — it is replacing the <span class="accent">screens people use to interact with the database</span>, and the humans who sit behind those screens.</p>
+</div>
+<div class="three-cards">
+<div class="card card-dark">
+<div class="card-title">
+<p>Systems of Record</p>
+</div>
+<p>Regulated industries (finance, healthcare, law) still need authoritative data stores with audit trails, compliance, and legal standing.</p>
+</div>
+<div class="card card-light">
+<div class="card-title">
+<p>Proprietary Data</p>
+</div>
+<p>Platforms with accumulated customer data, feedback loops, and network effects remain defensible. The data itself is the moat.</p>
+</div>
+<div class="card card-light">
+<div class="card-title">
+<p>Integration Hubs</p>
+</div>
+<p>Systems managing connections across many platforms survive because someone still has to move data between systems — even if the interface changes.</p>
+</div>
+</div>
+<div class="explainer">
+<p>This course is about the surviving layer: <span class="accent">the data</span>. You will learn to query it, combine it, build reports from it, and govern access to it — using AI agents instead of dashboards and analysts.</p>
+</div>
+<aside class="notes">
+<p>But here is the crucial point, and this is what this entire course is built around: AI is not replacing the database. It is replacing the screens people use to interact with the database, and the humans who sit behind those screens.</p>
+<p>What survives? Three things. Systems of record — in regulated industries, you still need authoritative data stores with audit trails and legal standing. Salesforce is not going away as a CRM database; what is going away is the idea that you need its interface to access the data. Second, proprietary data — companies that have accumulated years of customer data, feedback loops, and network effects. The data itself is the moat. Third, integration hubs — someone still has to connect systems together.</p>
+<p>And that is exactly what this course teaches. We are working with the layer that survives: the data. Over the next four weeks, you will learn to query it in plain English, combine it across systems, build automated reports from it, and govern who can access what — all using AI agents instead of dashboards and analyst queues.</p>
+<p>Sources for this section: TechCrunch, “SaaS in, SaaS out,” March 2026; CNBC, “AI fears pummel software stocks,” February 2026; Built In, “Will AI Agents Destroy SaaS?” 2026.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
