@@ -643,6 +643,112 @@ Kerry Back, Rice University
           display:block!important;
       }</style></aside>
 </section>
+<section id="turn-1-the-strategic-question" class="slide level2 shrink center">
+<h2>Turn 1: The Strategic Question</h2>
+<div class="highlight-box">
+<p><strong>“I’m considering expanding the Energy Division into the Southeast. Based on our pipeline, customer concentration, and support ticket trends, what are the top 3 risks?”</strong></p>
+</div>
+<p>The agent queried three systems (Legacy CRM, NetSuite Finance, Zendesk) and returned:</p>
+<p><strong>Risk 1 — Thin pipeline:</strong> Only 14 deals totaling $2.1M in Southeast regions. Division generates $147M annually — the pipeline is 1.4% of that base. Average deal size 28% below division average.</p>
+<p><strong>Risk 2 — Customer concentration:</strong> Top 5 customers = 62% of Energy revenue. ExxonMobil alone = 23%. Expansion funded from division profits is vulnerable to a single account loss.</p>
+<p><strong>Risk 3 — Support strain:</strong> Tickets up 34% YoY, resolution time up from 18 to 27 hours. Adding a region increases load on an already degraded support team.</p>
+<aside class="notes">
+<p>Turn 1 shows the agent synthesizing across three enterprise systems to frame a strategic question. Notice that the agent did not just pull one number — it queried CRM pipeline data, customer concentration figures, and Zendesk support trends, then wove them into a risk framework. Each risk is grounded in specific data points. This is what “thinking partner” looks like at its best: data-driven strategic framing in seconds.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="turns-23-pushback-and-evidence" class="slide level2 shrink center">
+<h2>Turns 2–3: Pushback and Evidence</h2>
+<div class="highlight-box">
+<p><strong>Turn 2:</strong> “You’re assuming our supply chain can handle Southeast volume. What if it can’t?”</p>
+</div>
+<p>The agent pulled Oracle SCM data it had not previously queried:</p>
+<ul>
+<li>Houston warehouse at <strong>91% capacity</strong> (pipes &amp; fittings), lead times up <strong>56% YoY</strong></li>
+<li><strong>3 of top 10 suppliers are single-source</strong> (National Oilwell Varco at $4.5M/year)</li>
+<li><strong>Revised risk ranking:</strong> Supply chain promoted to #1, displacing thin pipeline</li>
+</ul>
+<div class="highlight-box">
+<p><strong>Turn 3:</strong> “Push back on risk #2. What’s the actual evidence?”</p>
+</div>
+<p>The agent separated its claims by <strong>confidence level:</strong></p>
+<ul>
+<li><strong>High confidence:</strong> Delivery Issues tickets +60%, resolution time nearly doubled — this is real operational strain</li>
+<li><strong>Medium confidence:</strong> Ticket spike correlates with warehouse capacity data but causation is not proven</li>
+<li><strong>Lower confidence:</strong> Assumed shared support pool with Safety Division — no data confirming this</li>
+</ul>
+<div class="explainer">
+<p>Turn 2: the agent updated its analysis when challenged — it is not anchored to its first answer. Turn 3: it <span class="accent">decomposed its own confidence levels</span> instead of defending its position.</p>
+</div>
+<aside class="notes">
+<p>These two turns are the critical moments. In Turn 2, the user challenged an unstated assumption — that supply chain could handle the expansion. The agent did not defend its prior analysis. It went and got new data from Oracle SCM, found the Houston warehouse at 91% capacity with lead times already degraded, and promoted supply chain to the number one risk. Most people treat AI as an oracle and accept the first answer. The quality of the output depends on the quality of the follow-up questions. In Turn 3, the user asked the agent to push back on its own risk assessment. Instead of defending its position, the agent separated its claims into high, medium, and lower confidence tiers, explicitly acknowledging where the evidence was thin. This is what distinguishes a thinking partner from a yes-machine.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="turn-4-the-decision-boundary" class="slide level2 shrink center">
+<h2>Turn 4: The Decision Boundary</h2>
+<div class="highlight-box">
+<p><strong>“Given all of this, should we expand or not?”</strong></p>
+<p><strong>Agent:</strong> “That’s not my decision to make — and you should be skeptical of any AI system that would make it for you.”</p>
+</div>
+<div class="two-cards">
+<div class="card card-dark">
+<div class="card-title">
+<p>What Favors Expansion</p>
+</div>
+<ul>
+<li>Strategic diversification (62% top-5 concentration is a vulnerability)</li>
+<li>Board alignment (Energy growth is a Horizon 1 priority)</li>
+<li>Organic demand exists (14 deals without dedicated BD effort)</li>
+</ul>
+</div>
+<div class="card card-light">
+<div class="card-title">
+<p>What Argues Against Expanding Now</p>
+</div>
+<ul>
+<li>Supply chain at 91% with 56% lead time increase</li>
+<li>Support at tipping point (SLA breaches, 4-person team)</li>
+<li>Pipeline is $2.1M against $8–10M breakeven threshold</li>
+</ul>
+</div>
+</div>
+<p><strong>The 3 unknowns that matter most:</strong> Can you invest in supply chain first? Is the 14-deal pipeline a leading indicator or a ceiling? What’s the cost of waiting 6 months?</p>
+<div class="explainer">
+<p>The agent structured the decision without making it. It identified the <span class="accent">unknowns the data can’t answer</span> — which are the ones that matter most.</p>
+</div>
+<aside class="notes">
+<p>Turn 4 is the ethical boundary. The user asked for a recommendation, and the agent explicitly declined to make one. Instead, it structured the decision: what favors expansion, what argues against expanding now, and — most importantly — the three unknowns that should actually drive the decision. Can you invest in supply chain capacity before expanding? Is the thin pipeline a result of no BD effort or no market? What is the cost of waiting six months? These are questions the data cannot answer. The agent also proposed a sequenced approach: three months of dedicated BD effort plus supply chain planning, a gate review at month three, and regional buildout only if criteria are met. This is not an AI replacing human judgment. This is an AI making human judgment better-informed and better-structured. The key lesson: an AI that confidently says “yes, expand” based on 14 pipeline deals and strained supply chain data is more dangerous than one that says “here are the three things you need to figure out first.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="monday-morning-actions" class="slide level2 shrink center">
 <h2>Monday Morning Actions</h2>
 <div class="four-cards">

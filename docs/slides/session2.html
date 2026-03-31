@@ -28,6 +28,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-80873d3a46d0a92d285a31910fb8318b.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -358,6 +423,243 @@ Kerry Back, Rice University
           display:block!important;
       }</style></aside>
 </section>
+<section id="demo-the-prompt" class="slide level2 shrink center">
+<h2>Demo: The Prompt</h2>
+<div class="code-box">
+<div class="box-title">
+<p>What the user typed</p>
+</div>
+<pre><code>Which customers buy from multiple divisions?</code></pre>
+</div>
+<div class="explainer">
+<p>One sentence. The agent has to figure out the rest.</p>
+</div>
+<aside class="notes">
+<p>Here is the exact prompt. One sentence, plain English. The agent receives this along with its system prompt describing all three CRMs. It has to plan which systems to query, write SQL for each, and figure out how to match customer names that are spelled differently in every system. Let’s watch what happens behind the scenes.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="behind-the-scenes-three-crms-three-queries" class="slide level2 shrink center">
+<h2>Behind the Scenes: Three CRMs, Three Queries</h2>
+<div class="code-box">
+<div class="box-title">
+<p>Salesforce CRM (Industrial Division)</p>
+</div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a></a><span class="kw">SELECT</span> AccountName, <span class="fu">SUM</span>(Amount) <span class="kw">AS</span> total_revenue</span>
+<span id="cb2-2"><a></a><span class="kw">FROM</span> sf_opportunities</span>
+<span id="cb2-3"><a></a><span class="kw">WHERE</span> StageName <span class="op">=</span> <span class="st">'Closed Won'</span></span>
+<span id="cb2-4"><a></a>  <span class="kw">AND</span> CloseDate <span class="op">&gt;=</span> <span class="st">'2023-01-01'</span></span>
+<span id="cb2-5"><a></a><span class="kw">GROUP</span> <span class="kw">BY</span> AccountName <span class="kw">ORDER</span> <span class="kw">BY</span> total_revenue <span class="kw">DESC</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><em>47 accounts, $248.7M total</em></p>
+</div>
+<div class="code-box">
+<div class="box-title">
+<p>Legacy CRM (Energy Division)</p>
+</div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a></a><span class="kw">SELECT</span> CustName, <span class="fu">SUM</span>(OrderTotal) <span class="kw">AS</span> total_revenue</span>
+<span id="cb3-2"><a></a><span class="kw">FROM</span> orders</span>
+<span id="cb3-3"><a></a><span class="kw">WHERE</span> OrderStatus <span class="op">=</span> <span class="st">'Complete'</span></span>
+<span id="cb3-4"><a></a>  <span class="kw">AND</span> OrderDate <span class="op">&gt;=</span> <span class="st">'01/01/2023'</span>   <span class="co">-- VARCHAR date format!</span></span>
+<span id="cb3-5"><a></a><span class="kw">GROUP</span> <span class="kw">BY</span> CustName <span class="kw">ORDER</span> <span class="kw">BY</span> total_revenue <span class="kw">DESC</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><em>31 accounts, $147.2M total</em></p>
+</div>
+<div class="code-box">
+<div class="box-title">
+<p>HubSpot CRM (Safety Division)</p>
+</div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a></a><span class="kw">SELECT</span> company_name, <span class="fu">SUM</span>(deal_amount) <span class="kw">AS</span> total_revenue</span>
+<span id="cb4-2"><a></a><span class="kw">FROM</span> hs_deals <span class="kw">WHERE</span> deal_stage <span class="op">=</span> <span class="st">'closedwon'</span></span>
+<span id="cb4-3"><a></a>  <span class="kw">AND</span> close_date <span class="op">&gt;=</span> <span class="st">'2023-01-01'</span></span>
+<span id="cb4-4"><a></a><span class="kw">GROUP</span> <span class="kw">BY</span> company_name <span class="kw">ORDER</span> <span class="kw">BY</span> total_revenue <span class="kw">DESC</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><em>28 accounts, $98.4M total</em></p>
+</div>
+<aside class="notes">
+<p>Three separate systems, three separate SQL dialects, three different column names for “customer.” Notice the Legacy CRM uses VARCHAR dates in MM/DD/YYYY format — the agent’s first query actually used ISO format and returned zero rows. It detected the empty result, checked the schema, found the date stored as a string, and rewrote the filter. That is the test-and-review loop in action.</p>
+<p>Also notice: Salesforce calls it AccountName, the Legacy CRM calls it CustName, HubSpot calls it company_name. Same concept, three different labels. The agent has to normalize all of this before it can even begin matching.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="fuzzy-matching-results" class="slide level2 shrink center">
+<h2>Fuzzy Matching Results</h2>
+<div class="comparison-table">
+<table class="caption-top">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Match Score</th>
+<th>System A</th>
+<th>System B</th>
+<th>Variation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>100</td>
+<td>General Electric <em>(SF)</em></td>
+<td>GE Safety Division <em>(HS)</em></td>
+<td>Abbreviation + division suffix</td>
+</tr>
+<tr class="even">
+<td>91</td>
+<td>ExxonMobil Corporation <em>(SF)</em></td>
+<td>Exxon Mobil Energy Svcs <em>(LC)</em></td>
+<td>Space in name + abbreviation</td>
+</tr>
+<tr class="odd">
+<td>88</td>
+<td>Dow Chemical Company <em>(SF)</em></td>
+<td>Dow Inc.&nbsp;<em>(HS)</em></td>
+<td>Legal name vs.&nbsp;trading name</td>
+</tr>
+<tr class="even">
+<td>87</td>
+<td>Caterpillar Inc.&nbsp;<em>(SF)</em></td>
+<td>CAT Energy Services <em>(LC)</em></td>
+<td>Ticker symbol used as name</td>
+</tr>
+<tr class="odd">
+<td>85</td>
+<td>Schlumberger Ltd.&nbsp;<em>(LC)</em></td>
+<td>SLB Safety &amp; PPE <em>(HS)</em></td>
+<td>Rebranded name vs.&nbsp;legacy name</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="highlight-box">
+<p>Exact matching found only <strong>3</strong> of the 10 multi-division customers. Fuzzy matching (token-sort ratio &gt;= 82) caught the other <strong>7</strong>.</p>
+</div>
+<aside class="notes">
+<p>This table shows why exact matching fails. “General Electric” and “GE Safety Division” are obviously the same company to a human, but an exact string match sees them as completely different. The agent used Python’s thefuzz library with token-sort ratio scoring. It also cross-checked against industry and address fields to weed out false positives — for example, it initially matched “National Oilwell Varco” with “National Safety Supply” at score 83, but excluded the match after checking that one is Oil and Gas and the other is PPE Distribution.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="result-multi-division-customers" class="slide level2 shrink center">
+<h2>Result: Multi-Division Customers</h2>
+<div class="comparison-table">
+<table class="caption-top" style="width:100%;">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Customer</th>
+<th>Industrial</th>
+<th>Energy</th>
+<th>Safety</th>
+<th>Combined Revenue</th>
+<th>Divs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>General Electric</td>
+<td>General Electric</td>
+<td>GE Industrial Solutions</td>
+<td>GE Safety Division</td>
+<td>$18.4M</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td>ExxonMobil</td>
+<td>ExxonMobil Corp.</td>
+<td>Exxon Mobil Energy Svcs</td>
+<td>ExxonMobil Safety</td>
+<td>$14.7M</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td>Dow Chemical</td>
+<td>Dow Chemical Company</td>
+<td>Dow Energy Products</td>
+<td>Dow Inc.</td>
+<td>$12.1M</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td>Chevron</td>
+<td>Chevron USA Inc.</td>
+<td>Chevron Energy</td>
+<td>Chevron Phillips Safety</td>
+<td>$11.3M</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td>3M Company</td>
+<td>3M Industrial</td>
+<td>—</td>
+<td>3M Safety Products</td>
+<td>$8.6M</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>Caterpillar</td>
+<td>Caterpillar Inc.</td>
+<td>CAT Energy Services</td>
+<td>—</td>
+<td>$7.9M</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="info-box">
+<div class="box-title">
+<p>Key Finding</p>
+</div>
+<p><strong>10 customers</strong> buy from 2+ divisions. <strong>4</strong> buy from all 3 — representing <strong>$56.5M</strong> in combined revenue (11.4% of total). Without cross-system matching, these appear as <strong>24 separate accounts</strong> in reporting.</p>
+</div>
+<aside class="notes">
+<p>Here is the final answer. Ten customers buy from multiple divisions. Four of them — GE, ExxonMobil, Dow, and Chevron — buy from all three divisions. Together they represent 56.5 million dollars in combined revenue, or 11.4 percent of the company total. Without the cross-system merge, these customers appear as 24 separate accounts scattered across three CRMs. No one in the company could see the full relationship, negotiate enterprise-level pricing, or identify the strategic importance of these accounts. This is the kind of insight that was impossible before — not because the data did not exist, but because it was scattered across systems that were never designed to talk to each other.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="demo-revenue-per-employee-by-division" class="slide level2 shrink center">
 <h2>Demo: Revenue Per Employee by Division</h2>
 <div class="two-cards">
@@ -391,6 +693,93 @@ Kerry Back, Rice University
 <p>Two questions. Four systems. Both answered in under a minute. Compare that to what it would take to get these answers through traditional channels at most organizations. Someone would need to pull reports from each system, manually reconcile the data in a spreadsheet, and deliver it — probably in a few days if it is a priority, longer if it is not.</p>
 <p>Now, the question you should be asking is: how does this actually work? What is happening behind the scenes? We will get deep into that in Session 3. But for today, I want to focus on the business implications and the data integration landscape.</p>
 <p>The reason I am showing you these two demos is that they represent the most common cross-system question patterns in enterprises: customer overlap across business units, and efficiency metrics that combine financial and operational data.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="revenue-per-employee-merged-results" class="slide level2 shrink center">
+<h2>Revenue per Employee: Merged Results</h2>
+<div class="comparison-table">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Division</th>
+<th>2025 Revenue</th>
+<th>Headcount</th>
+<th>Revenue / Employee</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Industrial</td>
+<td>$87.3M</td>
+<td>218</td>
+<td><strong>$400,500</strong></td>
+</tr>
+<tr class="even">
+<td>Safety</td>
+<td>$34.8M</td>
+<td>87</td>
+<td><strong>$400,000</strong></td>
+</tr>
+<tr class="odd">
+<td>Energy</td>
+<td>$52.1M</td>
+<td>134</td>
+<td><strong>$388,800</strong></td>
+</tr>
+<tr class="even">
+<td><strong>Company-wide</strong></td>
+<td><strong>$174.2M</strong></td>
+<td><strong>482</strong></td>
+<td><strong>$361,400</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="explainer">
+<p>Revenue from 3 CRMs + headcount from Workday, merged on division name. Company-wide includes 43 Corporate/HQ employees with no direct revenue.</p>
+</div>
+<aside class="notes">
+<p>Here is the merged table. The agent queried revenue from each of the three CRMs — Salesforce for Industrial, the Legacy CRM for Energy, HubSpot for Safety — then pulled headcount from Workday and joined on division name. Notice that Corporate’s 43 employees are included in the company-wide figure but excluded from the divisional calculations, because they generate no direct revenue. The agent made that design choice and documented it — a good sign that it is reasoning about the data, not just running arithmetic.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="revenue-per-employee-key-findings" class="slide level2 shrink center">
+<h2>Revenue per Employee: Key Findings</h2>
+<div class="info-box">
+<div class="box-title">
+<p>What the chart reveals</p>
+</div>
+<ul>
+<li><strong>Surprisingly tight clustering:</strong> All three divisions fall between $389K–$401K per employee</li>
+<li><strong>Scale ≠ efficiency:</strong> Industrial is largest ($87.3M) but only marginally above Safety in per-employee terms</li>
+<li><strong>Corporate overhead:</strong> Company-wide average ($361K) is ~10% below divisional averages due to 43 HQ employees</li>
+<li><strong>Energy lags slightly:</strong> $388.8K may reflect heavier field-service staffing requirements</li>
+</ul>
+</div>
+<div class="highlight-box">
+<p>Four systems. One question. Under a minute. The same analysis through traditional channels would require pulling reports from each system and reconciling in a spreadsheet — probably a few days at best.</p>
+</div>
+<aside class="notes">
+<p>The bar chart the agent produced shows all three divisions clustered tightly around 390 to 400 thousand dollars per employee. That is actually a surprising finding — it suggests headcount has been scaled roughly in proportion to revenue across the business. Energy lags slightly, which could reflect the heavier field-service component of that division. The company-wide figure is dragged down by Corporate’s 43 employees who generate no direct revenue — that 8.9 percent corporate overhead is typical for a company this size. The important thing is not just the numbers but how fast we got them. Four systems, one question, under a minute. That is the power of the cross-system merge.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

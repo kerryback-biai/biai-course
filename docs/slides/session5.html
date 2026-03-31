@@ -491,6 +491,112 @@ Kerry Back, Rice University
           display:block!important;
       }</style></aside>
 </section>
+<section id="demo-result-what-the-agent-actually-returned" class="slide level2 shrink center">
+<h2>Demo Result: What the Agent Actually Returned</h2>
+<div class="two-col">
+<div class="div">
+<p><strong>Without Guardrails</strong></p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Title</th>
+<th>Salary</th>
+<th>Bonus</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>David Chen</td>
+<td>VP, Engineering</td>
+<td>$210,000</td>
+<td>25%</td>
+</tr>
+<tr class="even">
+<td>Sarah Martinez</td>
+<td>Sr.&nbsp;Dir, Platform Eng</td>
+<td>$195,000</td>
+<td>20%</td>
+</tr>
+<tr class="odd">
+<td>James Wilson</td>
+<td>Dir, Data Engineering</td>
+<td>$185,000</td>
+<td>20%</td>
+</tr>
+<tr class="even">
+<td>Priya Patel</td>
+<td>Principal SWE</td>
+<td>$178,000</td>
+<td>15%</td>
+</tr>
+<tr class="odd">
+<td>Marcus Johnson</td>
+<td>Sr.&nbsp;SWE</td>
+<td>$162,000</td>
+<td>15%</td>
+</tr>
+</tbody>
+</table>
+<p><em>…and 42 more rows returned on request.</em></p>
+<p>The agent happily returned <strong>individual names, exact salaries, and bonus targets</strong> to anyone who asked.</p>
+</div>
+<div class="div">
+<p><strong>With Guardrails</strong></p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Metric</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Headcount</td>
+<td>47</td>
+</tr>
+<tr class="even">
+<td>Average Base Salary</td>
+<td>$142,000</td>
+</tr>
+<tr class="odd">
+<td>Median Base Salary</td>
+<td>$138,000</td>
+</tr>
+<tr class="even">
+<td>Salary Range</td>
+<td>$98,000 – $210,000</td>
+</tr>
+<tr class="odd">
+<td>Average Bonus Target</td>
+<td>12%</td>
+</tr>
+</tbody>
+</table>
+<p><em>Access to individual records requires HR authorization (Policy MER-DATA-003).</em></p>
+<p>The agent blocked individual records and returned <strong>useful aggregate statistics</strong> instead.</p>
+</div>
+</div>
+<div class="explainer">
+<p>Same English prompt. Same underlying data. The guardrails — not the model — determined whether this was a <strong>useful insight</strong> or a <strong>compliance violation</strong>.</p>
+</div>
+<aside class="notes">
+<p>Say: “Let me show you what actually came back in each version. On the left, without guardrails: full names, exact salaries, bonus targets. David Chen makes $210,000. Sarah Martinez makes $195,000. Anyone in the company with access to the chat interface can pull this in five seconds. That is a compliance disaster.”</p>
+<p>“On the right, with guardrails: aggregate statistics only. The department has 47 people, the average salary is $142,000, the range is $98K to $210K. Still useful for planning and benchmarking, but no individual data exposed. And a clear policy reference telling you how to get individual records if you actually have authorization.”</p>
+<p>“The model is the same. The data access is the same. The only difference is the guardrail layer that sits between the user’s question and the data. This is why the deployment decisions we discussed earlier matter so much. It is not about whether the AI can access the data. It is about the governance layer you build around it.”</p>
+<p>Transition: “Let me formalize the four approaches to data security. You read about these in the primer.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="four-data-security-approaches" class="slide level2 shrink center">
 <h2>Four Data Security Approaches</h2>
 <div class="comparison-table">

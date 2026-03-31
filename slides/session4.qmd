@@ -168,6 +168,106 @@ If the live demo fails, switch to the pre-recorded fallback: "Let me switch to t
 
 ---
 
+## Pipeline Demo: The Prompt {.shrink}
+
+::: {.highlight-box}
+**Prompt typed into the XYZ app:**
+
+> Prepare a quarterly executive summary of XYZ Corp performance for Q4 2025 --- revenue by division, headcount efficiency, top customer risks, and supply chain issues.
+:::
+
+::: {.info-box}
+::: {.box-title}
+Systems queried behind the scenes
+:::
+
+- **Salesforce** --- Industrial division revenue (Q3 & Q4)
+- **Legacy CRM** --- Energy division revenue (Q3 & Q4)
+- **HubSpot** --- Safety division revenue (Q3 & Q4)
+- **Workday** --- Headcount by division
+- **SAP** --- Industrial late deliveries & supplier quality
+- **Oracle SCM** --- Energy late shipments & supplier quality
+- **Zendesk** --- Support ticket volume & CSAT by division
+- **Python** --- Merge all data, compute KPIs, generate memo
+:::
+
+::: {.notes}
+This slide shows exactly what the user typed and what happened behind the scenes. Say: "Here is the prompt. One sentence. And here is what the agent did with it: it queried seven systems, merged the data in Python, computed KPIs, and generated a structured memo. Let me show you the highlights of what came back."
+:::
+
+---
+
+## Pipeline Demo: The Result --- Key Excerpts {.shrink}
+
+::: {.highlight-box}
+**Executive Summary (from the generated memo):**
+
+XYZ Corp delivered **$10.5M in Q4 revenue**, up **7.8% from Q3** ($9.7M), with growth across all three divisions. Two risks require immediate attention: **Energy division's 34% customer concentration** in CAT Energy Services, and **rising supplier delivery delays** in Industrial operations (16.7% late rate).
+:::
+
+::: {.two-col}
+::: div
+**Revenue Scorecard**
+
+| Division | Q4 2025 | QoQ Growth |
+|---|---|---|
+| Industrial | $5.9M | +7.5% |
+| Energy | $3.4M | +7.1% |
+| Safety | $1.1M | +12.1% |
+| **Total** | **$10.5M** | **+7.8%** |
+:::
+
+::: div
+**Risk Flags**
+
+| Risk | Severity |
+|---|---|
+| CAT Energy = 34% of Energy revenue | **HIGH** |
+| Industrial late deliveries: 16.7% | **HIGH** |
+| Honeywell Safety = 14% of Safety revenue | MEDIUM |
+| Energy CSAT 3.5/5.0 (below target) | MEDIUM |
+:::
+:::
+
+::: {.notes}
+Walk through the highlights. Say: "Look at what came back. A structured executive summary with the headline finding up front --- two risks that need attention. A revenue scorecard across all three divisions with quarter-over-quarter growth. And a risk flag table that prioritizes by severity. The full memo also includes headcount efficiency, supply chain detail, and an outlook section with recommended actions. One prompt. One minute of waiting. A complete board-ready document."
+
+The chart description from the memo: "The agent also generated a grouped bar chart showing Q3 versus Q4 revenue for each division --- light blue for Q3, dark blue for Q4, showing the step-up across all three."
+:::
+
+---
+
+## Pipeline Demo: Supply Chain & Outlook {.shrink}
+
+::: {.two-col}
+::: div
+**Supply Chain Issues**
+
+- **Industrial (SAP):** 16.7% late delivery rate; worst supplier Huang-Martinez (quality score 2.8, avg 8.3 days late)
+- **Energy (Oracle SCM):** 11.9% late shipment rate; worst supplier Gonzalez & Sons (rating 2.9, avg 7.1 days late)
+:::
+
+::: div
+**Recommended Actions**
+
+1. **Diversify Energy's customer base** --- reduce CAT dependency below 25%
+2. **Fix Industrial supplier quality** --- place Huang-Martinez on 60-day improvement plan
+3. **Investigate Energy CSAT decline** --- cross-reference Zendesk tickets with late shipments
+:::
+:::
+
+::: {.explainer}
+Sources: Salesforce, Legacy CRM, HubSpot, Workday, SAP, Oracle SCM, Zendesk. All queried, merged, and formatted from a **single prompt**.
+:::
+
+::: {.notes}
+Say: "The memo also included supply chain detail from SAP and Oracle SCM, and ended with three concrete recommended actions --- each with a specific owner and timeline. This is the kind of output that would take an analyst days to compile manually. The agent did it in about a minute. That is the pipeline."
+
+Transition: "Now let me break down the anatomy of what just happened, because each of those steps is a lever you can customize."
+:::
+
+---
+
 ## Anatomy of a Reporting Pipeline {.section-divider}
 
 ::: {.notes}
@@ -278,6 +378,118 @@ Say: "The quality of what you get out depends entirely on the specificity of wha
 DEMO INSTRUCTIONS: Switch to the XYZ app. Do three quick iterations. First: "Summarize quarterly performance." Show the generic output. Second: "Redo this using traffic-light format with red, yellow, and green for each division. Flag any metric more than 10% off plan." Show the improvement. Third: "Make this one page maximum. Lead with the biggest risk. End with three recommended actions." Show the board-ready version. Each iteration takes about 30-60 seconds. Narrate the differences as they appear.
 
 After the demo: "Each iteration took seconds. The cost of refining is essentially zero. The skill is knowing what to ask for --- and that is a business skill, not a technical one. You know what your board wants to see. You know what format works. Now you have a tool that can produce it."
+:::
+
+---
+
+## Draft 1: "Summarize Q4 performance" {.shrink}
+
+::: {.highlight-box}
+**Prompt:** Summarize Q4 performance.
+:::
+
+> **XYZ Corp Q4 2025 Summary**
+>
+> XYZ Corp generated $10.5M in revenue during Q4 2025, up from $9.7M in Q3 2025, representing 7.8% quarter-over-quarter growth.
+>
+> **Revenue by division:**
+>
+> - Industrial: $5.9M (56% of total)
+> - Energy: $3.4M (33% of total)
+> - Safety: $1.1M (11% of total)
+>
+> **Headcount:**
+>
+> - Industrial: 308 employees
+> - Energy: 220 employees
+> - Safety: 106 employees
+>
+> All three divisions showed positive revenue growth compared to Q3. Safety had the highest growth rate at 12.1%.
+
+::: {.explainer}
+A **data dump**. Factually correct but no prioritization, no risk flags, no action items. A manager reads this and asks: *"So what?"*
+:::
+
+::: {.notes}
+Say: "Here is Draft 1. The agent did exactly what was asked --- it summarized Q4 performance. But look at the result. It is a wall of numbers with no hierarchy. Every fact is treated as equally important. There are no risk flags, no recommended actions, nothing that tells a decision-maker what to do next. This is what a generic prompt gets you: a generic answer."
+:::
+
+---
+
+## Draft 2: "Traffic-light format, flag >10% off plan" {.shrink}
+
+::: {.highlight-box}
+**Prompt:** Redo this in traffic-light format --- green/yellow/red for each division. Flag any metric more than 10% off plan.
+:::
+
+::: {.comparison-table}
+
+| Division | Revenue | vs Plan | Customer Risk | Supply Chain | Overall |
+|---|---|---|---|---|---|
+| **Industrial** | $5.9M | -5.0% | Low (top cust 7%) | Late 16.7% | YELLOW |
+| **Energy** | $3.4M | +10.1% | HIGH --- CAT 34% | Late 11.9% | RED |
+| **Safety** | $1.1M | N/A | Medium (top cust 14%) | N/A | YELLOW |
+
+:::
+
+> **RED flags:** Energy customer concentration 33.9%; Industrial late delivery rate 16.7%
+>
+> **YELLOW flags:** Industrial revenue 5% below plan; Energy CSAT 3.5/5.0
+>
+> **GREEN:** Energy revenue +10.1% above plan; Overall growth +7.8% QoQ
+
+::: {.explainer}
+**Structured and scannable.** Traffic-light colors give instant visual prioritization. But still no recommended actions --- a reader knows *what's wrong* but not *what to do*.
+:::
+
+::: {.notes}
+Say: "Same data, better prompt. Now we have a traffic-light dashboard. You can scan this in ten seconds and know that Energy is red and the other two are yellow. The agent pulled in budget data it did not use in Draft 1 because the prompt now asked for variance-to-plan. Red and yellow flags are clearly separated. This is a huge improvement --- but notice what is still missing. There are no recommended actions. A board member reads this and says, 'OK, Energy is red. Now what?'"
+:::
+
+---
+
+## Draft 3: "One page, lead with risk, end with actions" {.shrink}
+
+::: {.highlight-box}
+**Prompt:** One page maximum. Lead with the biggest risk. End with three recommended actions.
+:::
+
+::: {.two-col}
+::: div
+> **Biggest risk: Energy depends on a single customer**
+>
+> CAT Energy Services generated **$1.16M in Q4** --- **34% of Energy's revenue**. No other division has a customer above 14%.
+
+| | Industrial | Energy | Safety |
+|---|---|---|---|
+| Q4 Revenue | $5.9M | $3.4M | $1.1M |
+| vs Plan | -5% | +10% | N/A |
+| QoQ Growth | +7.5% | +7.1% | +12.1% |
+| Top Cust % | 7.0% | **33.9%** | 13.6% |
+| **Status** | YELLOW | **RED** | YELLOW |
+:::
+
+::: div
+> **Three recommended actions:**
+>
+> 1. **Diversify Energy's customer base.** Add 3--5 new accounts in Q1 to reduce CAT dependency below 25%.
+>
+> 2. **Fix Industrial supplier quality.** Place Huang-Martinez on a 60-day improvement plan.
+>
+> 3. **Investigate Energy CSAT decline.** Cross-reference Zendesk tickets with late shipments; present at February ops review.
+
+**Company total: $10.5M revenue, +7.8% QoQ, 634 employees**
+:::
+:::
+
+::: {.explainer}
+**Board-ready.** Leads with the headline risk. Compact scorecard. Ends with three concrete, assignable actions. Same data. Same agent. **The prompt was the variable that mattered.**
+:::
+
+::: {.notes}
+Say: "Draft 3. One page. The biggest risk is the very first thing you read --- Energy depends on a single customer for 34% of its revenue. The scorecard is compact enough to scan in ten seconds. And it ends with three recommended actions, each with a specific owner and timeline. This is what a board member can read in 90 seconds and know exactly what to do."
+
+"Same data. Same agent. Same systems queried. The only thing that changed was the prompt. That is the lesson: the quality of the output is a function of the specificity of the instruction. And that specificity is a business skill, not a technical one. You know what your board wants. Now you can produce it."
 :::
 
 ---

@@ -209,6 +209,50 @@ Transition: So you have seen document AI in action --- retrieval, synthesis, cit
 
 ---
 
+## Document Q&A: Policy Lookup {.shrink}
+
+::: {.highlight-box}
+**Q: "What is XYZ's policy on remote work for the Energy Division?"**
+:::
+
+**General Policy:** Up to 2 days remote/week for corporate staff, subject to manager approval and 30-day trial *(Employee Handbook, Section 4.3, p. 28)*.
+
+**Energy Division Exception:** Field operations, warehouse, and on-site technical roles are "location-essential" --- not eligible. Eligible staff (account managers, analysts, division finance) limited to **1 day/week** due to field-team coordination requirements *(Energy Division Addendum, Section 2, p. 3)*.
+
+**Approval:** Written VP approval, quarterly review, core hours 8 AM--3 PM CT *(Employee Handbook, Section 4.3, p. 29)*.
+
+::: {.explainer}
+Every claim traces to a specific document, section, and page. The agent synthesized across [two separate documents]{.accent} --- the handbook and the division addendum.
+:::
+
+::: {.notes}
+This is the first demo question. Notice three things. First, every claim has a citation with a document name, section number, and page number. Second, the agent had to retrieve from two separate documents --- the general employee handbook and the Energy Division addendum --- and synthesize them into a coherent answer that accounts for the division-specific override. Third, the answer is structured clearly with the general rule, the exception, and the process. A keyword search for "remote work" might find the handbook but miss the addendum. The AI found both and reconciled them.
+:::
+
+---
+
+## Document Q&A: Multi-Document Synthesis {.shrink}
+
+::: {.highlight-box}
+**Q: "What did the board approve regarding the Safety Division expansion?"**
+:::
+
+**Q4 2025 Board (Oct 17):** Approved in principle --- Houston distribution center (40K sq ft), 18 FTEs, Q3 2026 launch, projected $8.2M first-year revenue *(Board Minutes Q4 2025, Item 3, pp. 4--5)*.
+
+**Q1 2026 Board (Jan 22):** Final approval for **$3.4M capex** --- $1.8M warehouse fit-out, $0.9M fleet, $0.4M IT, $0.3M hiring *(Board Minutes Q1 2026, Item 2, pp. 2--3)*.
+
+**Gate review:** If Houston center does not reach 60% of projected revenue by Month 6, management must present revised plan or exit strategy.
+
+::: {.explainer}
+The agent assembled a narrative across [three documents and two time periods]{.accent} --- board minutes from two quarters plus the strategic plan. A keyword search would have found one; the AI found and connected all three.
+:::
+
+::: {.notes}
+This question required the agent to connect information across three separate documents spanning two quarters. The Q4 2025 board minutes had the initial approval and scope. The Q1 2026 minutes had the final capital expenditure authorization and the gate review requirement. The strategic plan provided additional context about this being a Horizon 1 initiative. No single document contains the full answer. This is the kind of question that, in most organizations, would require reading through dozens of pages of board minutes or asking someone who was in the room. The AI assembled the narrative in seconds, with citations to every source.
+:::
+
+---
+
 ## How RAG Works {.shrink}
 
 ::: {.step-flow-5}
@@ -408,6 +452,31 @@ After about 7 minutes: Let me bring everyone back. This is the vision we have be
 
 ---
 
+## Cross-System Result: GE Commitment vs. Spending {.shrink}
+
+::: {.highlight-box}
+**Q: "What's our contractual commitment to GE, and how does their actual spending compare?"**
+:::
+
+**From Document AI (contract):** MSA #MSA-2023-0847 requires **$4.2M minimum annual purchase**. Shortfall forfeits Tier 2/3 pricing retroactively. Auto-renews June 30, 2026 *(GE MSA, Sections 3, 8, Exhibit B)*.
+
+**From Database AI (3 CRMs):**
+
+| Year | Industrial | Energy | Safety | Total | vs. $4.2M |
+|------|-----------|--------|--------|-------|-----------|
+| 2024 | $2.85M | $1.02M | $0.41M | **$4.28M** | +$83K (met) |
+| 2025 | $2.61M | $0.84M | $0.34M | **$3.80M** | **-$404K (missed)** |
+
+::: {.explainer}
+Neither source alone answers the question. The contract says what we promised; the database says what happened. The **$404K shortfall with a renewal deadline 92 days away** only emerges when [both systems are combined]{.accent}.
+:::
+
+::: {.notes}
+This is the cross-system synthesis in action. The agent retrieved contract terms from the document store --- the $4.2M minimum commitment, the shortfall penalty clause, the auto-renewal date --- and then queried three separate CRMs for actual spending by division. GE appears under different names across systems: General Electric in Salesforce, GE-related entries in the Legacy CRM and HubSpot. The punchline: 2025 spending fell $404K short of the contractual minimum, exposing XYZ to retroactive repricing that could cost approximately $160K. And the auto-renewal is 92 days away. This is the kind of insight that requires both document AI and database AI working together --- and the kind of finding that could easily be missed if these systems are queried separately.
+:::
+
+---
+
 ## When RAG Fails {.shrink}
 
 ::: {.three-cards}
@@ -462,6 +531,50 @@ Let me show you this live. I am going to ask a question where I know the relevan
 [TIMING: About 5 minutes total on this slide, from minute 52 to about minute 57. Spend 2 minutes on the three failure modes, then 3 minutes on the live chunking failure demo. The demo is the most impactful part --- students seeing a confident but incomplete answer in real time drives the point home.]
 
 Transition: So chunking failures, hallucinated citations, and stale documents. These are the risks. But there is one more constraint you need to understand before we talk about deployment.
+:::
+
+---
+
+## Chunking Failure: The $1.53M Omission {.shrink}
+
+::: {.highlight-box}
+**Q: "What are the termination penalties in our Apex Industries contract?"**
+:::
+
+::: {.two-cards}
+::: {.card .card-dark}
+::: {.card-title}
+What the Agent Returned
+:::
+
+"Either party may terminate with **90 days' written notice**."
+
+*(Apex MSA, Section 12.1, p. 14)*
+
+- Factually correct, well-cited, confident tone
+- No hedging or uncertainty
+:::
+
+::: {.card .card-light}
+::: {.card-title}
+What It Missed
+:::
+
+Section 12.2 (p. 15) --- fell into a **different chunk**:
+
+"Terminating party shall pay **15% of remaining contract value**."
+
+- On a $6.8M contract with 18 months left = **$1.53M fee**
+- Chunk scored 0.64 --- below the 0.70 retrieval threshold
+:::
+:::
+
+::: {.explainer}
+The answer is correct, cited, and confident --- but missing the most expensive piece of information. The CFO who relies on this answer walks into a [$1.53M surprise]{.accent}.
+:::
+
+::: {.notes}
+This is the chunking failure made concrete. Someone asks about termination penalties in the Apex contract. The agent retrieves Section 12.1, which describes the 90-day notice requirement --- correct, well-cited, confidently stated. But Section 12.2, which specifies a 15% termination fee on remaining contract value, fell into a separate chunk at the page break between pages 14 and 15. That chunk scored 0.64 on relevance --- just below the 0.70 retrieval threshold --- because it references "Section 12.1" rather than repeating the word "termination penalty" directly. The result: a CFO relying on this answer would expect to walk away with just 90 days notice, and then get invoiced $1.53M. This is the worst kind of AI error --- one that looks exactly like a correct answer. There is no signal that anything is missing.
 :::
 
 ---

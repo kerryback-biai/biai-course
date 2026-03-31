@@ -314,6 +314,58 @@ This is the core insight from your pre-reading: the question is not whether the 
 
 ---
 
+## Demo Result: What the Agent Actually Returned {.shrink}
+
+::: {.two-col}
+::: div
+**Without Guardrails**
+
+| Name | Title | Salary | Bonus |
+|------|-------|--------|-------|
+| David Chen | VP, Engineering | $210,000 | 25% |
+| Sarah Martinez | Sr. Dir, Platform Eng | $195,000 | 20% |
+| James Wilson | Dir, Data Engineering | $185,000 | 20% |
+| Priya Patel | Principal SWE | $178,000 | 15% |
+| Marcus Johnson | Sr. SWE | $162,000 | 15% |
+
+*...and 42 more rows returned on request.*
+
+The agent happily returned **individual names, exact salaries, and bonus targets** to anyone who asked.
+:::
+
+::: div
+**With Guardrails**
+
+| Metric | Value |
+|--------|-------|
+| Headcount | 47 |
+| Average Base Salary | $142,000 |
+| Median Base Salary | $138,000 |
+| Salary Range | $98,000 -- $210,000 |
+| Average Bonus Target | 12% |
+
+*Access to individual records requires HR authorization (Policy MER-DATA-003).*
+
+The agent blocked individual records and returned **useful aggregate statistics** instead.
+:::
+:::
+
+::: {.explainer}
+Same English prompt. Same underlying data. The guardrails --- not the model --- determined whether this was a **useful insight** or a **compliance violation**.
+:::
+
+::: {.notes}
+Say: "Let me show you what actually came back in each version. On the left, without guardrails: full names, exact salaries, bonus targets. David Chen makes $210,000. Sarah Martinez makes $195,000. Anyone in the company with access to the chat interface can pull this in five seconds. That is a compliance disaster."
+
+"On the right, with guardrails: aggregate statistics only. The department has 47 people, the average salary is $142,000, the range is $98K to $210K. Still useful for planning and benchmarking, but no individual data exposed. And a clear policy reference telling you how to get individual records if you actually have authorization."
+
+"The model is the same. The data access is the same. The only difference is the guardrail layer that sits between the user's question and the data. This is why the deployment decisions we discussed earlier matter so much. It is not about whether the AI can access the data. It is about the governance layer you build around it."
+
+Transition: "Let me formalize the four approaches to data security. You read about these in the primer."
+:::
+
+---
+
 ## Four Data Security Approaches {.shrink}
 
 ::: {.comparison-table}

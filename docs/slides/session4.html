@@ -318,6 +318,166 @@ Kerry Back, Rice University
           display:block!important;
       }</style></aside>
 </section>
+<section id="pipeline-demo-the-prompt" class="slide level2 shrink center">
+<h2>Pipeline Demo: The Prompt</h2>
+<div class="highlight-box">
+<p><strong>Prompt typed into the XYZ app:</strong></p>
+<blockquote>
+<p>Prepare a quarterly executive summary of XYZ Corp performance for Q4 2025 — revenue by division, headcount efficiency, top customer risks, and supply chain issues.</p>
+</blockquote>
+</div>
+<div class="info-box">
+<div class="box-title">
+<p>Systems queried behind the scenes</p>
+</div>
+<ul>
+<li><strong>Salesforce</strong> — Industrial division revenue (Q3 &amp; Q4)</li>
+<li><strong>Legacy CRM</strong> — Energy division revenue (Q3 &amp; Q4)</li>
+<li><strong>HubSpot</strong> — Safety division revenue (Q3 &amp; Q4)</li>
+<li><strong>Workday</strong> — Headcount by division</li>
+<li><strong>SAP</strong> — Industrial late deliveries &amp; supplier quality</li>
+<li><strong>Oracle SCM</strong> — Energy late shipments &amp; supplier quality</li>
+<li><strong>Zendesk</strong> — Support ticket volume &amp; CSAT by division</li>
+<li><strong>Python</strong> — Merge all data, compute KPIs, generate memo</li>
+</ul>
+</div>
+<aside class="notes">
+<p>This slide shows exactly what the user typed and what happened behind the scenes. Say: “Here is the prompt. One sentence. And here is what the agent did with it: it queried seven systems, merged the data in Python, computed KPIs, and generated a structured memo. Let me show you the highlights of what came back.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="pipeline-demo-the-result-key-excerpts" class="slide level2 shrink center">
+<h2>Pipeline Demo: The Result — Key Excerpts</h2>
+<div class="highlight-box">
+<p><strong>Executive Summary (from the generated memo):</strong></p>
+<p>XYZ Corp delivered <strong>$10.5M in Q4 revenue</strong>, up <strong>7.8% from Q3</strong> ($9.7M), with growth across all three divisions. Two risks require immediate attention: <strong>Energy division’s 34% customer concentration</strong> in CAT Energy Services, and <strong>rising supplier delivery delays</strong> in Industrial operations (16.7% late rate).</p>
+</div>
+<div class="two-col">
+<div class="div">
+<p><strong>Revenue Scorecard</strong></p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Division</th>
+<th>Q4 2025</th>
+<th>QoQ Growth</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Industrial</td>
+<td>$5.9M</td>
+<td>+7.5%</td>
+</tr>
+<tr class="even">
+<td>Energy</td>
+<td>$3.4M</td>
+<td>+7.1%</td>
+</tr>
+<tr class="odd">
+<td>Safety</td>
+<td>$1.1M</td>
+<td>+12.1%</td>
+</tr>
+<tr class="even">
+<td><strong>Total</strong></td>
+<td><strong>$10.5M</strong></td>
+<td><strong>+7.8%</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="div">
+<p><strong>Risk Flags</strong></p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Risk</th>
+<th>Severity</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>CAT Energy = 34% of Energy revenue</td>
+<td><strong>HIGH</strong></td>
+</tr>
+<tr class="even">
+<td>Industrial late deliveries: 16.7%</td>
+<td><strong>HIGH</strong></td>
+</tr>
+<tr class="odd">
+<td>Honeywell Safety = 14% of Safety revenue</td>
+<td>MEDIUM</td>
+</tr>
+<tr class="even">
+<td>Energy CSAT 3.5/5.0 (below target)</td>
+<td>MEDIUM</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<aside class="notes">
+<p>Walk through the highlights. Say: “Look at what came back. A structured executive summary with the headline finding up front — two risks that need attention. A revenue scorecard across all three divisions with quarter-over-quarter growth. And a risk flag table that prioritizes by severity. The full memo also includes headcount efficiency, supply chain detail, and an outlook section with recommended actions. One prompt. One minute of waiting. A complete board-ready document.”</p>
+<p>The chart description from the memo: “The agent also generated a grouped bar chart showing Q3 versus Q4 revenue for each division — light blue for Q3, dark blue for Q4, showing the step-up across all three.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="pipeline-demo-supply-chain-outlook" class="slide level2 shrink center">
+<h2>Pipeline Demo: Supply Chain &amp; Outlook</h2>
+<div class="two-col">
+<div class="div">
+<p><strong>Supply Chain Issues</strong></p>
+<ul>
+<li><strong>Industrial (SAP):</strong> 16.7% late delivery rate; worst supplier Huang-Martinez (quality score 2.8, avg 8.3 days late)</li>
+<li><strong>Energy (Oracle SCM):</strong> 11.9% late shipment rate; worst supplier Gonzalez &amp; Sons (rating 2.9, avg 7.1 days late)</li>
+</ul>
+</div>
+<div class="div">
+<p><strong>Recommended Actions</strong></p>
+<ol type="1">
+<li><strong>Diversify Energy’s customer base</strong> — reduce CAT dependency below 25%</li>
+<li><strong>Fix Industrial supplier quality</strong> — place Huang-Martinez on 60-day improvement plan</li>
+<li><strong>Investigate Energy CSAT decline</strong> — cross-reference Zendesk tickets with late shipments</li>
+</ol>
+</div>
+</div>
+<div class="explainer">
+<p>Sources: Salesforce, Legacy CRM, HubSpot, Workday, SAP, Oracle SCM, Zendesk. All queried, merged, and formatted from a <strong>single prompt</strong>.</p>
+</div>
+<aside class="notes">
+<p>Say: “The memo also included supply chain detail from SAP and Oracle SCM, and ended with three concrete recommended actions — each with a specific owner and timeline. This is the kind of output that would take an analyst days to compile manually. The agent did it in about a minute. That is the pipeline.”</p>
+<p>Transition: “Now let me break down the anatomy of what just happened, because each of those steps is a lever you can customize.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="anatomy-of-a-reporting-pipeline" class="slide level2 section-divider center">
 <h2>Anatomy of a Reporting Pipeline</h2>
 <aside class="notes">
@@ -441,6 +601,204 @@ Kerry Back, Rice University
 <p>“The underlying data is the same in all three cases. The difference is entirely in the prompt.”</p>
 <p>DEMO INSTRUCTIONS: Switch to the XYZ app. Do three quick iterations. First: “Summarize quarterly performance.” Show the generic output. Second: “Redo this using traffic-light format with red, yellow, and green for each division. Flag any metric more than 10% off plan.” Show the improvement. Third: “Make this one page maximum. Lead with the biggest risk. End with three recommended actions.” Show the board-ready version. Each iteration takes about 30-60 seconds. Narrate the differences as they appear.</p>
 <p>After the demo: “Each iteration took seconds. The cost of refining is essentially zero. The skill is knowing what to ask for — and that is a business skill, not a technical one. You know what your board wants to see. You know what format works. Now you have a tool that can produce it.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="draft-1-summarize-q4-performance" class="slide level2 shrink center">
+<h2>Draft 1: “Summarize Q4 performance”</h2>
+<div class="highlight-box">
+<p><strong>Prompt:</strong> Summarize Q4 performance.</p>
+</div>
+<blockquote>
+<p><strong>XYZ Corp Q4 2025 Summary</strong></p>
+<p>XYZ Corp generated $10.5M in revenue during Q4 2025, up from $9.7M in Q3 2025, representing 7.8% quarter-over-quarter growth.</p>
+<p><strong>Revenue by division:</strong></p>
+<ul>
+<li>Industrial: $5.9M (56% of total)</li>
+<li>Energy: $3.4M (33% of total)</li>
+<li>Safety: $1.1M (11% of total)</li>
+</ul>
+<p><strong>Headcount:</strong></p>
+<ul>
+<li>Industrial: 308 employees</li>
+<li>Energy: 220 employees</li>
+<li>Safety: 106 employees</li>
+</ul>
+<p>All three divisions showed positive revenue growth compared to Q3. Safety had the highest growth rate at 12.1%.</p>
+</blockquote>
+<div class="explainer">
+<p>A <strong>data dump</strong>. Factually correct but no prioritization, no risk flags, no action items. A manager reads this and asks: <em>“So what?”</em></p>
+</div>
+<aside class="notes">
+<p>Say: “Here is Draft 1. The agent did exactly what was asked — it summarized Q4 performance. But look at the result. It is a wall of numbers with no hierarchy. Every fact is treated as equally important. There are no risk flags, no recommended actions, nothing that tells a decision-maker what to do next. This is what a generic prompt gets you: a generic answer.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="draft-2-traffic-light-format-flag-10-off-plan" class="slide level2 shrink center">
+<h2>Draft 2: “Traffic-light format, flag &gt;10% off plan”</h2>
+<div class="highlight-box">
+<p><strong>Prompt:</strong> Redo this in traffic-light format — green/yellow/red for each division. Flag any metric more than 10% off plan.</p>
+</div>
+<div class="comparison-table">
+<table class="caption-top" style="width:100%;">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Division</th>
+<th>Revenue</th>
+<th>vs Plan</th>
+<th>Customer Risk</th>
+<th>Supply Chain</th>
+<th>Overall</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Industrial</strong></td>
+<td>$5.9M</td>
+<td>-5.0%</td>
+<td>Low (top cust 7%)</td>
+<td>Late 16.7%</td>
+<td>YELLOW</td>
+</tr>
+<tr class="even">
+<td><strong>Energy</strong></td>
+<td>$3.4M</td>
+<td>+10.1%</td>
+<td>HIGH — CAT 34%</td>
+<td>Late 11.9%</td>
+<td>RED</td>
+</tr>
+<tr class="odd">
+<td><strong>Safety</strong></td>
+<td>$1.1M</td>
+<td>N/A</td>
+<td>Medium (top cust 14%)</td>
+<td>N/A</td>
+<td>YELLOW</td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<p><strong>RED flags:</strong> Energy customer concentration 33.9%; Industrial late delivery rate 16.7%</p>
+<p><strong>YELLOW flags:</strong> Industrial revenue 5% below plan; Energy CSAT 3.5/5.0</p>
+<p><strong>GREEN:</strong> Energy revenue +10.1% above plan; Overall growth +7.8% QoQ</p>
+</blockquote>
+<div class="explainer">
+<p><strong>Structured and scannable.</strong> Traffic-light colors give instant visual prioritization. But still no recommended actions — a reader knows <em>what’s wrong</em> but not <em>what to do</em>.</p>
+</div>
+<aside class="notes">
+<p>Say: “Same data, better prompt. Now we have a traffic-light dashboard. You can scan this in ten seconds and know that Energy is red and the other two are yellow. The agent pulled in budget data it did not use in Draft 1 because the prompt now asked for variance-to-plan. Red and yellow flags are clearly separated. This is a huge improvement — but notice what is still missing. There are no recommended actions. A board member reads this and says, ‘OK, Energy is red. Now what?’”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="draft-3-one-page-lead-with-risk-end-with-actions" class="slide level2 shrink center">
+<h2>Draft 3: “One page, lead with risk, end with actions”</h2>
+<div class="highlight-box">
+<p><strong>Prompt:</strong> One page maximum. Lead with the biggest risk. End with three recommended actions.</p>
+</div>
+<div class="two-col">
+<div class="div">
+<blockquote>
+<p><strong>Biggest risk: Energy depends on a single customer</strong></p>
+<p>CAT Energy Services generated <strong>$1.16M in Q4</strong> — <strong>34% of Energy’s revenue</strong>. No other division has a customer above 14%.</p>
+</blockquote>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th></th>
+<th>Industrial</th>
+<th>Energy</th>
+<th>Safety</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Q4 Revenue</td>
+<td>$5.9M</td>
+<td>$3.4M</td>
+<td>$1.1M</td>
+</tr>
+<tr class="even">
+<td>vs Plan</td>
+<td>-5%</td>
+<td>+10%</td>
+<td>N/A</td>
+</tr>
+<tr class="odd">
+<td>QoQ Growth</td>
+<td>+7.5%</td>
+<td>+7.1%</td>
+<td>+12.1%</td>
+</tr>
+<tr class="even">
+<td>Top Cust %</td>
+<td>7.0%</td>
+<td><strong>33.9%</strong></td>
+<td>13.6%</td>
+</tr>
+<tr class="odd">
+<td><strong>Status</strong></td>
+<td>YELLOW</td>
+<td><strong>RED</strong></td>
+<td>YELLOW</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="div">
+<blockquote>
+<p><strong>Three recommended actions:</strong></p>
+<ol type="1">
+<li><p><strong>Diversify Energy’s customer base.</strong> Add 3–5 new accounts in Q1 to reduce CAT dependency below 25%.</p></li>
+<li><p><strong>Fix Industrial supplier quality.</strong> Place Huang-Martinez on a 60-day improvement plan.</p></li>
+<li><p><strong>Investigate Energy CSAT decline.</strong> Cross-reference Zendesk tickets with late shipments; present at February ops review.</p></li>
+</ol>
+</blockquote>
+<p><strong>Company total: $10.5M revenue, +7.8% QoQ, 634 employees</strong></p>
+</div>
+</div>
+<div class="explainer">
+<p><strong>Board-ready.</strong> Leads with the headline risk. Compact scorecard. Ends with three concrete, assignable actions. Same data. Same agent. <strong>The prompt was the variable that mattered.</strong></p>
+</div>
+<aside class="notes">
+<p>Say: “Draft 3. One page. The biggest risk is the very first thing you read — Energy depends on a single customer for 34% of its revenue. The scorecard is compact enough to scan in ten seconds. And it ends with three recommended actions, each with a specific owner and timeline. This is what a board member can read in 90 seconds and know exactly what to do.”</p>
+<p>“Same data. Same agent. Same systems queried. The only thing that changed was the prompt. That is the lesson: the quality of the output is a function of the specificity of the instruction. And that specificity is a business skill, not a technical one. You know what your board wants. Now you can produce it.”</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

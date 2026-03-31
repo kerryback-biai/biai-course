@@ -109,6 +109,49 @@ How many of you have seen this pattern in your own BI tools? An analyst runs a q
 
 ---
 
+## Failure #1: What the Agent Actually Did {.shrink}
+
+::: {.highlight-box}
+**The agent's SQL --- no filter on deal stage:**
+
+```sql
+SELECT AVG(amount) AS avg_deal_size
+FROM salesforce.opportunities
+WHERE close_date >= '2025-10-01'
+  AND close_date <= '2025-12-31';
+-- No WHERE clause on stage = 'Closed Won'
+```
+:::
+
+::: {.two-cards}
+::: {.card .card-dark}
+::: {.card-title}
+Agent's Answer (Wrong)
+:::
+
+- 312 deals included (won + lost + open)
+- **Average deal size: $47,200**
+- Lost deals avg $28K, open deals avg $23K --- both drag the number down
+:::
+
+::: {.card .card-light}
+::: {.card-title}
+Correct Answer
+:::
+
+- 134 closed-won deals only
+- **Average deal size: $78,400**
+- Agent's number is **40% too low**
+- Looks plausible enough for a board deck
+:::
+:::
+
+::: {.notes}
+This slide shows the mechanics. The SQL on screen is what the agent actually ran --- a clean, syntactically correct query that averages across ALL 312 deals in the pipeline, including 89 closed-lost deals averaging $28K and 89 open deals averaging $23K. The correct answer, filtering to closed-won only, is $78,400 --- nearly double what the agent reported. The danger: $47K is in the right ballpark, so no one questions it.
+:::
+
+---
+
 ## Failure #2: The Date Format Trap {.shrink}
 
 ::: {.highlight-box}
@@ -137,6 +180,52 @@ Cross-system queries are especially vulnerable to this. Date formats, time zones
 
 ---
 
+## Failure #2: What the Agent Actually Did {.shrink}
+
+::: {.highlight-box}
+**Legacy CRM stores dates as VARCHAR --- string comparison fails silently:**
+
+```sql
+-- Legacy CRM query for Energy division
+SELECT SUM(deal_value) AS revenue
+FROM legacy_crm.deals
+WHERE status = 'Won'
+  AND close_date >= '10/01/2025'   -- VARCHAR comparison!
+  AND close_date <= '12/31/2025';
+```
+
+**Post-processing parsed `'11/03/2025'` as March 11 (DD/MM) instead of November 3 (MM/DD).**
+:::
+
+::: {.two-cards}
+::: {.card .card-dark}
+::: {.card-title}
+Agent's Answer (Wrong)
+:::
+
+- Energy revenue: **$35.2M**
+- Ambiguous dates (day <= 12) flipped month/day
+- Nov 3, Nov 5, Dec 6 reassigned to Mar, May, Jun
+:::
+
+::: {.card .card-light}
+::: {.card-title}
+Correct Answer
+:::
+
+- Energy revenue: **$37.5M**
+- **$2.3M understated (6.1%)**
+- Industrial and Safety numbers were correct (proper DATE types)
+- No error thrown --- result is silently wrong
+:::
+:::
+
+::: {.notes}
+Here are the mechanics of the date format failure. The Legacy CRM stores dates as VARCHAR strings in MM/DD/YYYY format. The SQL string comparison actually works for most dates, but the agent's post-processing Python code parsed ambiguous dates like 11/03/2025 using the wrong format --- reading it as March 11 instead of November 3. Those transactions fell outside Q4 in the final aggregation. The result: $2.3M vanished from Energy Division revenue, and the numbers still looked plausible enough that nobody would catch it by glancing at the chart.
+:::
+
+---
+
 ## Failure #3: The Double-Count {.shrink}
 
 ::: {.highlight-box}
@@ -161,6 +250,50 @@ The result: customer count was overstated by twenty-three percent. If this numbe
 Entity resolution across systems is one of the hardest problems in data engineering. Humans struggle with it. AI agents do not magically solve it --- they inherit the mess that already exists in your data. The agent is only as good as the data it queries.
 
 [TIMING: 5 minutes. Let the three failures sink in before moving to the pattern slide.]
+:::
+
+---
+
+## Failure #3: What the Agent Actually Did {.shrink}
+
+::: {.highlight-box}
+**Fuzzy matching at 85% threshold --- misses abbreviations and name variants:**
+
+```python
+from fuzzywuzzy import fuzz
+# Threshold: 85% token sort ratio
+# Catches: "Acme Corp" vs "ACME Corp" (100%)
+# Misses:  "Baker Hughes" vs "BHI" (31%)
+#          "ConocoPhillips" vs "COP" (26%)
+#          "General Electric" vs "GE" (33%)
+```
+:::
+
+::: {.two-cards}
+::: {.card .card-dark}
+::: {.card-title}
+Agent's Answer (Wrong)
+:::
+
+- Raw records: 1,017 across 3 CRMs
+- After dedup: **847 unique customers**
+- Stated with full confidence, no uncertainty range
+:::
+
+::: {.card .card-light}
+::: {.card-title}
+Correct Answer (Manual Audit)
+:::
+
+- True unique customers: **~690**
+- **23% overcount (157 phantom customers)**
+- Ticker symbols (GE, BHI, CAT) and suffixes (Inc/Corp/Ltd) break fuzzy matching
+- No single threshold solves it
+:::
+:::
+
+::: {.notes}
+The agent pulled customer lists from three CRMs --- 1,017 raw records --- and ran fuzzy string matching at an 85% similarity threshold. That caught obvious duplicates like capitalization differences, but completely missed abbreviations and ticker symbols. Baker Hughes, Baker Hughes Energy, and BHI were counted as three separate customers. General Electric, GE, and GE Industrial were three more. A manual audit using tax IDs and domain names found approximately 690 true unique customers --- the agent overcounted by 23%. And no single threshold fixes this: lowering it to 65% catches more duplicates but starts merging different companies like Atlas Steel and Atlas Energy.
 :::
 
 ---

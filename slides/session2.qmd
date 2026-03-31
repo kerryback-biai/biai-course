@@ -185,6 +185,130 @@ If the XYZ app is down or slow, switch to the pre-recorded fallback demo and nar
 
 ---
 
+## Demo: The Prompt {.shrink}
+
+::: {.code-box}
+::: {.box-title}
+What the user typed
+:::
+```
+Which customers buy from multiple divisions?
+```
+:::
+
+::: {.explainer}
+One sentence. The agent has to figure out the rest.
+:::
+
+::: {.notes}
+Here is the exact prompt. One sentence, plain English. The agent receives this along with its system prompt describing all three CRMs. It has to plan which systems to query, write SQL for each, and figure out how to match customer names that are spelled differently in every system. Let's watch what happens behind the scenes.
+:::
+
+---
+
+## Behind the Scenes: Three CRMs, Three Queries {.shrink}
+
+::: {.code-box}
+::: {.box-title}
+Salesforce CRM (Industrial Division)
+:::
+```sql
+SELECT AccountName, SUM(Amount) AS total_revenue
+FROM sf_opportunities
+WHERE StageName = 'Closed Won'
+  AND CloseDate >= '2023-01-01'
+GROUP BY AccountName ORDER BY total_revenue DESC;
+```
+*47 accounts, $248.7M total*
+:::
+
+::: {.code-box}
+::: {.box-title}
+Legacy CRM (Energy Division)
+:::
+```sql
+SELECT CustName, SUM(OrderTotal) AS total_revenue
+FROM orders
+WHERE OrderStatus = 'Complete'
+  AND OrderDate >= '01/01/2023'   -- VARCHAR date format!
+GROUP BY CustName ORDER BY total_revenue DESC;
+```
+*31 accounts, $147.2M total*
+:::
+
+::: {.code-box}
+::: {.box-title}
+HubSpot CRM (Safety Division)
+:::
+```sql
+SELECT company_name, SUM(deal_amount) AS total_revenue
+FROM hs_deals WHERE deal_stage = 'closedwon'
+  AND close_date >= '2023-01-01'
+GROUP BY company_name ORDER BY total_revenue DESC;
+```
+*28 accounts, $98.4M total*
+:::
+
+::: {.notes}
+Three separate systems, three separate SQL dialects, three different column names for "customer." Notice the Legacy CRM uses VARCHAR dates in MM/DD/YYYY format --- the agent's first query actually used ISO format and returned zero rows. It detected the empty result, checked the schema, found the date stored as a string, and rewrote the filter. That is the test-and-review loop in action.
+
+Also notice: Salesforce calls it AccountName, the Legacy CRM calls it CustName, HubSpot calls it company_name. Same concept, three different labels. The agent has to normalize all of this before it can even begin matching.
+:::
+
+---
+
+## Fuzzy Matching Results {.shrink}
+
+::: {.comparison-table}
+
+| Match Score | System A | System B | Variation |
+|---|---|---|---|
+| 100 | General Electric *(SF)* | GE Safety Division *(HS)* | Abbreviation + division suffix |
+| 91 | ExxonMobil Corporation *(SF)* | Exxon Mobil Energy Svcs *(LC)* | Space in name + abbreviation |
+| 88 | Dow Chemical Company *(SF)* | Dow Inc. *(HS)* | Legal name vs. trading name |
+| 87 | Caterpillar Inc. *(SF)* | CAT Energy Services *(LC)* | Ticker symbol used as name |
+| 85 | Schlumberger Ltd. *(LC)* | SLB Safety & PPE *(HS)* | Rebranded name vs. legacy name |
+
+:::
+
+::: {.highlight-box}
+Exact matching found only **3** of the 10 multi-division customers. Fuzzy matching (token-sort ratio >= 82) caught the other **7**.
+:::
+
+::: {.notes}
+This table shows why exact matching fails. "General Electric" and "GE Safety Division" are obviously the same company to a human, but an exact string match sees them as completely different. The agent used Python's thefuzz library with token-sort ratio scoring. It also cross-checked against industry and address fields to weed out false positives --- for example, it initially matched "National Oilwell Varco" with "National Safety Supply" at score 83, but excluded the match after checking that one is Oil and Gas and the other is PPE Distribution.
+:::
+
+---
+
+## Result: Multi-Division Customers {.shrink}
+
+::: {.comparison-table}
+
+| Customer | Industrial | Energy | Safety | Combined Revenue | Divs |
+|---|---|---|---|---|---|
+| General Electric | General Electric | GE Industrial Solutions | GE Safety Division | $18.4M | 3 |
+| ExxonMobil | ExxonMobil Corp. | Exxon Mobil Energy Svcs | ExxonMobil Safety | $14.7M | 3 |
+| Dow Chemical | Dow Chemical Company | Dow Energy Products | Dow Inc. | $12.1M | 3 |
+| Chevron | Chevron USA Inc. | Chevron Energy | Chevron Phillips Safety | $11.3M | 3 |
+| 3M Company | 3M Industrial | --- | 3M Safety Products | $8.6M | 2 |
+| Caterpillar | Caterpillar Inc. | CAT Energy Services | --- | $7.9M | 2 |
+
+:::
+
+::: {.info-box}
+::: {.box-title}
+Key Finding
+:::
+**10 customers** buy from 2+ divisions. **4** buy from all 3 --- representing **$56.5M** in combined revenue (11.4% of total). Without cross-system matching, these appear as **24 separate accounts** in reporting.
+:::
+
+::: {.notes}
+Here is the final answer. Ten customers buy from multiple divisions. Four of them --- GE, ExxonMobil, Dow, and Chevron --- buy from all three divisions. Together they represent 56.5 million dollars in combined revenue, or 11.4 percent of the company total. Without the cross-system merge, these customers appear as 24 separate accounts scattered across three CRMs. No one in the company could see the full relationship, negotiate enterprise-level pricing, or identify the strategic importance of these accounts. This is the kind of insight that was impossible before --- not because the data did not exist, but because it was scattered across systems that were never designed to talk to each other.
+:::
+
+---
+
 ## Demo: Revenue Per Employee by Division {.shrink}
 
 ::: {.two-cards}
@@ -223,6 +347,52 @@ Two questions. Four systems. Both answered in under a minute. Compare that to wh
 Now, the question you should be asking is: how does this actually work? What is happening behind the scenes? We will get deep into that in Session 3. But for today, I want to focus on the business implications and the data integration landscape.
 
 The reason I am showing you these two demos is that they represent the most common cross-system question patterns in enterprises: customer overlap across business units, and efficiency metrics that combine financial and operational data.
+:::
+
+---
+
+## Revenue per Employee: Merged Results {.shrink}
+
+::: {.comparison-table}
+
+| Division | 2025 Revenue | Headcount | Revenue / Employee |
+|---|---|---|---|
+| Industrial | $87.3M | 218 | **$400,500** |
+| Safety | $34.8M | 87 | **$400,000** |
+| Energy | $52.1M | 134 | **$388,800** |
+| **Company-wide** | **$174.2M** | **482** | **$361,400** |
+
+:::
+
+::: {.explainer}
+Revenue from 3 CRMs + headcount from Workday, merged on division name. Company-wide includes 43 Corporate/HQ employees with no direct revenue.
+:::
+
+::: {.notes}
+Here is the merged table. The agent queried revenue from each of the three CRMs --- Salesforce for Industrial, the Legacy CRM for Energy, HubSpot for Safety --- then pulled headcount from Workday and joined on division name. Notice that Corporate's 43 employees are included in the company-wide figure but excluded from the divisional calculations, because they generate no direct revenue. The agent made that design choice and documented it --- a good sign that it is reasoning about the data, not just running arithmetic.
+:::
+
+---
+
+## Revenue per Employee: Key Findings {.shrink}
+
+::: {.info-box}
+::: {.box-title}
+What the chart reveals
+:::
+
+- **Surprisingly tight clustering:** All three divisions fall between $389K--$401K per employee
+- **Scale ≠ efficiency:** Industrial is largest ($87.3M) but only marginally above Safety in per-employee terms
+- **Corporate overhead:** Company-wide average ($361K) is ~10% below divisional averages due to 43 HQ employees
+- **Energy lags slightly:** $388.8K may reflect heavier field-service staffing requirements
+:::
+
+::: {.highlight-box}
+Four systems. One question. Under a minute. The same analysis through traditional channels would require pulling reports from each system and reconciling in a spreadsheet --- probably a few days at best.
+:::
+
+::: {.notes}
+The bar chart the agent produced shows all three divisions clustered tightly around 390 to 400 thousand dollars per employee. That is actually a surprising finding --- it suggests headcount has been scaled roughly in proportion to revenue across the business. Energy lags slightly, which could reflect the heavier field-service component of that division. The company-wide figure is dragged down by Corporate's 43 employees who generate no direct revenue --- that 8.9 percent corporate overhead is typical for a company this size. The important thing is not just the numbers but how fast we got them. Four systems, one question, under a minute. That is the power of the cross-system merge.
 :::
 
 ---

@@ -28,6 +28,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-80873d3a46d0a92d285a31910fb8318b.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -263,6 +328,53 @@ Kerry Back, Rice University
           display:block!important;
       }</style></aside>
 </section>
+<section id="failure-1-what-the-agent-actually-did" class="slide level2 shrink center">
+<h2>Failure #1: What the Agent Actually Did</h2>
+<div class="highlight-box">
+<p><strong>The agent’s SQL — no filter on deal stage:</strong></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a></a><span class="kw">SELECT</span> <span class="fu">AVG</span>(amount) <span class="kw">AS</span> avg_deal_size</span>
+<span id="cb1-2"><a></a><span class="kw">FROM</span> salesforce.opportunities</span>
+<span id="cb1-3"><a></a><span class="kw">WHERE</span> close_date <span class="op">&gt;=</span> <span class="st">'2025-10-01'</span></span>
+<span id="cb1-4"><a></a>  <span class="kw">AND</span> close_date <span class="op">&lt;=</span> <span class="st">'2025-12-31'</span>;</span>
+<span id="cb1-5"><a></a><span class="co">-- No WHERE clause on stage = 'Closed Won'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="two-cards">
+<div class="card card-dark">
+<div class="card-title">
+<p>Agent’s Answer (Wrong)</p>
+</div>
+<ul>
+<li>312 deals included (won + lost + open)</li>
+<li><strong>Average deal size: $47,200</strong></li>
+<li>Lost deals avg $28K, open deals avg $23K — both drag the number down</li>
+</ul>
+</div>
+<div class="card card-light">
+<div class="card-title">
+<p>Correct Answer</p>
+</div>
+<ul>
+<li>134 closed-won deals only</li>
+<li><strong>Average deal size: $78,400</strong></li>
+<li>Agent’s number is <strong>40% too low</strong></li>
+<li>Looks plausible enough for a board deck</li>
+</ul>
+</div>
+</div>
+<aside class="notes">
+<p>This slide shows the mechanics. The SQL on screen is what the agent actually ran — a clean, syntactically correct query that averages across ALL 312 deals in the pipeline, including 89 closed-lost deals averaging $28K and 89 open deals averaging $23K. The correct answer, filtering to closed-won only, is $78,400 — nearly double what the agent reported. The danger: $47K is in the right ballpark, so no one questions it.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="failure-2-the-date-format-trap" class="slide level2 shrink center">
 <h2>Failure #2: The Date Format Trap</h2>
 <div class="highlight-box">
@@ -291,6 +403,55 @@ Kerry Back, Rice University
           display:block!important;
       }</style></aside>
 </section>
+<section id="failure-2-what-the-agent-actually-did" class="slide level2 shrink center">
+<h2>Failure #2: What the Agent Actually Did</h2>
+<div class="highlight-box">
+<p><strong>Legacy CRM stores dates as VARCHAR — string comparison fails silently:</strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a></a><span class="co">-- Legacy CRM query for Energy division</span></span>
+<span id="cb2-2"><a></a><span class="kw">SELECT</span> <span class="fu">SUM</span>(deal_value) <span class="kw">AS</span> revenue</span>
+<span id="cb2-3"><a></a><span class="kw">FROM</span> legacy_crm.deals</span>
+<span id="cb2-4"><a></a><span class="kw">WHERE</span> status <span class="op">=</span> <span class="st">'Won'</span></span>
+<span id="cb2-5"><a></a>  <span class="kw">AND</span> close_date <span class="op">&gt;=</span> <span class="st">'10/01/2025'</span>   <span class="co">-- VARCHAR comparison!</span></span>
+<span id="cb2-6"><a></a>  <span class="kw">AND</span> close_date <span class="op">&lt;=</span> <span class="st">'12/31/2025'</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Post-processing parsed <code>'11/03/2025'</code> as March 11 (DD/MM) instead of November 3 (MM/DD).</strong></p>
+</div>
+<div class="two-cards">
+<div class="card card-dark">
+<div class="card-title">
+<p>Agent’s Answer (Wrong)</p>
+</div>
+<ul>
+<li>Energy revenue: <strong>$35.2M</strong></li>
+<li>Ambiguous dates (day &lt;= 12) flipped month/day</li>
+<li>Nov 3, Nov 5, Dec 6 reassigned to Mar, May, Jun</li>
+</ul>
+</div>
+<div class="card card-light">
+<div class="card-title">
+<p>Correct Answer</p>
+</div>
+<ul>
+<li>Energy revenue: <strong>$37.5M</strong></li>
+<li><strong>$2.3M understated (6.1%)</strong></li>
+<li>Industrial and Safety numbers were correct (proper DATE types)</li>
+<li>No error thrown — result is silently wrong</li>
+</ul>
+</div>
+</div>
+<aside class="notes">
+<p>Here are the mechanics of the date format failure. The Legacy CRM stores dates as VARCHAR strings in MM/DD/YYYY format. The SQL string comparison actually works for most dates, but the agent’s post-processing Python code parsed ambiguous dates like 11/03/2025 using the wrong format — reading it as March 11 instead of November 3. Those transactions fell outside Q4 in the final aggregation. The result: $2.3M vanished from Energy Division revenue, and the numbers still looked plausible enough that nobody would catch it by glancing at the chart.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="failure-3-the-double-count" class="slide level2 shrink center">
 <h2>Failure #3: The Double-Count</h2>
 <div class="highlight-box">
@@ -307,6 +468,54 @@ Kerry Back, Rice University
 <p>The result: customer count was overstated by twenty-three percent. If this number went into a board presentation, it would show customer growth that does not exist. And again — the agent did not flag the problem. It returned the count with confidence.</p>
 <p>Entity resolution across systems is one of the hardest problems in data engineering. Humans struggle with it. AI agents do not magically solve it — they inherit the mess that already exists in your data. The agent is only as good as the data it queries.</p>
 <p>[TIMING: 5 minutes. Let the three failures sink in before moving to the pattern slide.]</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="failure-3-what-the-agent-actually-did" class="slide level2 shrink center">
+<h2>Failure #3: What the Agent Actually Did</h2>
+<div class="highlight-box">
+<p><strong>Fuzzy matching at 85% threshold — misses abbreviations and name variants:</strong></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="im">from</span> fuzzywuzzy <span class="im">import</span> fuzz</span>
+<span id="cb3-2"><a></a><span class="co"># Threshold: 85% token sort ratio</span></span>
+<span id="cb3-3"><a></a><span class="co"># Catches: "Acme Corp" vs "ACME Corp" (100%)</span></span>
+<span id="cb3-4"><a></a><span class="co"># Misses:  "Baker Hughes" vs "BHI" (31%)</span></span>
+<span id="cb3-5"><a></a><span class="co">#          "ConocoPhillips" vs "COP" (26%)</span></span>
+<span id="cb3-6"><a></a><span class="co">#          "General Electric" vs "GE" (33%)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="two-cards">
+<div class="card card-dark">
+<div class="card-title">
+<p>Agent’s Answer (Wrong)</p>
+</div>
+<ul>
+<li>Raw records: 1,017 across 3 CRMs</li>
+<li>After dedup: <strong>847 unique customers</strong></li>
+<li>Stated with full confidence, no uncertainty range</li>
+</ul>
+</div>
+<div class="card card-light">
+<div class="card-title">
+<p>Correct Answer (Manual Audit)</p>
+</div>
+<ul>
+<li>True unique customers: <strong>~690</strong></li>
+<li><strong>23% overcount (157 phantom customers)</strong></li>
+<li>Ticker symbols (GE, BHI, CAT) and suffixes (Inc/Corp/Ltd) break fuzzy matching</li>
+<li>No single threshold solves it</li>
+</ul>
+</div>
+</div>
+<aside class="notes">
+<p>The agent pulled customer lists from three CRMs — 1,017 raw records — and ran fuzzy string matching at an 85% similarity threshold. That caught obvious duplicates like capitalization differences, but completely missed abbreviations and ticker symbols. Baker Hughes, Baker Hughes Energy, and BHI were counted as three separate customers. General Electric, GE, and GE Industrial were three more. A manual audit using tax IDs and domain names found approximately 690 true unique customers — the agent overcounted by 23%. And no single threshold fixes this: lowering it to 65% catches more duplicates but starts merging different companies like Atlas Steel and Atlas Energy.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
