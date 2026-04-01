@@ -245,10 +245,25 @@ Kerry Back, Rice University
           display:block!important;
       }</style></aside>
 </section>
-<section id="demo-the-art-of-iteration" class="slide level2 section-divider center">
-<h2>Demo: The Art of Iteration</h2>
+<section id="the-key-principle" class="slide level2 section-divider center">
+<h2>The Key Principle</h2>
+</section>
+<section id="final-draft-not-first-draft" class="slide level2 shrink center">
+<h2>Final Draft, Not First Draft</h2>
+<div class="highlight-box">
+<p>Don’t review AI’s <span class="accent">first draft</span>. Instead:</p>
+<ol type="1">
+<li>Ask AI to produce the work</li>
+<li>Ask it to <span class="amber">critique itself</span> and revise</li>
+<li>Repeat until no further revisions are needed</li>
+<li><strong>Now</strong> review what it produced</li>
+</ol>
+</div>
+<div class="explainer">
+<p>You review a <span class="accent">final draft</span> instead of a first draft. This saves your time (though it burns tokens). The more consequential the work, the more revision cycles it deserves.</p>
+</div>
 <aside class="notes">
-<p>Let me start with a demo. I am going to take a mediocre first draft — either from the homework debrief or a prepared example — and show you the iteration cycle that turns it into something genuinely good. Pay attention to the specificity of my directions. That is the skill.</p>
+<p>Here is the single most important principle for working with AI. Do not review the first draft. That is wasting your time on the worst version of the output. Instead, ask the AI to produce the work, then ask it to critique itself and revise, and repeat until the revisions stop improving. Only then do you review. You are reviewing a final draft instead of a first draft. This saves enormous amounts of your time. The AI’s time is cheap — a few cents per revision. Your time is expensive. Let the AI iterate on itself before you invest your attention.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -291,8 +306,8 @@ Kerry Back, Rice University
           display:block!important;
       }</style></aside>
 </section>
-<section id="live-demo" class="slide level2 section-divider center">
-<h2><span class="amber">LIVE DEMO</span></h2>
+<section id="demo-walkthrough" class="slide level2 section-divider center">
+<h2>Demo Walkthrough</h2>
 <h3 id="from-mediocre-draft-to-polished-output">From mediocre draft to polished output</h3>
 <aside class="notes">
 <p>Let me show this live. I am going to take a mediocre executive summary — either from someone’s homework or my prepared example — and run through the full iteration cycle. Watch how each round of specific feedback transforms the output. And pay special attention to the self-critique step — when Claude identifies its own weaknesses, it often catches things we would not have thought to ask about.</p>
@@ -535,39 +550,27 @@ Kerry Back, Rice University
           display:block!important;
       }</style></aside>
 </section>
-<section id="the-power-move-sub-agents-and-critique" class="slide level2 center">
-<h2>The Power Move: Sub-Agents and Critique</h2>
+<section id="the-critique-pattern-three-independent-reviewers" class="slide level2 center">
+<h2>The /critique Pattern: Three Independent Reviewers</h2>
 <div class="three-cards">
 <div class="card card-light">
-<p><span class="card-title">Drafter</span></p>
-<ul>
-<li>Produces the initial output</li>
-<li>Follows the skill instructions</li>
-<li>Optimizes for completeness</li>
-<li>Works fast</li>
-</ul>
+<p><span class="card-title">Correctness &amp; Completeness</span></p>
+<p>Are there factual errors, logical gaps, or missing information? Are claims supported and assumptions justified?</p>
 </div>
 <div class="card card-light">
-<p><span class="card-title">Critic</span></p>
-<ul>
-<li>Reviews the draft independently</li>
-<li>Checks for accuracy and gaps</li>
-<li>Identifies weak arguments</li>
-<li>Flags unsupported claims</li>
-</ul>
+<p><span class="card-title">Clarity &amp; Persuasiveness</span></p>
+<p>Is the structure logical? Is anything confusing, redundant, or buried? Could the main message be stated more directly?</p>
 </div>
 <div class="card card-dark">
-<p><span class="card-title">Fact-Checker</span></p>
-<ul>
-<li>Verifies specific numbers</li>
-<li>Cross-references data</li>
-<li>Catches inconsistencies</li>
-<li>Confirms calculations</li>
-</ul>
+<p><span class="card-title">Devil’s Advocate</span></p>
+<p>What are the strongest counterarguments? Where is the reasoning weakest? What would a skeptic challenge?</p>
 </div>
+</div>
+<div class="explainer">
+<p>Three parallel reviewers examine the same output from different angles, then synthesize findings. The result is dramatically more reliable than any single-pass review.</p>
 </div>
 <aside class="notes">
-<p>Here is where it gets really powerful. Instead of one AI doing everything, you can use sub-agents — different AI roles working in parallel. One drafts. One critiques. One fact-checks. This is the slash-critique pattern: you ask Claude to generate three independent reviews of its own output, each from a different perspective. A drafter focuses on completeness. A critic looks for weak arguments and gaps. A fact-checker verifies numbers and catches inconsistencies. The result is dramatically more reliable than a single-pass output.</p>
+<p>This is the critique pattern, and it is the most powerful quality technique in the course. Instead of reviewing the output yourself from one perspective, you ask the AI to spawn three independent reviewers — each with a different lens. One checks correctness and completeness: are the facts right, are there gaps, are assumptions justified? One checks clarity and persuasiveness: is the structure logical, is anything buried or confusing? And one plays devil’s advocate: what would a skeptic challenge, where is the reasoning weakest? The three reviews are synthesized and applied. The result is dramatically stronger than any single-pass output — and it takes about 30 seconds.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -580,8 +583,8 @@ Kerry Back, Rice University
           display:block!important;
       }</style></aside>
 </section>
-<section id="live-demo-1" class="slide level2 section-divider center">
-<h2><span class="amber">LIVE DEMO</span></h2>
+<section id="demo-walkthrough-1" class="slide level2 section-divider center">
+<h2>Demo Walkthrough</h2>
 <h3 id="skills-structured-prompts-and-the-critique-pattern">Skills, structured prompts, and the /critique pattern</h3>
 <aside class="notes">
 <p>Let me show you this live. I am going to create a skill for a weekly status report, run it with sample data, and then show the critique pattern. Watch how the structured prompt produces consistent output, and how the self-critique step catches issues that the initial draft missed. This is the workflow you will build for yourselves in the hands-on session.</p>

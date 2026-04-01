@@ -623,11 +623,18 @@
     "text": "Today’s Agenda\n\n\n🔄 Iterate Turn mediocre drafts into great ones\n\n\n✅ Trust Calibrate verification to stakes\n\n\n🛠️ Skills Build reusable prompts and workflows\n\n\n📋 Build Create your own recurring workflow\n\n\n\nHere is what we are covering today. First, the art of iteration — how to take a mediocre first draft and make it genuinely useful through specific, directed feedback. Second, the maker/checker framework formalized — calibrating your level of trust to the stakes of the task. Third, skills and structured prompts — how to build reusable instructions that produce consistent output every time. And fourth, hands-on work where you build a reusable workflow for a recurring task in your own job."
   },
   {
-    "objectID": "slides/session2.html#demo-the-art-of-iteration",
-    "href": "slides/session2.html#demo-the-art-of-iteration",
+    "objectID": "slides/session2.html#the-key-principle",
+    "href": "slides/session2.html#the-key-principle",
     "title": "Session 2: Iterate, Critique, Trust",
-    "section": "Demo: The Art of Iteration",
-    "text": "Demo: The Art of Iteration\n\nLet me start with a demo. I am going to take a mediocre first draft — either from the homework debrief or a prepared example — and show you the iteration cycle that turns it into something genuinely good. Pay attention to the specificity of my directions. That is the skill."
+    "section": "The Key Principle",
+    "text": "The Key Principle"
+  },
+  {
+    "objectID": "slides/session2.html#final-draft-not-first-draft",
+    "href": "slides/session2.html#final-draft-not-first-draft",
+    "title": "Session 2: Iterate, Critique, Trust",
+    "section": "Final Draft, Not First Draft",
+    "text": "Final Draft, Not First Draft\n\nDon’t review AI’s first draft. Instead:\n\nAsk AI to produce the work\nAsk it to critique itself and revise\nRepeat until no further revisions are needed\nNow review what it produced\n\n\n\nYou review a final draft instead of a first draft. This saves your time (though it burns tokens). The more consequential the work, the more revision cycles it deserves.\n\n\nHere is the single most important principle for working with AI. Do not review the first draft. That is wasting your time on the worst version of the output. Instead, ask the AI to produce the work, then ask it to critique itself and revise, and repeat until the revisions stop improving. Only then do you review. You are reviewing a final draft instead of a first draft. This saves enormous amounts of your time. The AI’s time is cheap — a few cents per revision. Your time is expensive. Let the AI iterate on itself before you invest your attention."
   },
   {
     "objectID": "slides/session2.html#the-iteration-cycle",
@@ -637,11 +644,11 @@
     "text": "The Iteration Cycle\n\n\n📄 Draft Get the first version — fast but mediocre\n\n\n🎯 Direct Give specific feedback, not “make it better”\n\n\n🔍 Self-Critique Ask Claude to find its own weaknesses\n\n\n✨ Fix Apply the critique — dramatically better output\n\n\n\nHere is the cycle. Step one: get a first draft. It will be fast but usually mediocre — too generic, too long, missing nuance. Step two: give specific direction. Not “make it better” but “make it specific to our Q4 results” or “the chart is misleading — use a zero baseline” or “rewrite the executive summary in half the length.” Step three — and this is the power move — ask Claude to critique its own work. “What is weak about this analysis? What would a skeptical CFO push back on?” Step four: tell it to fix those issues. Two rounds of self-critique produce dramatically better output than any amount of vague “improve this” prompting."
   },
   {
-    "objectID": "slides/session2.html#live-demo",
-    "href": "slides/session2.html#live-demo",
+    "objectID": "slides/session2.html#demo-walkthrough",
+    "href": "slides/session2.html#demo-walkthrough",
     "title": "Session 2: Iterate, Critique, Trust",
-    "section": "LIVE DEMO",
-    "text": "LIVE DEMO\nFrom mediocre draft to polished output\n\nLet me show this live. I am going to take a mediocre executive summary — either from someone’s homework or my prepared example — and run through the full iteration cycle. Watch how each round of specific feedback transforms the output. And pay special attention to the self-critique step — when Claude identifies its own weaknesses, it often catches things we would not have thought to ask about."
+    "section": "Demo Walkthrough",
+    "text": "Demo Walkthrough\nFrom mediocre draft to polished output\n\nLet me show this live. I am going to take a mediocre executive summary — either from someone’s homework or my prepared example — and run through the full iteration cycle. Watch how each round of specific feedback transforms the output. And pay special attention to the self-critique step — when Claude identifies its own weaknesses, it often catches things we would not have thought to ask about."
   },
   {
     "objectID": "slides/session2.html#what-just-happened",
@@ -707,18 +714,18 @@
     "text": "Example: Weekly Status Report Skill\n\nReusable prompt\nYou are a business analyst preparing a weekly status report.\nFormat: Start with a 2-sentence executive summary. Then three sections: 1. Key Accomplishments (bullet points, max 5) 2. Risks and Blockers (bullet points with severity: high/medium/low) 3. Next Week Priorities (numbered list, max 4)\nTone: Direct, factual, no filler. Write for a VP who reads 20 of these. Length: One page maximum. Always end with: “Decision needed:” followed by any open items requiring management input, or “None this week.”\n\n\nHere is a concrete example. This is a weekly status report skill. It specifies exactly what Claude should produce: a two-sentence executive summary, three sections with specific formats, a direct tone written for a VP who reads twenty of these, a one-page maximum, and a closing section for decisions needed. You write this once. Then every week, you paste in your notes and run the skill. Claude produces a consistent, well-formatted status report in seconds. The quality is repeatable because the instructions are explicit."
   },
   {
-    "objectID": "slides/session2.html#the-power-move-sub-agents-and-critique",
-    "href": "slides/session2.html#the-power-move-sub-agents-and-critique",
+    "objectID": "slides/session2.html#the-critique-pattern-three-independent-reviewers",
+    "href": "slides/session2.html#the-critique-pattern-three-independent-reviewers",
     "title": "Session 2: Iterate, Critique, Trust",
-    "section": "The Power Move: Sub-Agents and Critique",
-    "text": "The Power Move: Sub-Agents and Critique\n\n\nDrafter\n\nProduces the initial output\nFollows the skill instructions\nOptimizes for completeness\nWorks fast\n\n\n\nCritic\n\nReviews the draft independently\nChecks for accuracy and gaps\nIdentifies weak arguments\nFlags unsupported claims\n\n\n\nFact-Checker\n\nVerifies specific numbers\nCross-references data\nCatches inconsistencies\nConfirms calculations\n\n\n\n\nHere is where it gets really powerful. Instead of one AI doing everything, you can use sub-agents — different AI roles working in parallel. One drafts. One critiques. One fact-checks. This is the slash-critique pattern: you ask Claude to generate three independent reviews of its own output, each from a different perspective. A drafter focuses on completeness. A critic looks for weak arguments and gaps. A fact-checker verifies numbers and catches inconsistencies. The result is dramatically more reliable than a single-pass output."
+    "section": "The /critique Pattern: Three Independent Reviewers",
+    "text": "The /critique Pattern: Three Independent Reviewers\n\n\nCorrectness & Completeness\nAre there factual errors, logical gaps, or missing information? Are claims supported and assumptions justified?\n\n\nClarity & Persuasiveness\nIs the structure logical? Is anything confusing, redundant, or buried? Could the main message be stated more directly?\n\n\nDevil’s Advocate\nWhat are the strongest counterarguments? Where is the reasoning weakest? What would a skeptic challenge?\n\n\n\nThree parallel reviewers examine the same output from different angles, then synthesize findings. The result is dramatically more reliable than any single-pass review.\n\n\nThis is the critique pattern, and it is the most powerful quality technique in the course. Instead of reviewing the output yourself from one perspective, you ask the AI to spawn three independent reviewers — each with a different lens. One checks correctness and completeness: are the facts right, are there gaps, are assumptions justified? One checks clarity and persuasiveness: is the structure logical, is anything buried or confusing? And one plays devil’s advocate: what would a skeptic challenge, where is the reasoning weakest? The three reviews are synthesized and applied. The result is dramatically stronger than any single-pass output — and it takes about 30 seconds."
   },
   {
-    "objectID": "slides/session2.html#live-demo-1",
-    "href": "slides/session2.html#live-demo-1",
+    "objectID": "slides/session2.html#demo-walkthrough-1",
+    "href": "slides/session2.html#demo-walkthrough-1",
     "title": "Session 2: Iterate, Critique, Trust",
-    "section": "LIVE DEMO",
-    "text": "LIVE DEMO\nSkills, structured prompts, and the /critique pattern\n\nLet me show you this live. I am going to create a skill for a weekly status report, run it with sample data, and then show the critique pattern. Watch how the structured prompt produces consistent output, and how the self-critique step catches issues that the initial draft missed. This is the workflow you will build for yourselves in the hands-on session."
+    "section": "Demo Walkthrough",
+    "text": "Demo Walkthrough\nSkills, structured prompts, and the /critique pattern\n\nLet me show you this live. I am going to create a skill for a weekly status report, run it with sample data, and then show the critique pattern. Watch how the structured prompt produces consistent output, and how the self-critique step catches issues that the initial draft missed. This is the workflow you will build for yourselves in the hands-on session."
   },
   {
     "objectID": "slides/session2.html#what-you-just-saw",

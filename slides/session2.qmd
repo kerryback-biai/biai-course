@@ -93,10 +93,27 @@ Here is what we are covering today. First, the art of iteration — how to take 
 
 ---
 
-## Demo: The Art of Iteration {.section-divider}
+## The Key Principle {.section-divider}
+
+---
+
+## Final Draft, Not First Draft {.shrink}
+
+::: {.highlight-box}
+Don't review AI's [first draft]{.accent}. Instead:
+
+1. Ask AI to produce the work
+2. Ask it to [critique itself]{.amber} and revise
+3. Repeat until no further revisions are needed
+4. **Now** review what it produced
+:::
+
+::: {.explainer}
+You review a [final draft]{.accent} instead of a first draft. This saves your time (though it burns tokens). The more consequential the work, the more revision cycles it deserves.
+:::
 
 ::: {.notes}
-Let me start with a demo. I am going to take a mediocre first draft — either from the homework debrief or a prepared example — and show you the iteration cycle that turns it into something genuinely good. Pay attention to the specificity of my directions. That is the skill.
+Here is the single most important principle for working with AI. Do not review the first draft. That is wasting your time on the worst version of the output. Instead, ask the AI to produce the work, then ask it to critique itself and revise, and repeat until the revisions stop improving. Only then do you review. You are reviewing a final draft instead of a first draft. This saves enormous amounts of your time. The AI's time is cheap — a few cents per revision. Your time is expensive. Let the AI iterate on itself before you invest your attention.
 :::
 
 ---
@@ -132,7 +149,7 @@ Here is the cycle. Step one: get a first draft. It will be fast but usually medi
 
 ---
 
-## [LIVE DEMO]{.amber} {.section-divider}
+## Demo Walkthrough {.section-divider}
 
 ### From mediocre draft to polished output
 
@@ -330,44 +347,39 @@ Here is a concrete example. This is a weekly status report skill. It specifies e
 
 ---
 
-## The Power Move: Sub-Agents and Critique
+## The /critique Pattern: Three Independent Reviewers
 
 ::: {.three-cards}
 ::: {.card .card-light}
-[Drafter]{.card-title}
+[Correctness & Completeness]{.card-title}
 
-- Produces the initial output
-- Follows the skill instructions
-- Optimizes for completeness
-- Works fast
+Are there factual errors, logical gaps, or missing information? Are claims supported and assumptions justified?
 :::
 
 ::: {.card .card-light}
-[Critic]{.card-title}
+[Clarity & Persuasiveness]{.card-title}
 
-- Reviews the draft independently
-- Checks for accuracy and gaps
-- Identifies weak arguments
-- Flags unsupported claims
+Is the structure logical? Is anything confusing, redundant, or buried? Could the main message be stated more directly?
 :::
 
 ::: {.card .card-dark}
-[Fact-Checker]{.card-title}
+[Devil's Advocate]{.card-title}
 
-- Verifies specific numbers
-- Cross-references data
-- Catches inconsistencies
-- Confirms calculations
+What are the strongest counterarguments? Where is the reasoning weakest? What would a skeptic challenge?
 :::
+:::
+
+::: {.explainer}
+Three parallel reviewers examine the same output from different angles, then synthesize findings. The result is dramatically more reliable than any single-pass review.
 :::
 
 ::: {.notes}
-Here is where it gets really powerful. Instead of one AI doing everything, you can use sub-agents — different AI roles working in parallel. One drafts. One critiques. One fact-checks. This is the slash-critique pattern: you ask Claude to generate three independent reviews of its own output, each from a different perspective. A drafter focuses on completeness. A critic looks for weak arguments and gaps. A fact-checker verifies numbers and catches inconsistencies. The result is dramatically more reliable than a single-pass output.
+This is the critique pattern, and it is the most powerful quality technique in the course. Instead of reviewing the output yourself from one perspective, you ask the AI to spawn three independent reviewers — each with a different lens. One checks correctness and completeness: are the facts right, are there gaps, are assumptions justified? One checks clarity and persuasiveness: is the structure logical, is anything buried or confusing? And one plays devil's advocate: what would a skeptic challenge, where is the reasoning weakest? The three reviews are synthesized and applied. The result is dramatically stronger than any single-pass output — and it takes about 30 seconds.
 :::
 
 ---
 
-## [LIVE DEMO]{.amber} {.section-divider}
+## Demo Walkthrough {.section-divider}
 
 ### Skills, structured prompts, and the /critique pattern
 
