@@ -562,7 +562,7 @@ Here is the shift. In Sessions 1 and 2, you brought the data to the AI — you p
 
 ---
 
-## Preview: Meridian Corp {.shrink}
+## Preview: XYZ Corp {.shrink}
 
 ::: {.info-box}
 [A simulated enterprise environment]{.box-title}
@@ -575,7 +575,7 @@ Here is the shift. In Sessions 1 and 2, you brought the data to the AI — you p
 :::
 
 ::: {.notes}
-Next session you will meet Meridian Corp — a simulated $500 million B2B industrial supplies distributor. It has three operating divisions, ten enterprise systems, 41 tables, and over 26,000 rows of realistic data spanning three years. You will log into a web application, ask questions in plain English, and watch the AI query multiple databases, merge the results, and produce charts and narratives. It is exactly like what you have been doing in Sessions 1 and 2 — but now the data comes from enterprise systems instead of your clipboard. And here is the key: the same iteration, critique, and verification skills you practiced today are exactly what you will use when the AI is querying databases. The stakes just get higher.
+Next session you will meet XYZ Corp — a simulated $500 million B2B industrial supplies distributor. It has three operating divisions, ten enterprise systems, 41 tables, and over 26,000 rows of realistic data spanning three years. You will log into a web application, ask questions in plain English, and watch the AI query multiple databases, merge the results, and produce charts and narratives. It is exactly like what you have been doing in Sessions 1 and 2 — but now the data comes from enterprise systems instead of your clipboard. And here is the key: the same iteration, critique, and verification skills you practiced today are exactly what you will use when the AI is querying databases. The stakes just get higher.
 :::
 
 ---
@@ -616,7 +616,7 @@ Three assignments. First, keep using Claude. Build at least one reusable workflo
 [Session 3]{.card-title}
 
 - AI meets enterprise data
-- Meridian Corp hands-on
+- XYZ Corp hands-on
 - Cross-system queries
 - Your company's data map
 :::
@@ -650,5 +650,5 @@ Three assignments. First, keep using Claude. Build at least one reusable workflo
 :::
 
 ::: {.notes}
-Here is what the rest of the course looks like. Session 3: we connect AI to enterprise data using the Meridian Corp simulation. Session 4: we build full reporting pipelines — from raw data to board-ready memos. Sessions 5 and 6 cover deployment architecture, vendor evaluation, security, and governance — the practical questions of how to bring this to your organization. And Sessions 7 and 8 combine everything into a capstone strategy that you could present to your leadership. Every session builds on the skills you developed this week. The iteration techniques, the critique patterns, the calibrated trust framework — those are the foundation. See you next session.
+Here is what the rest of the course looks like. Session 3: we connect AI to enterprise data using the XYZ Corp simulation. Session 4: we build full reporting pipelines — from raw data to board-ready memos. Sessions 5 and 6 cover deployment architecture, vendor evaluation, security, and governance — the practical questions of how to bring this to your organization. And Sessions 7 and 8 combine everything into a capstone strategy that you could present to your leadership. Every session builds on the skills you developed this week. The iteration techniques, the critique patterns, the calibrated trust framework — those are the foundation. See you next session.
 :::

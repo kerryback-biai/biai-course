@@ -148,7 +148,7 @@ Kerry Back, Rice University
 <section id="homework-debrief" class="slide level2 section-divider center">
 <h2>Homework Debrief</h2>
 <aside class="notes">
-<p>This opens the homework debrief (minutes 0-10). Students share their best and worst answers from the Meridian exploration homework. The goal is to surface common failure patterns and connect them to the maker/checker framework from Session 2.</p>
+<p>This opens the homework debrief (minutes 0-10). Students share their best and worst answers from the XYZ Corp exploration homework. The goal is to surface common failure patterns and connect them to the maker/checker framework from Session 2.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -186,7 +186,7 @@ Kerry Back, Rice University
 </div>
 </div>
 <aside class="notes">
-<p>Say: “Before we dive into new material, let’s debrief the homework. You spent this week asking the Meridian app at least 10 business questions. I want to hear about your best answer and your worst answer.”</p>
+<p>Say: “Before we dive into new material, let’s debrief the homework. You spent this week asking the XYZ Corp app at least 10 business questions. I want to hear about your best answer and your worst answer.”</p>
 <p>Call on 3-4 students. For each, ask: “What question did you ask? What made the answer good — or bad?” Listen for common patterns: - Good answers: clear data, well-structured tables, accurate calculations - Bad answers: wrong aggregations, missing filters, misleading charts, hallucinated context</p>
 <p>After sharing, connect to Session 2: “Remember the maker/checker framework? Every one of these answers needs a different level of verification. A chart for your own understanding? Quick glance. A number going into a board presentation? Verify the SQL, check the filters, confirm the row counts.”</p>
 <p>Transition: “Now let me show you what happens when we go from single questions to complete deliverables.”</p>
@@ -255,7 +255,7 @@ Kerry Back, Rice University
 <section id="full-pipeline-demo" class="slide level2 section-divider center">
 <h2>Full Pipeline Demo</h2>
 <aside class="notes">
-<p>This opens the full pipeline demo (minutes 10-25). This is the showpiece demo of Session 4. Make sure the Meridian app is open and ready. You will ask for a quarterly executive summary and then iterate on it.</p>
+<p>This opens the full pipeline demo (minutes 10-25). This is the showpiece demo of Session 4. Make sure the XYZ Corp app is open and ready. You will ask for a quarterly executive summary and then iterate on it.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -363,10 +363,10 @@ Kerry Back, Rice University
 </div>
 </div>
 <aside class="notes">
-<p>Walk through each step before switching to the live demo. Say: “Here is what is about to happen. I am going to ask the Meridian app one question: ‘Prepare a quarterly executive summary.’ Watch what the agent does.”</p>
+<p>Walk through each step before switching to the live demo. Say: “Here is what is about to happen. I am going to ask the XYZ Corp app one question: ‘Prepare a quarterly executive summary.’ Watch what the agent does.”</p>
 <p>“Step one: it will query six source systems — the three CRMs, the financial systems, Workday HR, and Zendesk support. Step two: merge and deduplicate. Step three: compute KPIs — quarter-over-quarter changes, efficiency ratios, concentration metrics. Step four: charts. Step five: narrative analysis — not just numbers, but interpretation. Step six: assemble everything into a structured document.”</p>
 <p>“Let me show you.”</p>
-<p>Switch to the Meridian app.</p>
+<p>Switch to the XYZ Corp app.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -385,12 +385,12 @@ Kerry Back, Rice University
 <div class="box-title">
 <p>The prompt</p>
 </div>
-<pre><code>Prepare a quarterly executive summary of Meridian Corp performance ---
+<pre><code>Prepare a quarterly executive summary of XYZ Corp performance ---
 revenue by division, headcount efficiency, top customer risks, and
 supply chain issues. Include charts and a narrative summary.</code></pre>
 </div>
 <aside class="notes">
-<p>DEMO INSTRUCTIONS: Switch to the Meridian app. Type the prompt. As it runs, narrate what you see: “It is starting with the CRM queries — pulling revenue by division from each system. Now Workday for headcount. Now Zendesk for support tickets. SAP and Oracle for supply chain.”</p>
+<p>DEMO INSTRUCTIONS: Switch to the XYZ Corp app. Type the prompt. As it runs, narrate what you see: “It is starting with the CRM queries — pulling revenue by division from each system. Now Workday for headcount. Now Zendesk for support tickets. SAP and Oracle for supply chain.”</p>
 <p>Let the full result render. It should produce: - Revenue by division table with QoQ comparison - Headcount efficiency metrics - Customer concentration risk flags - Supply chain issue summary - Charts and narrative text</p>
 <p>Point out the key insight: “This is a complete executive summary. Revenue, headcount, customer risk, supply chain. All from one prompt. Six systems queried. Charts generated. Narrative written.”</p>
 <p>If the demo fails, switch to the fallback recording and narrate over it.</p>
@@ -649,7 +649,7 @@ supply chain issues. Include charts and a narrative summary.</code></pre>
 <p>This is a <strong>test-and-review cycle</strong>, not a one-shot generation. The LLM writes code, the system executes it, the LLM reviews the results, and decides: deliver or try again.</p>
 </div>
 <aside class="notes">
-<p>Say: “Let me pull back the curtain. When you ask the Meridian app a question, four things happen.”</p>
+<p>Say: “Let me pull back the curtain. When you ask the XYZ Corp app a question, four things happen.”</p>
 <p>Walk through each step: “Step one: the system prompt. Before your question ever reaches the LLM, a system prompt has been loaded that describes every table, every column, and every relationship. This is the institutional knowledge layer — it tells the LLM what data exists and what it means.”</p>
 <p>“Step two: the tool call. The LLM reads your question, reads the schema, and writes SQL. But it does not just return the SQL. It requests execution — it says ‘run this query against this database.’”</p>
 <p>“Step three: the system runs the SQL and sends the results back to the LLM. The LLM never touches the database directly.”</p>
@@ -672,7 +672,7 @@ supply chain issues. Include charts and a narrative summary.</code></pre>
 <div class="box-title">
 <p>What the LLM sees before your question</p>
 </div>
-<pre><code>You are a data analyst for Meridian Corp, a $500M B2B distributor.
+<pre><code>You are a data analyst for XYZ Corp, a $500M B2B distributor.
 
 Available databases:
 - sf_opportunities: Salesforce CRM (Industrial division)
@@ -889,7 +889,7 @@ IMPORTANT: Customer names differ across systems. Use fuzzy matching.</code></pre
 <p>“Watch — I am telling Claude Code in plain English to build a data agent. ‘Build a Python script that takes a question, sends it to Claude with a schema description, gets back SQL, runs it against a parquet file, and prints the answer.’”</p>
 <p>“It is writing the code now. About 50 lines. There is the schema description. There is the tool call mechanism. There is the execution loop.”</p>
 <p>Run it. Ask: “How many employees does each division have?” Show the answer.</p>
-<p>Say: “That is the entire core agent. Fifty lines of code. Built from English instructions in about 5 minutes. The Meridian app you have been using is built on this same core loop — it just has 3,000 more lines for error handling, multiple databases, authentication, and the web interface.”</p>
+<p>Say: “That is the entire core agent. Fifty lines of code. Built from English instructions in about 5 minutes. The XYZ Corp app you have been using is built on this same core loop — it just has 3,000 more lines for error handling, multiple databases, authentication, and the web interface.”</p>
 <p>“The gap between 50 lines and 3,000 lines is the gap between prototype and production. That gap is real. But the core is simple.”</p>
 <p>If the live demo fails, describe what would have happened and show a pre-prepared screenshot of the code.</p>
 <style type="text/css">
@@ -929,7 +929,7 @@ IMPORTANT: Customer names differ across systems. Use fuzzy matching.</code></pre
 <li>Error handling and retry logic</li>
 <li>Logging, monitoring, audit trail</li>
 <li>Web interface, API, scheduling</li>
-<li><span class="amber">This is the Meridian app</span></li>
+<li><span class="amber">This is the XYZ Corp app</span></li>
 </ul>
 </div>
 </div>
@@ -954,7 +954,7 @@ IMPORTANT: Customer names differ across systems. Use fuzzy matching.</code></pre
 <section id="hands-on-build-your-own-report" class="slide level2 section-divider center">
 <h2>Hands-On: Build Your Own Report</h2>
 <aside class="notes">
-<p>This opens the hands-on segment (minutes 53-68). Students use the Meridian app to produce specific deliverables. Three guided exercises, each requiring different combinations of data sources.</p>
+<p>This opens the hands-on segment (minutes 53-68). Students use the XYZ Corp app to produce specific deliverables. Three guided exercises, each requiring different combinations of data sources.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1053,7 +1053,7 @@ IMPORTANT: Customer names differ across systems. Use fuzzy matching.</code></pre
 <section id="workshop-your-reporting-candidates" class="slide level2 section-divider center">
 <h2>Workshop: Your Reporting Candidates</h2>
 <aside class="notes">
-<p>This opens the workshop segment (minutes 68-80). Students shift from the Meridian simulation to their own companies. They are identifying recurring reports that follow the data-to-deliverable pattern and could be candidates for automation.</p>
+<p>This opens the workshop segment (minutes 68-80). Students shift from the XYZ Corp simulation to their own companies. They are identifying recurring reports that follow the data-to-deliverable pattern and could be candidates for automation.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1168,7 +1168,7 @@ IMPORTANT: Customer names differ across systems. Use fuzzy matching.</code></pre
 <li>Code runs on the vendor’s servers</li>
 <li>Easiest to set up</li>
 <li>Your data leaves your network</li>
-<li>What we use for the Meridian demo (synthetic data)</li>
+<li>What we use for the XYZ Corp demo (synthetic data)</li>
 </ul>
 </div>
 <div class="card card-light">
@@ -1199,7 +1199,7 @@ IMPORTANT: Customer names differ across systems. Use fuzzy matching.</code></pre
 </div>
 <aside class="notes">
 <p>Say: “Quick preview. When you deploy an agent in production, where does the code actually run? Three options.”</p>
-<p>Walk through briefly: “Option one: the vendor’s cloud. Easiest to set up, but your data leaves your network. That is what we use for the Meridian demo — the data is synthetic, so it does not matter. Option two: your own containers. Data stays on-premise. You manage everything. Higher control, higher cost. Option three: SQL-only mode. The LLM generates SQL but never sees the raw data. Your system executes the query locally and only sends aggregate results to the LLM.”</p>
+<p>Walk through briefly: “Option one: the vendor’s cloud. Easiest to set up, but your data leaves your network. That is what we use for the XYZ Corp demo — the data is synthetic, so it does not matter. Option two: your own containers. Data stays on-premise. You manage everything. Higher control, higher cost. Option three: SQL-only mode. The LLM generates SQL but never sees the raw data. Your system executes the query locally and only sends aggregate results to the LLM.”</p>
 <p>“Each option has different security, cost, and capability tradeoffs. Session 5 is entirely about this decision. The pre-readings I am assigning tonight will prepare you for that discussion.”</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -1236,7 +1236,7 @@ IMPORTANT: Customer names differ across systems. Use fuzzy matching.</code></pre
 <p>Homework for Session 5</p>
 </div>
 <ol type="1">
-<li><strong>Produce one complete deliverable</strong> using the Meridian app — a memo, comparison, or risk assessment. Save or screenshot the output.</li>
+<li><strong>Produce one complete deliverable</strong> using the XYZ Corp app — a memo, comparison, or risk assessment. Save or screenshot the output.</li>
 <li><strong>Pre-reading (~35 min):</strong>
 <ul>
 <li>Morgan Stanley case study (provided) — a regulated firm’s deployment decision</li>
@@ -1248,7 +1248,7 @@ IMPORTANT: Customer names differ across systems. Use fuzzy matching.</code></pre
 </ol>
 </div>
 <aside class="notes">
-<p>Say: “Homework. First, produce one complete deliverable using the Meridian app. Not a single question — a full report. A memo, a comparison, a risk assessment. Whatever interests you. Save or screenshot the output and bring it to Session 5.”</p>
+<p>Say: “Homework. First, produce one complete deliverable using the XYZ Corp app. Not a single question — a full report. A memo, a comparison, a risk assessment. Whatever interests you. Save or screenshot the output and bring it to Session 5.”</p>
 <p>“Second, required pre-reading — about 35 minutes total. Three items: the Morgan Stanley case study, the AIMultiple article on cloud vs.&nbsp;local LLMs, and a short piece on what the AI actually sees when it accesses your data. These prepare you for Session 5, which is entirely about deployment and architecture.”</p>
 <p>“Optional: the a16z enterprise AI survey and the DUNNIXER vendor evaluation scorecard. Keep the DUNNIXER scorecard — you will use it in Session 5.”</p>
 <p>“Also optional: the Linux server exercises and recorded demos. If you want to build an agent yourself, Exercises 1 and 2 walk you through it with AI assistance.”</p>

@@ -17,7 +17,7 @@ format:
 ## Homework Debrief {.section-divider}
 
 ::: {.notes}
-This opens the homework debrief (minutes 0-10). Students share their best and worst answers from the Meridian exploration homework. The goal is to surface common failure patterns and connect them to the maker/checker framework from Session 2.
+This opens the homework debrief (minutes 0-10). Students share their best and worst answers from the XYZ Corp exploration homework. The goal is to surface common failure patterns and connect them to the maker/checker framework from Session 2.
 :::
 
 ---
@@ -45,7 +45,7 @@ Share Your Worst Answer
 :::
 
 ::: {.notes}
-Say: "Before we dive into new material, let's debrief the homework. You spent this week asking the Meridian app at least 10 business questions. I want to hear about your best answer and your worst answer."
+Say: "Before we dive into new material, let's debrief the homework. You spent this week asking the XYZ Corp app at least 10 business questions. I want to hear about your best answer and your worst answer."
 
 Call on 3-4 students. For each, ask: "What question did you ask? What made the answer good --- or bad?" Listen for common patterns:
 - Good answers: clear data, well-structured tables, accurate calculations
@@ -102,7 +102,7 @@ Transition: "Let me show you the full pipeline."
 ## Full Pipeline Demo {.section-divider}
 
 ::: {.notes}
-This opens the full pipeline demo (minutes 10-25). This is the showpiece demo of Session 4. Make sure the Meridian app is open and ready. You will ask for a quarterly executive summary and then iterate on it.
+This opens the full pipeline demo (minutes 10-25). This is the showpiece demo of Session 4. Make sure the XYZ Corp app is open and ready. You will ask for a quarterly executive summary and then iterate on it.
 :::
 
 ---
@@ -204,13 +204,13 @@ Format final document
 :::
 
 ::: {.notes}
-Walk through each step before switching to the live demo. Say: "Here is what is about to happen. I am going to ask the Meridian app one question: 'Prepare a quarterly executive summary.' Watch what the agent does."
+Walk through each step before switching to the live demo. Say: "Here is what is about to happen. I am going to ask the XYZ Corp app one question: 'Prepare a quarterly executive summary.' Watch what the agent does."
 
 "Step one: it will query six source systems --- the three CRMs, the financial systems, Workday HR, and Zendesk support. Step two: merge and deduplicate. Step three: compute KPIs --- quarter-over-quarter changes, efficiency ratios, concentration metrics. Step four: charts. Step five: narrative analysis --- not just numbers, but interpretation. Step six: assemble everything into a structured document."
 
 "Let me show you."
 
-Switch to the Meridian app.
+Switch to the XYZ Corp app.
 :::
 
 ---
@@ -222,14 +222,14 @@ Switch to the Meridian app.
 The prompt
 :::
 ```
-Prepare a quarterly executive summary of Meridian Corp performance ---
+Prepare a quarterly executive summary of XYZ Corp performance ---
 revenue by division, headcount efficiency, top customer risks, and
 supply chain issues. Include charts and a narrative summary.
 ```
 :::
 
 ::: {.notes}
-DEMO INSTRUCTIONS: Switch to the Meridian app. Type the prompt. As it runs, narrate what you see: "It is starting with the CRM queries --- pulling revenue by division from each system. Now Workday for headcount. Now Zendesk for support tickets. SAP and Oracle for supply chain."
+DEMO INSTRUCTIONS: Switch to the XYZ Corp app. Type the prompt. As it runs, narrate what you see: "It is starting with the CRM queries --- pulling revenue by division from each system. Now Workday for headcount. Now Zendesk for support tickets. SAP and Oracle for supply chain."
 
 Let the full result render. It should produce:
 - Revenue by division table with QoQ comparison
@@ -409,7 +409,7 @@ This is a **test-and-review cycle**, not a one-shot generation. The LLM writes c
 :::
 
 ::: {.notes}
-Say: "Let me pull back the curtain. When you ask the Meridian app a question, four things happen."
+Say: "Let me pull back the curtain. When you ask the XYZ Corp app a question, four things happen."
 
 Walk through each step: "Step one: the system prompt. Before your question ever reaches the LLM, a system prompt has been loaded that describes every table, every column, and every relationship. This is the institutional knowledge layer --- it tells the LLM what data exists and what it means."
 
@@ -429,7 +429,7 @@ Walk through each step: "Step one: the system prompt. Before your question ever 
 What the LLM sees before your question
 :::
 ```
-You are a data analyst for Meridian Corp, a $500M B2B distributor.
+You are a data analyst for XYZ Corp, a $500M B2B distributor.
 
 Available databases:
 - sf_opportunities: Salesforce CRM (Industrial division)
@@ -610,7 +610,7 @@ DEMO INSTRUCTIONS: Switch to the Linux server terminal. Open an empty file. Tell
 
 Run it. Ask: "How many employees does each division have?" Show the answer.
 
-Say: "That is the entire core agent. Fifty lines of code. Built from English instructions in about 5 minutes. The Meridian app you have been using is built on this same core loop --- it just has 3,000 more lines for error handling, multiple databases, authentication, and the web interface."
+Say: "That is the entire core agent. Fifty lines of code. Built from English instructions in about 5 minutes. The XYZ Corp app you have been using is built on this same core loop --- it just has 3,000 more lines for error handling, multiple databases, authentication, and the web interface."
 
 "The gap between 50 lines and 3,000 lines is the gap between prototype and production. That gap is real. But the core is simple."
 
@@ -642,7 +642,7 @@ If the live demo fails, describe what would have happened and show a pre-prepare
 - Error handling and retry logic
 - Logging, monitoring, audit trail
 - Web interface, API, scheduling
-- [This is the Meridian app]{.amber}
+- [This is the XYZ Corp app]{.amber}
 :::
 :::
 
@@ -661,7 +661,7 @@ Say: "The core agent is 50 lines. The production application is 3,000 lines. Wha
 ## Hands-On: Build Your Own Report {.section-divider}
 
 ::: {.notes}
-This opens the hands-on segment (minutes 53-68). Students use the Meridian app to produce specific deliverables. Three guided exercises, each requiring different combinations of data sources.
+This opens the hands-on segment (minutes 53-68). Students use the XYZ Corp app to produce specific deliverables. Three guided exercises, each requiring different combinations of data sources.
 :::
 
 ---
@@ -737,7 +737,7 @@ Display this slide as a reference while students work. You do not need to walk t
 ## Workshop: Your Reporting Candidates {.section-divider}
 
 ::: {.notes}
-This opens the workshop segment (minutes 68-80). Students shift from the Meridian simulation to their own companies. They are identifying recurring reports that follow the data-to-deliverable pattern and could be candidates for automation.
+This opens the workshop segment (minutes 68-80). Students shift from the XYZ Corp simulation to their own companies. They are identifying recurring reports that follow the data-to-deliverable pattern and could be candidates for automation.
 :::
 
 ---
@@ -798,7 +798,7 @@ Cloud LLM Sandbox
 - Code runs on the vendor's servers
 - Easiest to set up
 - Your data leaves your network
-- What we use for the Meridian demo (synthetic data)
+- What we use for the XYZ Corp demo (synthetic data)
 :::
 
 ::: {.card .card-light}
@@ -829,7 +829,7 @@ Our demo uses synthetic data in the cloud. Production deployments keep data on-p
 ::: {.notes}
 Say: "Quick preview. When you deploy an agent in production, where does the code actually run? Three options."
 
-Walk through briefly: "Option one: the vendor's cloud. Easiest to set up, but your data leaves your network. That is what we use for the Meridian demo --- the data is synthetic, so it does not matter. Option two: your own containers. Data stays on-premise. You manage everything. Higher control, higher cost. Option three: SQL-only mode. The LLM generates SQL but never sees the raw data. Your system executes the query locally and only sends aggregate results to the LLM."
+Walk through briefly: "Option one: the vendor's cloud. Easiest to set up, but your data leaves your network. That is what we use for the XYZ Corp demo --- the data is synthetic, so it does not matter. Option two: your own containers. Data stays on-premise. You manage everything. Higher control, higher cost. Option three: SQL-only mode. The LLM generates SQL but never sees the raw data. Your system executes the query locally and only sends aggregate results to the LLM."
 
 "Each option has different security, cost, and capability tradeoffs. Session 5 is entirely about this decision. The pre-readings I am assigning tonight will prepare you for that discussion."
 :::
@@ -850,7 +850,7 @@ Wrap-up segment (minutes 85-90).
 ::: {.box-title}
 Homework for Session 5
 :::
-1. **Produce one complete deliverable** using the Meridian app --- a memo, comparison, or risk assessment. Save or screenshot the output.
+1. **Produce one complete deliverable** using the XYZ Corp app --- a memo, comparison, or risk assessment. Save or screenshot the output.
 2. **Pre-reading (~35 min):**
     - Morgan Stanley case study (provided) --- a regulated firm's deployment decision
     - [AIMultiple: "Cloud LLM vs Local LLMs"](https://aimultiple.com/cloud-llm) --- three deployment options
@@ -860,7 +860,7 @@ Homework for Session 5
 :::
 
 ::: {.notes}
-Say: "Homework. First, produce one complete deliverable using the Meridian app. Not a single question --- a full report. A memo, a comparison, a risk assessment. Whatever interests you. Save or screenshot the output and bring it to Session 5."
+Say: "Homework. First, produce one complete deliverable using the XYZ Corp app. Not a single question --- a full report. A memo, a comparison, a risk assessment. Whatever interests you. Save or screenshot the output and bring it to Session 5."
 
 "Second, required pre-reading --- about 35 minutes total. Three items: the Morgan Stanley case study, the AIMultiple article on cloud vs. local LLMs, and a short piece on what the AI actually sees when it accesses your data. These prepare you for Session 5, which is entirely about deployment and architecture."
 
