@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.6.42">
 
   <meta name="author" content="Kerry Back, Rice University">
-  <title>Session 1: Exploring Data with AI</title>
+  <title>Session 1: What AI Can Do for You</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -133,7 +133,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Session 1: Exploring Data with AI</h1>
+  <h1 class="title">Session 1: What AI Can Do for You</h1>
   <p class="subtitle">Business Intelligence &amp; AI</p>
 
 <div class="quarto-title-authors">
@@ -145,20 +145,10 @@ Kerry Back, Rice University
 </div>
 
 </section>
-<section id="the-saaspocalypse" class="slide level2 quote-slide center">
-<h2>The SaaSpocalypse</h2>
-<div class="quote-text">
-<p>“In late January 2026, Anthropic announced Claude Cowork — autonomous agent plugins. By February, roughly <span class="amber"><strong>$2 trillion</strong></span> in SaaS market cap had evaporated. The press called it the SaaSpocalypse.”</p>
-</div>
-<div class="quote-source">
-<p>— CNBC, “AI fears pummel software stocks,” February 2026; TechCrunch, “SaaS in, SaaS out,” March 2026</p>
-</div>
+<section id="welcome" class="slide level2 section-divider center">
+<h2>Welcome</h2>
 <aside class="notes">
-<p>Welcome, everyone. Let me start with the event that sets the stage for everything we are going to do over the next four weeks.</p>
-<p>In late January 2026, Anthropic announced Claude Cowork — autonomous agent plugins that let AI take actions inside enterprise software. Within weeks, roughly two trillion dollars in SaaS market cap evaporated. The press called it the SaaSpocalypse. Salesforce dropped 31 percent. Adobe dropped 32. Atlassian dropped 35.</p>
-<p>Now, whether or not you agree with the market’s verdict, the technology behind that bet is real, and it is what we will be working with for the next four weeks. This course teaches you to use it, understand how it works, evaluate its reliability, and build a strategy for deploying it.</p>
-<p>Before we dive in, a quick reminder of what the pre-program video covered: the Meridian Corp simulation with ten enterprise systems, and the optional Linux VM for hands-on building. Today, we start as users.</p>
-<p>This opening segment should take about 12-15 minutes including the next few slides. Keep the energy high — this is the hook for the entire course.</p>
+<p>Welcome everyone to Session 1 of Business Intelligence and AI. I am excited to have you here. Over the next four weeks, we are going to transform the way you think about using AI in your daily work — and then extend that to enterprise data and organizational strategy. Today, we start with you. Personal productivity. Immediate value. By the time you leave this session, you will have used AI to produce real deliverables.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -171,66 +161,85 @@ Kerry Back, Rice University
           display:block!important;
       }</style></aside>
 </section>
-<section id="the-damage" class="slide level2 shrink center">
+<section id="what-we-covered-in-the-pre-program-video" class="slide level2 center">
+<h2>What We Covered in the Pre-Program Video</h2>
+<div class="info-box">
+<p><span class="box-title">Quick recap</span></p>
+<ul>
+<li><strong>Course tools:</strong> Claude.ai (browser), Claude Desktop (local files), Claude Code (building tools)</li>
+<li><strong>The arc:</strong> personal productivity → enterprise data → deployment → strategy</li>
+<li><strong>Meridian Corp:</strong> a $500M distributor simulation — starting in Week 2</li>
+<li><strong>By Session 8:</strong> a concrete AI strategy for your organization</li>
+</ul>
+</div>
+<aside class="notes">
+<p>Before we dive in, let me quickly recap what you saw in the pre-program video. You learned about the three tools we will use — Claude in the browser, Claude Desktop for working with your own files, and Claude Code which I will use to build things in later sessions. You saw the overall arc of the course: we start with personal productivity, move to enterprise data in Week 2, then cover deployment and governance, and finish with strategy. And you got a preview of Meridian Corp, the simulated company we will use starting in Session 3. Today, though, it is all about you and your immediate productivity.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-why-now" class="slide level2 centered-statement center">
+<h2>The “Why Now”</h2>
+<h3 id="in-february-2026-ai-agents-wiped-2-trillion-from-software-company-valuations.">In February 2026, AI agents wiped <strong>$2 trillion</strong> from software company valuations.</h3>
+<aside class="notes">
+<p>So why does this matter right now? Let me set the context. In February 2026, something remarkable happened. AI agents — software that can understand plain English and take action — triggered the largest repricing in software history. Two trillion dollars in market value disappeared in a matter of weeks. The market sent a very clear signal: AI can replace large categories of enterprise software. Whether or not you agree with the market’s verdict, the technology behind it is real, and it is moving fast.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-saaspocalypse" class="slide level2 quote-slide center">
+<h2>The SAASpocalypse</h2>
+<div class="quote-text">
+<p>“The AI agent revolution is wreaking havoc on traditional SaaS valuations. Investors are betting that <span class="amber">intelligent agents will replace</span> the click-heavy workflows that enterprise software companies have spent decades building.”</p>
+</div>
+<div class="quote-source">
+<p>— CNBC, “Software stocks face worst rout in a decade as AI agents threaten business models,” February 2026</p>
+</div>
+<aside class="notes">
+<p>The press called it the SAASpocalypse. CNBC, TechCrunch, and every major financial outlet covered it. The thesis was simple: if an AI agent can do what a human does inside Salesforce, or SAP, or ServiceNow — querying data, generating reports, automating workflows — then why pay per-seat license fees for the software itself? The market decided that the answer, for many categories, is: you will not need to.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-damage" class="slide level2 center">
 <h2>The Damage</h2>
 <div class="stat-cards">
 <div class="stat-card">
-<div class="stat-number">
-<p>-31%</p>
-</div>
-<div class="stat-label">
-<p>Salesforce</p>
-</div>
+<p><span class="stat-number">−31%</span> <span class="stat-label">Salesforce</span></p>
 </div>
 <div class="stat-card">
-<div class="stat-number">
-<p>-32%</p>
-</div>
-<div class="stat-label">
-<p>Adobe</p>
-</div>
+<p><span class="stat-number">−32%</span> <span class="stat-label">Adobe</span></p>
 </div>
 <div class="stat-card">
-<div class="stat-number">
-<p>-35%</p>
+<p><span class="stat-number">−35%</span> <span class="stat-label">Atlassian</span></p>
 </div>
-<div class="stat-label">
-<p>Atlassian</p>
-</div>
-</div>
-</div>
-<div class="stat-cards">
-<div class="stat-card">
-<div class="stat-number">
-<p>-11%</p>
-</div>
-<div class="stat-label">
-<p>Intuit</p>
-</div>
-</div>
-<div class="stat-card">
-<div class="stat-number">
-<p>$2T</p>
-</div>
-<div class="stat-label">
-<p>Total SaaS market cap erased</p>
-</div>
-</div>
-<div class="stat-card">
-<div class="stat-number">
-<p>~6 wks</p>
-</div>
-<div class="stat-label">
-<p>January–February 2026</p>
-</div>
-</div>
-</div>
-<div class="explainer">
-<p>ServiceNow and Workday were also hit hard. These are not speculative startups — they are the software backbone of most enterprises.</p>
 </div>
 <aside class="notes">
-<p>Look at these numbers. Salesforce, down 31 percent. Adobe, 32. Atlassian, 35. Intuit, 11. And those are just the biggest names — ServiceNow, Workday, and dozens of others were hit too. Two trillion dollars in total, over about six weeks.</p>
-<p>These are not speculative startups. These are the companies that run your CRM, your project management, your financial reporting, your HR systems. The market is saying: AI agents are coming for the software you use every day. Let me explain why.</p>
+<p>Here are some of the numbers. Salesforce, the world’s largest CRM company, lost 31 percent of its value. Adobe, which dominates creative software, dropped 32 percent. Atlassian, the maker of Jira and Confluence — tools used by virtually every software team — fell 35 percent. These are not small companies. These are pillars of the enterprise software industry, and the market is telling them their moats may be thinner than they thought.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -243,33 +252,39 @@ Kerry Back, Rice University
           display:block!important;
       }</style></aside>
 </section>
-<section id="what-ai-is-replacing" class="slide level2 shrink center">
+<section id="what-ai-is-replacing" class="slide level2 center">
 <h2>What AI Is Replacing</h2>
 <div class="three-cards">
 <div class="card card-dark">
-<div class="card-title">
-<p>The Interface Layer</p>
+<p><span class="card-title">The Interface Layer</span></p>
+<ul>
+<li>Click-heavy workflows</li>
+<li>Form-filling and navigation</li>
+<li>Manual data entry across screens</li>
+<li>“Training” users on software</li>
+</ul>
 </div>
-<p>Most SaaS products are forms, dashboards, and screens sitting on top of databases. AI agents let users skip navigating “20 screens” and state what they want in plain English. The interface becomes the agent, not the app.</p>
+<div class="card card-dark">
+<p><span class="card-title">Workflow Automation</span></p>
+<ul>
+<li>Rule-based routing</li>
+<li>Report scheduling</li>
+<li>Template-driven outputs</li>
+<li>Repetitive analysis tasks</li>
+</ul>
 </div>
-<div class="card card-light">
-<div class="card-title">
-<p>Simple Workflow Automation</p>
-</div>
-<p>Task tracking, status updates, if-then automations, data transfers between systems. These are exactly what AI agents do natively — no SaaS subscription required.</p>
-</div>
-<div class="card card-light">
-<div class="card-title">
-<p>Per-Seat Economics</p>
-</div>
-<p>If 10 AI agents do the work of 100 human reps, you need 10 Salesforce seats, not 100. The revenue model collapses even if the product is still used.</p>
+<div class="card card-dark">
+<p><span class="card-title">Per-Seat Economics</span></p>
+<ul>
+<li>$150-300/user/month SaaS fees</li>
+<li>Shelfware (paid but unused)</li>
+<li>Feature bloat nobody asked for</li>
+<li>Integration tax between tools</li>
+</ul>
 </div>
 </div>
 <aside class="notes">
-<p>So what exactly is AI replacing? Not the data. Not the databases. Three things.</p>
-<p>First, the interface layer. Think about what most SaaS products actually are: forms, dashboards, and screens sitting on top of databases. You navigate twenty screens to do something that could be stated in one sentence. AI agents let users skip the screens and just say what they want. The interface becomes the agent, not the app.</p>
-<p>Second, simple workflow automation. Task tracking, status updates, if-then rules, moving data between systems. These are things agents do natively. You do not need a SaaS subscription for a task that an AI can handle in seconds.</p>
-<p>Third, and this is the one that scares investors the most: per-seat economics. If ten AI agents can do the work of a hundred human reps, you need ten Salesforce seats, not a hundred. The product might still be useful, but the revenue model collapses.</p>
+<p>So what exactly is AI replacing? Three things. First, the interface layer — all those clicks, forms, and navigation that enterprise software forces you through. If you can just say what you want in English, the UI becomes unnecessary. Second, workflow automation — rules-based routing, report scheduling, template-driven outputs. AI handles these natively. Third, the per-seat economics model itself. Companies pay 150 to 300 dollars per user per month for SaaS tools, and much of that capacity goes unused. AI collapses the cost structure.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -282,39 +297,13 @@ Kerry Back, Rice University
           display:block!important;
       }</style></aside>
 </section>
-<section id="what-survives" class="slide level2 shrink center">
+<section id="what-survives" class="slide level2 centered-statement center">
 <h2>What Survives</h2>
-<div class="highlight-box">
-<p>AI is not replacing the database — it is replacing the <span class="accent">screens people use to interact with the database</span>, and the humans who sit behind those screens.</p>
-</div>
-<div class="three-cards">
-<div class="card card-dark">
-<div class="card-title">
-<p>Systems of Record</p>
-</div>
-<p>Regulated industries (finance, healthcare, law) still need authoritative data stores with audit trails, compliance, and legal standing.</p>
-</div>
-<div class="card card-light">
-<div class="card-title">
-<p>Proprietary Data</p>
-</div>
-<p>Platforms with accumulated customer data, feedback loops, and network effects remain defensible. The data itself is the moat.</p>
-</div>
-<div class="card card-light">
-<div class="card-title">
-<p>Integration Hubs</p>
-</div>
-<p>Systems managing connections across many platforms survive because someone still has to move data between systems — even if the interface changes.</p>
-</div>
-</div>
-<div class="explainer">
-<p>This course is about the surviving layer: <span class="accent">the data</span>. You will learn to query it, combine it, build reports from it, and govern access to it — using AI agents instead of dashboards and analysts.</p>
-</div>
+<h3 id="data"><span class="accent">Data</span></h3>
+<p>The systems of record. The databases. The institutional knowledge embedded in your CRM, ERP, and HR systems.</p>
+<p>AI does not replace your data — it makes it <span class="amber">accessible</span>.</p>
 <aside class="notes">
-<p>But here is the crucial point, and this is what this entire course is built around: AI is not replacing the database. It is replacing the screens people use to interact with the database, and the humans who sit behind those screens.</p>
-<p>What survives? Three things. Systems of record — in regulated industries, you still need authoritative data stores with audit trails and legal standing. Salesforce is not going away as a CRM database; what is going away is the idea that you need its interface to access the data. Second, proprietary data — companies that have accumulated years of customer data, feedback loops, and network effects. The data itself is the moat. Third, integration hubs — someone still has to connect systems together.</p>
-<p>And that is exactly what this course teaches. We are working with the layer that survives: the data. Over the next four weeks, you will learn to query it in plain English, combine it across systems, build automated reports from it, and govern who can access what — all using AI agents instead of dashboards and analyst queues.</p>
-<p>Sources for this section: TechCrunch, “SaaS in, SaaS out,” March 2026; CNBC, “AI fears pummel software stocks,” February 2026; Built In, “Will AI Agents Destroy SaaS?” 2026.</p>
+<p>But here is what does not get replaced: data. Your CRM still holds your customer relationships. Your ERP still tracks your supply chain. Your HR system still manages your people. AI does not replace those systems of record. What it does is make the data inside them dramatically more accessible. Instead of needing a BI team to build a dashboard, you ask a question in English. That is the shift — and it is why we spend the second half of this course on enterprise data.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -327,11 +316,11 @@ Kerry Back, Rice University
           display:block!important;
       }</style></aside>
 </section>
-<section id="a-familiar-story" class="slide level2 section-divider center">
-<h2>A Familiar Story</h2>
+<section id="but-this-course-starts-with-you" class="slide level2 section-divider center">
+<h2>But This Course Starts With You</h2>
+<h3 id="before-ai-transforms-your-organization-it-can-transform-your-tuesday-afternoon.">Before AI transforms your organization, it can transform your Tuesday afternoon.</h3>
 <aside class="notes">
-<p>Now let me tell you a story that I suspect will sound very familiar. This is the cold open — it is designed to be a little provocative. I want you to think about whether something like this has happened at your company.</p>
-<p>This segment should take about 5 minutes including discussion.</p>
+<p>But we are not starting with enterprise systems. We are starting with something much more immediate. Before AI transforms your organization, it can transform your Tuesday afternoon. The personal productivity gains are available to you right now, today, with no IT department involvement, no deployment project, no budget approval. That is where we begin.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -344,24 +333,10 @@ Kerry Back, Rice University
           display:block!important;
       }</style></aside>
 </section>
-<section id="the-email-chain" class="slide level2 shrink center">
-<h2>The Email Chain</h2>
-<div class="highlight-box">
-<p><strong>Monday 9:14 AM</strong> — CEO to VP Sales: “Which customers buy from multiple divisions? I want the list by Wednesday.”</p>
-</div>
-<div class="highlight-box">
-<p><strong>Monday 11:02 AM</strong> — VP Sales to BI Team: “Need a cross-division customer overlap report. CEO priority.”</p>
-</div>
-<div class="highlight-box">
-<p><strong>Monday 3:30 PM</strong> — BI Team: “We can start next sprint. ETA: 3 weeks. We need to join Salesforce, Legacy CRM, and HubSpot — different schemas, no common key.”</p>
-</div>
-<div class="highlight-box">
-<p><strong>Monday 3:45 PM</strong> — CEO: “Three <em>weeks</em>?”</p>
-</div>
+<section id="demo-ai-as-your-analyst" class="slide level2 section-divider center">
+<h2>Demo: AI as Your Analyst</h2>
 <aside class="notes">
-<p>Read through this email chain with the class. Monday morning, 9:14 AM — the CEO fires off a simple question: which of our customers buy from multiple divisions? Seems straightforward, right? By 11 AM it has landed on the BI team’s desk as a priority request. And by 3:30 PM, the BI team responds: three weeks. They need to join Salesforce, the Legacy CRM, and HubSpot — different schemas, no common key. The CEO’s reaction at 3:45 says it all: three weeks?</p>
-<p>Now, ask the room: has this happened to you? Not this exact scenario, but the pattern — a senior leader asks what feels like a simple question, and the answer is weeks away because the data lives in different systems that were never designed to talk to each other. I want to hear a couple of examples. Let two or three people share briefly before moving on.</p>
-<p>The reason I am showing you this is that it sets up the core promise of what we are about to see. What if this question did not take three weeks? What if it took thirty seconds?</p>
+<p>Let me show you what I mean. I am going to open Claude.ai right now and produce three deliverables in about three minutes. Watch the speed, watch the format flexibility, and pay attention to the quality. Then ask yourself: how long would this have taken you?</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -374,193 +349,24 @@ Kerry Back, Rice University
           display:block!important;
       }</style></aside>
 </section>
-<section id="what-if-it-took-30-seconds" class="slide level2 centered-statement center">
-<h2>What If It Took 30 Seconds?</h2>
-</section>
-<section id="which-customers-buy-from-multiple-divisions" class="slide level2 center">
-<h2>“Which customers buy from multiple divisions?”</h2>
-<div class="explainer">
-<p>Type the question. Get SQL, a chart, and a narrative — instantly.</p>
-</div>
-<aside class="notes">
-<p>This is the transition to the live demo. Open the XYZ Corp app now. Type exactly this question into the chat: “Which customers buy from multiple divisions?” Let the class watch as the agent processes the query, generates SQL, runs it against multiple systems, and returns an answer with a chart and narrative — all in about thirty seconds.</p>
-<p>As the results come back, narrate what is happening: “Notice it is querying Salesforce for the Industrial division, the Legacy CRM for Energy, and HubSpot for Safety. It is pulling customer lists from each, then using Python to match names across systems and find the overlaps.” Ask a follow-up question the class suggests — something a dashboard could never handle because it was not pre-built for it.</p>
-<p>This demo should take about 8 minutes. The goal is visceral impact — the class just heard about a three-week wait, and now they are watching the same question answered in real time. If the app is slow or down, switch to the pre-recorded fallback demo and narrate over it.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="dashboard-vs.-chat" class="slide level2 shrink center">
-<h2>Dashboard vs.&nbsp;Chat</h2>
-<div class="two-cards">
-<div class="card card-dark">
-<div class="card-title">
-<p>Traditional Dashboard</p>
-</div>
-<ul>
-<li>Pre-built by analysts weeks ago</li>
-<li>Fixed filters and dimensions</li>
-<li>Can’t answer questions it wasn’t designed for</li>
-<li>New question = new ticket = new sprint</li>
-</ul>
-</div>
-<div class="card card-light">
-<div class="card-title">
-<p>AI Chat Interface</p>
-</div>
-<ul>
-<li>Ask any question in plain English</li>
-<li>Agent writes SQL, runs it, returns results</li>
-<li>Generates charts and narrative on the fly</li>
-<li>Follow-up questions in seconds</li>
-</ul>
-</div>
-</div>
-<aside class="notes">
-<p>Now let’s connect what you just saw back to the broader picture. On the left, you have the traditional dashboard — pre-built by analysts weeks ago, with fixed filters and fixed dimensions. It can only answer the questions it was designed for. If you have a new question, that is a new ticket, a new sprint, a new wait.</p>
-<p>On the right, the AI chat interface. You ask any question in plain English. The agent writes SQL, runs it, returns results. It generates charts and narratives on the fly. And follow-up questions take seconds, not weeks. The key difference is not speed — it is flexibility. The dashboard answers the questions someone anticipated. The chat interface answers the questions you actually have, right now, in the moment.</p>
-<p>I want to be clear: dashboards are not going away. They are still the right tool for operational monitoring — metrics you check every day. But for the long tail of ad hoc questions that never justified building a dashboard? That is where this technology changes everything.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="todays-learning-objectives" class="slide level2 center">
-<h2>Today’s Learning Objectives</h2>
-<div class="info-box">
-<div class="box-title">
-<p>By the end of this session, you will be able to:</p>
-</div>
-<ul>
-<li>Explain why AI agents are disrupting the BI software market — and why it matters now</li>
-<li>Experience conversational data access vs.&nbsp;traditional dashboards</li>
-<li>Ask business questions in plain English and get instant answers with charts</li>
-</ul>
-</div>
-<aside class="notes">
-<p>Here are our learning objectives for today. By the end of this session, you will be able to explain why AI agents are disrupting the BI software market and why this matters right now — not in five years, right now. You will have experienced conversational data access firsthand, contrasted it with traditional dashboards, and you will have asked your own business questions in plain English and gotten instant answers with charts.</p>
-<p>We are about to shift gears into the business implications of what you just saw, and then we are going to get hands-on with the XYZ app for the rest of the session. Let’s talk about what this means strategically.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="the-business-lens" class="slide level2 section-divider center">
-<h2>The Business Lens</h2>
-<aside class="notes">
-<p>Now let’s step back from the technology and put on our business hats. The technology you just saw — querying enterprise data in plain English, getting instant charts and narratives — is what the market believes will displace dashboards, reporting teams, and data integration tools. That is a big claim. Let’s think about what it actually means for your organizations.</p>
-<p>This business lens segment should take about 10 minutes, including the discussion on the next slide.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="the-key-question" class="slide level2 center">
-<h2>The Key Question</h2>
-<div class="highlight-box">
-<p>If <strong>anyone in your company</strong> could query data in plain English — no SQL, no tickets, no dashboards — what decisions get made faster? What questions finally get asked?</p>
-</div>
-<aside class="notes">
-<p>This is the key question I want you to sit with. If anyone in your company — not just the analysts, not just the people who know SQL — could query data in plain English, what changes? Think about it in two dimensions.</p>
-<p>First, what decisions get made faster? The decisions that are already being made, but slowly, because someone has to pull the data, build the report, and route it through the right people. Those decisions get compressed from days or weeks to minutes.</p>
-<p>But the second dimension is more interesting: what questions finally get asked? There are questions in every organization that nobody bothers asking because the cost of getting the answer is too high. It would take three weeks and a dedicated analyst, so people just go with their gut. When the cost of asking drops to zero, those questions start getting asked. And that is where the real value is.</p>
-<p>Ask the room: can anyone give me an example of a question at your company that nobody asks because it is too hard to get the data? Let two or three people respond. This discussion is important — it makes the abstract concrete for each participant.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="hands-on-single-system-queries" class="slide level2 shrink center">
-<h2>Hands-On: Single-System Queries</h2>
+<section id="what-you-are-about-to-see" class="slide level2 center">
+<h2>What You Are About to See</h2>
 <div class="step-flow">
 <div class="step-card">
-<div class="step-icon">
-<p>1</p>
-</div>
-<div class="step-title">
-<p>Simple Lookup</p>
-</div>
-<div class="step-desc">
-<p>“What are our top 10 customers by revenue?”</p>
-</div>
+<p><span class="step-icon">📊</span> <span class="step-title">Chart</span> <span class="step-desc">Paste numbers, get an interactive visualization</span></p>
 </div>
 <div class="step-card">
-<div class="step-icon">
-<p>2</p>
-</div>
-<div class="step-title">
-<p>Filtering</p>
-</div>
-<div class="step-desc">
-<p>“Show me open deals over $100K in the Energy division.”</p>
-</div>
+<p><span class="step-icon">📝</span> <span class="step-title">Memo</span> <span class="step-desc">Turn the data into an executive summary</span></p>
 </div>
 <div class="step-card">
-<div class="step-icon">
-<p>3</p>
-</div>
-<div class="step-title">
-<p>Aggregation</p>
-</div>
-<div class="step-desc">
-<p>“What is average deal size by sales rep this quarter?”</p>
-</div>
+<p><span class="step-icon">📑</span> <span class="step-title">Slide</span> <span class="step-desc">Reformat as a PowerPoint-ready slide</span></p>
 </div>
 <div class="step-card">
-<div class="step-icon">
-<p>4</p>
+<p><span class="step-icon">⚡</span> <span class="step-title">3 Minutes</span> <span class="step-desc">Three deliverables, one conversation</span></p>
 </div>
-<div class="step-title">
-<p>Analytical</p>
-</div>
-<div class="step-desc">
-<p>“Which reps are trending above quota? Show me a chart.”</p>
-</div>
-</div>
-</div>
-<div class="explainer">
-<p>We’ll progress from simple lookups to analytical questions. Each prompt hits a single system — Salesforce pipeline, NetSuite financials, or Workday headcount.</p>
 </div>
 <aside class="notes">
-<p>Now we are going to get hands-on. For the next twenty minutes, you are going to work through a progression of queries against the XYZ app. We start simple and build up. Step one is a simple lookup — “What are our top 10 customers by revenue?” This is the equivalent of a basic database query. Step two adds a filter — “Show me open deals over 100K in the Energy division.” Step three introduces aggregation — “What is average deal size by sales rep this quarter?” And step four is analytical — “Which reps are trending above quota? Show me a chart.”</p>
-<p>Each of these prompts hits a single system. We are not crossing systems yet — that comes in Session 2. The point here is to get comfortable with the conversational interface and to feel the difference between waiting for a report and having a conversation with your data.</p>
-<p>If you get stuck or the app gives you something unexpected, that is fine — note it and keep going. We will debrief as a group afterward. This hands-on segment should take about 20 minutes.</p>
+<p>Here is the sequence. First, I will paste a table of quarterly sales numbers and ask Claude to generate a chart. You will see an interactive artifact — you can hover over data points, filter, and export. Second, I will ask it to turn the same data into an executive summary memo. Third, I will ask for a PowerPoint-ready slide with bullet points. Three deliverables, three minutes, one conversation. This is what I mean by AI as your analyst — it drafts, you direct and verify.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -573,23 +379,15 @@ Kerry Back, Rice University
           display:block!important;
       }</style></aside>
 </section>
-<section id="meet-xyz-corp" class="slide level2 shrink center">
-<h2>Meet XYZ Corp</h2>
-<div class="info-box">
-<div class="box-title">
-<p>Your Simulation Environment</p>
-</div>
-<ul>
-<li><strong>XYZ Corp</strong> — a $500M industrial distributor</li>
-<li><strong>3 divisions:</strong> Industrial (~$250M), Energy (~$150M), Safety (~$100M)</li>
-<li><strong>10 enterprise systems</strong> — CRMs, ERP, HRIS, ticketing, and more</li>
-<li><strong>41 database tables</strong> across all systems</li>
-<li><strong>26,000+ rows</strong> of realistic, interconnected data spanning 3 years</li>
-</ul>
+<section id="the-key-framing" class="slide level2 center">
+<h2>The Key Framing</h2>
+<div class="highlight-box">
+<p>AI is a <strong>fast junior analyst</strong>.</p>
+<p>It drafts. You direct and verify.</p>
+<p>It is not replacing your judgment — it is accelerating your output.</p>
 </div>
 <aside class="notes">
-<p>Before you start querying, let me tell you about the company you are going to be working with. XYZ Corp is a fictional 500-million-dollar industrial distributor. It has three operating divisions: Industrial at about 250 million, Energy at about 150 million, and Safety at about 100 million. The company runs on ten enterprise systems — CRMs, ERP, HRIS, ticketing, and more — with 41 database tables and over 26,000 rows of realistic, interconnected data spanning three years.</p>
-<p>This is not a toy dataset. It has the same kind of cross-system friction you deal with in real life: different naming conventions, different date formats, customers that appear under different names in different systems. We built it to feel real because the lessons only land if the data feels real.</p>
+<p>I want you to hold onto this framing throughout the entire course. AI is a fast junior analyst. It can produce a first draft of almost anything in seconds. But like any junior analyst, it needs direction, it sometimes makes mistakes, and you are the one who decides whether the output is good enough to use. Your judgment, your domain expertise, your understanding of the audience — that is what turns an AI draft into a real deliverable.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -602,56 +400,12 @@ Kerry Back, Rice University
           display:block!important;
       }</style></aside>
 </section>
-<section id="xyzs-systems-at-a-glance" class="slide level2 shrink center">
-<h2>XYZ’s Systems at a Glance</h2>
-<div class="four-cards">
-<div class="card card-dark">
-<div class="card-title">
-<p>Industrial Division (~$250M)</p>
-</div>
-<ul>
-<li>Salesforce CRM</li>
-<li>NetSuite Finance</li>
-<li>SAP Operations</li>
-</ul>
-</div>
-<div class="card card-light">
-<div class="card-title">
-<p>Energy Division (~$150M)</p>
-</div>
-<ul>
-<li>Legacy CRM (custom-built)</li>
-<li>QuickBooks Finance</li>
-<li>Oracle SCM</li>
-</ul>
-</div>
-<div class="card card-light">
-<div class="card-title">
-<p>Safety Division (~$100M)</p>
-</div>
-<ul>
-<li>HubSpot CRM</li>
-<li>Shared NetSuite Finance</li>
-</ul>
-</div>
-<div class="card card-dark">
-<div class="card-title">
-<p>Corporate HQ</p>
-</div>
-<ul>
-<li>Workday HR (all divisions)</li>
-<li>NetSuite Consolidation</li>
-<li>Zendesk Support</li>
-</ul>
-</div>
-</div>
-<div class="explainer">
-<p>Three divisions. Three CRMs. Ten enterprise systems. This is the cross-system reality most enterprises face.</p>
-</div>
+<section id="live-demo" class="slide level2 section-divider center">
+<h2><span class="amber">LIVE DEMO</span></h2>
+<h3 id="claude.ai-chart-memo-slide">Claude.ai: Chart → Memo → Slide</h3>
 <aside class="notes">
-<p>Take a moment to look at this layout. Three divisions, each with their own CRM and financial systems. Industrial uses Salesforce and NetSuite. Energy uses a legacy custom-built CRM and QuickBooks. Safety uses HubSpot and shares NetSuite with Industrial. Then corporate has Workday for HR across all divisions, NetSuite for consolidation, and Zendesk for support.</p>
-<p>Notice the pattern: three CRMs. Three different data models. Three different ways of storing customer information. This is not bad IT management — this is what happens when companies grow through acquisition, when divisions have autonomy, when different teams picked the best tool for their needs at different times. It is the normal state of enterprise data, and it is exactly why that CEO’s question about cross-division customers took three weeks.</p>
-<p>For today, you will be querying individual systems. Next session, we tackle the hard problem of querying across them.</p>
+<p>Alright, let me switch to the browser and do this live. I have a table of quarterly revenue by product line — four quarters, three product lines. Let me paste it in and ask for a chart. Watch what happens.</p>
+<p>I will narrate as I go. First the chart — notice it is interactive, you can hover and see values. Now I will ask for the executive summary. And finally the slide format. Three deliverables, and notice how each one builds on the same underlying data but presents it in a completely different way for a different purpose.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -664,11 +418,10 @@ Kerry Back, Rice University
           display:block!important;
       }</style></aside>
 </section>
-<section id="try-it-yourself" class="slide level2 section-divider center">
-<h2>Try It Yourself</h2>
+<section id="the-tool-landscape" class="slide level2 section-divider center">
+<h2>The Tool Landscape</h2>
 <aside class="notes">
-<p>All right, it is time to get your hands on the keyboard. Everyone should have the XYZ app open in your browser. If you have not logged in yet, do that now — the URL and credentials were in the pre-session email. I will give you a moment to get set up.</p>
-<p>This is the transition into the hands-on portion. You will have about 30 minutes total — first with guided prompts, then open exploration. Let’s go.</p>
+<p>Now that you have seen what Claude can do, let me explain the tools we will use in this course and which tool fits which situation. You saw claude.ai in the demo — that is our primary tool today. But there are two more you should know about.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -681,28 +434,48 @@ Kerry Back, Rice University
           display:block!important;
       }</style></aside>
 </section>
-<section id="guided-exploration" class="slide level2 shrink center">
-<h2>Guided Exploration</h2>
-<div class="info-box">
-<div class="box-title">
-<p>Sample Prompts to Try</p>
-</div>
-<ul>
-<li>“What was XYZ’s total revenue last year, broken down by division?”</li>
-<li>“Who are the top 5 customers in the Industrial division by lifetime value?”</li>
-<li>“Show me headcount by department. Are any teams growing faster than revenue?”</li>
-<li>“What’s our average days-to-close for deals over $200K?”</li>
-<li>“Plot monthly revenue trends for all three divisions on one chart.”</li>
-</ul>
-</div>
-<div class="explainer">
-<p>Start with the prompts above, then ask your own questions. The goal is to feel the difference between <em>waiting for a report</em> and <em>having a conversation with your data</em>.</p>
+<section id="three-tools-three-use-cases" class="slide level2 center">
+<h2>Three Tools, Three Use Cases</h2>
+<div class="comparison-table">
+<table class="caption-top">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Tool</th>
+<th>Access</th>
+<th>Best For</th>
+<th>When</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Claude.ai</strong></td>
+<td>Browser tab</td>
+<td>Quick analysis, charts, documents, brainstorming</td>
+<td>Sessions 1-2, anytime</td>
+</tr>
+<tr class="even">
+<td><strong>Claude Desktop</strong></td>
+<td>Installed app</td>
+<td>Working with your own files — spreadsheets, PDFs</td>
+<td>Session 2 onward</td>
+</tr>
+<tr class="odd">
+<td><strong>Claude Code</strong></td>
+<td>Terminal</td>
+<td>Building tools and automations from English</td>
+<td>Instructor demos; optional</td>
+</tr>
+</tbody>
+</table>
 </div>
 <aside class="notes">
-<p>Here are some sample prompts to get you started. You can type these in exactly as written or riff on them. “What was XYZ’s total revenue last year, broken down by division?” is a good warmup — it hits the financial systems. “Who are the top 5 customers in the Industrial division by lifetime value?” goes into the CRM. “Show me headcount by department — are any teams growing faster than revenue?” pulls from Workday and requires the agent to do some analysis. “What is our average days-to-close for deals over 200K?” is a more analytical CRM query. And “Plot monthly revenue trends for all three divisions on one chart” tests the charting capability.</p>
-<p>Start with these, then branch out. Ask questions you would actually want to know about a company like this. The goal is not to test the app’s limits — we will do that in Session 6. The goal right now is to feel the difference between waiting for a report and having a conversation with your data. Notice how quickly you can iterate: ask a question, see the answer, ask a follow-up, refine.</p>
-<p>I will be monitoring the chat and highlighting interesting discoveries as they happen. If you find something surprising, drop it in the Zoom chat so everyone can see.</p>
-<p>This guided exploration should take about 12 minutes, then we will open it up for free exploration.</p>
+<p>Here is the landscape. Claude.ai is what you will use today — it runs in your browser, requires no installation, and handles conversational work beautifully: charts, documents, analysis, brainstorming. Claude Desktop is an installed application that can access your local files directly. If you want Claude to read your spreadsheet or work with your documents without copy-pasting, Desktop is the right tool. We will introduce it next session. Claude Code is a terminal-based tool for building software and automations from English descriptions. I will use it in later sessions to build data agents and pipelines. It is available to you on the Linux server if you want to explore, but it is entirely optional.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -715,36 +488,197 @@ Kerry Back, Rice University
           display:block!important;
       }</style></aside>
 </section>
-<section id="breakout-discussion" class="slide level2 shrink center">
-<h2>Breakout Discussion</h2>
+<section id="which-tool-when" class="slide level2 center">
+<h2>Which Tool When?</h2>
 <div class="two-cards">
-<div class="card card-dark">
-<div class="card-title">
-<p>Reflect</p>
-</div>
+<div class="card card-light">
+<p><span class="card-title">Today: Claude.ai</span></p>
 <ul>
-<li>What surprised you about the speed or quality of answers?</li>
-<li>What question did you try that worked unexpectedly well?</li>
-<li>What question stumped the agent — and why?</li>
+<li>Quick charts and visualizations</li>
+<li>Document drafting and editing</li>
+<li>Interactive calculators and tools</li>
+<li>Brainstorming and analysis</li>
+<li>No installation required</li>
+</ul>
+</div>
+<div class="card card-dark">
+<p><span class="card-title">Later: Desktop and Code</span></p>
+<ul>
+<li>Desktop: read your own files directly</li>
+<li>Desktop: MCP integrations with other tools</li>
+<li>Code: build automations and agents</li>
+<li>Code: create reusable data pipelines</li>
+<li>Both: deeper, more persistent work</li>
+</ul>
+</div>
+</div>
+<aside class="notes">
+<p>Think of it this way. Claude.ai is your quick-access analyst — open a tab, ask a question, get a deliverable. It is where you start for anything new. Claude Desktop is for when you are working with your own files and want a more integrated experience. And Claude Code is for when you want to go beyond one-off tasks and build something reusable. Today we are focused entirely on Claude.ai. By the end of this session, you will have produced multiple artifacts and you will have a feel for what this tool can and cannot do.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="hands-on-your-first-artifacts" class="slide level2 section-divider center">
+<h2>Hands-On: Your First Artifacts</h2>
+<aside class="notes">
+<p>Time for you to try it yourselves. We have three guided exercises, each demonstrating a different type of artifact Claude can create. I will walk you through the first one, and then you will have time to work through all three at your own pace. Open claude.ai in your browser now if you have not already.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="exercise-1-build-a-chart" class="slide level2 shrink center">
+<h2>Exercise 1: Build a Chart</h2>
+<div class="info-box">
+<p><span class="box-title">Instructions</span></p>
+<ol type="1">
+<li>Paste the sample dataset (provided in chat) into Claude.ai</li>
+<li>Ask: “Create a bar chart comparing Q1 through Q4 revenue by product line”</li>
+<li><strong>Iterate:</strong> “Change the colors to blue and gray” → “Add data labels” → “Switch to a line chart” → “Make it a stacked bar chart”</li>
+<li>Notice the interactive artifact — hover, filter, explore</li>
+</ol>
+</div>
+<div class="highlight-box">
+<p><strong>The point:</strong> You are not learning to code. You are learning to direct. Tell it what you want, see the result, refine with plain English.</p>
+</div>
+<aside class="notes">
+<p>Exercise one is about visualization. I have pasted a sample dataset into the chat — quarterly revenue for three product lines. Copy it into Claude.ai and ask for a bar chart. But do not stop at the first version. This is where the real skill is. Ask it to change colors, add labels, switch chart types. Try “make it a stacked bar chart” or “add a trend line.” Each iteration takes seconds, and you are learning the most important skill in working with AI: directing and refining. You are not coding. You are describing what you want and adjusting until it is right.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="exercise-2-build-an-interactive-calculator" class="slide level2 center">
+<h2>Exercise 2: Build an Interactive Calculator</h2>
+<div class="info-box">
+<p><span class="box-title">Instructions</span></p>
+<ol type="1">
+<li>Ask Claude: “Build me an interactive break-even analysis calculator”</li>
+<li>It should have inputs for: fixed costs, variable cost per unit, selling price per unit</li>
+<li><strong>Iterate:</strong> “Add a chart showing profit/loss across different volumes” → “Add a sensitivity table” → “Make the inputs sliders instead of text boxes”</li>
+<li>Try your own: ROI calculator, loan amortization, pricing model</li>
+</ol>
+</div>
+<aside class="notes">
+<p>Exercise two is about interactive tools. Ask Claude to build a break-even calculator. It will create a working application right in the chat — with input fields, calculations, and output. Then iterate: ask for a chart, a sensitivity table, sliders instead of text boxes. The artifact is fully interactive, and you can keep refining it. If break-even does not fit your work, try an ROI calculator, a loan amortization schedule, or a pricing model. The point is that Claude can build functional tools, not just static documents.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="exercise-3-draft-an-executive-summary" class="slide level2 center">
+<h2>Exercise 3: Draft an Executive Summary</h2>
+<div class="info-box">
+<p><span class="box-title">Instructions</span></p>
+<ol type="1">
+<li>Open the briefing document (provided) — a two-page quarterly performance update</li>
+<li>Paste it into Claude and ask: “Write a one-page executive summary for the CEO”</li>
+<li><strong>Iterate:</strong> “Make it half the length” → “Lead with the biggest risk” → “Add a recommendation section” → “Change the tone to be more direct”</li>
+<li>Compare your iterations — notice how specific direction produces specific improvement</li>
+</ol>
+</div>
+<aside class="notes">
+<p>Exercise three is about written documents. I have provided a two-page quarterly briefing document. Paste it into Claude and ask for a one-page executive summary for the CEO. Then iterate — and pay close attention to how the specificity of your direction determines the quality of the output. Saying “make it better” gets you almost nothing. Saying “lead with the biggest risk and cut the background section” gets you a dramatically different and usually better document. This is the core skill: specific direction produces specific improvement.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="open-exploration" class="slide level2 section-divider center">
+<h2>Open Exploration</h2>
+<h3 id="bring-something-from-your-actual-work.">Bring something from your actual work.</h3>
+<aside class="notes">
+<p>Now I want you to go beyond the exercises. For the next ten minutes, try Claude with something from your actual work. A dataset you have been meaning to analyze. A document you need to draft. A summary you have been putting off. A comparison you need to make. The exercises showed you what is possible — now apply it to something real. If you produce something interesting, I will ask you to share it with the group. And if you get stuck, raise your hand or drop a message in the chat.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="what-to-try" class="slide level2 center">
+<h2>What to Try</h2>
+<div class="four-cards">
+<div class="card card-light">
+<p><span class="card-title">Analyze</span></p>
+<ul>
+<li>Paste a dataset</li>
+<li>Ask for trends</li>
+<li>Request comparisons</li>
+<li>Generate charts</li>
 </ul>
 </div>
 <div class="card card-light">
-<div class="card-title">
-<p>Apply</p>
-</div>
+<p><span class="card-title">Draft</span></p>
 <ul>
-<li>What would this look like at your company?</li>
-<li>Who currently answers these questions — and how long does it take?</li>
-<li>What decisions are delayed because the data isn’t accessible?</li>
+<li>Email to a client</li>
+<li>Meeting summary</li>
+<li>Project proposal</li>
+<li>Status update</li>
+</ul>
+</div>
+<div class="card card-light">
+<p><span class="card-title">Summarize</span></p>
+<ul>
+<li>Long report → key points</li>
+<li>Article → executive brief</li>
+<li>Meeting notes → action items</li>
+<li>Research → decision memo</li>
+</ul>
+</div>
+<div class="card card-light">
+<p><span class="card-title">Build</span></p>
+<ul>
+<li>Calculator or estimator</li>
+<li>Comparison matrix</li>
+<li>Decision framework</li>
+<li>Checklist or rubric</li>
 </ul>
 </div>
 </div>
 <aside class="notes">
-<p>Time for breakout discussions. I am going to put you into groups of three or four. You will have about 15 minutes. There are two sets of questions to work through.</p>
-<p>First, reflect on what you just experienced. What surprised you about the speed or quality of answers? What question did you try that worked unexpectedly well? And importantly, what question stumped the agent — and why did it fail? Understanding the failure modes is just as valuable as seeing the successes.</p>
-<p>Second, apply it to your world. What would this look like at your company? Who currently answers these kinds of questions — is it a BI team, an analyst, someone in finance? How long does it take? And what decisions are being delayed or not made at all because the data is not accessible?</p>
-<p>Each group should be ready to share one key insight when we come back together. I will give you a two-minute warning before we reconvene.</p>
-<p>This breakout should take about 15 minutes. When groups report back, listen for patterns — if multiple groups mention the same pain point, highlight it.</p>
+<p>Here are some ideas if you need a starting point. You can analyze — paste a dataset and ask for trends, comparisons, or charts. You can draft — an email, a meeting summary, a project proposal. You can summarize — take a long document and ask for key points or an executive brief. Or you can build — a calculator, a comparison matrix, a decision framework. All of these are things Claude handles well, and all of them are things that typically take you 30 minutes to an hour but take Claude about 30 seconds for a first draft.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -757,62 +691,219 @@ Kerry Back, Rice University
           display:block!important;
       }</style></aside>
 </section>
-<section id="before-next-session" class="slide level2 shrink center">
-<h2>Before Next Session</h2>
+<section id="breakout-discussion" class="slide level2 section-divider center">
+<h2>Breakout Discussion</h2>
+<h3 id="groups-of-3-4">Groups of 3-4</h3>
+<aside class="notes">
+<p>Let me move you into breakout rooms now. You will be in groups of three or four. I have three questions for you to discuss, and I will ask each group to share one insight when we come back together.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="discussion-questions" class="slide level2 center">
+<h2>Discussion Questions</h2>
+<div class="three-cards">
+<div class="card card-light">
+<p><span class="card-title">What surprised you?</span></p>
+<ul>
+<li>What did AI do better than expected?</li>
+<li>Where did it fall short?</li>
+<li>What was the quality like?</li>
+</ul>
+</div>
+<div class="card card-light">
+<p><span class="card-title">What would you use tomorrow?</span></p>
+<ul>
+<li>Which task from your real work fits best?</li>
+<li>What would you delegate to AI first?</li>
+<li>Where is the biggest time savings?</li>
+</ul>
+</div>
+<div class="card card-light">
+<p><span class="card-title">What patterns do you see?</span></p>
+<ul>
+<li>What tasks follow a repeatable pattern?</li>
+<li>Where do you spend time on structure, not substance?</li>
+<li>What recurring work could AI accelerate?</li>
+</ul>
+</div>
+</div>
+<aside class="notes">
+<p>Here are your three discussion questions. First: what surprised you? Both on the upside and the downside. Second: what would you actually use this for tomorrow? Not in theory — in practice, this week, at your desk. And third: what patterns do you see? What tasks in your work follow a repeatable pattern where you spend more time on structure and formatting than on actual thinking? Those are the tasks where AI delivers the most value. You have about 15 minutes. Each group should be ready to share one insight.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="group-debrief" class="slide level2 centered-statement center">
+<h2>Group Debrief</h2>
+<h3 id="each-group-share-your-one-best-insight.">Each group: share your one best insight.</h3>
+<aside class="notes">
+<p>Welcome back. Let me hear from each group — one insight, one thing that came up in your discussion that you think the rest of the class should hear. We will go quickly around the room.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-makerchecker-preview" class="slide level2 center">
+<h2>The Maker/Checker Preview</h2>
+<div class="two-cards">
+<div class="card card-light">
+<p><span class="card-title">The Maker</span></p>
+<ul>
+<li>AI generates the first draft</li>
+<li>Fast, tireless, format-flexible</li>
+<li>No domain expertise</li>
+<li>No sense of stakes or audience</li>
+<li>Will confidently produce wrong answers</li>
+</ul>
+</div>
+<div class="card card-dark">
+<p><span class="card-title">The Checker</span></p>
+<ul>
+<li>You verify, refine, and approve</li>
+<li>Domain knowledge and judgment</li>
+<li>Understands the audience</li>
+<li>Knows what “wrong” costs</li>
+<li>The irreplaceable human role</li>
+</ul>
+</div>
+</div>
+<aside class="notes">
+<p>Before we wrap up, I want to plant a seed that will grow throughout this entire course. Everything AI produces needs verification. Everything. The question is not whether to check — it is how much to check. And the answer depends on the stakes. This is the maker/checker framework. AI is the maker — fast, tireless, format-flexible, but with no domain expertise and no sense of what getting it wrong would cost. You are the checker — you bring judgment, domain knowledge, and an understanding of your audience. We will formalize this framework next session.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-spectrum-of-trust" class="slide level2 center">
+<h2>The Spectrum of Trust</h2>
+<div class="step-flow">
+<div class="step-card">
+<p><span class="step-icon">🟢</span> <span class="step-title">Low Stakes</span> <span class="step-desc">Personal notes, brainstorming, exploration</span></p>
+</div>
+<div class="step-card">
+<p><span class="step-icon">🟡</span> <span class="step-title">Medium Stakes</span> <span class="step-desc">Team decks, internal reports, summaries</span></p>
+</div>
+<div class="step-card">
+<p><span class="step-icon">🔴</span> <span class="step-title">High Stakes</span> <span class="step-desc">Board decks, regulatory filings, public docs</span></p>
+</div>
+<div class="step-card">
+<p><span class="step-icon">🎯</span> <span class="step-title">Your Judgment</span> <span class="step-desc">Match verification effort to consequences</span></p>
+</div>
+</div>
+<aside class="notes">
+<p>Think of it as a spectrum. Green: low stakes — personal notes, brainstorming, quick explorations. A fast sanity check is enough. Yellow: medium stakes — team presentations, internal reports, meeting summaries. You need to verify numbers and check that the framing is accurate. Red: high stakes — board decks, regulatory filings, anything public-facing. Every claim, every number, every source needs independent verification. And the skill you are developing is judgment — knowing where each output falls on this spectrum and calibrating your verification effort accordingly. Next session, we formalize this into a framework you can apply to every AI interaction.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="homework" class="slide level2 section-divider center">
+<h2>Homework</h2>
+<aside class="notes">
+<p>Here is your homework for this week. It is designed to build on what you did today and give you real experience to bring to our discussion next session.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="your-assignment-this-week" class="slide level2 center">
+<h2>Your Assignment This Week</h2>
 <div class="info-box">
-<div class="box-title">
-<p>Homework</p>
-</div>
+<p><span class="box-title">Homework — Due Session 2</span></p>
+<ol type="1">
+<li><p><strong>Use Claude.ai for at least 3 real work tasks</strong> — a chart, a document draft, an analysis, a summary, whatever fits your workflow. Screenshot or save the outputs.</p></li>
+<li><p><strong>For each task, note:</strong></p>
 <ul>
-<li>Log into the XYZ app and ask <strong>10 business questions</strong> against any single system</li>
-<li>Write down one question the agent answered well and one where it was unsatisfying or wrong</li>
-<li>Bring both to Session 2</li>
+<li>What was good about the output?</li>
+<li>What needed editing?</li>
+<li>How long would it have taken without AI?</li>
+</ul></li>
+<li><p><strong>Bring to Session 2:</strong> your best example and your worst example.</p></li>
+</ol>
+</div>
+<aside class="notes">
+<p>Three things. First, use Claude for at least three real work tasks this week. Not exercises — real work. A chart you actually need, a document you actually have to draft, an analysis you actually have to do. Save or screenshot the outputs. Second, for each task, write down what was good, what needed editing, and how long it would have taken you without AI. This reflection is important — it builds your calibration for when AI helps and when it does not. Third, bring your best example and your worst example to Session 2. We will start next session with a debrief, and the best learning comes from both the successes and the failures.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="next-session-preview" class="slide level2 center">
+<h2>Next Session Preview</h2>
+<div class="two-cards">
+<div class="card card-light">
+<p><span class="card-title">Session 2: Iterate, Critique, Trust</span></p>
+<ul>
+<li>The art of iteration — turning mediocre drafts into great ones</li>
+<li>The maker/checker framework formalized</li>
+<li>Skills and structured prompts for consistent output</li>
+<li>Build a reusable workflow for your recurring tasks</li>
 </ul>
 </div>
-<aside class="notes">
-<p>Here is your homework for before our next session on Wednesday. I want you to log into the XYZ app and ask ten business questions against any single system. Ten is the minimum — ask more if you like. The point is to build fluency with conversational data access.</p>
-<p>But here is the important part: write down one question the agent answered well — really nailed it — and one question where the answer was unsatisfying or outright wrong. Bring both to Session 2. I am going to ask three or four of you to share your best and worst answers, and those examples will set up exactly what we cover next time.</p>
-<p>A hint: if you ask questions that span multiple systems — like comparing CRM data with financial data — you may start running into some interesting friction. That is by design. It is exactly what Session 2 is about.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="key-takeaway" class="slide level2 section-divider center">
-<h2>Key Takeaway</h2>
-<aside class="notes">
-<p>Let me leave you with the key takeaway from today’s session.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="the-bottleneck-was-never-the-data." class="slide level2 centered-statement center">
-<h2>The bottleneck was never the data.</h2>
-</section>
-<section id="it-was-access-to-the-data." class="slide level2 center">
-<h2>It was <span class="accent">access to the data</span>.</h2>
-<div class="explainer">
-<p>AI agents don’t replace your analysts — they give everyone else the ability to ask questions without waiting in line.</p>
+<div class="card card-dark">
+<p><span class="card-title">The Course Ahead</span></p>
+<ul>
+<li>Session 3: AI meets your enterprise data</li>
+<li>Session 4: From data to deliverables</li>
+<li>Sessions 5-6: Deployment and governance</li>
+<li>Sessions 7-8: Strategy and capstone</li>
+</ul>
+</div>
 </div>
 <aside class="notes">
-<p>The bottleneck was never the data. Your company has plenty of data — in Salesforce, in NetSuite, in Workday, in a dozen other systems. The bottleneck was access to the data. It was the three-week wait for a custom report. It was the dashboard that could not answer the question you actually had. It was the analyst who was busy with someone else’s priority.</p>
-<p>AI agents do not replace your analysts. Your analysts are still the people who understand the business context, who know what questions to ask, who can verify whether an answer makes sense. What AI agents do is give everyone else the ability to ask questions without waiting in line. That is the shift. The cost of asking a question drops to zero, and when that happens, the questions start flowing.</p>
-<p>Thank you for today. Do your homework, play with the app, and come ready on Wednesday to talk about what happens when the data you need is not in one system — it is everywhere. See you then.</p>
+<p>Next session we go deeper. You will learn the art of iteration — how to take a mediocre first draft and turn it into something genuinely useful through specific, directed feedback. We will formalize the maker/checker framework. And you will build a reusable workflow for a recurring task in your work — something you can use every week, not just once. After that, in Session 3, we connect AI to enterprise data for the first time, and the rest of the course builds from there. But it all starts with the personal productivity skills you practiced today. See you next session.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

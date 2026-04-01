@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.6.42">
 
   <meta name="author" content="Kerry Back, Rice University">
-  <title>Session 2: Our Data Is Everywhere</title>
+  <title>Session 2: Iterate, Critique, Trust</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -28,71 +28,6 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-    /* CSS for syntax highlighting */
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        color: #aaaaaa;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-    div.sourceCode
-      { color: #003b4f; background-color: #f1f3f5; }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #003b4f; } /* Normal */
-    code span.al { color: #ad0000; } /* Alert */
-    code span.an { color: #5e5e5e; } /* Annotation */
-    code span.at { color: #657422; } /* Attribute */
-    code span.bn { color: #ad0000; } /* BaseN */
-    code span.bu { } /* BuiltIn */
-    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #20794d; } /* Char */
-    code span.cn { color: #8f5902; } /* Constant */
-    code span.co { color: #5e5e5e; } /* Comment */
-    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
-    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
-    code span.dt { color: #ad0000; } /* DataType */
-    code span.dv { color: #ad0000; } /* DecVal */
-    code span.er { color: #ad0000; } /* Error */
-    code span.ex { } /* Extension */
-    code span.fl { color: #ad0000; } /* Float */
-    code span.fu { color: #4758ab; } /* Function */
-    code span.im { color: #00769e; } /* Import */
-    code span.in { color: #5e5e5e; } /* Information */
-    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
-    code span.op { color: #5e5e5e; } /* Operator */
-    code span.ot { color: #003b4f; } /* Other */
-    code span.pp { color: #ad0000; } /* Preprocessor */
-    code span.sc { color: #5e5e5e; } /* SpecialChar */
-    code span.ss { color: #20794d; } /* SpecialString */
-    code span.st { color: #20794d; } /* String */
-    code span.va { color: #111111; } /* Variable */
-    code span.vs { color: #20794d; } /* VerbatimString */
-    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-80873d3a46d0a92d285a31910fb8318b.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -198,7 +133,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Session 2: Our Data Is Everywhere</h1>
+  <h1 class="title">Session 2: Iterate, Critique, Trust</h1>
   <p class="subtitle">Business Intelligence &amp; AI</p>
 
 <div class="quarto-title-authors">
@@ -210,11 +145,11 @@ Kerry Back, Rice University
 </div>
 
 </section>
-<section id="quick-debrief" class="slide level2 section-divider center">
-<h2>Quick Debrief</h2>
+<section id="homework-debrief" class="slide level2 section-divider center">
+<h2>Homework Debrief</h2>
+<h3 id="what-worked-what-didnt">What worked? What didn’t?</h3>
 <aside class="notes">
-<p>Welcome back, everyone. Before we dive into new material, let’s debrief the homework. I asked you to log into the XYZ app, ask ten business questions, and bring your best answer and your worst answer. I want to hear from three or four of you.</p>
-<p>This debrief should take about 10 minutes. The goal is to surface the friction that sets up today’s topic. Most of the “worst answers” will involve questions that span multiple systems — that is exactly where we are headed.</p>
+<p>Welcome back to Session 2. Last session you used Claude for the first time — charts, documents, calculators. This week you used it on real work. Let us start by hearing what happened. I want to hear both the wins and the failures, because we learn more from the failures than from the successes. I will ask three or four of you to share.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -227,38 +162,30 @@ Kerry Back, Rice University
           display:block!important;
       }</style></aside>
 </section>
-<section id="homework-takeaways" class="slide level2 shrink center">
-<h2>Homework Takeaways</h2>
+<section id="share-your-best-and-worst" class="slide level2 center">
+<h2>Share Your Best and Worst</h2>
 <div class="two-cards">
-<div class="card card-dark">
-<div class="card-title">
-<p>What Worked</p>
-</div>
-<ul>
-<li>Simple lookups were fast and accurate</li>
-<li>Single-system aggregations felt effortless</li>
-<li>Charts and narratives generated on the fly</li>
-</ul>
-</div>
 <div class="card card-light">
-<div class="card-title">
-<p>What Broke</p>
-</div>
+<p><span class="card-title">Your Best Output</span></p>
 <ul>
-<li>Questions spanning multiple systems</li>
-<li>Customer names that don’t match across CRMs</li>
-<li>Joining data with no common key</li>
+<li>What task did you give Claude?</li>
+<li>How good was the first draft?</li>
+<li>How much editing did it need?</li>
+<li>How much time did it save?</li>
+</ul>
+</div>
+<div class="card card-dark">
+<p><span class="card-title">Your Worst Output</span></p>
+<ul>
+<li>What went wrong?</li>
+<li>Was it factually incorrect?</li>
+<li>Was it generic or off-target?</li>
+<li>What would have fixed it?</li>
 </ul>
 </div>
 </div>
-<div class="explainer">
-<p>The homework was designed to surface exactly this friction. Today we confront it directly.</p>
-</div>
 <aside class="notes">
-<p>Let me summarize what I expect you found. On the “what worked” side: simple lookups were fast and accurate, single-system aggregations felt effortless, and the charts and narratives that the agent generated on the fly were genuinely useful. That is the promise of Session 1 delivered.</p>
-<p>But on the “what broke” side — and this is the important part — questions that spanned multiple systems hit a wall. If you asked “How does revenue compare to headcount growth by division?” the agent had trouble because revenue lives in the CRMs and headcount lives in Workday. Customer names that appear differently across CRMs — “General Electric” in one system and “GE Industrial Solutions” in another — made cross-system questions unreliable. And joining data with no common key was simply impossible for single-system queries.</p>
-<p>The homework was designed to surface exactly this friction. If single-system queries are the easy win, cross-system queries are the hard problem — and it is the problem most enterprises actually face. Today we confront it directly.</p>
-<p>Ask the room: who had a question that broke because it needed data from more than one system? Let two or three people share their specific examples.</p>
+<p>As people share, listen for patterns. Where does AI save the most time? Where does it need the most editing? And critically — when it fails, why does it fail? Is it getting facts wrong? Is it being too generic? Is it misunderstanding the audience? These patterns will tell us exactly where today’s techniques make the biggest difference.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -271,10 +198,11 @@ Kerry Back, Rice University
           display:block!important;
       }</style></aside>
 </section>
-<section id="the-cross-system-problem" class="slide level2 section-divider center">
-<h2>The Cross-System Problem</h2>
+<section id="patterns-from-your-experience" class="slide level2 centered-statement center">
+<h2>Patterns from Your Experience</h2>
+<h3 id="where-did-ai-save-time-where-did-it-need-heavy-editing">Where did AI save time? Where did it need heavy editing?</h3>
 <aside class="notes">
-<p>Now let’s name the problem we are solving today. This is the cross-system problem, and it is the central challenge of enterprise data.</p>
+<p>Let me highlight a few patterns I am hearing. First, AI tends to be very good at structure and format — it produces well-organized documents quickly. Second, it tends to be generic when you give it generic instructions. Third, it sometimes gets facts wrong or invents plausible-sounding numbers. These are the exact problems that today’s techniques are designed to solve. Specificity beats generic prompting. Self-critique catches errors. And calibrated trust tells you how much checking to do.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -287,130 +215,24 @@ Kerry Back, Rice University
           display:block!important;
       }</style></aside>
 </section>
-<section id="your-data-isnt-missing." class="slide level2 centered-statement center">
-<h2>Your data isn’t missing.</h2>
-</section>
-<section id="its-everywhere." class="slide level2 center">
-<h2>It’s <span class="accent">everywhere</span>.</h2>
-<div class="explainer">
-<p>Scattered across 10 systems that were never designed to talk to each other.</p>
-</div>
-<aside class="notes">
-<p>Your data is not missing. Nobody deleted it. Nobody forgot to collect it. It is everywhere — scattered across ten systems that were never designed to talk to each other. Salesforce knows about Industrial division customers. The Legacy CRM knows about Energy division customers. HubSpot knows about Safety. Workday knows about employees. NetSuite knows about finances. Zendesk knows about support tickets. Each system is doing its job perfectly well in isolation. The problem is that the most valuable business questions require data from more than one of them.</p>
-<p>This is not a XYZ Corp problem. This is an every-company problem. If your company has been around more than a few years, you have this exact situation — maybe with different system names, but the same fundamental challenge.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="todays-learning-objectives" class="slide level2 center">
-<h2>Today’s Learning Objectives</h2>
-<div class="info-box">
-<div class="box-title">
-<p>By the end of this session, you will be able to:</p>
-</div>
-<ul>
-<li>Explain why enterprise data is scattered and why consolidation costs millions</li>
-<li>Watch AI query multiple systems and merge results in real time</li>
-<li>Map your own company’s data landscape and identify cross-system blind spots</li>
-</ul>
-</div>
-<aside class="notes">
-<p>Here are our learning objectives for today. By the end of this session, you will understand why enterprise data is scattered and why traditional consolidation costs millions. You will watch an AI agent query multiple systems and merge the results in real time — something that would normally take weeks of engineering work. And you will map your own company’s data landscape and identify the cross-system blind spots where valuable questions go unanswered.</p>
-<p>Let’s start with a demo that picks up right where Session 1’s email chain left off.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="demo-the-cross-system-merge" class="slide level2 section-divider center">
-<h2>Demo: The Cross-System Merge</h2>
-<aside class="notes">
-<p>Now let’s see the cross-system merge in action. This is the centerpiece demo of today’s session. Open the XYZ app now. We are going to ask the exact question from Session 1’s email chain — the one that the BI team said would take three weeks.</p>
-<p>This demo segment should take about 20 minutes total, covering two cross-system queries.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="which-customers-buy-from-multiple-divisions" class="slide level2 shrink center">
-<h2>“Which customers buy from multiple divisions?”</h2>
+<section id="todays-agenda" class="slide level2 center">
+<h2>Today’s Agenda</h2>
 <div class="step-flow">
 <div class="step-card">
-<div class="step-icon">
-<p>1</p>
-</div>
-<div class="step-title">
-<p>Query Salesforce</p>
-</div>
-<div class="step-desc">
-<p>Pull Industrial division customers and revenue</p>
-</div>
+<p><span class="step-icon">🔄</span> <span class="step-title">Iterate</span> <span class="step-desc">Turn mediocre drafts into great ones</span></p>
 </div>
 <div class="step-card">
-<div class="step-icon">
-<p>2</p>
-</div>
-<div class="step-title">
-<p>Query Legacy CRM</p>
-</div>
-<div class="step-desc">
-<p>Pull Energy division customers and revenue</p>
-</div>
+<p><span class="step-icon">✅</span> <span class="step-title">Trust</span> <span class="step-desc">Calibrate verification to stakes</span></p>
 </div>
 <div class="step-card">
-<div class="step-icon">
-<p>3</p>
-</div>
-<div class="step-title">
-<p>Query HubSpot</p>
-</div>
-<div class="step-desc">
-<p>Pull Safety division customers and revenue</p>
-</div>
+<p><span class="step-icon">🛠️</span> <span class="step-title">Skills</span> <span class="step-desc">Build reusable prompts and workflows</span></p>
 </div>
 <div class="step-card">
-<div class="step-icon">
-<p>4</p>
+<p><span class="step-icon">📋</span> <span class="step-title">Build</span> <span class="step-desc">Create your own recurring workflow</span></p>
 </div>
-<div class="step-title">
-<p>Fuzzy Merge</p>
-</div>
-<div class="step-desc">
-<p>Python matches names across all three systems</p>
-</div>
-</div>
-</div>
-<div class="explainer">
-<p>The agent writes and executes SQL against each system, then uses Python with fuzzy string matching to reconcile customer names — all in under a minute.</p>
 </div>
 <aside class="notes">
-<p>Open the XYZ app and type: “Which customers buy from multiple divisions?” Watch what happens. Narrate each step as the agent works through it.</p>
-<p>Step one: the agent queries Salesforce to pull Industrial division customers and their revenue. Step two: it queries the Legacy CRM for Energy division customers. Step three: it queries HubSpot for Safety division customers. And here is the critical part — step four: it uses Python with fuzzy string matching to reconcile customer names across all three systems. “General Electric” in Salesforce, “GE Industrial Solutions” in the Legacy CRM, “GE Safety Division” in HubSpot — the agent figures out these are the same company and merges the data.</p>
-<p>The agent queried three separate systems, pulled the data into Python, matched customer names using fuzzy logic, and gave us a unified answer — in under a minute. Point out the SQL the agent generated for each system — it is visible in the response. Point out the matching logic. This transparency is important because it lets you verify the answer.</p>
-<p>Now, I want to be honest about what just happened. The fuzzy matching is not perfect. It catches about 80 percent of cases. Some matches might be wrong — is “Honeywell Safety Products” the same entity as “Honeywell International”? That is a business judgment call. We will talk more about this kind of friction later in the session.</p>
-<p>If the XYZ app is down or slow, switch to the pre-recorded fallback demo and narrate over it.</p>
+<p>Here is what we are covering today. First, the art of iteration — how to take a mediocre first draft and make it genuinely useful through specific, directed feedback. Second, the maker/checker framework formalized — calibrating your level of trust to the stakes of the task. Third, skills and structured prompts — how to build reusable instructions that produce consistent output every time. And fourth, hands-on work where you build a reusable workflow for a recurring task in your own job.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -423,19 +245,10 @@ Kerry Back, Rice University
           display:block!important;
       }</style></aside>
 </section>
-<section id="demo-the-prompt" class="slide level2 shrink center">
-<h2>Demo: The Prompt</h2>
-<div class="code-box">
-<div class="box-title">
-<p>What the user typed</p>
-</div>
-<pre><code>Which customers buy from multiple divisions?</code></pre>
-</div>
-<div class="explainer">
-<p>One sentence. The agent has to figure out the rest.</p>
-</div>
+<section id="demo-the-art-of-iteration" class="slide level2 section-divider center">
+<h2>Demo: The Art of Iteration</h2>
 <aside class="notes">
-<p>Here is the exact prompt. One sentence, plain English. The agent receives this along with its system prompt describing all three CRMs. It has to plan which systems to query, write SQL for each, and figure out how to match customer names that are spelled differently in every system. Let’s watch what happens behind the scenes.</p>
+<p>Let me start with a demo. I am going to take a mediocre first draft — either from the homework debrief or a prepared example — and show you the iteration cycle that turns it into something genuinely good. Pay attention to the specificity of my directions. That is the skill.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -448,747 +261,24 @@ Kerry Back, Rice University
           display:block!important;
       }</style></aside>
 </section>
-<section id="behind-the-scenes-three-crms-three-queries" class="slide level2 shrink center">
-<h2>Behind the Scenes: Three CRMs, Three Queries</h2>
-<div class="code-box">
-<div class="box-title">
-<p>Salesforce CRM (Industrial Division)</p>
-</div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a></a><span class="kw">SELECT</span> AccountName, <span class="fu">SUM</span>(Amount) <span class="kw">AS</span> total_revenue</span>
-<span id="cb2-2"><a></a><span class="kw">FROM</span> sf_opportunities</span>
-<span id="cb2-3"><a></a><span class="kw">WHERE</span> StageName <span class="op">=</span> <span class="st">'Closed Won'</span></span>
-<span id="cb2-4"><a></a>  <span class="kw">AND</span> CloseDate <span class="op">&gt;=</span> <span class="st">'2023-01-01'</span></span>
-<span id="cb2-5"><a></a><span class="kw">GROUP</span> <span class="kw">BY</span> AccountName <span class="kw">ORDER</span> <span class="kw">BY</span> total_revenue <span class="kw">DESC</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><em>47 accounts, $248.7M total</em></p>
-</div>
-<div class="code-box">
-<div class="box-title">
-<p>Legacy CRM (Energy Division)</p>
-</div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a></a><span class="kw">SELECT</span> CustName, <span class="fu">SUM</span>(OrderTotal) <span class="kw">AS</span> total_revenue</span>
-<span id="cb3-2"><a></a><span class="kw">FROM</span> orders</span>
-<span id="cb3-3"><a></a><span class="kw">WHERE</span> OrderStatus <span class="op">=</span> <span class="st">'Complete'</span></span>
-<span id="cb3-4"><a></a>  <span class="kw">AND</span> OrderDate <span class="op">&gt;=</span> <span class="st">'01/01/2023'</span>   <span class="co">-- VARCHAR date format!</span></span>
-<span id="cb3-5"><a></a><span class="kw">GROUP</span> <span class="kw">BY</span> CustName <span class="kw">ORDER</span> <span class="kw">BY</span> total_revenue <span class="kw">DESC</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><em>31 accounts, $147.2M total</em></p>
-</div>
-<div class="code-box">
-<div class="box-title">
-<p>HubSpot CRM (Safety Division)</p>
-</div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a></a><span class="kw">SELECT</span> company_name, <span class="fu">SUM</span>(deal_amount) <span class="kw">AS</span> total_revenue</span>
-<span id="cb4-2"><a></a><span class="kw">FROM</span> hs_deals <span class="kw">WHERE</span> deal_stage <span class="op">=</span> <span class="st">'closedwon'</span></span>
-<span id="cb4-3"><a></a>  <span class="kw">AND</span> close_date <span class="op">&gt;=</span> <span class="st">'2023-01-01'</span></span>
-<span id="cb4-4"><a></a><span class="kw">GROUP</span> <span class="kw">BY</span> company_name <span class="kw">ORDER</span> <span class="kw">BY</span> total_revenue <span class="kw">DESC</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><em>28 accounts, $98.4M total</em></p>
-</div>
-<aside class="notes">
-<p>Three separate systems, three separate SQL dialects, three different column names for “customer.” Notice the Legacy CRM uses VARCHAR dates in MM/DD/YYYY format — the agent’s first query actually used ISO format and returned zero rows. It detected the empty result, checked the schema, found the date stored as a string, and rewrote the filter. That is the test-and-review loop in action.</p>
-<p>Also notice: Salesforce calls it AccountName, the Legacy CRM calls it CustName, HubSpot calls it company_name. Same concept, three different labels. The agent has to normalize all of this before it can even begin matching.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="fuzzy-matching-results" class="slide level2 shrink center">
-<h2>Fuzzy Matching Results</h2>
-<div class="comparison-table">
-<table class="caption-top">
-<colgroup>
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Match Score</th>
-<th>System A</th>
-<th>System B</th>
-<th>Variation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>100</td>
-<td>General Electric <em>(SF)</em></td>
-<td>GE Safety Division <em>(HS)</em></td>
-<td>Abbreviation + division suffix</td>
-</tr>
-<tr class="even">
-<td>91</td>
-<td>ExxonMobil Corporation <em>(SF)</em></td>
-<td>Exxon Mobil Energy Svcs <em>(LC)</em></td>
-<td>Space in name + abbreviation</td>
-</tr>
-<tr class="odd">
-<td>88</td>
-<td>Dow Chemical Company <em>(SF)</em></td>
-<td>Dow Inc.&nbsp;<em>(HS)</em></td>
-<td>Legal name vs.&nbsp;trading name</td>
-</tr>
-<tr class="even">
-<td>87</td>
-<td>Caterpillar Inc.&nbsp;<em>(SF)</em></td>
-<td>CAT Energy Services <em>(LC)</em></td>
-<td>Ticker symbol used as name</td>
-</tr>
-<tr class="odd">
-<td>85</td>
-<td>Schlumberger Ltd.&nbsp;<em>(LC)</em></td>
-<td>SLB Safety &amp; PPE <em>(HS)</em></td>
-<td>Rebranded name vs.&nbsp;legacy name</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="highlight-box">
-<p>Exact matching found only <strong>3</strong> of the 10 multi-division customers. Fuzzy matching (token-sort ratio &gt;= 82) caught the other <strong>7</strong>.</p>
-</div>
-<aside class="notes">
-<p>This table shows why exact matching fails. “General Electric” and “GE Safety Division” are obviously the same company to a human, but an exact string match sees them as completely different. The agent used Python’s thefuzz library with token-sort ratio scoring. It also cross-checked against industry and address fields to weed out false positives — for example, it initially matched “National Oilwell Varco” with “National Safety Supply” at score 83, but excluded the match after checking that one is Oil and Gas and the other is PPE Distribution.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="result-multi-division-customers" class="slide level2 shrink center">
-<h2>Result: Multi-Division Customers</h2>
-<div class="comparison-table">
-<table class="caption-top" style="width:100%;">
-<colgroup>
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Customer</th>
-<th>Industrial</th>
-<th>Energy</th>
-<th>Safety</th>
-<th>Combined Revenue</th>
-<th>Divs</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>General Electric</td>
-<td>General Electric</td>
-<td>GE Industrial Solutions</td>
-<td>GE Safety Division</td>
-<td>$18.4M</td>
-<td>3</td>
-</tr>
-<tr class="even">
-<td>ExxonMobil</td>
-<td>ExxonMobil Corp.</td>
-<td>Exxon Mobil Energy Svcs</td>
-<td>ExxonMobil Safety</td>
-<td>$14.7M</td>
-<td>3</td>
-</tr>
-<tr class="odd">
-<td>Dow Chemical</td>
-<td>Dow Chemical Company</td>
-<td>Dow Energy Products</td>
-<td>Dow Inc.</td>
-<td>$12.1M</td>
-<td>3</td>
-</tr>
-<tr class="even">
-<td>Chevron</td>
-<td>Chevron USA Inc.</td>
-<td>Chevron Energy</td>
-<td>Chevron Phillips Safety</td>
-<td>$11.3M</td>
-<td>3</td>
-</tr>
-<tr class="odd">
-<td>3M Company</td>
-<td>3M Industrial</td>
-<td>—</td>
-<td>3M Safety Products</td>
-<td>$8.6M</td>
-<td>2</td>
-</tr>
-<tr class="even">
-<td>Caterpillar</td>
-<td>Caterpillar Inc.</td>
-<td>CAT Energy Services</td>
-<td>—</td>
-<td>$7.9M</td>
-<td>2</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="info-box">
-<div class="box-title">
-<p>Key Finding</p>
-</div>
-<p><strong>10 customers</strong> buy from 2+ divisions. <strong>4</strong> buy from all 3 — representing <strong>$56.5M</strong> in combined revenue (11.4% of total). Without cross-system matching, these appear as <strong>24 separate accounts</strong> in reporting.</p>
-</div>
-<aside class="notes">
-<p>Here is the final answer. Ten customers buy from multiple divisions. Four of them — GE, ExxonMobil, Dow, and Chevron — buy from all three divisions. Together they represent 56.5 million dollars in combined revenue, or 11.4 percent of the company total. Without the cross-system merge, these customers appear as 24 separate accounts scattered across three CRMs. No one in the company could see the full relationship, negotiate enterprise-level pricing, or identify the strategic importance of these accounts. This is the kind of insight that was impossible before — not because the data did not exist, but because it was scattered across systems that were never designed to talk to each other.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="demo-revenue-per-employee-by-division" class="slide level2 shrink center">
-<h2>Demo: Revenue Per Employee by Division</h2>
-<div class="two-cards">
-<div class="card card-dark">
-<div class="card-title">
-<p>Data Sources</p>
-</div>
-<ul>
-<li><strong>CRMs</strong> (Salesforce, Legacy CRM, HubSpot) — revenue by division</li>
-<li><strong>Workday</strong> — headcount by department and division</li>
-</ul>
-</div>
-<div class="card card-light">
-<div class="card-title">
-<p>What the Agent Does</p>
-</div>
-<ul>
-<li>Queries revenue from each CRM</li>
-<li>Queries headcount from Workday</li>
-<li>Merges on division, calculates revenue/employee</li>
-<li>Returns a table and a bar chart</li>
-</ul>
-</div>
-</div>
-<div class="explainer">
-<p>Two questions. Four systems. Both answered in under a minute. The AI agent is the interface — but where should the data live?</p>
-</div>
-<aside class="notes">
-<p>Now let’s ask a second cross-system question. Type into the XYZ app: “What is the revenue per employee by division?” This one is interesting because it requires data from two completely different kinds of systems.</p>
-<p>On the left, we need revenue data, which lives in the CRMs — Salesforce, the Legacy CRM, and HubSpot. On the right, we need headcount data, which lives in Workday. The agent queries revenue from each CRM, queries headcount from Workday, merges on division, calculates revenue per employee, and returns a table and a bar chart.</p>
-<p>Two questions. Four systems. Both answered in under a minute. Compare that to what it would take to get these answers through traditional channels at most organizations. Someone would need to pull reports from each system, manually reconcile the data in a spreadsheet, and deliver it — probably a few days if it is a priority, longer if it is not.</p>
-<p>Now, an important question: where should this data actually live? In our demo, the agent is querying each source system directly. In a mature enterprise, much of this data would already be consolidated in a warehouse — and the agent would query that instead. The AI layer works either way. We will dig into that distinction in a few slides, and deep into the mechanics in Session 3. For now, let’s focus on the data integration landscape.</p>
-<p>The reason I am showing you these two demos is that they represent the most common cross-system question patterns in enterprises: customer overlap across business units, and efficiency metrics that combine financial and operational data.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="revenue-per-employee-merged-results" class="slide level2 shrink center">
-<h2>Revenue per Employee: Merged Results</h2>
-<div class="comparison-table">
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th>Division</th>
-<th>2025 Revenue</th>
-<th>Headcount</th>
-<th>Revenue / Employee</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Industrial</td>
-<td>$87.3M</td>
-<td>218</td>
-<td><strong>$400,500</strong></td>
-</tr>
-<tr class="even">
-<td>Safety</td>
-<td>$34.8M</td>
-<td>87</td>
-<td><strong>$400,000</strong></td>
-</tr>
-<tr class="odd">
-<td>Energy</td>
-<td>$52.1M</td>
-<td>134</td>
-<td><strong>$388,800</strong></td>
-</tr>
-<tr class="even">
-<td><strong>Company-wide</strong></td>
-<td><strong>$174.2M</strong></td>
-<td><strong>482</strong></td>
-<td><strong>$361,400</strong></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="explainer">
-<p>Revenue from 3 CRMs + headcount from Workday, merged on division name. Company-wide includes 43 Corporate/HQ employees with no direct revenue.</p>
-</div>
-<aside class="notes">
-<p>Here is the merged table. The agent queried revenue from each of the three CRMs — Salesforce for Industrial, the Legacy CRM for Energy, HubSpot for Safety — then pulled headcount from Workday and joined on division name. Notice that Corporate’s 43 employees are included in the company-wide figure but excluded from the divisional calculations, because they generate no direct revenue. The agent made that design choice and documented it — a good sign that it is reasoning about the data, not just running arithmetic.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="revenue-per-employee-key-findings" class="slide level2 shrink center">
-<h2>Revenue per Employee: Key Findings</h2>
-<div class="info-box">
-<div class="box-title">
-<p>What the chart reveals</p>
-</div>
-<ul>
-<li><strong>Surprisingly tight clustering:</strong> All three divisions fall between $389K–$401K per employee</li>
-<li><strong>Scale ≠ efficiency:</strong> Industrial is largest ($87.3M) but only marginally above Safety in per-employee terms</li>
-<li><strong>Corporate overhead:</strong> Company-wide average ($361K) is ~10% below divisional averages due to 43 HQ employees</li>
-<li><strong>Energy lags slightly:</strong> $388.8K may reflect heavier field-service staffing requirements</li>
-</ul>
-</div>
-<div class="highlight-box">
-<p>Four systems. One question. Under a minute. Whether the data lives in a warehouse or in the source systems, the AI layer turns a multi-day analyst request into a conversation.</p>
-</div>
-<aside class="notes">
-<p>The bar chart the agent produced shows all three divisions clustered tightly around 390 to 400 thousand dollars per employee. That is actually a surprising finding — it suggests headcount has been scaled roughly in proportion to revenue across the business. Energy lags slightly, which could reflect the heavier field-service component of that division. The company-wide figure is dragged down by Corporate’s 43 employees who generate no direct revenue — that 8.9 percent corporate overhead is typical for a company this size. The important thing is not just the numbers but how fast we got them. Four systems, one question, under a minute. Whether this data lives in source systems or a warehouse, the AI layer is what turns a multi-day analyst request into a conversation.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="how-data-moves-today" class="slide level2 section-divider center">
-<h2>How Data Moves Today</h2>
-<aside class="notes">
-<p>Now let’s step back and understand the landscape. What you just saw — an AI agent querying multiple systems and merging results on the fly — is impressive. But it is one pattern among several, and understanding where it fits requires knowing how data moves in enterprises today.</p>
-<p>This lecture segment should take about 12 minutes.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="four-patterns-of-data-integration" class="slide level2 shrink center">
-<h2>Four Patterns of Data Integration</h2>
-<div class="four-cards">
-<div class="card card-dark">
-<div class="card-title">
-<p>APIs</p>
-</div>
-<ul>
-<li>Real-time, point-to-point</li>
-<li>Each connection hand-coded</li>
-<li>Breaks when vendors change endpoints</li>
-</ul>
-</div>
-<div class="card card-light">
-<div class="card-title">
-<p>iPaaS</p>
-</div>
-<ul>
-<li>MuleSoft, Workato, Boomi</li>
-<li>Pre-built connectors</li>
-<li>Still needs mapping and maintenance</li>
-</ul>
-</div>
-<div class="card card-light">
-<div class="card-title">
-<p>ETL / Warehouse</p>
-</div>
-<ul>
-<li>Extract, transform, load into Snowflake/BigQuery</li>
-<li>Single source of truth</li>
-<li>$500K–$5M and 6–18 months</li>
-</ul>
-</div>
-<div class="card card-dark">
-<div class="card-title">
-<p>CSV Export</p>
-</div>
-<ul>
-<li>The “just email me the file” approach</li>
-<li>No governance, no audit trail</li>
-<li>Surprisingly common</li>
-</ul>
-</div>
-</div>
-<aside class="notes">
-<p>There are four main patterns for how data moves between systems in enterprises today. First, APIs — real-time, point-to-point connections. Each one is hand-coded, and they break when vendors change their endpoints. Second, integration platforms like MuleSoft, Workato, or Boomi — these offer pre-built connectors, which is better, but you still need to map fields and maintain the connections over time.</p>
-<p>Third, the ETL and data warehouse approach — extract, transform, load into something like Snowflake or BigQuery. This gives you a single source of truth, which is the gold standard. But the cost is 500K to 5 million dollars and 6 to 18 months to build. And fourth — and I hesitate to even call this a “pattern” — the CSV export. The “just email me the file” approach. No governance, no audit trail. And it is surprisingly common. If you are honest with yourself, how much of your company’s cross-system data integration happens in Excel spreadsheets that get emailed around?</p>
-<p>Ask the room: which of these four patterns does your company rely on most? I bet the answer is some combination of all four, depending on which systems and which teams are involved.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="the-traditional-answer" class="slide level2 shrink center">
-<h2>The Traditional Answer</h2>
-<div class="stat-cards">
-<div class="stat-card">
-<div class="stat-number">
-<p>$500K–$5M</p>
-</div>
-<div class="stat-label">
-<p>Cost of a data warehouse build</p>
-</div>
-</div>
-<div class="stat-card">
-<div class="stat-number">
-<p>6–18 mo</p>
-</div>
-<div class="stat-label">
-<p>Timeline to production</p>
-</div>
-</div>
-<div class="stat-card">
-<div class="stat-number">
-<p>60–70%</p>
-</div>
-<div class="stat-label">
-<p>Of data warehouse projects that stall or underdeliver (industry estimates)</p>
-</div>
-</div>
-</div>
-<div class="explainer">
-<p>The warehouse is the gold standard — and it is not going away. But the cost and timeline explain why many mid-market companies don’t have one yet. The question is: <span class="accent">what does AI add</span> at every level of data maturity?</p>
-</div>
-<aside class="notes">
-<p>Let these numbers land. 500K to 5 million dollars to build a data warehouse. Six to eighteen months before it is in production. And 60 to 70 percent of data warehouse projects stall or underdeliver — that is an industry estimate, not something I am making up.</p>
-<p>I want to be clear about something: the data warehouse is the gold standard for a reason, and it is not going away. It gives you a single schema, a single source of truth, strong governance, and fast queries because the data is pre-modeled. Companies that have invested in a warehouse — and use it well — are not going to rip it out.</p>
-<p>But these numbers explain why many mid-market companies do not have one yet. If you are a 500-million-dollar distributor like XYZ, spending 5 million and 18 months on a warehouse that has a better-than-coin-flip chance of stalling is a hard sell to the board. So the real question is not “warehouse or AI” — it is “what does AI add at every level of data maturity?” Let me show you a framework for thinking about that.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="where-ai-fits-three-tiers" class="slide level2 shrink center">
-<h2>Where AI Fits: Three Tiers</h2>
-<div class="comparison-table">
-<table class="caption-top">
-<colgroup>
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-</colgroup>
-<thead>
-<tr class="header">
-<th></th>
-<th>No Warehouse</th>
-<th>Warehouse + Dashboards</th>
-<th>Warehouse + AI Agent</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Who</strong></td>
-<td>Small/mid-market, no data team</td>
-<td>Established enterprises</td>
-<td>Companies at any stage</td>
-</tr>
-<tr class="even">
-<td><strong>How it works</strong></td>
-<td>Agent queries vendor APIs/files directly</td>
-<td>Traditional ETL into Snowflake/BigQuery</td>
-<td>Agent queries the warehouse via natural language</td>
-</tr>
-<tr class="odd">
-<td><strong>Strengths</strong></td>
-<td>Fast start, low cost, immediate value</td>
-<td>Governance, compliance, audit trail</td>
-<td>Long-tail questions, ad hoc analysis, cross-system exploration</td>
-</tr>
-<tr class="even">
-<td><strong>Limitations</strong></td>
-<td>Weaker governance, API rate limits</td>
-<td>Slow to build, rigid, expensive</td>
-<td>Requires warehouse or data readiness</td>
-</tr>
-<tr class="odd">
-<td><strong>What AI adds</strong></td>
-<td>The entire analytics layer</td>
-<td>Natural language interface to existing data</td>
-<td>Answers the 80% of questions that never justified a dashboard</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="explainer">
-<p>AI is not a substitute for a warehouse. It is the <span class="accent">last mile</span> between your data — wherever it lives — and the business user who needs an answer.</p>
-</div>
-<aside class="notes">
-<p>Let me give you a framework for thinking about where AI fits. There are really three tiers, and AI adds value at every one.</p>
-<p>Tier one: no warehouse. This is where XYZ Corp is in our simulation, and where many mid-market companies are today. The agent queries each vendor system directly and merges results on the fly. This gives you immediate value — fast start, low cost — but governance is weaker and you are limited by API rate limits.</p>
-<p>Tier two: warehouse plus dashboards. This is the traditional enterprise setup. You have invested in Snowflake or BigQuery, you have Fivetran or Airbyte syncing your data, and you have dashboards in Tableau or Power BI. The warehouse is not going away — it gives you governance, compliance, and an audit trail that no other approach can match.</p>
-<p>Tier three: warehouse plus AI agent. This is where the industry is heading. The agent sits on top of the warehouse and gives business users a natural language interface to the data that is already consolidated. Instead of writing SQL or waiting for an analyst to build a dashboard, you ask a question in English. The agent writes the query, runs it against the warehouse, and gives you an answer.</p>
-<p>The key insight is the last row of the table. AI is not a substitute for the warehouse. It is the last mile between your data — wherever it lives — and the business user who needs an answer. For companies without a warehouse, AI can serve as the analytics layer. For companies with a warehouse, AI handles the long tail of questions — the 80 percent of ad hoc questions that never justified building a dashboard.</p>
-<p>Think about it this way: your warehouse powers the 50 dashboards that everyone checks every morning. The AI agent handles the 500 one-off questions that used to require an analyst and a two-week turnaround.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="cross-system-friction" class="slide level2 section-divider center">
-<h2>Cross-System Friction</h2>
-<aside class="notes">
-<p>Now let’s look at the unsexy but critical part of cross-system data: the friction. This is what makes merging hard, whether you are building a warehouse or using an AI agent. The technology changes; the friction does not.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="why-merging-is-hard" class="slide level2 shrink center">
-<h2>Why Merging Is Hard</h2>
-<div class="comparison-table">
-<table class="caption-top">
-<colgroup>
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Problem</th>
-<th>System A</th>
-<th>System B</th>
-<th>Impact</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Naming conventions</strong></td>
-<td><code>customerName</code></td>
-<td><code>customer_name</code></td>
-<td>Schema mismatch</td>
-</tr>
-<tr class="even">
-<td><strong>Date formats</strong></td>
-<td><code>2025-03-15</code></td>
-<td><code>March 15, 2025</code></td>
-<td>Parse failures</td>
-</tr>
-<tr class="odd">
-<td><strong>Customer identity</strong></td>
-<td>General Electric</td>
-<td>GE Industrial Solutions</td>
-<td>No common key</td>
-</tr>
-<tr class="even">
-<td><strong>Customer identity</strong></td>
-<td>Honeywell International</td>
-<td>Honeywell Safety Products</td>
-<td>Wrong match</td>
-</tr>
-<tr class="odd">
-<td><strong>ID systems</strong></td>
-<td><code>SF-001234</code></td>
-<td><code>ACCT-5678</code></td>
-<td>No shared identifier</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="explainer">
-<p>XYZ has ~25 customers that appear under different names across its three CRMs. This is not a bug — it is the normal state of enterprise data.</p>
-</div>
-<aside class="notes">
-<p>Let me walk through the specific problems that make cross-system merging hard. Look at this table. Naming conventions: one system uses camelCase for column names, another uses snake_case. Same data, different labels — the agent has to know that “customerName” and “customer_name” refer to the same thing.</p>
-<p>Date formats: one system stores dates as “2025-03-15” and another stores them as “March 15, 2025” — or even worse, as a text string in MM/DD/YYYY format. If you are doing date-based aggregations, this causes parse failures and wrong results.</p>
-<p>But the hardest problem is customer identity. “General Electric” in Salesforce and “GE Industrial Solutions” in the Legacy CRM — these are the same company, but there is no common key linking them. No shared customer ID. Just a name that is spelled differently in every system. And it gets worse: “Honeywell International” and “Honeywell Safety Products” — are those the same entity? Or is one a subsidiary? That is a business judgment call, not a technical one.</p>
-<p>XYZ has about 25 customers that appear under different names across its three CRMs. This is not a bug in our simulation. This is the normal state of enterprise data. Every company I have worked with has this problem. If you have grown through acquisition or have divisions with autonomy over their CRM, you have this problem.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="the-fuzzy-matching-problem" class="slide level2 shrink center">
-<h2>The Fuzzy Matching Problem</h2>
-<div class="info-box">
-<div class="box-title">
-<p>How Does the Agent Resolve “General Electric” vs.&nbsp;“GE Industrial Solutions”?</p>
-</div>
-<ul>
-<li><strong>Exact match</strong> fails — the strings are completely different</li>
-<li><strong>Fuzzy matching</strong> (Levenshtein distance, token-set ratio) catches ~80% of cases</li>
-<li><strong>Semantic matching</strong> (embeddings) catches more, but is slower and less transparent</li>
-<li><strong>Human review</strong> is still needed for ambiguous cases (is “Honeywell Safety Products” a subsidiary or a division?)</li>
-</ul>
-</div>
-<div class="highlight-box">
-<p>This is the unsexy core of data integration. No amount of AI eliminates the need to <span class="accent">decide what your entities are</span> and maintain a mapping.</p>
-</div>
-<aside class="notes">
-<p>So how does the agent resolve “General Electric” versus “GE Industrial Solutions”? Exact string matching fails completely — the strings are totally different. Fuzzy matching — techniques like Levenshtein distance and token-set ratio — catches about 80 percent of cases. It is looking for strings that are similar enough to be plausible matches. Semantic matching using embeddings can catch more, but it is slower and less transparent. And for ambiguous cases, you still need human review.</p>
-<p>Here is the honest truth, and I want to underline the text at the bottom of this slide: this is the unsexy core of data integration. No amount of AI eliminates the need to decide what your entities are and maintain a mapping. Someone in your organization needs to define: is “Honeywell Safety Products” the same as “Honeywell International” for reporting purposes? That is a business decision. The AI can suggest matches, but a human needs to confirm them and maintain the mapping over time.</p>
-<p>This is often where the excitement about AI data tools meets the reality of enterprise data management. The technology is impressive, but the hard work is still defining your master data. Keep this in mind as we move into the hands-on portion.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="hands-on-cross-system-queries" class="slide level2 section-divider center">
-<h2>Hands-On: Cross-System Queries</h2>
-<aside class="notes">
-<p>All right, time to get hands-on again. This time, you are going to tackle cross-system queries — the hard stuff. We are going to start with a timed challenge to add a little competitive energy, and then open it up for exploration.</p>
-<p>This hands-on segment should take about 16 minutes total.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="timed-challenge" class="slide level2 shrink center">
-<h2>Timed Challenge</h2>
-<div class="info-box">
-<div class="box-title">
-<p>The Question</p>
-</div>
-<p>“Which division’s top customer is most at risk of churning?”</p>
-</div>
+<section id="the-iteration-cycle" class="slide level2 center">
+<h2>The Iteration Cycle</h2>
 <div class="step-flow">
 <div class="step-card">
-<div class="step-icon">
-<p>1</p>
-</div>
-<div class="step-title">
-<p>Identify</p>
-</div>
-<div class="step-desc">
-<p>Find each division’s #1 customer by revenue (CRMs)</p>
-</div>
+<p><span class="step-icon">📄</span> <span class="step-title">Draft</span> <span class="step-desc">Get the first version — fast but mediocre</span></p>
 </div>
 <div class="step-card">
-<div class="step-icon">
-<p>2</p>
-</div>
-<div class="step-title">
-<p>Assess Risk</p>
-</div>
-<div class="step-desc">
-<p>Check support ticket volume and sentiment (Zendesk)</p>
-</div>
+<p><span class="step-icon">🎯</span> <span class="step-title">Direct</span> <span class="step-desc">Give specific feedback, not “make it better”</span></p>
 </div>
 <div class="step-card">
-<div class="step-icon">
-<p>3</p>
-</div>
-<div class="step-title">
-<p>Merge</p>
-</div>
-<div class="step-desc">
-<p>Combine revenue + support data, rank by churn risk</p>
-</div>
+<p><span class="step-icon">🔍</span> <span class="step-title">Self-Critique</span> <span class="step-desc">Ask Claude to find its own weaknesses</span></p>
 </div>
 <div class="step-card">
-<div class="step-icon">
-<p>4</p>
+<p><span class="step-icon">✨</span> <span class="step-title">Fix</span> <span class="step-desc">Apply the critique — dramatically better output</span></p>
 </div>
-<div class="step-title">
-<p>Recommend</p>
-</div>
-<div class="step-desc">
-<p>Draft a 3-sentence executive summary</p>
-</div>
-</div>
-</div>
-<div class="explainer">
-<p>You have 15 minutes. This requires querying at least two systems and merging the results. Pay attention to how the agent handles name matching.</p>
 </div>
 <aside class="notes">
-<p>Here is your timed challenge. The question is: “Which division’s top customer is most at risk of churning?” This is a genuinely hard question because it requires data from at least two systems.</p>
-<p>Let me walk through the steps. First, you need to identify each division’s number one customer by revenue — that requires querying the three CRMs. Second, you need to assess churn risk — and for that, check support ticket volume and sentiment in Zendesk. Third, you need to merge the revenue data with the support data. And fourth, draft a three-sentence executive summary with your recommendation.</p>
-<p>You have 15 minutes. Pay close attention to how the agent handles the name matching between the CRM data and the Zendesk data. Does it get the right customer? Does it flag any uncertainty? If the agent struggles, try breaking it into smaller steps — ask for the top customer by division first, then separately ask about their support tickets, and then ask the agent to combine the two.</p>
-<p>I will give you a five-minute warning and a one-minute warning. If you finish early, try a different cross-system question of your own design. Drop interesting findings in the Zoom chat.</p>
+<p>Here is the cycle. Step one: get a first draft. It will be fast but usually mediocre — too generic, too long, missing nuance. Step two: give specific direction. Not “make it better” but “make it specific to our Q4 results” or “the chart is misleading — use a zero baseline” or “rewrite the executive summary in half the length.” Step three — and this is the power move — ask Claude to critique its own work. “What is weak about this analysis? What would a skeptical CFO push back on?” Step four: tell it to fix those issues. Two rounds of self-critique produce dramatically better output than any amount of vague “improve this” prompting.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1201,11 +291,11 @@ Kerry Back, Rice University
           display:block!important;
       }</style></aside>
 </section>
-<section id="data-map-workshop" class="slide level2 section-divider center">
-<h2>Data Map Workshop</h2>
+<section id="live-demo" class="slide level2 section-divider center">
+<h2><span class="amber">LIVE DEMO</span></h2>
+<h3 id="from-mediocre-draft-to-polished-output">From mediocre draft to polished output</h3>
 <aside class="notes">
-<p>Now we are going to shift from XYZ’s data to your data. This workshop is one of the most important activities in the entire course, because what you produce here carries forward all the way to your capstone strategy in Session 8. Take this seriously — it is the foundation for everything that follows.</p>
-<p>This workshop and the subsequent breakout should take about 25 minutes total.</p>
+<p>Let me show this live. I am going to take a mediocre executive summary — either from someone’s homework or my prepared example — and run through the full iteration cycle. Watch how each round of specific feedback transforms the output. And pay special attention to the self-critique step — when Claude identifies its own weaknesses, it often catches things we would not have thought to ask about.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1218,49 +308,372 @@ Kerry Back, Rice University
           display:block!important;
       }</style></aside>
 </section>
-<section id="map-your-companys-data" class="slide level2 shrink center">
-<h2>Map Your Company’s Data</h2>
+<section id="what-just-happened" class="slide level2 shrink center">
+<h2>What Just Happened</h2>
+<div class="code-box">
+<p><span class="box-title">The iteration sequence</span></p>
+<p>Round 1: “This is too generic — make it specific to our Q4 results.” → Output improves from template to tailored.</p>
+<p>Round 2: “The chart is misleading — use a zero baseline.” → Visual accuracy corrected.</p>
+<p>Round 3: “Rewrite the executive summary in half the length.” → Concise, focused, executive-ready.</p>
+<p>Round 4: “What’s weak about this analysis? What would a skeptical CFO push back on?” → Claude identifies 3-4 real gaps.</p>
+<p>Round 5: “Fix those issues.” → Final version is dramatically stronger.</p>
+</div>
+<aside class="notes">
+<p>Let me recap what we just did. Round one: we replaced generic language with specific details. Round two: we fixed a misleading visualization. Round three: we cut the length in half, which forced the AI to prioritize. Round four: we asked Claude to critique itself — and it found real problems. Round five: we fixed those problems. Each round took maybe 30 seconds. The total investment was about three minutes, and the difference between the first draft and the final version is night and day. This is the skill. Specific direction, self-critique, and iteration.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-secret-specificity" class="slide level2 center">
+<h2>The Secret: Specificity</h2>
+<div class="two-cards">
+<div class="card card-dark">
+<p><span class="card-title">Vague (Weak)</span></p>
+<ul>
+<li>“Make it better”</li>
+<li>“Improve the analysis”</li>
+<li>“Make it more professional”</li>
+<li>“Fix the chart”</li>
+<li>“Add more detail”</li>
+</ul>
+</div>
+<div class="card card-light">
+<p><span class="card-title">Specific (Strong)</span></p>
+<ul>
+<li>“Lead with the biggest risk to Q4 revenue”</li>
+<li>“Add year-over-year comparisons for each metric”</li>
+<li>“Cut the background section and start with the recommendation”</li>
+<li>“Use a zero baseline and add data labels”</li>
+<li>“Include the three customers that drove the variance”</li>
+</ul>
+</div>
+</div>
+<aside class="notes">
+<p>Here is the core principle. Vague feedback produces vague improvement. Specific feedback produces specific improvement. When you say “make it better,” Claude has to guess what you mean. When you say “lead with the biggest risk to Q4 revenue,” it knows exactly what to do. This is true of managing people too, by the way — but it is even more true of managing AI, because AI has no context about your preferences, your audience, or your organizational culture unless you tell it explicitly.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-makerchecker-framework" class="slide level2 section-divider center">
+<h2>The Maker/Checker Framework</h2>
+<aside class="notes">
+<p>Now let me formalize something we previewed at the end of Session 1. The maker/checker framework. This is how you think about every AI output for the rest of this course — and for the rest of your career using these tools.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-core-shift" class="slide level2 center">
+<h2>The Core Shift</h2>
+<div class="highlight-box">
+<p>The professional skill is shifting:</p>
+<p><strong>From</strong> producing analysis → <strong>To</strong> directing and verifying it</p>
+<p>AI is the <span class="accent">maker</span>. You are the <span class="amber">checker</span>.</p>
+</div>
+<aside class="notes">
+<p>The fundamental shift is this: the professional skill used to be producing analysis. Building the spreadsheet, writing the report, creating the presentation. Now the skill is directing and verifying. You tell the AI what to make, and then you check whether it made it correctly. This is not a lesser skill — it requires deep domain expertise, judgment, and an understanding of what “correct” means in context. But it is a different skill, and developing it is what this course is about.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="calibrated-trust" class="slide level2 shrink center">
+<h2>Calibrated Trust</h2>
 <div class="three-cards">
+<div class="card card-light">
+<p><span class="card-title">🟢 Low Stakes</span></p>
+<ul>
+<li>Internal notes</li>
+<li>Brainstorming sessions</li>
+<li>Personal exploration</li>
+<li>First-draft ideas</li>
+</ul>
+<p><strong>Verification:</strong> Quick sanity check. Glance at axes, skim for obvious errors.</p>
+</div>
+<div class="card card-light">
+<p><span class="card-title">🟡 Medium Stakes</span></p>
+<ul>
+<li>Team presentations</li>
+<li>Internal reports</li>
+<li>Meeting summaries</li>
+<li>Analysis for your manager</li>
+</ul>
+<p><strong>Verification:</strong> Verify every number. Check that framing matches reality. Test key claims.</p>
+</div>
 <div class="card card-dark">
-<div class="card-title">
-<p>Step 1: List Your Systems</p>
-</div>
+<p><span class="card-title">🔴 High Stakes</span></p>
 <ul>
-<li>Identify 3–5 core systems (CRM, ERP, HRIS, etc.)</li>
-<li>What data lives in each?</li>
-<li>Who owns it?</li>
+<li>Board presentations</li>
+<li>Regulatory filings</li>
+<li>Public-facing documents</li>
+<li>Financial disclosures</li>
+</ul>
+<p><strong>Verification:</strong> Independent verification of every claim. Cross-check sources. Second reviewer.</p>
+</div>
+</div>
+<aside class="notes">
+<p>Calibrated trust means matching your verification effort to the consequences of being wrong. Low stakes: internal notes, brainstorming, personal explorations. If the chart has a minor error, nobody is hurt. A quick sanity check is sufficient. Medium stakes: team presentations, internal reports, analysis for your manager. If the numbers are wrong, your credibility takes a hit. Verify every number. Check that the framing matches what you know to be true. High stakes: board presentations, regulatory filings, anything public-facing. If these are wrong, the consequences are severe. Every claim needs independent verification. You should cross-check sources and have a second reviewer. The right answer is not “always check everything” — that defeats the purpose of using AI. The right answer is “check proportionally to what happens if it is wrong.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-critical-question" class="slide level2 centered-statement center">
+<h2>The Critical Question</h2>
+<h3 id="what-happens-if-this-output-is-wrong">What happens if this output is wrong?</h3>
+<p>If the answer is “nothing much” → quick check.</p>
+<p>If the answer is “serious consequences” → full verification.</p>
+<aside class="notes">
+<p>This is the question to ask yourself every single time you use AI output in your work. What happens if this is wrong? If the answer is “nothing much” — it is a personal brainstorm, a draft for your own thinking — then a quick check is fine. If the answer is “serious consequences” — reputational damage, financial loss, regulatory exposure — then you need full verification. This is not about being paranoid. It is about being professional. You would not let a junior analyst present unchecked numbers to the board. Do not let an AI do it either.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="demo-skills-and-structured-prompts" class="slide level2 section-divider center">
+<h2>Demo: Skills and Structured Prompts</h2>
+<aside class="notes">
+<p>Now let me show you something that takes your productivity to the next level. So far, every time you use Claude, you start from scratch. You describe what you want, you iterate, you get a good result. But what if you do the same type of task every week? A status report, a data analysis, a document review? You should not have to re-explain what you want every time. That is where skills and structured prompts come in.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="what-is-a-skill" class="slide level2 center">
+<h2>What Is a Skill?</h2>
+<div class="highlight-box">
+<p>A <strong>skill</strong> is a reusable set of instructions that produces consistent output every time.</p>
+<p>Write it once. Reuse it every week. Get the same quality without re-explaining.</p>
+</div>
+<div class="explainer">
+<p>Think of it as a template for your AI — not a document template with blanks to fill in, but an instruction set that tells the AI exactly what to produce, in what format, with what tone and structure.</p>
+</div>
+<aside class="notes">
+<p>A skill is a reusable set of instructions. Instead of telling Claude what you want from scratch every time, you write a detailed prompt once — specifying the sections, the format, the tone, the level of detail — and then you reuse it. Every time you run the skill, you get consistent, high-quality output without having to re-explain your preferences. Think of it as the difference between giving a new employee instructions every day versus writing them a standard operating procedure.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="example-weekly-status-report-skill" class="slide level2 center">
+<h2>Example: Weekly Status Report Skill</h2>
+<div class="code-box">
+<p><span class="box-title">Reusable prompt</span></p>
+<p>You are a business analyst preparing a weekly status report.</p>
+<p>Format: Start with a 2-sentence executive summary. Then three sections: 1. Key Accomplishments (bullet points, max 5) 2. Risks and Blockers (bullet points with severity: high/medium/low) 3. Next Week Priorities (numbered list, max 4)</p>
+<p>Tone: Direct, factual, no filler. Write for a VP who reads 20 of these. Length: One page maximum. Always end with: “Decision needed:” followed by any open items requiring management input, or “None this week.”</p>
+</div>
+<aside class="notes">
+<p>Here is a concrete example. This is a weekly status report skill. It specifies exactly what Claude should produce: a two-sentence executive summary, three sections with specific formats, a direct tone written for a VP who reads twenty of these, a one-page maximum, and a closing section for decisions needed. You write this once. Then every week, you paste in your notes and run the skill. Claude produces a consistent, well-formatted status report in seconds. The quality is repeatable because the instructions are explicit.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-power-move-sub-agents-and-critique" class="slide level2 center">
+<h2>The Power Move: Sub-Agents and Critique</h2>
+<div class="three-cards">
+<div class="card card-light">
+<p><span class="card-title">Drafter</span></p>
+<ul>
+<li>Produces the initial output</li>
+<li>Follows the skill instructions</li>
+<li>Optimizes for completeness</li>
+<li>Works fast</li>
 </ul>
 </div>
 <div class="card card-light">
-<div class="card-title">
-<p>Step 2: Draw the Gaps</p>
-</div>
+<p><span class="card-title">Critic</span></p>
 <ul>
-<li>What cross-system questions can nobody answer easily?</li>
-<li>Where do people resort to spreadsheets?</li>
-<li>What decisions are made on gut feel because the data is too hard to get?</li>
+<li>Reviews the draft independently</li>
+<li>Checks for accuracy and gaps</li>
+<li>Identifies weak arguments</li>
+<li>Flags unsupported claims</li>
+</ul>
+</div>
+<div class="card card-dark">
+<p><span class="card-title">Fact-Checker</span></p>
+<ul>
+<li>Verifies specific numbers</li>
+<li>Cross-references data</li>
+<li>Catches inconsistencies</li>
+<li>Confirms calculations</li>
+</ul>
+</div>
+</div>
+<aside class="notes">
+<p>Here is where it gets really powerful. Instead of one AI doing everything, you can use sub-agents — different AI roles working in parallel. One drafts. One critiques. One fact-checks. This is the slash-critique pattern: you ask Claude to generate three independent reviews of its own output, each from a different perspective. A drafter focuses on completeness. A critic looks for weak arguments and gaps. A fact-checker verifies numbers and catches inconsistencies. The result is dramatically more reliable than a single-pass output.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="live-demo-1" class="slide level2 section-divider center">
+<h2><span class="amber">LIVE DEMO</span></h2>
+<h3 id="skills-structured-prompts-and-the-critique-pattern">Skills, structured prompts, and the /critique pattern</h3>
+<aside class="notes">
+<p>Let me show you this live. I am going to create a skill for a weekly status report, run it with sample data, and then show the critique pattern. Watch how the structured prompt produces consistent output, and how the self-critique step catches issues that the initial draft missed. This is the workflow you will build for yourselves in the hands-on session.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="what-you-just-saw" class="slide level2 center">
+<h2>What You Just Saw</h2>
+<div class="info-box">
+<p><span class="box-title">The workflow</span></p>
+<ol type="1">
+<li><strong>Skill created:</strong> Reusable instructions for a recurring task</li>
+<li><strong>Consistent output:</strong> Same format, tone, and structure every time</li>
+<li><strong>Sub-agent critique:</strong> Three independent reviewers catch different issues</li>
+<li><strong>Final version:</strong> Incorporates all critique — stronger than any single pass</li>
+</ol>
+</div>
+<aside class="notes">
+<p>Let me recap. We created a reusable skill — a set of instructions that produces consistent output every time. We ran it and got a well-formatted status report in seconds. Then we used the critique pattern — three independent reviewers examining the output from different angles. The final version incorporated all the feedback and was significantly stronger than the first draft. This entire workflow took maybe two minutes and produced something that would normally take thirty to forty-five minutes of writing and editing.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="hands-on-build-your-own-workflow" class="slide level2 section-divider center">
+<h2>Hands-On: Build Your Own Workflow</h2>
+<aside class="notes">
+<p>Now it is your turn. I want each of you to pick a recurring task from your work and build a reusable workflow for it. This is not an exercise — this is something you will actually use starting this week. Think about what you do repeatedly: weekly reports, data analysis, document reviews, meeting summaries. Pick one and build a skill for it.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="choose-your-workflow" class="slide level2 center">
+<h2>Choose Your Workflow</h2>
+<div class="three-cards">
+<div class="card card-light">
+<p><span class="card-title">Option 1: Report Template</span></p>
+<ul>
+<li>Pick a recurring report you write</li>
+<li>Define the sections, format, and tone</li>
+<li>Specify what data goes in each section</li>
+<li>Build a reusable prompt</li>
+<li>Test it with real or sample data</li>
 </ul>
 </div>
 <div class="card card-light">
-<div class="card-title">
-<p>Step 3: Identify Quick Wins</p>
-</div>
+<p><span class="card-title">Option 2: Data Analysis</span></p>
 <ul>
-<li>Which two systems, if connected, would unlock the most value?</li>
-<li>What’s the simplest question that currently takes weeks?</li>
+<li>Define a standard analysis pattern</li>
+<li>“Given a CSV, always produce these 5 charts and a summary”</li>
+<li>Specify chart types and formatting</li>
+<li>Include interpretation guidance</li>
+<li>Test with the sample dataset</li>
+</ul>
+</div>
+<div class="card card-dark">
+<p><span class="card-title">Option 3: Document Review</span></p>
+<ul>
+<li>Build a review checklist</li>
+<li>“Read this document and flag issues in these categories”</li>
+<li>Specify severity levels</li>
+<li>Include tone and audience checks</li>
+<li>Test with a real document</li>
 </ul>
 </div>
 </div>
-<div class="explainer">
-<p>Spend 10 minutes sketching this out. We’ll share and compare.</p>
-</div>
 <aside class="notes">
-<p>I want you to spend the next 10 minutes sketching out your company’s data map. There are three steps.</p>
-<p>Step one: list your core systems. Think about three to five systems your company runs on — your CRM, your ERP, your HRIS, your ticketing system, whatever they are. What data lives in each? Who owns it?</p>
-<p>Step two: draw the gaps. What cross-system questions can nobody answer easily today? Where do people resort to spreadsheets to bridge the gap between systems? What decisions are being made on gut feel because the data is too hard to assemble?</p>
-<p>Step three: identify the quick wins. If you could connect any two systems, which two would unlock the most value? What is the simplest question that currently takes weeks to answer?</p>
-<p>You do not need a polished document — a sketch on paper or a few bullet points in a notes app is fine. The point is to start thinking concretely about your own data landscape. This map becomes the foundation for your capstone strategy, so take a few minutes to think it through carefully.</p>
-<p>I will be available in the main room if you have questions. We will go to breakout rooms after this for comparison.</p>
+<p>Here are three options, but you are not limited to these. Option one: build a template for a recurring report — a weekly status, a monthly review, a quarterly summary. Define the sections, the format, the tone. Option two: build a data analysis workflow — “given a CSV, always produce these five charts and a summary paragraph.” Option three: build a document review checklist — “read this document and flag issues in these categories with severity levels.” Pick whichever fits your work best, and use the critique technique to refine it. You have about fifteen minutes.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1273,51 +686,23 @@ Kerry Back, Rice University
           display:block!important;
       }</style></aside>
 </section>
-<section id="what-were-skipping-for-now" class="slide level2 shrink center">
-<h2>What We’re Skipping (For Now)</h2>
+<section id="tips-for-building-your-workflow" class="slide level2 shrink center">
+<h2>Tips for Building Your Workflow</h2>
 <div class="info-box">
-<div class="box-title">
-<p>The Pre-Work Nobody Talks About</p>
-</div>
-<p>Before any AI agent can query your real systems, someone must:</p>
+<p><span class="box-title">What makes a good skill</span></p>
 <ul>
-<li><strong>Catalog data</strong> — what tables exist, what do the columns mean?</li>
-<li><strong>Document schemas</strong> — data types, relationships, business rules</li>
-<li><strong>Provision API access</strong> — authentication, rate limits, permissions</li>
-<li><strong>Classify PII</strong> — which fields contain personal data? What are the retention rules?</li>
+<li><strong>Be explicit about format:</strong> sections, length, bullet vs.&nbsp;paragraph, headers</li>
+<li><strong>Specify tone:</strong> formal vs.&nbsp;conversational, direct vs.&nbsp;diplomatic</li>
+<li><strong>Define the audience:</strong> who reads this? What do they care about?</li>
+<li><strong>Include examples:</strong> “A good bullet point looks like this: …”</li>
+<li><strong>Add constraints:</strong> “Never exceed one page” or “Always include a recommendation”</li>
 </ul>
 </div>
-<div class="stat-cards">
-<div class="stat-card">
-<div class="stat-number">
-<p>60–90</p>
-</div>
-<div class="stat-label">
-<p>Typical pre-work before an agent touches real data</p>
-</div>
-</div>
-<div class="stat-card">
-<div class="stat-number">
-<p>5–10</p>
-</div>
-<div class="stat-label">
-<p>People typically involved in data readiness</p>
-</div>
-</div>
-<div class="stat-card">
-<div class="stat-number">
-<p>0</p>
-</div>
-<div class="stat-label">
-<p>Vendors who mention this in their demos</p>
-</div>
-</div>
+<div class="highlight-box">
+<p><strong>Test it 2-3 times</strong> with different inputs. A good skill works consistently, not just once.</p>
 </div>
 <aside class="notes">
-<p>Before we wrap up, I want to name something important that the demos do not show. Before any AI agent can query your real systems — not the XYZ simulation, but your actual production systems — someone has to do a significant amount of pre-work.</p>
-<p>You need to catalog the data: what tables exist, what do the columns mean? You need to document the schemas: data types, relationships, business rules. You need to provision API access: authentication, rate limits, permissions. And you need to classify PII: which fields contain personal data, and what are the retention rules?</p>
-<p>Look at these numbers. Sixty to ninety days of typical pre-work before an agent touches real data. Five to ten people typically involved in data readiness. And zero — zero — vendors who mention this in their demos. I am naming this now because I want to calibrate your expectations. The demos make this look easy — and the technology part genuinely is easier than it used to be. But the organizational pre-work is real whether you are connecting an AI agent directly to vendor systems or layering it on top of an existing warehouse. And no vendor will mention it in their sales pitch. When you evaluate vendors in Session 5, remember this slide.</p>
-<p>This segment should take about 6 minutes.</p>
+<p>A few tips as you build. Be explicit about format — specify sections, length limits, whether you want bullets or paragraphs, what the headers should be. Specify the tone — formal or conversational, direct or diplomatic. Define the audience — who reads this and what do they care about? Include examples of what good output looks like. And add constraints — “never exceed one page” or “always include a recommendation.” Then test it two or three times with different inputs. A skill that only works once is not a skill — it should produce consistent quality across different inputs.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1330,25 +715,144 @@ Kerry Back, Rice University
           display:block!important;
       }</style></aside>
 </section>
-<section id="before-next-session" class="slide level2 shrink center">
-<h2>Before Next Session</h2>
+<section id="breakout-your-productivity-portfolio" class="slide level2 section-divider center">
+<h2>Breakout: Your Productivity Portfolio</h2>
+<h3 id="groups-of-3-4">Groups of 3-4</h3>
+<aside class="notes">
+<p>Let me move you into breakout rooms. Each person will share the workflow they built. I want you to compare: what types of tasks came up? What patterns are common across your work? And critically — what level of trust does each task require? Use the low, medium, high framework we discussed earlier.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="breakout-discussion-guide" class="slide level2 center">
+<h2>Breakout Discussion Guide</h2>
+<div class="two-cards">
+<div class="card card-light">
+<p><span class="card-title">Share and Compare</span></p>
+<ul>
+<li>What workflow did you build?</li>
+<li>What recurring task does it address?</li>
+<li>How much time does it save?</li>
+<li>What trust level does it require?</li>
+</ul>
+</div>
+<div class="card card-dark">
+<p><span class="card-title">Identify Top Use Cases</span></p>
+<ul>
+<li>Which workflows save the most time?</li>
+<li>Which have acceptable risk levels?</li>
+<li>What patterns are common?</li>
+<li><strong>Each group:</strong> pick your top 3 highest-value use cases</li>
+</ul>
+</div>
+</div>
+<aside class="notes">
+<p>Here is your discussion guide. First, each person shares what they built. Then compare: what types of tasks came up? Are there common patterns? And here is the key question: for each workflow, what level of trust does it require? A brainstorming skill is low stakes — you barely need to check. A board report skill is high stakes — you check everything. Your group should identify the top three use cases where AI saves the most time with acceptable risk. That is your productivity portfolio — the set of tasks where AI gives you the biggest return on your checking investment.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="group-reports" class="slide level2 centered-statement center">
+<h2>Group Reports</h2>
+<h3 id="each-group-your-top-3-highest-value-ai-use-cases.">Each group: your top 3 highest-value AI use cases.</h3>
+<aside class="notes">
+<p>Welcome back. Let me hear from each group. What were your top three highest-value use cases — the tasks where AI saves the most time with acceptable risk? I am looking for patterns across groups.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="bridge-to-enterprise-data" class="slide level2 section-divider center">
+<h2>Bridge to Enterprise Data</h2>
+<aside class="notes">
+<p>Everything you have done so far in this course uses data you paste in or documents you upload. You are bringing the data to the AI. But most of the data that drives business decisions does not live in your clipboard — it lives in enterprise systems. CRMs, ERPs, HR platforms, financial systems. Starting next session, we flip the model. Instead of you bringing data to the AI, the AI goes to the data.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-shift-ahead" class="slide level2 center">
+<h2>The Shift Ahead</h2>
+<div class="two-cards">
+<div class="card card-light">
+<p><span class="card-title">Sessions 1-2: You bring the data</span></p>
+<ul>
+<li>Copy-paste into Claude</li>
+<li>Upload documents</li>
+<li>Manual data entry</li>
+<li>Limited to what you can carry</li>
+<li>Great for personal productivity</li>
+</ul>
+</div>
+<div class="card card-dark">
+<p><span class="card-title">Sessions 3+: AI goes to the data</span></p>
+<ul>
+<li>AI queries enterprise databases</li>
+<li>CRM, ERP, HR, finance systems</li>
+<li>Cross-system analysis in seconds</li>
+<li>The same skills — iteration, critique, verification</li>
+<li>Organizational-scale impact</li>
+</ul>
+</div>
+</div>
+<aside class="notes">
+<p>Here is the shift. In Sessions 1 and 2, you brought the data to the AI — you pasted tables, uploaded documents, typed in numbers. That is great for personal productivity, and you should keep doing it. But starting in Session 3, the AI goes to the data. It queries Salesforce for your pipeline, NetSuite for your financials, Workday for your headcount — and it does it from a single chat interface. The skills you have developed — iteration, critique, calibrated trust — remain exactly the same. But the scope expands from your personal work to your organization’s data.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="preview-meridian-corp" class="slide level2 shrink center">
+<h2>Preview: Meridian Corp</h2>
 <div class="info-box">
-<div class="box-title">
-<p>Homework</p>
-</div>
+<p><span class="box-title">A simulated enterprise environment</span></p>
 <ul>
-<li>Read the <strong>enterprise systems background document</strong> (provided)</li>
-<li>Complete your data map: list <strong>at least 5 systems</strong> your company uses and the <strong>top 3 cross-system questions</strong> you can’t answer today</li>
+<li><strong>$500M B2B industrial supplies distributor</strong> with three operating divisions</li>
+<li><strong>10 enterprise systems:</strong> Salesforce, NetSuite, SAP, Workday, HubSpot, Oracle, and more</li>
+<li><strong>41 tables, 26,000+ rows, 3 years of data</strong></li>
+<li>Ask questions in plain English — the AI queries the databases for you</li>
+<li>Cross-system analysis: “Which customers buy from multiple divisions?”</li>
 </ul>
 </div>
-<div class="explainer">
-<p>Monday’s session: <span class="accent">How Does This Actually Work?</span> — we look under the hood at the agent loop, the system prompt, and where the code runs.</p>
-</div>
 <aside class="notes">
-<p>Here is your homework for before Monday’s session. First, read the enterprise systems background document — it will be emailed to you. This gives you context on how enterprise systems are structured and why they end up the way they do.</p>
-<p>Second, and this is the more important one: complete your data map. Take the sketch you started today and expand it. List at least five systems your company uses and identify the top three cross-system questions you cannot answer today. Be specific. “Our CRM and ERP don’t talk to each other” is a start, but “We cannot answer what our customer acquisition cost is by segment because marketing spend is in HubSpot and revenue is in NetSuite” is what I am looking for.</p>
-<p>This data map is not just homework — it is the foundation for your capstone strategy. The more specific you are now, the better your capstone will be.</p>
-<p>On Monday, we look under the hood. You have spent two sessions as the user. Now we are going to answer the question: how does this actually work? We will look at the agent loop, the system prompt, and where the code runs. See you then.</p>
+<p>Next session you will meet Meridian Corp — a simulated $500 million B2B industrial supplies distributor. It has three operating divisions, ten enterprise systems, 41 tables, and over 26,000 rows of realistic data spanning three years. You will log into a web application, ask questions in plain English, and watch the AI query multiple databases, merge the results, and produce charts and narratives. It is exactly like what you have been doing in Sessions 1 and 2 — but now the data comes from enterprise systems instead of your clipboard. And here is the key: the same iteration, critique, and verification skills you practiced today are exactly what you will use when the AI is querying databases. The stakes just get higher.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1361,10 +865,10 @@ Kerry Back, Rice University
           display:block!important;
       }</style></aside>
 </section>
-<section id="key-takeaway" class="slide level2 section-divider center">
-<h2>Key Takeaway</h2>
+<section id="homework" class="slide level2 section-divider center">
+<h2>Homework</h2>
 <aside class="notes">
-<p>Let me leave you with the key takeaway from today.</p>
+<p>Here is your homework. It has three parts, and the third part is particularly important for getting the most out of next session.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1377,19 +881,77 @@ Kerry Back, Rice University
           display:block!important;
       }</style></aside>
 </section>
-<section id="the-hardest-part-isnt-technology." class="slide level2 centered-statement center">
-<h2>The hardest part isn’t technology.</h2>
-</section>
-<section id="its-that-your-systems-disagree." class="slide level2 center">
-<h2>It’s that your systems <span class="accent">disagree</span>.</h2>
-<div class="explainer">
-<p>They disagree on who your customers are, what your products are called, and when things happened. AI can bridge the gap — but someone still has to define the truth.</p>
+<section id="your-assignment-this-week" class="slide level2 shrink center">
+<h2>Your Assignment This Week</h2>
+<div class="info-box">
+<p><span class="box-title">Homework — Due Session 3</span></p>
+<ol type="1">
+<li><p><strong>Continue using Claude for real work.</strong> Build at least one reusable workflow and test it 2-3 times. Refine until it produces consistent quality.</p></li>
+<li><p><strong>Read the enterprise systems background document</strong> (provided). It covers what Salesforce, SAP, Workday, NetSuite, and other enterprise systems actually do. Come to Session 3 with a basic vocabulary.</p></li>
+<li><p><strong>Map your company’s data landscape:</strong></p>
+<ul>
+<li>What are your top 3-5 enterprise systems?</li>
+<li>What cross-system questions can nobody answer easily today?</li>
+<li>Bring your list to Session 3.</li>
+</ul></li>
+</ol>
 </div>
 <aside class="notes">
-<p>The hardest part of cross-system data is not the technology. It is that your systems disagree. They disagree on who your customers are — “General Electric” versus “GE Industrial Solutions” versus “GE Safety Division.” They disagree on what your products are called. They disagree on when things happened because of different date formats and different fiscal calendars.</p>
-<p>AI can bridge the gap. You saw it today — fuzzy matching, cross-system merges, intelligent reconciliation. But someone still has to define the truth. Someone has to say: yes, these three names are the same customer. Someone has to maintain that mapping over time. Someone has to decide what “revenue” means when each system calculates it slightly differently.</p>
-<p>That is the organizational work that makes the technology work. And it is why your data map homework matters — you are starting to identify where those disagreements exist at your company, which is the first step toward resolving them.</p>
-<p>Thank you for a great session. See you Monday.</p>
+<p>Three assignments. First, keep using Claude. Build at least one reusable workflow — maybe the one you started today, maybe a new one — and test it two or three times with different inputs. Refine it until it produces consistent quality. Second, read the enterprise systems background document. It explains what systems like Salesforce, SAP, Workday, and NetSuite actually do at a conceptual level. You do not need to become an expert, but you should come to Session 3 with a basic vocabulary. Third — and this is the most important one — map your company’s data landscape. What are your top three to five enterprise systems? What cross-system questions can nobody answer easily today? Bring your list to Session 3. That list becomes the foundation for your capstone strategy at the end of the course.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="what-is-coming-next" class="slide level2 center">
+<h2>What Is Coming Next</h2>
+<div class="four-cards">
+<div class="card card-light">
+<p><span class="card-title">Session 3</span></p>
+<ul>
+<li>AI meets enterprise data</li>
+<li>Meridian Corp hands-on</li>
+<li>Cross-system queries</li>
+<li>Your company’s data map</li>
+</ul>
+</div>
+<div class="card card-light">
+<p><span class="card-title">Session 4</span></p>
+<ul>
+<li>Data to deliverables</li>
+<li>Full reporting pipelines</li>
+<li>The agent loop explained</li>
+<li>Build your own report</li>
+</ul>
+</div>
+<div class="card card-light">
+<p><span class="card-title">Sessions 5-6</span></p>
+<ul>
+<li>Deployment architecture</li>
+<li>Vendor evaluation</li>
+<li>Security and governance</li>
+<li>Risk frameworks</li>
+</ul>
+</div>
+<div class="card card-dark">
+<p><span class="card-title">Sessions 7-8</span></p>
+<ul>
+<li>Document AI and RAG</li>
+<li>Combined data + docs</li>
+<li>Capstone strategy</li>
+<li>Pitch to leadership</li>
+</ul>
+</div>
+</div>
+<aside class="notes">
+<p>Here is what the rest of the course looks like. Session 3: we connect AI to enterprise data using the Meridian Corp simulation. Session 4: we build full reporting pipelines — from raw data to board-ready memos. Sessions 5 and 6 cover deployment architecture, vendor evaluation, security, and governance — the practical questions of how to bring this to your organization. And Sessions 7 and 8 combine everything into a capstone strategy that you could present to your leadership. Every session builds on the skills you developed this week. The iteration techniques, the critique patterns, the calibrated trust framework — those are the foundation. See you next session.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

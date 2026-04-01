@@ -156,7 +156,7 @@ Kerry Back, Rice University
 <p>Session 1</p>
 </div>
 <div class="timeline-desc">
-<p>Exploring Data with AI — first conversation with your data</p>
+<p>What AI Can Do for You — personal productivity with AI</p>
 </div>
 </div>
 <div class="timeline-item">
@@ -167,7 +167,7 @@ Kerry Back, Rice University
 <p>Session 2</p>
 </div>
 <div class="timeline-desc">
-<p>Our Data Is Everywhere — the cross-system challenge</p>
+<p>Iterate, Critique, Trust — the maker/checker framework</p>
 </div>
 </div>
 <div class="timeline-item">
@@ -178,7 +178,7 @@ Kerry Back, Rice University
 <p>Session 3</p>
 </div>
 <div class="timeline-desc">
-<p>How It Works Under the Hood — agents, SQL, and prompts</p>
+<p>AI Meets Your Data — enterprise data access</p>
 </div>
 </div>
 <div class="timeline-item">
@@ -189,7 +189,7 @@ Kerry Back, Rice University
 <p>Session 4</p>
 </div>
 <div class="timeline-desc">
-<p>From Data to Deliverable — reporting pipelines</p>
+<p>From Data to Deliverable — reporting pipelines and the agent loop</p>
 </div>
 </div>
 <div class="timeline-item">
@@ -200,7 +200,7 @@ Kerry Back, Rice University
 <p>Session 5</p>
 </div>
 <div class="timeline-desc">
-<p>What Does Deployment Look Like — from prototype to production</p>
+<p>What Does Deployment Look Like? — architecture, data security, build vs.&nbsp;buy</p>
 </div>
 </div>
 <div class="timeline-item">
@@ -211,7 +211,7 @@ Kerry Back, Rice University
 <p>Session 6</p>
 </div>
 <div class="timeline-desc">
-<p>Can You Trust It — validation, governance, guardrails</p>
+<p>Can You Trust It? — validation, governance, guardrails</p>
 </div>
 </div>
 <div class="timeline-item">
@@ -238,7 +238,7 @@ Kerry Back, Rice University
 </div>
 </div>
 <aside class="notes">
-<p>Welcome to our final session. Before we dive into your presentations, let me take thirty seconds to remind you where we have been. Look at this timeline. In Session 1, you had your first conversation with data — asking questions in plain English and getting instant answers. Session 2, you tackled the cross-system challenge, seeing how AI handles data scattered across ten different enterprise systems. Session 3, you looked under the hood at how agents actually work — the orchestration loop, SQL generation, code execution. Session 4, you built reporting pipelines that go from raw data to polished deliverables. Session 5, deployment — what it actually takes to go from a prototype to production. Session 6, trust and verification — red-teaming, governance, guardrails. Session 7, document AI — retrieval-augmented generation for unstructured knowledge.</p>
+<p>Welcome to our final session. Before we dive into your presentations, let me take thirty seconds to remind you where we have been. Look at this timeline. In Session 1, you discovered what AI can do for you personally — charts, documents, analyses in minutes. Session 2, you learned the maker/checker framework — iterate, critique, and calibrate your trust. Session 3, AI met your enterprise data — querying CRMs, ERPs, and HR systems in plain English. Session 4, you went from data to deliverable — reporting pipelines and the agent loop. Session 5, deployment — architecture, data security, build versus buy. Session 6, trust and verification — red-teaming, governance, guardrails. Session 7, document AI — retrieval-augmented generation for unstructured knowledge.</p>
 <p>And today, Session 8, you bring it all together. Each of you has written a strategy document that draws on everything you have learned. Today you present it, get feedback, and leave with a concrete plan you can execute starting tomorrow. This is the session where the learning becomes action.</p>
 <p>[TIMING: About 2 minutes on this slide. It is a fast recap, not a re-teaching. The timeline visual does the heavy lifting. Keep it brisk and forward-looking. You need to be into the setup by minute 3.]</p>
 <style type="text/css">
@@ -502,20 +502,26 @@ Kerry Back, Rice University
 </section>
 <section id="synthesis-what-you-now-know" class="slide level2 shrink center">
 <h2>Synthesis: What You Now Know</h2>
-<div class="four-cards">
+<div class="five-cards">
 <div class="card card-dark">
+<div class="card-title">
+<p>Personal Productivity Multiplier</p>
+</div>
+<p>AI is available right now — charts, documents, analyses, automated workflows. The tools from Sessions 1–2 require no IT approval and no enterprise deployment.</p>
+</div>
+<div class="card card-light">
 <div class="card-title">
 <p>Plain English = Data Answers</p>
 </div>
-<p>AI agents turn natural language questions into SQL queries, chart generation, and narrative summaries — no technical skills required.</p>
+<p>AI agents turn natural language questions into enterprise data answers — replacing dashboards, manual reports, and the wait for analyst time.</p>
 </div>
 <div class="card card-light">
 <div class="card-title">
 <p>Simple but Not Easy</p>
 </div>
-<p>The technology is simpler than expected (50 lines of code) but production deployment requires governance, validation, and organizational change.</p>
+<p>The technology is simpler than expected (50 lines of code) but production requires governance, verification, and organizational readiness.</p>
 </div>
-<div class="card card-light">
+<div class="card card-dark">
 <div class="card-title">
 <p>Two Complementary Tools</p>
 </div>
@@ -525,17 +531,18 @@ Kerry Back, Rice University
 <div class="card-title">
 <p>The Critical Skill</p>
 </div>
-<p>The human skill that matters most: asking the right questions and verifying the answers. AI amplifies judgment — it doesn’t replace it.</p>
+<p>Asking the right questions, iterating on output, and verifying the answers. The maker/checker mindset is the throughline of this entire course.</p>
 </div>
 </div>
 <aside class="notes">
-<p>Let me pull together the four big ideas from this entire course. These are the things I want you to carry with you long after the details fade.</p>
-<p>First, plain English equals data answers. AI agents turn natural language questions into SQL queries, chart generation, and narrative summaries. No technical skills required. You experienced this in Session 1 and you have been doing it ever since. The person closest to the business question can now get the answer directly, without waiting for an analyst, a dashboard, or a report.</p>
-<p>Second, simple but not easy. In Session 3, you saw that a working agent is about fifty lines of code. The technology is simpler than most people expect. But production deployment requires governance, validation, and organizational change. The gap between a demo and a production system is not technical — it is organizational. Who owns the data? Who validates the answers? Who approves deployment? Those are the hard questions, and several of the strategies we just heard addressed them well.</p>
-<p>Third, two complementary tools. Database AI for structured data — numbers, trends, KPIs. Document AI for unstructured text — policies, contracts, procedures. You learned database AI in Sessions 1 through 6 and document AI in Session 7. Most real business questions need both, and the most powerful strategies we heard today combined both capabilities.</p>
-<p>Fourth, the critical skill. The human skill that matters most is not building AI tools. It is asking the right questions and verifying the answers. AI amplifies judgment — it does not replace it. If you ask a bad question, you get a bad answer faster. If you do not verify, you propagate errors at scale. The maker/checker framework from Session 6 is not optional — it is essential.</p>
+<p>Let me pull together the five big ideas from this entire course. These are the things I want you to carry with you long after the details fade.</p>
+<p>First, AI is a personal productivity multiplier. Charts, documents, analyses, automated workflows — all available right now, no IT approval needed. You experienced this in Sessions 1 and 2. The tools you used on day one are tools you can use tomorrow morning.</p>
+<p>Second, plain English equals enterprise data answers. AI agents turn natural language questions into SQL queries, chart generation, and narrative summaries — replacing dashboards, manual reports, and the wait for analyst time. The person closest to the business question can now get the answer directly.</p>
+<p>Third, simple but not easy. In Session 4, you saw that a working agent is about fifty lines of code. The technology is simpler than most people expect. But production deployment requires governance, verification, and organizational readiness. The gap between a demo and a production system is not technical — it is organizational. Who owns the data? Who validates the answers? Who approves deployment? Those are the hard questions, and several of the strategies we just heard addressed them well.</p>
+<p>Fourth, two complementary tools. Database AI for structured data — numbers, trends, KPIs. Document AI for unstructured text — policies, contracts, procedures. You learned database AI in Sessions 3 through 6 and document AI in Session 7. Most real business questions need both, and the most powerful strategies we heard today combined both capabilities.</p>
+<p>Fifth, the critical skill. The human skill that matters most is not building AI tools. It is asking the right questions, iterating on output, and verifying the answers. The maker/checker mindset is the throughline of this entire course. If you ask a bad question, you get a bad answer faster. If you do not verify, you propagate errors at scale. The maker/checker framework is not optional — it is essential.</p>
 <p>[TIMING: About 5 minutes on this slide, from minute 70 to about minute 75. Walk through each card. Reference specific strategies from the plenary presentations when possible — “As [presenter name] showed, combining database AI with document AI for vendor management is exactly this third point in action.” Make it feel like a synthesis, not a new lecture.]</p>
-<p>Transition: Those are the four big ideas. But before we close, I want to show you one more capability — something we have not covered yet, and it is the one that will change how you think about AI the most.</p>
+<p>Transition: Those are the five big ideas. But before we close, I want to show you one more capability — something we have not covered yet, and it is the one that will change how you think about AI the most.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -630,7 +637,7 @@ Kerry Back, Rice University
 <p>Now watch what happens when I ask the strategic question on the right card: “I am considering expanding the Energy Division into the Southeast. Based on our pipeline, customer concentration, and support ticket trends, what are the top 3 risks?” See how it reasons across multiple data sources? It is pulling sales trends, looking at customer concentration, checking support ticket patterns. It synthesizes and gives me three risks.</p>
 <p>But here is where it gets interesting. I am going to push back. “You are assuming our supply chain can handle Southeast volume. What if it can’t?” Watch how the analysis changes. The AI adjusts, because I challenged one of its assumptions. This is the thinking partner in action. It does not get defensive. It revises. But — and this is crucial — it would never have challenged that assumption on its own. That is your job. AI anchors on your framing. The same data with different framing produces different recommendations. The human role is providing context, challenging assumptions, and deciding. Not outsourcing judgment.</p>
 <p>[TIMING: About 8 minutes for this demo, from minute 78 to minute 86. Spend 1 minute on the data question, 3 minutes on the strategic question, 2 minutes on the push-back, and 2 minutes on discussion. Ask the group: “How many of you would have thought to challenge that assumption? That is the skill — knowing when to push back.”]</p>
-<p>Transition: That is the vision. Data retrieval plus strategic dialogue. Now let me give you four things you can do starting tomorrow.</p>
+<p>Transition: That is the vision. Data retrieval plus strategic dialogue. Now let me give you five things you can do starting tomorrow.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -751,28 +758,34 @@ Kerry Back, Rice University
 </section>
 <section id="monday-morning-actions" class="slide level2 shrink center">
 <h2>Monday Morning Actions</h2>
-<div class="four-cards">
+<div class="five-cards">
 <div class="card card-dark">
 <div class="card-title">
-<p>A. Audit Workflows</p>
+<p>A. Use AI for Your Personal Workflow</p>
 </div>
-<p>Where do people wait for data? Which recurring reports follow the data → analysis → deliverable pattern?</p>
+<p>The tools from Sessions 1–2 are available now — no IT approval needed. Start with charts, documents, and analyses for your own work.</p>
 </div>
 <div class="card card-light">
 <div class="card-title">
-<p>B. Scope a Sprint</p>
+<p>B. Audit Reporting Workflows</p>
+</div>
+<p>Where do people wait for data? Which recurring reports follow the data → analysis → deliverable pattern and could be automated?</p>
+</div>
+<div class="card card-light">
+<div class="card-title">
+<p>C. Scope a 30-Day Sprint</p>
 </div>
 <p>Pick one team, one data source, 30 days. Build a prototype and test with real questions from real users.</p>
 </div>
-<div class="card card-light">
+<div class="card card-dark">
 <div class="card-title">
-<p>C. Inventory Documents</p>
+<p>D. Inventory Documents</p>
 </div>
 <p>Where is knowledge trapped? Policies, contracts, procedures — which collections would benefit from AI-powered Q&amp;A?</p>
 </div>
 <div class="card card-dark">
 <div class="card-title">
-<p>D. Establish Governance</p>
+<p>E. Establish Governance</p>
 </div>
 <p>Who validates AI output? Who approves deployment? Define this before shadow IT does it for you.</p>
 </div>
@@ -781,11 +794,12 @@ Kerry Back, Rice University
 <p>You don’t need a 12-month roadmap. You need <span class="accent">one pilot, one owner, one deadline</span>.</p>
 </div>
 <aside class="notes">
-<p>Four things every executive can do regardless of role, starting tomorrow morning. You do not need a twelve-month roadmap. You need one pilot, one owner, one deadline.</p>
-<p>A: Audit your reporting workflows. Where do people wait for data? Which recurring reports follow the data to analysis to deliverable pattern? Those are your automation candidates. We covered this in Session 4.</p>
-<p>B: Scope a thirty-day discovery sprint. Pick one team, one data source, thirty days. Build a prototype and test it with real questions from real users. Not a proof of concept that sits on a shelf — a working prototype that real people use and give feedback on. Several of the strategies we heard today are structured exactly this way.</p>
-<p>C: Inventory your document collections. Where is knowledge trapped? This was your breakout exercise in Session 7. Policies, contracts, procedures — which collections would benefit from AI-powered Q&amp;A? You probably already have a list from last session.</p>
-<p>D: Establish governance before shadow IT does it for you. Who validates AI output? Who approves deployment? If you do not define this, someone in your organization will deploy ChatGPT on sensitive company data without any guardrails, and you will be cleaning up the mess. Get ahead of it. This was the core message of Session 6.</p>
+<p>Five things every participant can do regardless of role, starting tomorrow morning. You do not need a twelve-month roadmap. You need one pilot, one owner, one deadline.</p>
+<p>A: Use AI for your personal workflow. The tools from Sessions 1 and 2 are available right now, no IT approval needed. Charts, documents, analyses, automated workflows. Start using them for your own work this week. This is the lowest-friction, highest-impact action on this list.</p>
+<p>B: Audit your reporting workflows. Where do people wait for data? Which recurring reports follow the data to analysis to deliverable pattern and could be automated? Those are your automation candidates. We covered this in Session 4.</p>
+<p>C: Scope a thirty-day discovery sprint. Pick one team, one data source, thirty days. Build a prototype and test it with real questions from real users. Not a proof of concept that sits on a shelf — a working prototype that real people use and give feedback on. Several of the strategies we heard today are structured exactly this way.</p>
+<p>D: Inventory your document collections. Where is knowledge trapped? This was your breakout exercise in Session 7. Policies, contracts, procedures — which collections would benefit from AI-powered Q&amp;A? You probably already have a list from last session.</p>
+<p>E: Establish governance before shadow IT does it for you. Who validates AI output? Who approves deployment? If you do not define this, someone in your organization will deploy ChatGPT on sensitive company data without any guardrails, and you will be cleaning up the mess. Get ahead of it. This was the core message of Session 6.</p>
 <p>Read the explainer. One pilot, one owner, one deadline. That is the formula. The companies that succeed with AI are not the ones with the biggest budgets or the most sophisticated technology. They are the ones that start small, learn fast, and scale what works.</p>
 <p>[TIMING: About 2 minutes on this slide, from minute 86 to minute 88. Be crisp. These are action items, not a lecture. You are in the closing sequence now.]</p>
 <style type="text/css">

@@ -14,16 +14,95 @@ format:
     center: true
 ---
 
-## What If the Agent Could Do More Than Answer Questions? {.centered-statement}
+## Homework Debrief {.section-divider}
 
 ::: {.notes}
-This opening slide sets the tone for Session 4. The check-in segment runs from minutes 0-10. Before diving into content, you want to reconnect with the class and see who tried the Linux server exercises.
+This opens the homework debrief (minutes 0-10). Students share their best and worst answers from the Meridian exploration homework. The goal is to surface common failure patterns and connect them to the maker/checker framework from Session 2.
+:::
 
-Say: "What if the agent could do more than answer questions? That is the question for today. For three sessions now, you have been asking questions and getting answers. Today we go further. Instead of just answering a question, we are going to have the agent produce complete deliverables --- memos, reports, risk assessments --- the kind of documents that actually get distributed and acted on."
+---
 
-But first, pause and ask: "Before we dive in --- did anyone try the Linux server exercises over the past few days? I am curious: who logged into the server, even just to look around?" Get a show of hands. If anyone tried, ask them to share briefly: "What was the experience like? What surprised you? What was frustrating?" Spend about 5-7 minutes on this check-in. The goal is to surface any struggles and normalize the learning curve. If nobody tried, that is fine --- say: "The exercises will be there all course. No pressure. Today is going to give you even more motivation to try them."
+## Best and Worst Answers
 
-This check-in segment should take about 10 minutes total.
+::: {.two-cards}
+::: {.card .card-light}
+::: {.card-title}
+Share Your Best Answer
+:::
+- What question did you ask?
+- What made the answer good?
+- Would you trust it without further checking?
+:::
+
+::: {.card .card-dark}
+::: {.card-title}
+Share Your Worst Answer
+:::
+- What went wrong?
+- Was the answer wrong, misleading, or just incomplete?
+- What verification would have caught it?
+:::
+:::
+
+::: {.notes}
+Say: "Before we dive into new material, let's debrief the homework. You spent this week asking the Meridian app at least 10 business questions. I want to hear about your best answer and your worst answer."
+
+Call on 3-4 students. For each, ask: "What question did you ask? What made the answer good --- or bad?" Listen for common patterns:
+- Good answers: clear data, well-structured tables, accurate calculations
+- Bad answers: wrong aggregations, missing filters, misleading charts, hallucinated context
+
+After sharing, connect to Session 2: "Remember the maker/checker framework? Every one of these answers needs a different level of verification. A chart for your own understanding? Quick glance. A number going into a board presentation? Verify the SQL, check the filters, confirm the row counts."
+
+Transition: "Now let me show you what happens when we go from single questions to complete deliverables."
+:::
+
+---
+
+## Applying Maker/Checker
+
+::: {.three-cards}
+::: {.card .card-light}
+::: {.card-title}
+Low Stakes
+:::
+- Internal exploration, brainstorming
+- "How many customers does each division have?"
+- Quick sanity check: do the numbers look reasonable?
+:::
+
+::: {.card .card-light}
+::: {.card-title}
+Medium Stakes
+:::
+- Team presentations, internal reports
+- "Revenue per employee by division"
+- Verify: check the SQL, confirm date ranges, spot-check totals
+:::
+
+::: {.card .card-dark}
+::: {.card-title}
+High Stakes
+:::
+- Board decks, regulatory filings
+- "Quarterly executive summary for the CEO"
+- [Independent verification of every claim]{.amber}
+:::
+:::
+
+::: {.notes}
+Say: "The maker/checker framework from Session 2 applies directly to enterprise data. The stakes determine the level of checking. For internal exploration, a quick sanity check is fine. For a board presentation, you verify every number independently."
+
+"Today we are going to produce high-stakes deliverables --- the kind of documents that actually get distributed and acted on. That means the verification skills you learned in Session 2 are essential."
+
+Transition: "Let me show you the full pipeline."
+:::
+
+---
+
+## Full Pipeline Demo {.section-divider}
+
+::: {.notes}
+This opens the full pipeline demo (minutes 10-25). This is the showpiece demo of Session 4. Make sure the Meridian app is open and ready. You will ask for a quarterly executive summary and then iterate on it.
 :::
 
 ---
@@ -35,48 +114,20 @@ In Sessions 1--3, we asked questions and got answers. Today we chain those steps
 :::
 
 ::: {.highlight-box}
-One prompt. Six systems queried. Charts generated. Narrative written. Document assembled. **That's the pipeline.**
+One prompt. Six systems queried. Charts generated. Narrative written. Document assembled. **That is the pipeline.**
 :::
 
 ::: {.notes}
 Say: "In Sessions 1 through 3, we asked questions and got answers. A number. A chart. A paragraph of explanation. Useful, but not a deliverable. Today we chain those steps into complete reporting pipelines --- from raw data to polished, board-ready documents."
 
-"Here is what that looks like: one prompt. Six systems queried. Charts generated. Narrative written. Document assembled. That is the pipeline. Instead of asking six separate questions and manually combining the results, we give the agent one high-level instruction and it produces a complete, formatted output."
+"Here is what that looks like: one prompt. Six systems queried. Charts generated. Narrative written. Document assembled. That is the pipeline."
 
 "This is where AI data agents go from 'interesting tool' to 'transformative capability.' Answering questions saves minutes. Automating reporting pipelines saves days."
-
-Transition: "Let me show you the learning objectives, and then we will see this in action."
 :::
 
 ---
 
-## Learning Objectives
-
-- See the full pipeline: data to chart to narrative to board-ready memo
-- Understand how to **chain AI steps** into automated workflows
-- Produce a deliverable and **iterate on quality**
-
-::: {.notes}
-Walk through the objectives quickly. Say: "Three things today. First, you will see the full pipeline --- from raw data to a finished document. Second, you will understand how the agent chains multiple steps together into a workflow. And third, you will produce deliverables yourself and learn how to iterate on quality by refining your prompts."
-
-"That third point is key. The first draft is rarely the best draft. The skill is knowing how to refine --- and the cost of refining is nearly zero."
-
-Transition: "Let me start with the full pipeline demo."
-:::
-
----
-
-## Full Pipeline Demo {.section-divider}
-
-::: {.notes}
-This section divider opens the full pipeline demo segment, which runs from roughly minute 10 to minute 25. Say: "Full Pipeline Demo." Then advance.
-
-Make sure the XYZ app is open and ready. You are about to ask it for a quarterly executive summary that pulls from multiple systems. This is the showpiece demo of Session 4.
-:::
-
----
-
-## "Prepare a Quarterly Executive Summary"
+## The Pipeline Steps
 
 ::: {.step-flow-6}
 ::: {.step-card}
@@ -153,515 +204,155 @@ Format final document
 :::
 
 ::: {.notes}
-This is the main demo slide for the full pipeline. Walk through the six steps on screen before switching to the live demo. Say: "Here is what is about to happen. I am going to ask the XYZ app one question: 'Prepare a quarterly executive summary of XYZ Corp performance --- revenue by division, headcount efficiency, top customer risks, and supply chain issues.' Watch what the agent does."
+Walk through each step before switching to the live demo. Say: "Here is what is about to happen. I am going to ask the Meridian app one question: 'Prepare a quarterly executive summary.' Watch what the agent does."
 
-Walk through each step: "Step one: it will query six source systems --- the three CRMs, the financial systems, Workday HR, and Zendesk support. Step two: it will merge the data, joining across systems and deduplicating where needed. Step three: it will compute KPIs --- year-over-year changes, variances to plan, efficiency ratios. Step four: charts. Step five: it will write narrative analysis --- not just numbers, but interpretation. Step six: it will assemble everything into a structured document."
+"Step one: it will query six source systems --- the three CRMs, the financial systems, Workday HR, and Zendesk support. Step two: merge and deduplicate. Step three: compute KPIs --- quarter-over-quarter changes, efficiency ratios, concentration metrics. Step four: charts. Step five: narrative analysis --- not just numbers, but interpretation. Step six: assemble everything into a structured document."
 
-"This is the 'last mile' problem. Getting the data is step one. Turning it into something your board can read is steps two through six. Let me show you."
+"Let me show you."
 
-DEMO INSTRUCTIONS: Switch to the XYZ app. Type: "Prepare a quarterly executive summary of XYZ Corp performance --- revenue by division, headcount efficiency, top customer risks, and supply chain issues." Let it run. Narrate as the agent works through each step. Point out: "Notice it is querying multiple systems... now it is merging... computing metrics... generating a chart... writing the narrative... and here is the final document." This demo should take about 10-12 minutes including narration.
-
-After the demo, say: "One prompt. One minute of waiting. A complete executive summary that would have taken an analyst days to prepare. That is the pipeline."
-
-If the live demo fails, switch to the pre-recorded fallback: "Let me switch to the recorded version so we do not lose time."
+Switch to the Meridian app.
 :::
 
 ---
 
-## Pipeline Demo: The Prompt {.shrink}
+## Live Demo: "Prepare a Quarterly Executive Summary" {.shrink}
 
-::: {.highlight-box}
-**Prompt typed into the XYZ app:**
-
-> Prepare a quarterly executive summary of XYZ Corp performance for Q4 2025 --- revenue by division, headcount efficiency, top customer risks, and supply chain issues.
-:::
-
-::: {.info-box}
+::: {.code-box}
 ::: {.box-title}
-Systems queried behind the scenes
+The prompt
 :::
-
-- **Salesforce** --- Industrial division revenue (Q3 & Q4)
-- **Legacy CRM** --- Energy division revenue (Q3 & Q4)
-- **HubSpot** --- Safety division revenue (Q3 & Q4)
-- **Workday** --- Headcount by division
-- **SAP** --- Industrial late deliveries & supplier quality
-- **Oracle SCM** --- Energy late shipments & supplier quality
-- **Zendesk** --- Support ticket volume & CSAT by division
-- **Python** --- Merge all data, compute KPIs, generate memo
+```
+Prepare a quarterly executive summary of Meridian Corp performance ---
+revenue by division, headcount efficiency, top customer risks, and
+supply chain issues. Include charts and a narrative summary.
+```
 :::
 
 ::: {.notes}
-This slide shows exactly what the user typed and what happened behind the scenes. Say: "Here is the prompt. One sentence. And here is what the agent did with it: it queried seven systems, merged the data in Python, computed KPIs, and generated a structured memo. Let me show you the highlights of what came back."
+DEMO INSTRUCTIONS: Switch to the Meridian app. Type the prompt. As it runs, narrate what you see: "It is starting with the CRM queries --- pulling revenue by division from each system. Now Workday for headcount. Now Zendesk for support tickets. SAP and Oracle for supply chain."
+
+Let the full result render. It should produce:
+- Revenue by division table with QoQ comparison
+- Headcount efficiency metrics
+- Customer concentration risk flags
+- Supply chain issue summary
+- Charts and narrative text
+
+Point out the key insight: "This is a complete executive summary. Revenue, headcount, customer risk, supply chain. All from one prompt. Six systems queried. Charts generated. Narrative written."
+
+If the demo fails, switch to the fallback recording and narrate over it.
 :::
 
 ---
 
-## Pipeline Demo: The Result --- Key Excerpts {.shrink}
-
-::: {.highlight-box}
-**Executive Summary (from the generated memo):**
-
-XYZ Corp delivered **$10.5M in Q4 revenue**, up **7.8% from Q3** ($9.7M), with growth across all three divisions. Two risks require immediate attention: **Energy division's 34% customer concentration** in CAT Energy Services, and **rising supplier delivery delays** in Industrial operations (16.7% late rate).
-:::
-
-::: {.two-col}
-::: div
-**Revenue Scorecard**
-
-| Division | Q4 2025 | QoQ Growth |
-|---|---|---|
-| Industrial | $5.9M | +7.5% |
-| Energy | $3.4M | +7.1% |
-| Safety | $1.1M | +12.1% |
-| **Total** | **$10.5M** | **+7.8%** |
-:::
-
-::: div
-**Risk Flags**
-
-| Risk | Severity |
-|---|---|
-| CAT Energy = 34% of Energy revenue | **HIGH** |
-| Industrial late deliveries: 16.7% | **HIGH** |
-| Honeywell Safety = 14% of Safety revenue | MEDIUM |
-| Energy CSAT 3.5/5.0 (below target) | MEDIUM |
-:::
-:::
-
-::: {.notes}
-Walk through the highlights. Say: "Look at what came back. A structured executive summary with the headline finding up front --- two risks that need attention. A revenue scorecard across all three divisions with quarter-over-quarter growth. And a risk flag table that prioritizes by severity. The full memo also includes headcount efficiency, supply chain detail, and an outlook section with recommended actions. One prompt. One minute of waiting. A complete board-ready document."
-
-The chart description from the memo: "The agent also generated a grouped bar chart showing Q3 versus Q4 revenue for each division --- light blue for Q3, dark blue for Q4, showing the step-up across all three."
-:::
-
----
-
-## Pipeline Demo: Supply Chain & Outlook {.shrink}
-
-::: {.two-col}
-::: div
-**Supply Chain Issues**
-
-- **Industrial (SAP):** 16.7% late delivery rate; worst supplier Huang-Martinez (quality score 2.8, avg 8.3 days late)
-- **Energy (Oracle SCM):** 11.9% late shipment rate; worst supplier Gonzalez & Sons (rating 2.9, avg 7.1 days late)
-:::
-
-::: div
-**Recommended Actions**
-
-1. **Diversify Energy's customer base** --- reduce CAT dependency below 25%
-2. **Fix Industrial supplier quality** --- place Huang-Martinez on 60-day improvement plan
-3. **Investigate Energy CSAT decline** --- cross-reference Zendesk tickets with late shipments
-:::
-:::
-
-::: {.explainer}
-Sources: Salesforce, Legacy CRM, HubSpot, Workday, SAP, Oracle SCM, Zendesk. All queried, merged, and formatted from a **single prompt**.
-:::
-
-::: {.notes}
-Say: "The memo also included supply chain detail from SAP and Oracle SCM, and ended with three concrete recommended actions --- each with a specific owner and timeline. This is the kind of output that would take an analyst days to compile manually. The agent did it in about a minute. That is the pipeline."
-
-Transition: "Now let me break down the anatomy of what just happened, because each of those steps is a lever you can customize."
-:::
-
----
-
-## Anatomy of a Reporting Pipeline {.section-divider}
-
-::: {.notes}
-This section divider opens the anatomy segment, which runs from roughly minute 25 to minute 38. Say: "Anatomy of a Reporting Pipeline." Then advance.
-
-This segment breaks down what just happened in the demo into discrete, customizable steps. The goal is to show participants that each step is a lever they can pull --- they are not locked into a single output format.
-:::
-
----
-
-## Each Step Is Customizable
-
-::: {.two-col}
-::: div
-**Data Steps**
-
-- **Query** --- which systems, which tables, what date range
-- **Clean** --- handle nulls, standardize formats, deduplicate
-- **Merge** --- join across systems on shared keys
-- **Compute** --- KPIs, YoY change, variance to budget
-:::
-
-::: div
-**Output Steps**
-
-- **Chart** --- bar, line, waterfall, heatmap; style and palette
-- **Narrate** --- tone, length, audience, what to emphasize
-- **Assemble** --- layout, headers, appendix, export format
-- **Review** --- human-in-the-loop checkpoint before distribution
-:::
-:::
-
-::: {.explainer}
-The pipeline is the same agent loop from Session 3, executed multiple times in sequence. Each step's output feeds into the next step's input.
-:::
-
-::: {.notes}
-Say: "Let me break down what you just saw into its component parts, because each one of these steps is customizable. That is what makes this powerful --- you are not locked into a fixed report format."
-
-Walk through the data steps: "On the left, the data steps. Query: you control which systems to pull from, which tables, what date range. Clean: handle missing values, standardize formats --- remember the Legacy CRM stores dates as text strings? That needs cleaning. Merge: join across systems using shared keys, with fuzzy matching for inconsistent names. Compute: calculate the metrics you care about --- year-over-year changes, variance to budget, headcount ratios."
-
-Walk through the output steps: "On the right, the output steps. Chart: you choose the chart type, the style, the color palette. Narrate: you control the tone --- formal for the board, conversational for a team meeting --- the length, the audience, what to emphasize. Assemble: layout, headers, whether there is an appendix, the export format. And review: a human-in-the-loop checkpoint before anything gets distributed."
-
-"The key insight here is that the pipeline is the same agent loop from Session 3, just executed multiple times in sequence. Each step's output feeds into the next step's input. The agent queries the data, feeds the results to the merge step, feeds the merged data to the compute step, and so on."
-
-"And here is where it gets interesting: you can change any single step without changing the others. Want a different chart type? Change the chart instruction. Want a different tone? Change the narrate instruction. Want to add a new data source? Add it to the query step. The pipeline is modular."
-
-Transition: "Now let me show you how to use that modularity to iterate on quality."
-:::
-
----
-
-## The Art of Iteration {.section-divider}
-
-::: {.notes}
-This section divider opens the iteration demo segment, which runs from roughly minute 38 to minute 43. Say: "The Art of Iteration." Then advance.
-
-This is a quick five-minute demo showing how prompt specificity drives output quality. You will ask for the same report three times with increasingly specific prompts.
-:::
-
----
-
-## Prompt Specificity Drives Quality
-
-::: {.three-cards}
-::: {.card .card-dark}
-::: {.card-title}
-Generic Prompt
-:::
-- "Summarize Q3 results"
-- Gets a wall of text
-- No structure, no emphasis
-- Fine for a first draft
-:::
-
-::: {.card .card-light}
-::: {.card-title}
-Structured Prompt
-:::
-- "Use traffic-light format: green/yellow/red for each division"
-- Clear visual hierarchy
-- Easy to scan
-- Much more useful
-:::
-
-::: {.card .card-light}
-::: {.card-title}
-Executive Prompt
-:::
-- "One page, lead with biggest risk, include 90-day action items"
-- Board-ready output
-- Prioritized by impact
-- Actionable recommendations
-:::
-:::
-
-::: {.notes}
-Say: "The quality of what you get out depends entirely on the specificity of what you put in. Let me show you three levels."
-
-"Level one: the generic prompt. 'Summarize Q3 results.' You will get a wall of text. It will be factually correct, but it will not be useful. No structure, no emphasis, no prioritization. Fine for a first draft, but you would never send it to your board."
-
-"Level two: the structured prompt. 'Use traffic-light format --- green, yellow, red --- for each division.' Now you have visual hierarchy. You can scan it in 30 seconds and know where the problems are. Much more useful."
-
-"Level three: the executive prompt. 'One page maximum. Lead with the biggest risk. End with three recommended actions for the next 90 days.' Now you have a board-ready document. Prioritized by impact. Actionable."
-
-"The underlying data is the same in all three cases. The difference is entirely in the prompt."
-
-DEMO INSTRUCTIONS: Switch to the XYZ app. Do three quick iterations. First: "Summarize quarterly performance." Show the generic output. Second: "Redo this using traffic-light format with red, yellow, and green for each division. Flag any metric more than 10% off plan." Show the improvement. Third: "Make this one page maximum. Lead with the biggest risk. End with three recommended actions." Show the board-ready version. Each iteration takes about 30-60 seconds. Narrate the differences as they appear.
-
-After the demo: "Each iteration took seconds. The cost of refining is essentially zero. The skill is knowing what to ask for --- and that is a business skill, not a technical one. You know what your board wants to see. You know what format works. Now you have a tool that can produce it."
-:::
-
----
-
-## Draft 1: "Summarize Q4 performance" {.shrink}
-
-::: {.highlight-box}
-**Prompt:** Summarize Q4 performance.
-:::
-
-> **XYZ Corp Q4 2025 Summary**
->
-> XYZ Corp generated $10.5M in revenue during Q4 2025, up from $9.7M in Q3 2025, representing 7.8% quarter-over-quarter growth.
->
-> **Revenue by division:**
->
-> - Industrial: $5.9M (56% of total)
-> - Energy: $3.4M (33% of total)
-> - Safety: $1.1M (11% of total)
->
-> **Headcount:**
->
-> - Industrial: 308 employees
-> - Energy: 220 employees
-> - Safety: 106 employees
->
-> All three divisions showed positive revenue growth compared to Q3. Safety had the highest growth rate at 12.1%.
-
-::: {.explainer}
-A **data dump**. Factually correct but no prioritization, no risk flags, no action items. A manager reads this and asks: *"So what?"*
-:::
-
-::: {.notes}
-Say: "Here is Draft 1. The agent did exactly what was asked --- it summarized Q4 performance. But look at the result. It is a wall of numbers with no hierarchy. Every fact is treated as equally important. There are no risk flags, no recommended actions, nothing that tells a decision-maker what to do next. This is what a generic prompt gets you: a generic answer."
-:::
-
----
-
-## Draft 2: "Traffic-light format, flag >10% off plan" {.shrink}
-
-::: {.highlight-box}
-**Prompt:** Redo this in traffic-light format --- green/yellow/red for each division. Flag any metric more than 10% off plan.
-:::
+## Demo Result: Q4 Executive Summary {.shrink}
 
 ::: {.comparison-table}
 
-| Division | Revenue | vs Plan | Customer Risk | Supply Chain | Overall |
-|---|---|---|---|---|---|
-| **Industrial** | $5.9M | -5.0% | Low (top cust 7%) | Late 16.7% | YELLOW |
-| **Energy** | $3.4M | +10.1% | HIGH --- CAT 34% | Late 11.9% | RED |
-| **Safety** | $1.1M | N/A | Medium (top cust 14%) | N/A | YELLOW |
+| Division | Q4 2025 | Q3 2025 | QoQ Growth | Active Customers |
+|---|---|---|---|---|
+| Industrial | $5,891,237 | $5,482,103 | +7.5% | 91 |
+| Energy | $3,412,891 | $3,187,445 | +7.1% | 65 |
+| Safety | $1,147,892 | $1,023,556 | +12.1% | 37 |
+| **Total** | **$10,452,020** | **$9,693,104** | **+7.8%** | **193** |
 
 :::
-
-> **RED flags:** Energy customer concentration 33.9%; Industrial late delivery rate 16.7%
->
-> **YELLOW flags:** Industrial revenue 5% below plan; Energy CSAT 3.5/5.0
->
-> **GREEN:** Energy revenue +10.1% above plan; Overall growth +7.8% QoQ
-
-::: {.explainer}
-**Structured and scannable.** Traffic-light colors give instant visual prioritization. But still no recommended actions --- a reader knows *what's wrong* but not *what to do*.
-:::
-
-::: {.notes}
-Say: "Same data, better prompt. Now we have a traffic-light dashboard. You can scan this in ten seconds and know that Energy is red and the other two are yellow. The agent pulled in budget data it did not use in Draft 1 because the prompt now asked for variance-to-plan. Red and yellow flags are clearly separated. This is a huge improvement --- but notice what is still missing. There are no recommended actions. A board member reads this and says, 'OK, Energy is red. Now what?'"
-:::
-
----
-
-## Draft 3: "One page, lead with risk, end with actions" {.shrink}
 
 ::: {.highlight-box}
-**Prompt:** One page maximum. Lead with the biggest risk. End with three recommended actions.
-:::
-
-::: {.two-col}
-::: div
-> **Biggest risk: Energy depends on a single customer**
->
-> CAT Energy Services generated **$1.16M in Q4** --- **34% of Energy's revenue**. No other division has a customer above 14%.
-
-| | Industrial | Energy | Safety |
-|---|---|---|---|
-| Q4 Revenue | $5.9M | $3.4M | $1.1M |
-| vs Plan | -5% | +10% | N/A |
-| QoQ Growth | +7.5% | +7.1% | +12.1% |
-| Top Cust % | 7.0% | **33.9%** | 13.6% |
-| **Status** | YELLOW | **RED** | YELLOW |
-:::
-
-::: div
-> **Three recommended actions:**
->
-> 1. **Diversify Energy's customer base.** Add 3--5 new accounts in Q1 to reduce CAT dependency below 25%.
->
-> 2. **Fix Industrial supplier quality.** Place Huang-Martinez on a 60-day improvement plan.
->
-> 3. **Investigate Energy CSAT decline.** Cross-reference Zendesk tickets with late shipments; present at February ops review.
-
-**Company total: $10.5M revenue, +7.8% QoQ, 634 employees**
-:::
-:::
-
-::: {.explainer}
-**Board-ready.** Leads with the headline risk. Compact scorecard. Ends with three concrete, assignable actions. Same data. Same agent. **The prompt was the variable that mattered.**
+Safety posted the strongest growth rate at **12.1%**. But Energy has a **34% customer concentration risk** in CAT Energy Services --- a single-point-of-failure.
 :::
 
 ::: {.notes}
-Say: "Draft 3. One page. The biggest risk is the very first thing you read --- Energy depends on a single customer for 34% of its revenue. The scorecard is compact enough to scan in ten seconds. And it ends with three recommended actions, each with a specific owner and timeline. This is what a board member can read in 90 seconds and know exactly what to do."
+Display this slide alongside or after the demo result. Say: "Here is the revenue breakdown. All three divisions grew quarter over quarter. Safety had the strongest growth rate at 12.1 percent, though from a smaller base. Total revenue: $10.5 million, up 7.8 percent."
 
-"Same data. Same agent. Same systems queried. The only thing that changed was the prompt. That is the lesson: the quality of the output is a function of the specificity of the instruction. And that specificity is a business skill, not a technical one. You know what your board wants. Now you can produce it."
+"But the agent also flagged a risk: Energy division has 34 percent customer concentration in CAT Energy Services. If that one customer leaves, Energy loses one-third of its revenue. No dashboard would have surfaced that unprompted. The agent did because the prompt asked for 'top customer risks.'"
 :::
 
 ---
 
-## Iteration in Practice
+## Now Iterate
 
-::: {.highlight-box}
-**Draft 1:** "Summarize quarterly performance." --- You get a generic overview.
-
-**Draft 2:** "Use traffic-light format. Flag any metric more than 10% off plan." --- Now it's scannable.
-
-**Draft 3:** "One page maximum. Lead with the biggest risk. End with three recommended actions." --- Board-ready.
-:::
-
-::: {.explainer}
-Each iteration takes seconds. The cost of refining is near zero. The skill is knowing *what to ask for* --- and that's a business skill, not a technical one.
-:::
-
-::: {.notes}
-Say: "Here is the pattern in text form. Draft one: generic. Draft two: structured. Draft three: board-ready. Three iterations. Each one took 30 seconds. Total cost: maybe a penny in API fees."
-
-"The important thing to internalize is that the first draft does not need to be perfect. The first draft needs to be good enough to iterate on. You are not writing the report --- you are directing the report. And the vocabulary of direction is format, tone, length, focus, audience, and emphasis."
-
-"I want you to use this vocabulary in the hands-on exercises we are about to do. Do not accept the first draft. Iterate at least twice."
-
-Transition: "Speaking of which --- let us get hands-on."
-:::
-
----
-
-## Hands-On Exercises {.section-divider}
-
-::: {.notes}
-This section divider opens the hands-on segment, which runs from roughly minute 43 to minute 60. Say: "Hands-On Exercises." Then advance.
-
-You are giving participants about 17 minutes to work through three exercises of increasing complexity. Not everyone will finish all three --- that is fine. The goal is for everyone to produce at least one deliverable and iterate on it at least once.
-:::
-
----
-
-## Exercise 1: Customer Risk Report {.shrink}
-
-::: {.info-box}
-::: {.box-title}
-Exercise 1 --- Customer Risk Report
-:::
-- Query accounts receivable aging and customer order history
-- Flag customers with invoices over 90 days past due
-- Cross-reference with recent order volume (are they still active?)
-- Output: one-page risk summary with traffic-light ratings
-:::
-
-::: {.notes}
-Say: "Exercise 1 is a customer risk report. Ask the XYZ app to pull accounts receivable aging data and cross-reference it with customer order history. You want to flag customers with invoices over 90 days past due and check whether those customers are still placing orders --- because a customer who owes you money but is still buying is a very different risk than a customer who owes you money and has gone silent."
-
-"The output should be a one-page risk summary with traffic-light ratings --- green, yellow, red. Try a generic prompt first, then refine."
-
-"If you are new to this, here is a starting prompt: 'Create a customer risk report. Query accounts receivable aging and recent order history. Flag any customer with invoices over 90 days past due. Show whether they are still placing orders. Use traffic-light format.' Then iterate."
-
-This exercise should take about 5-6 minutes. Walk the Zoom room while people work. Share your screen to show the exercise slide, then tell participants to switch to the XYZ app in their own browsers.
-:::
-
----
-
-## Exercise 2: Division P&L Comparison {.shrink}
-
-::: {.info-box}
-::: {.box-title}
-Exercise 2 --- Division P&L Comparison
-:::
-- Pull revenue and expense data for 3 divisions
-- Compute gross margin, operating margin, and YoY change
-- Generate a comparison chart (grouped bar or waterfall)
-- Write a two-paragraph narrative highlighting key variances
-:::
-
-::: {.notes}
-Say: "Exercise 2 is a division P&L comparison. Pull revenue and expense data for all three divisions --- Industrial, Energy, and Safety. Compute gross margin, operating margin, and year-over-year change. Generate a comparison chart --- grouped bar or waterfall, your choice. And write a two-paragraph narrative highlighting the key variances."
-
-"This is more complex because it requires data from multiple financial systems and a computed output. A good starting prompt might be: 'Compare P&L performance across XYZ's three divisions. Show revenue, gross margin, and operating margin for each. Include year-over-year changes. Generate a grouped bar chart and write two paragraphs of analysis highlighting the biggest variances.'"
-
-"Then iterate: change the chart type, adjust the narrative tone, add a specific metric you care about."
-
-If participants are struggling with Exercise 1, encourage them to keep refining rather than moving on. Quality iteration on one exercise is more valuable than rushing through all three.
-:::
-
----
-
-## Exercise 3: Board-Ready Memo {.shrink}
-
-::: {.info-box}
-::: {.box-title}
-Exercise 3 --- Board-Ready Memo
-:::
-- Combine data from Exercises 1 and 2
-- Add headcount and pipeline data
-- Structure as: Executive Summary, Key Risks, Division Performance, Outlook
-- One page. Lead with the single most important thing the board needs to know.
-- Iterate at least twice on tone and structure
-:::
-
-::: {.notes}
-Say: "Exercise 3 is the full board-ready memo. This combines everything from Exercises 1 and 2, adds headcount data from Workday and pipeline data from the CRMs, and structures it as a formal document: Executive Summary, Key Risks, Division Performance, Outlook."
-
-"The constraint is one page. Lead with the single most important thing the board needs to know. And I want you to iterate at least twice on tone and structure."
-
-"A starting prompt: 'Prepare a one-page board memo for XYZ Corp. Include: Executive Summary (lead with the single most important issue), Key Risks (customer AR and churn risk), Division Performance (revenue, margins, year-over-year), and Outlook (next quarter priorities). Pull from all available systems. Keep it to one page.'"
-
-"If you have time, try different versions: one for the board, one for an internal team meeting, one for an investor presentation. Same data, different audience, different tone."
-
-After about 15-17 minutes of hands-on time, bring the group back: "Let me bring everyone back. We are going to shift from producing deliverables ad hoc to thinking about how to automate them."
-
-This is a good moment to ask: "Did anyone produce something they would actually consider sharing? What did your iteration process look like?" Get one or two quick shares.
-:::
-
----
-
-## From Ad Hoc to Automated {.section-divider}
-
-::: {.notes}
-This section divider opens the automation segment, which runs from roughly minute 60 to minute 72. Say: "From Ad Hoc to Automated." Then advance.
-
-This segment bridges from the hands-on exercises to the production reality. The key insight is that the pipeline architecture is identical whether a human triggers it via chat or a scheduler triggers it via cron job.
-:::
-
----
-
-## Same Pipeline, Different Trigger
-
-::: {.two-cards}
-::: {.card .card-dark}
+::: {.three-cards}
+::: {.card .card-light}
 ::: {.card-title}
-Ad Hoc (Chat)
+Draft 1: Data Summary
 :::
-- User types a request
-- Agent runs pipeline
-- Delivers to the user
-- Great for exploration and one-offs
+- Revenue by division, headcount, growth rates
+- Comprehensive but flat
+- "Summarize Q4 performance"
 :::
 
 ::: {.card .card-light}
 ::: {.card-title}
-Automated (Scheduled)
+Draft 2: Traffic-Light Format
 :::
-- Cron job triggers the pipeline
-- Monday morning dashboard refresh
-- Monthly board deck generation
-- Human review gate before distribution
+- Red / Yellow / Green status by division
+- Flags anything >10% off plan
+- "Traffic-light format, flag >10% off plan"
+:::
+
+::: {.card .card-dark}
+::: {.card-title}
+Draft 3: Executive Brief
+:::
+- Leads with the biggest risk
+- Ends with 3 recommended actions
+- ["One page, lead with risk, end with actions"]{.amber}
 :::
 :::
 
-::: {.explainer}
-The architecture is identical. The only difference is *who triggers it* --- a person typing in chat or a scheduler running on a timer.
+::: {.case-quote}
+Same data. Same agent. [The prompt was the variable that mattered.]{.amber}
 :::
 
 ::: {.notes}
-Say: "Everything you just did in the exercises --- the customer risk report, the P&L comparison, the board memo --- you triggered it by typing in a chat window. But in production, these same pipelines can run on a schedule."
+DEMO INSTRUCTIONS: You can either do this live or show the prepared results. If live, iterate on the summary:
+1. The first output was a comprehensive data dump
+2. Now ask: "Reformat this as a traffic-light dashboard --- red, yellow, green --- flag anything more than 10 percent off plan"
+3. Then: "Make this one page. Lead with the biggest risk. End with three recommended actions."
 
-"On the left: ad hoc. You type a request, the agent runs the pipeline, delivers to you. Great for exploration, one-offs, and answering questions as they come up."
+Walk through the three drafts: "Same data. Same agent. The prompt was the variable that mattered. Draft 1 was a data dump --- technically correct but not useful to an executive. Draft 2 added structure --- the traffic-light format makes it scannable. Draft 3 leads with risk and ends with actions --- that is what a board wants to see."
 
-"On the right: automated. A cron job --- a scheduled task --- triggers the exact same pipeline. Monday morning at 6 AM, the agent runs the weekly performance review. First of the month, it generates the board deck. Every Friday, it refreshes the sales forecast."
-
-"The architecture is identical. The same agent loop from Session 3, the same pipeline steps we just walked through. The only difference is who triggers it --- a person or a scheduler."
-
-"But there is one critical addition in the automated version: a human review gate. The report is generated, but it is not distributed automatically. It goes to an approver --- a manager, a controller, a VP --- who reviews it, makes any needed edits, and then releases it. This is the maker-checker pattern we will discuss in depth in Session 6."
-
-Ask the room: "Think about your organization for a moment. What reports get produced on a regular schedule? Weekly? Monthly? Quarterly? How many person-hours go into producing them?" Let a few people share. Then say: "Now imagine those reports being drafted automatically, with a human just reviewing and approving. That is what we are talking about."
+"This is the iteration skill from Session 2, applied to enterprise deliverables. The first draft is rarely the best draft. The skill is knowing how to refine."
 :::
 
 ---
 
-## Production Pipeline Architecture
+## Three Iterations Compared {.shrink}
+
+::: {.comparison-table}
+
+| Draft | Prompt Addition | Output | Audience |
+|---|---|---|---|
+| 1 | "Summarize Q4 performance" | Data dump --- no prioritization | Analyst |
+| 2 | + "Traffic-light, flag >10% off plan" | Structured dashboard --- scannable | Manager |
+| 3 | + "One page, lead with risk, end with actions" | Executive brief --- board-ready | C-suite |
+
+:::
+
+::: {.explainer}
+The prompt is not just a question --- it is a **specification**. More specific prompts produce more useful deliverables. This is the skill you developed in Session 2, now applied to enterprise data.
+:::
+
+::: {.notes}
+Say: "Let me make the pattern explicit. The prompt is not just a question. It is a specification. Each iteration added specificity: format, thresholds, priorities, audience. And each iteration produced a more useful output."
+
+"This is the skill you developed in Session 2 --- iteration, critique, refinement --- now applied to enterprise data. The maker/checker framework still applies. But now you are checking not just accuracy, but whether the output serves its intended audience."
+
+Transition: "Now let me show you what happens behind the scenes."
+:::
+
+---
+
+## How the Agent Loop Works {.section-divider}
+
+::: {.notes}
+This opens the agent loop explanation (minutes 25-38). You are pulling back the curtain on the technical architecture. The goal is not to make students into developers, but to give them enough understanding to have informed conversations with technical teams and vendors.
+:::
+
+---
+
+## The Core Loop
 
 ::: {.step-flow}
 ::: {.step-card}
@@ -669,10 +360,10 @@ Ask the room: "Think about your organization for a moment. What reports get prod
 1
 :::
 ::: {.step-title}
-Scheduler
+System Prompt
 :::
 ::: {.step-desc}
-Cron, Airflow, or cloud scheduler
+Schema description: what tables, columns, and relationships exist
 :::
 :::
 
@@ -681,10 +372,10 @@ Cron, Airflow, or cloud scheduler
 2
 :::
 ::: {.step-title}
-Agent Pipeline
+Tool Call
 :::
 ::: {.step-desc}
-Same loop: query, compute, chart, narrate
+LLM writes SQL and requests execution
 :::
 :::
 
@@ -693,10 +384,10 @@ Same loop: query, compute, chart, narrate
 3
 :::
 ::: {.step-title}
-Human Review
+Execute & Return
 :::
 ::: {.step-desc}
-Approver checks output before distribution
+System runs SQL, sends results back to LLM
 :::
 :::
 
@@ -705,61 +396,147 @@ Approver checks output before distribution
 4
 :::
 ::: {.step-title}
-Distribute
+Test & Review
 :::
 ::: {.step-desc}
-Email, Slack, SharePoint, or dashboard
+LLM checks results --- correct? try again? deliver?
 :::
 :::
+:::
+
+::: {.explainer}
+This is a **test-and-review cycle**, not a one-shot generation. The LLM writes code, the system executes it, the LLM reviews the results, and decides: deliver or try again.
 :::
 
 ::: {.notes}
-Walk through the four steps. Say: "Here is the production architecture. Step one: a scheduler kicks off the pipeline. This could be a simple cron job, Apache Airflow if you have a data engineering team, or a cloud scheduler like AWS EventBridge or Azure Logic Apps."
+Say: "Let me pull back the curtain. When you ask the Meridian app a question, four things happen."
 
-"Step two: the agent pipeline runs. Same loop we have been looking at all session --- query, compute, chart, narrate, assemble. The code is identical to what ran when you typed in the chat window."
+Walk through each step: "Step one: the system prompt. Before your question ever reaches the LLM, a system prompt has been loaded that describes every table, every column, and every relationship. This is the institutional knowledge layer --- it tells the LLM what data exists and what it means."
 
-"Step three: human review. This is essential. The output goes to an approver before it goes anywhere else. The approver checks the numbers, verifies the narrative makes sense, and either approves or sends it back for revision. In production, you never distribute an AI-generated report without human review. We will talk more about why in Session 6 when we cover trust and verification."
+"Step two: the tool call. The LLM reads your question, reads the schema, and writes SQL. But it does not just return the SQL. It requests execution --- it says 'run this query against this database.'"
 
-"Step four: distribute. Once approved, the report goes out --- email, Slack, SharePoint, a dashboard, whatever your organization uses."
+"Step three: the system runs the SQL and sends the results back to the LLM. The LLM never touches the database directly."
 
-"The beauty of this architecture is that steps two through four are the same regardless of what triggers step one. A person typing in chat, a scheduled job, a webhook from another system --- the pipeline does not care. It just runs."
-
-Transition: "This is not hypothetical. Let me show you a real-world example of exactly this pattern at enterprise scale."
+"Step four --- and this is the key insight: the LLM reviews the results. If the result set is empty, or the numbers look wrong, or an error occurred, it tries again. It rewrites the SQL, changes a filter, fixes a join. This is a test-and-review cycle, not a one-shot generation."
 :::
 
 ---
 
-## Case Study: HPE {.section-divider}
+## The System Prompt Is Everything {.shrink}
+
+::: {.code-box}
+::: {.box-title}
+What the LLM sees before your question
+:::
+```
+You are a data analyst for Meridian Corp, a $500M B2B distributor.
+
+Available databases:
+- sf_opportunities: Salesforce CRM (Industrial division)
+  Columns: OpportunityId, AccountName, Amount, CloseDate, Stage...
+- legacy_orders: Legacy CRM (Energy division)
+  Columns: order_id, customer_name, order_amount, order_date (VARCHAR!)...
+- hs_deals: HubSpot CRM (Safety division)
+  Columns: deal_id, company_name, amount, close_date...
+- wd_employees: Workday HR
+  Columns: employee_id, division, department, hire_date, salary...
+
+IMPORTANT: legacy_orders stores dates as MM/DD/YYYY text strings.
+IMPORTANT: Customer names differ across systems. Use fuzzy matching.
+```
+:::
 
 ::: {.notes}
-This section divider opens the HPE case study, which is part of the automation segment (minutes 60-72). Say: "Case Study: HPE." Then advance.
+Say: "This is a simplified version of what the LLM sees before your question arrives. The system prompt describes every table, every column, and every gotcha. Look at the notes at the bottom: the Legacy CRM stores dates as text strings, not proper dates. Customer names differ across systems --- use fuzzy matching."
 
-The HPE case is powerful because it is a Fortune 500 company that automated exactly the kind of pipeline the participants just built in miniature. The scale is different, but the pattern is identical.
+"This system prompt is the institutional knowledge layer. If the agent gets a query wrong, the fix is often not in the code --- it is in the schema description. Change the description, change the SQL."
+
+"Who writes this? In a production deployment, it is a combination of data engineers and business analysts. Someone who knows both the technical schema and what the business actually means when it says 'revenue' or 'active customer.'"
 :::
 
 ---
 
-## HPE: "Alfred" Replaces 100-Slide Weekly Review {.quote-slide}
+## The Test-and-Review Cycle
+
+::: {.two-cards}
+::: {.card .card-light}
+::: {.card-title}
+What Makes This Different from a Dashboard
+:::
+- Dashboards run **pre-written** queries
+- If the query is wrong, you get wrong answers forever
+- Changing the question means changing the code
+- No self-correction capability
+:::
+
+::: {.card .card-dark}
+::: {.card-title}
+What the Agent Does
+:::
+- Writes a **new query** for every question
+- Reviews results: empty set? error? retry
+- Can rewrite SQL 2-3 times before delivering
+- [Self-corrects --- but not infallibly]{.amber}
+:::
+:::
+
+::: {.notes}
+Say: "This test-and-review cycle is what makes agents fundamentally different from dashboards. A dashboard runs pre-written queries. If the query has a bug, you get wrong answers until someone fixes the code. The agent writes a new query for every question, reviews the results, and can self-correct."
+
+"But --- and this is important --- self-correction is not infallible. The agent can retry 2 or 3 times and still get it wrong. It might think an empty result set means 'no data' when the real problem is a wrong filter. That is why the maker/checker framework matters. The agent corrects many of its own errors. You catch the rest."
+:::
+
+---
+
+## From Ad Hoc to Automated {.section-divider}
+
+::: {.notes}
+This opens the "ad hoc to automated" segment (minutes 38-48). You are bridging from interactive Q&A to scheduled reporting pipelines. The HPE case study provides real-world validation.
+:::
+
+---
+
+## The Production Pattern
+
+::: {.two-cards}
+::: {.card .card-light}
+::: {.card-title}
+What You Have Been Doing
+:::
+- Type a question in a chat interface
+- Get an answer in real time
+- Useful --- but manual and ad hoc
+- You still have to remember to ask
+:::
+
+::: {.card .card-dark}
+::: {.card-title}
+What Production Looks Like
+:::
+- Same agent loop, triggered by a **schedule**
+- Monday morning dashboard refresh
+- Monthly board deck, weekly sales forecast
+- [Error handling + version control + human review gates]{.amber}
+:::
+:::
+
+::: {.notes}
+Say: "Everything you have done so far has been interactive. You type a question, you get an answer. That is useful. But in production, these pipelines run on schedules."
+
+"Imagine the quarterly executive summary you just saw, but it runs automatically on the first Monday of every quarter. It queries the same six systems, generates the same charts, writes the same narrative. But instead of you typing the prompt, a cron job triggers it."
+
+"What changes in production? Three things: error handling --- what happens when a database is down or a query returns unexpected results? Version control --- can you reproduce last month's report exactly? And human review gates --- the report is drafted but held for approval before distribution."
+:::
+
+---
+
+## Real-World Benchmark: HPE {.quote-slide}
+
+## "Alfred" --- HPE's AI Agent
 
 ::: {.quote-text}
-CFO Marie Myers deployed an AI agent called [Alfred]{.amber} to automate Hewlett Packard Enterprise's weekly performance review. The 100-slide deck that took a team days to prepare is now generated automatically --- with humans reviewing the output, not creating it.
+HPE's CFO Marie Myers deployed an AI agent that replaced a [100-slide weekly performance review]{.amber} that consumed hundreds of person-hours. The agent queries financial systems, generates analysis, and produces executive summaries --- the same pipeline you just saw.
 :::
-
-::: {.quote-source}
---- HPE executive communications, 2025--2026; reported by Fortune and CFO Dive
-:::
-
-::: {.notes}
-Let the quote land, then add context. Say: "This is Hewlett Packard Enterprise --- a Fortune 500 company with over 60,000 employees. Their CFO, Marie Myers, deployed an AI agent called Alfred to automate the weekly performance review. Previously, a team spent days preparing a 100-slide deck every week. Now the agent generates it, and the team reviews it."
-
-"Notice the pattern: it is exactly what we just built. Query multiple systems, compute metrics, generate charts, write narrative, assemble a document. The difference is scale --- HPE is doing this across the entire enterprise --- and trigger --- it runs on a schedule, not from a chat window."
-
-"But the most important part of this story is not the technology. It is the organizational shift. The team that used to create the deck now reviews it. Their job changed from production to verification. That is a fundamentally different skill set, and it is a change that every organization deploying this technology will face."
-:::
-
----
-
-## HPE Results
 
 ::: {.stat-cards}
 ::: {.stat-card}
@@ -767,7 +544,7 @@ Let the quote land, then add context. Say: "This is Hewlett Packard Enterprise -
 40%
 :::
 ::: {.stat-label}
-Faster reporting cycle
+faster reporting cycle
 :::
 :::
 
@@ -776,7 +553,7 @@ Faster reporting cycle
 25%
 :::
 ::: {.stat-label}
-Lower processing costs
+lower processing costs
 :::
 :::
 
@@ -785,35 +562,182 @@ Lower processing costs
 90%
 :::
 ::: {.stat-label}
-Reduction in manual preparation
+reduction in manual prep
 :::
 :::
-:::
-
-::: {.explainer}
-The pattern is exactly what we built today: query multiple systems, compute metrics, generate charts, write narrative, assemble document. HPE just runs it on a schedule instead of typing in a chat window.
 :::
 
 ::: {.notes}
-Say: "The numbers are striking. Forty percent faster reporting cycle --- the weekly review is ready in hours instead of days. Twenty-five percent lower processing costs. And ninety percent reduction in manual preparation."
+Say: "This is not hypothetical. HPE's CFO Marie Myers deployed an AI agent internally called Alfred. It replaced a 100-slide weekly performance review that consumed hundreds of person-hours of manual preparation."
 
-"That ninety percent number is the one I want you to focus on. It does not mean the team was eliminated. It means ninety percent of their preparation time was freed up. They now spend their time on judgment and verification --- checking the numbers, interpreting the trends, adding context that the agent cannot --- rather than on data gathering and formatting."
+"The results: 40 percent faster reporting cycle. 25 percent lower processing costs. 90 percent reduction in manual prep. This is exactly the pipeline you just saw --- querying enterprise systems, generating analysis, producing executive summaries --- running at scale in a Fortune 500 company."
 
-"This is the pattern for every organization that deploys reporting automation. The work shifts from creation to verification. The people doing the work need different skills --- they need to be good at checking, not just producing."
-
-"And this is also a benchmark for your capstone projects. If HPE can automate a 100-slide weekly review for a $30 billion company, what recurring reports at your organization could follow the same pattern?"
-
-Transition: "Let us explore that question now."
+"This is the benchmark. When you think about your capstone strategy and what is realistic, HPE shows that automated reporting pipelines are not a future promise --- they are a current reality."
 :::
 
 ---
 
-## Workshop {.section-divider}
+## Live Walkthrough: Building an Agent {.section-divider}
 
 ::: {.notes}
-This section divider opens the workshop segment, which runs from roughly minute 72 to minute 85. Say: "Workshop." Then advance.
+This opens the live build segment (minutes 48-53). The instructor builds a simple agent on the Linux server using Claude Code. This is a quick, high-impact demonstration --- 5 minutes, not a full coding session. The goal is the "your developer could do this" moment.
+:::
 
-This is individual and small-group work. The goal is for each participant to identify 2-3 recurring reports at their company that could be automated using this pipeline pattern. This feeds directly into the capstone project.
+---
+
+## From English to Working Code
+
+::: {.info-box}
+::: {.box-title}
+What You Are About to See
+:::
+- The instructor opens a terminal on the Linux server
+- Types English instructions to Claude Code: "Build a Python script that takes a question, sends it to Claude with a schema description, gets SQL back, runs it, and prints the answer"
+- Claude Code generates ~50 lines of Python
+- We run it. We ask a question. We get an answer.
+:::
+
+::: {.highlight-box}
+The entire agent --- from blank file to working code --- takes about **5 minutes**. This is the "your developer could do this" moment.
+:::
+
+::: {.notes}
+DEMO INSTRUCTIONS: Switch to the Linux server terminal. Open an empty file. Tell Claude Code in English to build the basic agent. Narrate as it generates code:
+
+"Watch --- I am telling Claude Code in plain English to build a data agent. 'Build a Python script that takes a question, sends it to Claude with a schema description, gets back SQL, runs it against a parquet file, and prints the answer.'"
+
+"It is writing the code now. About 50 lines. There is the schema description. There is the tool call mechanism. There is the execution loop."
+
+Run it. Ask: "How many employees does each division have?" Show the answer.
+
+Say: "That is the entire core agent. Fifty lines of code. Built from English instructions in about 5 minutes. The Meridian app you have been using is built on this same core loop --- it just has 3,000 more lines for error handling, multiple databases, authentication, and the web interface."
+
+"The gap between 50 lines and 3,000 lines is the gap between prototype and production. That gap is real. But the core is simple."
+
+If the live demo fails, describe what would have happened and show a pre-prepared screenshot of the code.
+:::
+
+---
+
+## The 50 Lines vs. the 3,000 Lines
+
+::: {.two-cards}
+::: {.card .card-light}
+::: {.card-title}
+50 Lines: The Prototype
+:::
+- System prompt with schema
+- Tool call mechanism (SQL execution)
+- Basic response formatting
+- Works for one database, one user
+- **This is what you just saw**
+:::
+
+::: {.card .card-dark}
+::: {.card-title}
+3,000 Lines: Production
+:::
+- Multiple database connections
+- Authentication and access control
+- Error handling and retry logic
+- Logging, monitoring, audit trail
+- Web interface, API, scheduling
+- [This is the Meridian app]{.amber}
+:::
+:::
+
+::: {.explainer}
+The core is simple. Production is engineering. Understanding the difference helps you evaluate vendors and scope internal builds.
+:::
+
+::: {.notes}
+Say: "The core agent is 50 lines. The production application is 3,000 lines. What is the other 2,950 lines? Multiple database connections. Authentication. Error handling. Logging. Monitoring. A web interface. Scheduling. All the things that make it reliable, secure, and usable by more than one person."
+
+"Why does this matter to you? Two reasons. First, when a vendor shows you a demo, you now know that the demo is the easy part. The hard part is the production engineering. Second, when someone on your team says 'I can build this,' they are right about the 50-line prototype --- but make sure they are scoping the 3,000-line production version."
+:::
+
+---
+
+## Hands-On: Build Your Own Report {.section-divider}
+
+::: {.notes}
+This opens the hands-on segment (minutes 53-68). Students use the Meridian app to produce specific deliverables. Three guided exercises, each requiring different combinations of data sources.
+:::
+
+---
+
+## Three Report Exercises
+
+::: {.three-cards}
+::: {.card .card-light}
+::: {.card-title}
+Exercise 1: Customer Risk Report
+:::
+- Combine CRM pipeline data with support ticket trends
+- Which customers are high-revenue AND high-complaint?
+- Include a chart and a recommendation
+:::
+
+::: {.card .card-light}
+::: {.card-title}
+Exercise 2: Division P&L Comparison
+:::
+- Revenue by division from CRMs
+- Headcount from Workday
+- Revenue per employee with commentary
+- Compare divisions head-to-head
+:::
+
+::: {.card .card-dark}
+::: {.card-title}
+Exercise 3: Board Memo
+:::
+- Q3 vs Q4 performance across all divisions
+- Charts, narrative, risk flags
+- [Iterate: make it one page, lead with risk]{.amber}
+- Use the Session 2 techniques
+:::
+:::
+
+::: {.notes}
+Say: "Your turn. Three exercises, each producing a different type of deliverable. You do not need to do all three --- pick the one that interests you most and do it well. If you finish early, try another."
+
+"Exercise 1: customer risk report. Combine CRM data with Zendesk support tickets. Which customers are both high-revenue and high-complaint? That is a risk signal."
+
+"Exercise 2: division P&L comparison. Pull revenue from the CRMs and headcount from Workday. Calculate revenue per employee. Compare divisions."
+
+"Exercise 3: the full board memo. Q3 vs Q4 performance across all divisions, with charts, narrative, and risk flags. Then iterate --- make it one page, lead with the biggest risk. Use the iteration techniques from Session 2."
+
+"You have 15 minutes. Focus on one exercise and make it great. Iterate on your prompt --- the first draft is never the best draft."
+
+Circulate and help. Watch for students who are struggling with prompt specificity --- coach them to be more specific about format, audience, and what to include.
+:::
+
+---
+
+## Iteration Tips
+
+::: {.info-box}
+::: {.box-title}
+Getting Better Output
+:::
+- **Be specific about format:** "Traffic-light dashboard" vs. "one-page executive brief"
+- **Name the audience:** "For the CFO" produces different output than "for the sales team"
+- **Set thresholds:** "Flag anything more than 10% off plan"
+- **Ask for critique:** "What is weak about this analysis? What would a skeptical CFO push back on?"
+- **Iterate:** "Lead with risk. End with three actions. Cut to one page."
+:::
+
+::: {.notes}
+Display this slide as a reference while students work. You do not need to walk through each point unless someone asks. The key coaching move is to watch for students getting mediocre output and saying "good enough" --- push them to iterate at least once.
+:::
+
+---
+
+## Workshop: Your Reporting Candidates {.section-divider}
+
+::: {.notes}
+This opens the workshop segment (minutes 68-80). Students shift from the Meridian simulation to their own companies. They are identifying recurring reports that follow the data-to-deliverable pattern and could be candidates for automation.
 :::
 
 ---
@@ -822,154 +746,185 @@ This is individual and small-group work. The goal is for each participant to ide
 
 ::: {.info-box}
 ::: {.box-title}
-Workshop --- Your Recurring Reports
+Individual Exercise (12 minutes)
 :::
-- Identify **2--3 recurring reports** at your company that follow this pattern
-- For each, answer:
-  1. What data sources does it pull from?
-  2. Who prepares it today, and how long does it take?
-  3. Who reviews and approves it?
-  4. What would "good enough to automate" look like?
-- Be ready to share one example with the class
+For **2-3 recurring reports** at your company:
+
+1. **What is the report?** (weekly status, monthly board deck, quarterly review, etc.)
+2. **What systems feed it?** (CRM, ERP, HR, finance)
+3. **Who builds it today?** How long does it take?
+4. **What would automation look like?** Agent queries sources, generates draft, human reviews
+:::
+
+::: {.comparison-table}
+
+| Report | Systems | Owner Today | Time | Automation Potential |
+|---|---|---|---|---|
+| *e.g., Weekly sales forecast* | *Salesforce + NetSuite* | *Sales Ops analyst* | *4 hours/week* | *High --- structured data, repeating format* |
+| *e.g., Monthly board deck* | *All systems* | *FP&A team* | *3 days/month* | *Medium --- needs heavy human review* |
+| | | | | |
+
 :::
 
 ::: {.notes}
-Say: "For the next 12 to 13 minutes, I want you to think about your own organization. Identify two to three recurring reports that follow the pattern we have been discussing --- data from multiple systems, compiled into a deliverable, distributed on a regular schedule."
+Say: "Now think about your own company. What recurring reports follow the pattern we just saw --- data from enterprise systems, combined and formatted into a deliverable? I want you to identify 2 to 3 candidates."
 
-"For each report, answer four questions. One: what data sources does it pull from? Two: who prepares it today, and how long does it take? Three: who reviews and approves it before distribution? Four: what would 'good enough to automate' look like? Not perfect --- good enough. What level of accuracy and polish would you need before you would trust an automated draft?"
+"For each one: what is the report? What systems feed it? Who builds it today and how long does it take? And what would automation look like?"
 
-"That fourth question is the most important one, and it is the one most organizations skip. They think about whether the technology can produce the report, but they do not think about what the acceptance criteria are. If the automated version is 90% as good and takes 95% less time, is that good enough? For most internal reports, the answer is yes."
+"Be realistic about automation potential. A weekly sales forecast from structured CRM data is a strong candidate. A monthly board deck that requires significant judgment and interpretation is a weaker candidate --- or at least, the automation handles the data assembly and the human handles the analysis."
 
-"Take about 8 minutes to work through this individually, and then we will share. I want each person to be ready to describe one of their recurring reports --- what it is, where the data comes from, and what 'good enough to automate' would mean."
+"This exercise connects directly to your capstone. The reports you identify here may become the use case you present in Session 8."
 
-After 8-9 minutes: "Let me have a few people share. Who has a good example?" Take 3-4 shares, asking follow-up questions: "How many person-hours go into that report today? What would your team do with that time back? Who in your organization would need to approve an automated version?"
-
-Discussion prompts if energy is low: "What is the most painful recurring report in your organization --- the one everyone dreads producing? What makes it painful: the data gathering, the formatting, or the review process?"
+Give students the full 12 minutes. Circulate and help.
 :::
 
 ---
 
-## Session 4 Recap
-
-::: {.step-flow}
-::: {.step-card}
-::: {.step-icon}
-1
-:::
-::: {.step-title}
-Pipeline
-:::
-::: {.step-desc}
-Query, clean, compute, chart, narrate, assemble
-:::
-:::
-
-::: {.step-card}
-::: {.step-icon}
-2
-:::
-::: {.step-title}
-Iteration
-:::
-::: {.step-desc}
-Prompt specificity drives output quality
-:::
-:::
-
-::: {.step-card}
-::: {.step-icon}
-3
-:::
-::: {.step-title}
-Automation
-:::
-::: {.step-desc}
-Same loop, triggered by schedule instead of chat
-:::
-:::
-
-::: {.step-card}
-::: {.step-icon}
-4
-:::
-::: {.step-title}
-HPE Case
-:::
-::: {.step-desc}
-100-slide deck automated, 90% less manual prep
-:::
-:::
-:::
+## Where Does the Code Run? {.section-divider}
 
 ::: {.notes}
-Walk through the recap. Say: "Four things from today. First, the pipeline: query, clean, compute, chart, narrate, assemble. Every reporting pipeline follows this pattern, and each step is customizable."
-
-"Second, iteration. The quality of the output depends on the specificity of your prompt. Generic prompts get generic results. Specific prompts --- with format, tone, length, focus --- get board-ready documents. The cost of iterating is near zero."
-
-"Third, automation. The pipeline you ran from a chat window today is the same pipeline that can run on a Monday morning schedule. The architecture is identical. The only difference is the trigger."
-
-"Fourth, the HPE case. A Fortune 500 company automated a 100-slide weekly review with 90% less manual preparation. The team shifted from creating to reviewing. That is the pattern for every organization deploying this technology."
+Brief preview segment (minutes 80-85). This sets up Session 5 on deployment architecture. Keep it high-level --- 5 minutes, not a deep dive.
 :::
 
 ---
 
-## Before Next Session {.shrink}
+## Three Execution Options
+
+::: {.three-cards}
+::: {.card .card-light}
+::: {.card-title}
+Cloud LLM Sandbox
+:::
+- Code runs on the vendor's servers
+- Easiest to set up
+- Your data leaves your network
+- What we use for the Meridian demo (synthetic data)
+:::
+
+::: {.card .card-light}
+::: {.card-title}
+Your Own Containers
+:::
+- Code runs on your servers
+- Data stays on-premise
+- You manage infrastructure
+- Higher control, higher cost
+:::
+
+::: {.card .card-dark}
+::: {.card-title}
+SQL-Only Mode
+:::
+- LLM only generates SQL, never sees raw data
+- Your system executes the SQL locally
+- Minimum data exposure
+- [Most restrictive but most secure]{.amber}
+:::
+:::
+
+::: {.explainer}
+Our demo uses synthetic data in the cloud. Production deployments keep data on-premise. Session 5 digs into these tradeoffs in detail.
+:::
+
+::: {.notes}
+Say: "Quick preview. When you deploy an agent in production, where does the code actually run? Three options."
+
+Walk through briefly: "Option one: the vendor's cloud. Easiest to set up, but your data leaves your network. That is what we use for the Meridian demo --- the data is synthetic, so it does not matter. Option two: your own containers. Data stays on-premise. You manage everything. Higher control, higher cost. Option three: SQL-only mode. The LLM generates SQL but never sees the raw data. Your system executes the query locally and only sends aggregate results to the LLM."
+
+"Each option has different security, cost, and capability tradeoffs. Session 5 is entirely about this decision. The pre-readings I am assigning tonight will prepare you for that discussion."
+:::
+
+---
+
+## Homework {.section-divider}
+
+::: {.notes}
+Wrap-up segment (minutes 85-90).
+:::
+
+---
+
+## This Week
 
 ::: {.info-box}
 ::: {.box-title}
-Homework
+Homework for Session 5
 :::
-
-- **Produce a deliverable:** Use the XYZ app to create one complete output --- a memo, comparison, or risk assessment. Save or screenshot it. Bring it to Session 5.
-- **Pre-reading for Session 5** (~35 min total):
-  1. **Morgan Stanley case study** (provided) --- a regulated firm's deployment decision. Come prepared to discuss: what constraints did they face, and what surprised you?
-  2. **AIMultiple: "Cloud LLM vs Local LLMs"** --- the three deployment options and their tradeoffs
-  3. **"What Does Your AI Actually See?"** (provided) --- four data security approaches. A 5-minute read.
-- If you haven't yet, read the **a16z CIO survey** and **DUNNIXER vendor scorecard** from Session 3 homework before Session 5.
-:::
-
-::: {.explainer}
-Monday's session: [What Does Deployment Look Like?]{.accent} --- architecture, data security, and build vs. buy. This is a flipped session --- come prepared to discuss, not just listen.
+1. **Produce one complete deliverable** using the Meridian app --- a memo, comparison, or risk assessment. Save or screenshot the output.
+2. **Pre-reading (~35 min):**
+    - Morgan Stanley case study (provided) --- a regulated firm's deployment decision
+    - [AIMultiple: "Cloud LLM vs Local LLMs"](https://aimultiple.com/cloud-llm) --- three deployment options
+    - "What Does Your AI Actually See?" (provided) --- four data security approaches
+3. **Optional reading:** a16z "How 100 Enterprise CIOs Are Building and Buying Gen AI" + DUNNIXER vendor evaluation scorecard
+4. **Optional:** Linux server Exercises 1--2 + Demos 1--4
 :::
 
 ::: {.notes}
-Walk through the homework carefully. This is important because Session 5 is a flipped session that depends on the pre-reading.
+Say: "Homework. First, produce one complete deliverable using the Meridian app. Not a single question --- a full report. A memo, a comparison, a risk assessment. Whatever interests you. Save or screenshot the output and bring it to Session 5."
 
-Say: "Homework for next session. First, produce a deliverable. Use the XYZ app to create one complete output --- a memo, a comparison, a risk assessment, whatever interests you. Save it or screenshot it and bring it to Session 5. We will open with people sharing what they produced."
+"Second, required pre-reading --- about 35 minutes total. Three items: the Morgan Stanley case study, the AIMultiple article on cloud vs. local LLMs, and a short piece on what the AI actually sees when it accesses your data. These prepare you for Session 5, which is entirely about deployment and architecture."
 
-"Second, and this is critical: pre-reading for Session 5. There are about 35 minutes of reading total, and you need to do it before Monday. Session 5 is a flipped session --- we are going to discuss and apply, not lecture. If you come without having read, you will be lost."
+"Optional: the a16z enterprise AI survey and the DUNNIXER vendor evaluation scorecard. Keep the DUNNIXER scorecard --- you will use it in Session 5."
 
-"The three readings. One: the Morgan Stanley case study, which is in your course materials. Morgan Stanley deployed AI for 16,000 financial advisors under SEC and FINRA regulations. Come prepared to discuss: what constraints did they face, what did they choose, and what surprised you? Two: the AIMultiple article on cloud versus local LLMs. Three deployment options and their tradeoffs --- this connects directly to the 'where does the code run' discussion from Session 3. Three: 'What Does Your AI Actually See?' --- four approaches to data security. It is a five-minute read but it is the core concept for Session 5."
-
-"Also, if you have not yet read the a16z CIO survey and the DUNNIXER vendor scorecard from the Session 3 homework, please read them before Monday. We will use the DUNNIXER scorecard in a group exercise."
-
-"Monday's session is about deployment architecture, data security, and build versus buy. Come prepared to discuss, not just listen."
-
-If relevant, mention the optional Linux server exercises: "And if you want more hands-on time, Exercise 3 on the Linux server connects to today's session --- it walks you through wrapping an agent in a web interface. Demos 3 and 4 in the recorded demos also connect."
+"Also optional: the Linux server exercises and recorded demos. If you want to build an agent yourself, Exercises 1 and 2 walk you through it with AI assistance."
 :::
 
 ---
 
-## Key Takeaway {.section-divider}
+## Session 5 Preview
+
+::: {.highlight-box}
+**Session 5: "What Does Deployment Look Like?"**
+
+- Where does the LLM run? Cloud vs. on-premise vs. hybrid
+- What does the AI actually see? Data security approaches
+- Build vs. buy vs. extend --- the real decision matrix
+- Morgan Stanley case study discussion
+
+Come prepared: read the case study and form an opinion.
+:::
 
 ::: {.notes}
-This is the final section divider. Say: "Key Takeaway." Then advance to the closing slide.
+Say: "Next session is about deployment. You have seen what the technology can do. Now the question is: how do you actually put this into production at your company? Where does the LLM run? What data does it see? Do you build, buy, or extend?"
+
+"Come prepared. Read the Morgan Stanley case study and form an opinion --- was their decision the right one? What would your company do differently? See you Monday."
 :::
 
 ---
 
-## Same pipeline. Different trigger. {.centered-statement}
+## Session 4 Summary {.centered-statement}
 
-## You typed in a chat window. HPE runs it at [6 AM Monday]{.accent}.
+## From Data to Deliverable
 
-::: {.explainer}
-The pattern --- query, compute, chart, narrate, assemble --- is the same whether it's ad hoc or automated.
+::: {.stat-cards}
+::: {.stat-card}
+::: {.stat-number}
+6
+:::
+::: {.stat-label}
+systems queried in one prompt
+:::
+:::
+
+::: {.stat-card}
+::: {.stat-number}
+50
+:::
+::: {.stat-label}
+lines of code in the core agent loop
+:::
+:::
+
+::: {.stat-card}
+::: {.stat-number}
+90%
+:::
+::: {.stat-label}
+manual prep reduction at HPE
+:::
+:::
 :::
 
 ::: {.notes}
-Let the slide land, then close with: "Same pipeline. Different trigger. You typed in a chat window this afternoon. HPE runs the same pattern at 6 AM every Monday morning."
-
-"The technology is not the barrier. The pattern --- query, compute, chart, narrate, assemble --- works. You have seen it work. You have used it yourself. The questions that remain are about deployment, security, trust, and organizational change. Those are the questions we will tackle starting Monday."
-
-"Produce your deliverable this week. Do the reading. Come ready to discuss on Monday. Have a good evening."
+Recap slide to display as students leave. Key takeaways: the pipeline goes from one prompt to a complete deliverable, the core agent is surprisingly simple (50 lines), and this is already working at scale in companies like HPE.
 :::

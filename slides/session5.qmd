@@ -60,7 +60,7 @@ Notice the arc: the first three objectives give you the frameworks. The fourth o
 ## Homework Debrief {.section-divider}
 
 ::: {.notes}
-Alright, let us start with where we left off. You were asked to produce a complete deliverable using the XYZ app --- a memo, a comparison, a risk assessment. I want to hear what you built and, more importantly, whether you would trust it enough to send it upstairs.
+Alright, let us start with where we left off. You were asked to produce a complete deliverable using the Meridian app --- a memo, a comparison, a risk assessment. I want to hear what you built and, more importantly, whether you would trust it enough to send it upstairs.
 
 [TIMING: This section divider is a brief transition. Move immediately to the next slide.]
 :::
@@ -75,7 +75,7 @@ Alright, let us start with where we left off. You were asked to produce a comple
 Share Your Deliverable
 :::
 
-- Walk us through the output from Session 4
+- Walk us through the deliverable you produced in the Meridian app
 - What question did it answer?
 - Who is the audience --- and what format did you choose?
 :::
@@ -102,7 +102,7 @@ After each share, I want the rest of the room to apply the board-ready test. Loo
 
 This is the perfect bridge into today's topic. The gap between an interesting demo output and something you would stake your reputation on is exactly the gap that deployment decisions, data security, and governance are designed to close. That gap is what the rest of this session addresses.
 
-[TIMING: 8 minutes total for this segment. Call on 3-4 students, about 1.5 minutes each, with brief reactions from the room. If participation is slow, share your own example from the XYZ app to get things started. Transition: "Those verification instincts you just described? They are exactly the right instincts. Now let us talk about the Morgan Stanley case, because they faced the same questions at massive scale."]
+[TIMING: 8 minutes total for this segment. Call on 3-4 students, about 1.5 minutes each, with brief reactions from the room. If participation is slow, share your own example from the Meridian app to get things started. Transition: "Those verification instincts you just described? They are exactly the right instincts. Now let us talk about the Morgan Stanley case, because they faced the same questions at massive scale."]
 :::
 
 ---
@@ -110,7 +110,7 @@ This is the perfect bridge into today's topic. The gap between an interesting de
 ## Two Separate Decisions {.section-divider}
 
 ::: {.notes}
-Before we get into the Morgan Stanley discussion, I want to plant one important idea that connects back to Session 3.
+Before we get into the Morgan Stanley discussion, I want to plant one important idea that connects back to Session 4.
 
 [TIMING: Brief transition slide. Move to the next slide immediately.]
 :::
@@ -142,11 +142,11 @@ Where does THE LLM run?
 :::
 
 ::: {.explainer}
-Bridge from Session 3: the agent architecture has two halves. Your code and the LLM are [separate deployment decisions]{.accent} --- and the security implications are different for each.
+Bridge from Session 4: the agent architecture has two halves. Your code and the LLM are [separate deployment decisions]{.accent} --- and the security implications are different for each.
 :::
 
 ::: {.notes}
-Remember in Session 3 when we looked under the hood of the agent? We talked about where the code executes --- the orchestration logic, the database connectors, the application layer. That code runs on your servers. You control it entirely. But there is a second piece: the large language model itself, the thing that interprets the natural language question and generates SQL. Where does that run? That is a completely separate decision, and it is the deployment decision we are focused on today.
+In Session 4 we asked: where does the code run? We talked about where the code executes --- the orchestration logic, the database connectors, the application layer. That code runs on your servers. You control it entirely. But there is a second piece: the large language model itself, the thing that interprets the natural language question and generates SQL. Where does that run? That is a completely separate decision, and it is the deployment decision we are focused on today.
 
 Here is why this distinction matters. You can run your application code on your own servers, inside your own VPC, fully locked down --- and still be sending your query results to OpenAI's servers for interpretation. Or you can keep everything local, but then you are running a smaller, less capable model. These are different tradeoffs with different security implications. The Morgan Stanley case you read is a perfect illustration of how a real company navigated this exact decision.
 
@@ -249,7 +249,7 @@ Cloud API dominates early adoption. But as query volume scales and data sensitiv
 :::
 
 ::: {.notes}
-Let me put some numbers on this. A simple cloud API query costs one to five cents. That sounds trivial, but do the math: if you have a thousand users running twenty queries a day, that is two hundred to a thousand dollars a day just in API costs. And multi-step queries --- the kind we have been running in the XYZ app, where the agent queries multiple systems and merges results --- those can cost ten to fifty cents each because they involve multiple LLM calls.
+Let me put some numbers on this. A simple cloud API query costs one to five cents. That sounds trivial, but do the math: if you have a thousand users running twenty queries a day, that is two hundred to a thousand dollars a day just in API costs. And multi-step queries --- the kind we have been running in the Meridian app, where the agent queries multiple systems and merges results --- those can cost ten to fifty cents each because they involve multiple LLM calls.
 
 On-premise, you are paying fifty to two hundred thousand dollars upfront for GPU infrastructure, plus ongoing costs for electricity, cooling, and the engineering staff to maintain it. But after that, your marginal cost per query approaches zero.
 
@@ -299,7 +299,7 @@ The question isn't whether the AI *can* access the data. It's whether it *should
 :::
 
 ::: {.notes}
-[DEMO INSTRUCTIONS: Open the XYZ app. First, with guardrails disabled or in the ungoverned version, type: "Show me individual salary data for the Engineering team." Let the agent return names, titles, and exact salaries. Let the room see it. Pause for a beat. Then switch to the guardrailed version and ask the same question. Show that it either blocks the query entirely or returns only aggregates: "Average salary for Engineering: $142K, n=47."]
+[DEMO INSTRUCTIONS: Open the Meridian app. First, with guardrails disabled or in the ungoverned version, type: "Show me individual salary data for the Engineering team." Let the agent return names, titles, and exact salaries. Let the room see it. Pause for a beat. Then switch to the guardrailed version and ask the same question. Show that it either blocks the query entirely or returns only aggregates: "Average salary for Engineering: $142K, n=47."]
 
 Look at that first result. The agent did exactly what you asked. The SQL was correct. The data is accurate. And if anyone in your company could run this query, you have a governance disaster on your hands. Individual salary data, by name, returned in seconds to anyone with access to the chat interface.
 
@@ -400,7 +400,7 @@ The key insight is that these are not mutually exclusive. They are a menu, and y
 ## Build vs. Buy {.section-divider}
 
 ::: {.notes}
-We have covered the "where does it run" question. Now the "who builds it" question. You may have read the DUNNIXER vendor scorecard with your Session 3 homework --- if you did, you are ahead. If not, I will walk you through the framework now and we will apply it together.
+We have covered the "where does it run" question. Now the "who builds it" question. You may have read the DUNNIXER vendor scorecard with your Session 4 homework --- if you did, you are ahead. If not, I will walk you through the framework now and we will apply it together.
 
 [TIMING: Brief transition. Move to the next slide.]
 :::
@@ -489,7 +489,7 @@ Buying from your incumbent vendor --- Salesforce, Microsoft, SAP --- is the lowe
 
 AI-native startups are purpose-built for AI-first workflows. They often have the highest capability today because AI is all they do. But there is vendor survival risk. Half of the AI startups that exist today will not exist in three years. And integration with your legacy systems may be nonexistent.
 
-Building internally gives you full control. You saw in Session 3 that the core agent loop is fifty lines of code. But going from fifty lines to production is a different story --- authentication, error handling, monitoring, audit logging. You need ML engineering talent, and you are looking at quarters, not weeks.
+Building internally gives you full control. You saw in Session 4 that the core agent loop is fifty lines of code. But going from fifty lines to production is a different story --- authentication, error handling, monitoring, audit logging. You need ML engineering talent, and you are looking at quarters, not weeks.
 
 The hybrid or extend approach is the most common enterprise pattern. You buy a platform --- Salesforce Agentforce, Microsoft Copilot Studio, something similar --- and then you customize on top. You get the vendor's infrastructure and security, but you add your own prompts, your own data connections, your own business logic.
 
@@ -533,7 +533,7 @@ Agentforce illustrates the [extend strategy]{.accent}: buy the platform, customi
 ::: {.notes}
 Let us score this together using the DUNNIXER framework. I will take us through two or three dimensions as a group exercise.
 
-Data integration: Agentforce gets a high score within the Salesforce ecosystem. If your CRM data is in Salesforce, the connection is native. But how does it score for cross-system queries? If you also need NetSuite financial data or Workday HR data, Agentforce's reach drops significantly. Think about the XYZ app experience --- we were querying across ten systems. Agentforce is strong within one.
+Data integration: Agentforce gets a high score within the Salesforce ecosystem. If your CRM data is in Salesforce, the connection is native. But how does it score for cross-system queries? If you also need NetSuite financial data or Workday HR data, Agentforce's reach drops significantly. Think about the Meridian app experience --- we were querying across ten systems. Agentforce is strong within one.
 
 Non-functional requirements: Salesforce already has SOC 2 certification, GDPR compliance, and enterprise-grade uptime SLAs. If your compliance team already trusts Salesforce with your data, the incremental trust required for Agentforce is small. That is a real advantage.
 
@@ -596,13 +596,13 @@ Signs You Should Wait
 :::
 
 ::: {.explainer}
-The 60--90 days of pre-work from Session 2 applies here. [Data readiness]{.accent} is the prerequisite that no vendor demo will mention.
+The 60--90 days of pre-work from Session 3 applies here. [Data readiness]{.accent} is the prerequisite that no vendor demo will mention.
 :::
 
 ::: {.notes}
 I want to be honest with you about something that no vendor will tell you. Not every company is ready for this. If you are sitting there thinking "my company does not even have documented schemas" or "it would take six months just to get API access to our production databases," then the honest answer for your capstone might be: the first phase of your AI strategy is data readiness, not AI deployment.
 
-Remember Session 2, when we talked about the sixty to ninety days of pre-work? Cataloging your data, documenting your schemas, provisioning API access, classifying PII? That pre-work is not optional. It is the prerequisite. And if your company has not done it, that is actually a valuable finding for your capstone. Your deployment profile might say: "Phase 1 is data readiness, Phase 2 is a pilot deployment."
+Remember Session 3, when we talked about the sixty to ninety days of pre-work? Cataloging your data, documenting your schemas, provisioning API access, classifying PII? That pre-work is not optional. It is the prerequisite. And if your company has not done it, that is actually a valuable finding for your capstone. Your deployment profile might say: "Phase 1 is data readiness, Phase 2 is a pilot deployment."
 
 There is no shame in that. In fact, a capstone that honestly says "we are not ready yet, and here is the six-month roadmap to get ready" is more credible than one that pretends you can deploy an AI agent next quarter when you cannot even describe your schema.
 
@@ -713,7 +713,7 @@ Second, think about the approval chain. Who in your organization would need to s
 
 Third, if you did not finish your deployment profile, complete it before Wednesday. You will need it.
 
-Wednesday's session is called "Can You Trust It?" and it is going to be a very different experience. We are going to deliberately break the XYZ app. We are going to show you three failures that look like successes, teach you a verification framework, and then turn you loose to red-team the agent yourselves. Come ready to be skeptical.
+Wednesday's session is called "Can You Trust It?" and it is going to be a very different experience. We are going to deliberately break the Meridian app. We are going to show you three failures that look like successes, teach you a verification framework, and then turn you loose to red-team the agent yourselves. Come ready to be skeptical.
 
 [TIMING: 3 minutes. Be clear and concise on the homework. Transition to the closing.]
 :::

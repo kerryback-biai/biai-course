@@ -1,5 +1,5 @@
 ---
-title: "Session 3: How Does This Actually Work?"
+title: "Session 3: AI Meets Your Data"
 subtitle: "Business Intelligence & AI"
 author: "Kerry Back, Rice University"
 format:
@@ -14,71 +14,170 @@ format:
     center: true
 ---
 
-## Last Week, You Were the User {.section-divider}
+## From Personal Productivity to Enterprise Data {.section-divider}
 
 ::: {.notes}
-This is the section divider that opens the bridge segment. Take a breath here and let the title land. You are transitioning the class from "user mode" --- where they have spent the last week asking questions and getting answers from the XYZ app --- into "builder mode," where they will understand what is happening behind the scenes. This bridge segment should take about 10 minutes total, covering this slide and the next two.
-
-Set the tone: "For the past week, you have been the user. You typed questions in plain English, you got charts and narratives back, and hopefully a few of you found something genuinely surprising in the data. Today we flip perspectives. We are going to look under the hood and understand how the technology actually works. By the end of this session, you will know exactly what happens between the moment you press Enter and the moment the answer appears."
+This section divider opens the bridge segment (minutes 0-8). You are transitioning the class from "personal AI" mode --- where they spent a week generating charts, documents, and workflows with Claude --- into "enterprise AI" mode, where the same technology connects to corporate databases. Let the title land, then advance.
 :::
 
 ---
 
-## Bridge {.centered-statement}
-
-::: {.notes}
-This is a brief transitional slide. Simply say: "Bridge. We are crossing from user to builder. Everything you have done so far --- the queries, the cross-system merges, the charts --- all of that was powered by a surprisingly small amount of code. Today you will see it."
-
-Pause for a beat and advance. Do not linger on this slide.
-:::
-
----
-
-## You've spent a week asking questions and getting answers.
-
-Now let's look under the hood.
+## The Shift
 
 ::: {.explainer}
-How does an AI agent turn your English question into SQL, run it, and deliver a polished result? The answer is surprisingly simple --- and surprisingly powerful.
+You have spent a week using AI for **personal productivity** --- charts, documents, workflows. Now we scale up. The same AI that drafts your memos can also **query your company's databases**.
+:::
+
+::: {.highlight-box}
+But enterprise data is scattered across 5, 10, sometimes 20 systems. Today we see what that looks like --- and what AI can do about it.
 :::
 
 ::: {.notes}
-This is the main bridge slide. Spend about two minutes here setting up the session arc. Say something like: "You have spent a week asking questions and getting answers. Some of those answers were great. Some were not. But in every case, something was happening behind the scenes --- your English question was being translated into SQL, that SQL was being executed against a real database, and the results were being interpreted and formatted for you."
+Say: "You have spent a week using AI for personal productivity --- charts, documents, workflows. You have iterated, critiqued, and built reusable prompts. Now we scale up. The same AI that drafts your memos can also query your company's databases. But enterprise data is scattered across many systems. Today we see what that looks like and what AI can do about it."
 
-"Today we are going to demystify that entire process. The answer to 'how does this work?' is surprisingly simple at the core. The agent loop that powers the XYZ app --- and most BI agents on the market --- is about 50 lines of code. We will see those 50 lines today. We will also see why going from 50 lines to a production application takes 3,000 lines, and what all that extra code does. That gap --- between prototype and production --- is one of the most important things you need to understand as an executive evaluating AI tools."
+"By the end of this session, you will have queried enterprise databases in plain English, watched AI merge data across systems that don't talk to each other, and started mapping your own company's data landscape. Let's jump right in."
 
-Transition: "Let me start with our learning objectives for today."
+Transition: advance to the cold open.
 :::
 
 ---
 
-## Learning Objectives
-
-- Understand the **agent loop** as an orchestrated test-and-review cycle
-- See the **50 lines of code** that power the core of the app
-- Understand **where code executes** and why that's an architectural decision
+## The 3-Week Email Chain {.section-divider}
 
 ::: {.notes}
-Walk through the three objectives briefly. Say: "Three things we are going to cover. First, the agent loop --- the core pattern that every AI data agent uses. It is a test-and-review cycle, not a one-shot generation. Second, we will see the actual code --- about 50 lines --- that powers the core of the app you have been using. And third, we will talk about where that code runs, because that is an architectural decision with real security implications."
-
-"These three concepts will give you the vocabulary to have informed conversations with your technical teams and with vendors. You will understand what is simple, what is hard, and where the real engineering effort lives."
-
-This slide should take about one minute. Then transition: "Let us start with the agent loop."
+This is the cold open provocation (minutes 8-13). The goal is to create an emotional anchor: the frustration of waiting weeks for a simple cross-system question. You will present the scenario and then immediately contrast it with the Meridian app demo.
 :::
 
 ---
 
-## The Agent Loop {.section-divider}
+## "Which of Our Customers Buy from Multiple Divisions?"
+
+::: {.two-cards}
+::: {.card .card-dark}
+::: {.card-title}
+The CEO's Question
+:::
+- Simple enough to ask in one sentence
+- Requires data from 3 separate CRMs
+- Nobody owns the cross-system view
+- The answer should drive pricing strategy
+:::
+
+::: {.card .card-light}
+::: {.card-title}
+The 3-Week Reality
+:::
+- Week 1: BI team extracts from Salesforce
+- Week 2: Energy team pulls from legacy CRM
+- Week 3: Manual matching in Excel, finally delivered
+- [CEO has moved on to a different priority]{.accent}
+:::
+:::
 
 ::: {.notes}
-This section divider opens the agent loop demo segment, which runs from roughly minute 10 to minute 30. Say: "The Agent Loop. This is the core pattern." Then advance.
+Say: "Here is a scenario that might feel familiar. A CEO asks a simple question: which of our customers buy from multiple divisions? It is one sentence. It should be answerable. But here is what actually happens."
 
-Before you advance, make sure the XYZ app is open in another window and ready for the demo. You will be showing a cross-system question and walking through what happens behind the scenes --- the system prompt, the tool call, the SQL execution, the merge, and the final response.
+Walk through the right card: "Week one, the BI team extracts data from Salesforce. Week two, someone from the Energy division pulls from their legacy CRM. Week three, an analyst is manually matching customer names in Excel. By the time the answer arrives, the CEO has moved on to a different priority."
+
+Ask the room: "Has this happened to you? A simple business question that took weeks because the data lived in different systems? Raise your hand if the answer is yes."
+
+Pause for responses. Then: "What I am about to show you takes about 30 seconds."
 :::
 
 ---
 
-## What Happens When You Ask a Question?
+## Demo: Dashboard vs. Chat {.section-divider}
+
+::: {.notes}
+This opens the live demo segment (minutes 13-23). Make sure the Meridian Corp app is open in another browser tab and ready. You are about to ask the same cross-system question and get an instant answer. This is the "wow" moment of the session.
+:::
+
+---
+
+## Introducing Meridian Corp
+
+::: {.info-box}
+::: {.box-title}
+The Simulation Environment
+:::
+- **$500M B2B industrial distributor** with 3 operating divisions
+- **10 enterprise systems**: Salesforce, Legacy CRM, HubSpot, NetSuite, SAP, Oracle SCM, Workday, Zendesk, QuickBooks
+- **41 tables, 26,000+ rows, 3 years of data**
+- Realistic cross-system friction: different naming conventions, date formats, column styles
+:::
+
+::: {.explainer}
+You will log in and query this environment yourself in 15 minutes. First, watch what happens when we ask it the CEO's question.
+:::
+
+::: {.notes}
+Briefly introduce the Meridian Corp simulation. Say: "This is the environment you will be working with for the rest of the course. Meridian Corp is a fictional $500M B2B industrial supplies distributor. It has three divisions --- Industrial, Energy, and Safety --- each with their own CRM, plus shared finance, HR, and support systems. Ten systems total. Forty-one database tables. Three years of realistic data."
+
+"The key word is realistic. The systems have different naming conventions. The Legacy CRM stores dates as text strings. Customers appear under different names across divisions --- General Electric in one system, GE Industrial Solutions in another. This is what real enterprise data looks like."
+
+"You will log in and query this yourself in a few minutes. But first, let me show you what happens when we ask it the CEO's question."
+
+Switch to the Meridian app and prepare for the live demo.
+:::
+
+---
+
+## Live Demo: "Which Customers Buy from Multiple Divisions?" {.shrink}
+
+::: {.code-box}
+::: {.box-title}
+The prompt
+:::
+```
+Which of our customers buy from multiple divisions?
+Show combined revenue and flag any name mismatches across systems.
+```
+:::
+
+::: {.notes}
+DEMO INSTRUCTIONS: Switch to the Meridian app. Type the prompt above (or similar). As results load, narrate what is happening: "Watch --- it is querying Salesforce first, then the Legacy CRM, then HubSpot. Three separate queries. Now it is using Python to merge the results with fuzzy name matching."
+
+Let the full result appear. Point out key elements:
+- The table showing multi-division customers with combined revenue
+- The name mismatches (GE vs. General Electric, CAT vs. Caterpillar)
+- The summary stats: 10 customers across multiple divisions, 4 buying from all 3
+
+Say: "That took about 30 seconds. The same question that took the BI team 3 weeks. Same data. Same systems. Different interface."
+
+If the live demo fails, switch to the pre-recorded fallback and narrate over it.
+:::
+
+---
+
+## Demo Result: Cross-System Merge {.shrink}
+
+::: {.comparison-table}
+
+| Customer | Industrial (SF) | Energy (Legacy) | Safety (HubSpot) | Combined Revenue | Divisions |
+|---|---|---|---|---|---|
+| General Electric | General Electric | GE Industrial Solutions | GE Safety Division | $18.4M | 3 |
+| ExxonMobil | ExxonMobil Corp | Exxon Mobil Energy Svcs | ExxonMobil Safety | $14.7M | 3 |
+| Dow Chemical | Dow Chemical Co. | Dow Energy Products | Dow Inc. | $12.1M | 3 |
+| Chevron | Chevron USA Inc. | Chevron Energy | Chevron Phillips Safety | $11.3M | 3 |
+| 3M Company | 3M Industrial | --- | 3M Safety Products | $8.6M | 2 |
+
+:::
+
+::: {.highlight-box}
+**10 customers** buy from 2+ divisions. **4** buy from all 3 --- representing **$56.5M** (11.4% of total revenue). Only 3 of 10 had matching names across systems.
+:::
+
+::: {.notes}
+Display this summary slide while the demo result is still visible in the app. Say: "Here is what the agent found. Ten customers purchase from multiple divisions. Four of them --- GE, ExxonMobil, Dow, and Chevron --- buy from all three divisions, representing $56.5 million in combined revenue."
+
+"But here is the insight that matters: only 3 of the 10 had matching names across systems. The other 7 required fuzzy matching to link. Without that matching, these customers appear as 24 separate accounts. You cannot negotiate enterprise pricing. You cannot see the full relationship. You cannot even answer the CEO's question."
+
+Pause: "This is the problem that AI solves. Not just querying one database --- any dashboard can do that. Querying multiple systems and reconciling the messy reality of how the same customer appears differently in each one."
+:::
+
+---
+
+## Behind the Scenes
 
 ::: {.step-flow}
 ::: {.step-card}
@@ -86,10 +185,10 @@ Before you advance, make sure the XYZ app is open in another window and ready fo
 1
 :::
 ::: {.step-title}
-System Prompt
+Query SF
 :::
 ::: {.step-desc}
-Schema description tells the LLM what tables and columns exist
+Pull customers + revenue from Salesforce CRM
 :::
 :::
 
@@ -98,10 +197,10 @@ Schema description tells the LLM what tables and columns exist
 2
 :::
 ::: {.step-title}
-Tool Call
+Query Legacy
 :::
 ::: {.step-desc}
-LLM writes SQL (or Python) and requests execution
+Pull from Energy division's custom CRM
 :::
 :::
 
@@ -110,10 +209,10 @@ LLM writes SQL (or Python) and requests execution
 3
 :::
 ::: {.step-title}
-Execute & Return
+Query HubSpot
 :::
 ::: {.step-desc}
-System runs the code and sends results back to the LLM
+Pull from Safety division's CRM
 :::
 :::
 
@@ -122,700 +221,536 @@ System runs the code and sends results back to the LLM
 4
 :::
 ::: {.step-title}
-Review & Deliver
+Fuzzy Merge
 :::
 ::: {.step-desc}
-LLM checks results, fixes errors or delivers the answer
+Python matches names across systems (GE = General Electric)
 :::
 :::
-:::
-
-::: {.notes}
-This is the first conceptual slide of the agent loop segment. This segment should take about 20 minutes total (minutes 10-30), including the live demo. Walk through each step deliberately, pointing to each card as you go.
-
-Say: "When you type a question into the XYZ app --- or any AI data agent --- four things happen. Step one: the system prompt. Before your question even reaches the LLM, a system prompt has already been loaded that describes the database schema --- what tables exist, what columns they have, what the relationships are. Think of this as giving the LLM a map of your data before asking it to navigate."
-
-"Step two: the tool call. The LLM reads your question, reads the schema, and writes SQL --- or sometimes Python --- to answer it. But here is the key: it does not just return the SQL to you. It makes a tool call, which is a request to the system to actually execute that code."
-
-"Step three: execute and return. The orchestration layer --- the code that sits between you and the LLM --- takes that SQL, runs it against the database, and sends the results back to the LLM. The LLM never touches the database directly. It writes code, and the system executes it."
-
-"Step four: review and deliver. The LLM looks at the results. If something looks wrong --- an empty result set, an error message, numbers that do not make sense --- it can try again. It might rewrite the SQL, change a filter, fix a join. If the results look good, it formats them into a natural language response with charts and delivers the answer."
-
-Transition: "Let me show you this in action. I am going to switch to the XYZ app and ask a cross-system question, but this time I want you to watch what happens behind the scenes."
-
-DEMO INSTRUCTIONS: Switch to the XYZ app. Ask a cross-system question like "Which customers buy from multiple divisions and what is their total revenue?" Walk through the system prompt, show the SQL that was generated, show the results coming back, show the Python merge step, and show the final formatted response. Narrate each step as it maps to the four cards on this slide.
-:::
-
----
-
-## Agent Loop Demo: The Prompt {.shrink}
-
-::: {.code-box}
-::: {.box-title}
-What the user typed
-:::
-```
-Which division has the highest customer concentration risk?
-```
 :::
 
 ::: {.explainer}
-One question. The agent must: (1) decide what "concentration risk" means, (2) query three CRMs, (3) compute top-customer share for each division, (4) compare and flag the outlier.
+The agent **cannot** join across systems in a single query. It pulls from each, then uses Python to reconcile. This mirrors how a real enterprise AI tool works.
 :::
 
 ::: {.notes}
-This is the demo question. Notice it requires business reasoning --- the agent has to define "customer concentration risk" as the percentage of revenue from the top customer. Then it has to query three separate CRMs to get revenue by customer for each division, compute the percentages, and compare them. Let's trace the agent loop step by step.
+Walk through each step card. Say: "What you just saw was not a single database query. The agent queried three separate systems, one at a time. It pulled customer data and revenue from Salesforce, then the Legacy CRM, then HubSpot. Then it used Python to merge the results."
+
+"The merge step is where the magic happens. The agent used fuzzy name matching to link 'General Electric' in Salesforce to 'GE Industrial Solutions' in the Legacy CRM to 'GE Safety Division' in HubSpot. An exact-match join would have missed 7 of the 10 multi-division customers."
+
+"This is important to understand: the agent cannot join across systems in a single SQL query. It queries each system where the data lives, then reconciles in code. This mirrors how a real enterprise AI tool would work --- and it is different from a data warehouse, where you would move everything into one place first."
 :::
 
 ---
 
-## Agent Loop Demo: The SQL {.shrink}
-
-::: {.code-box}
-::: {.box-title}
-Step 3 --- Salesforce (Industrial)
-:::
-```sql
-SELECT a.AccountName, SUM(o.TotalAmount) AS total_revenue
-FROM sf_orders o JOIN sf_accounts a ON o.AccountId = a.AccountId
-WHERE o.Status != 'Cancelled'
-GROUP BY a.AccountName ORDER BY total_revenue DESC LIMIT 10
-```
-*Top customer: General Electric --- $4.2M of $63.4M total*
-:::
-
-::: {.code-box}
-::: {.box-title}
-Step 4 --- Legacy CRM (Energy)
-:::
-```sql
-SELECT c.client_name, SUM(o.total) AS total_revenue
-FROM client_orders o JOIN clients c ON o.client_id = c.client_id
-GROUP BY c.client_name ORDER BY total_revenue DESC LIMIT 10
-```
-*Top customer: CAT Energy Services --- $12.8M of $37.9M total*
-:::
-
-::: {.code-box}
-::: {.box-title}
-Step 5 --- HubSpot (Safety)
-:::
-```sql
-SELECT c.name, SUM(d.amount) AS total_revenue
-FROM hs_deals d JOIN hs_companies c ON d.company_id = c.company_id
-WHERE d.dealstage = 'closedwon'
-GROUP BY c.name ORDER BY total_revenue DESC LIMIT 10
-```
-*Top customer: Honeywell Safety Products --- $1.7M of $12.2M total*
-:::
+## The Business Lens {.section-divider}
 
 ::: {.notes}
-Three systems, three queries, three different schemas. Each query pulls the top 10 customers by revenue and a division total. Notice the structural differences: Salesforce uses AccountId as the join key, the Legacy CRM uses client_id, and HubSpot uses company_id. The agent knew which columns to use because the system prompt told it. Also notice the agent filtered for completed orders in each system --- Status not Cancelled in Salesforce, and dealstage equals closedwon in HubSpot. These filters came from the system prompt documentation.
-
-The agent also ran a separate total-revenue query for each division so it could compute concentration percentages. That is seven tool calls so far --- six queries plus one code execution coming next.
+This transitions to the business implications segment (minutes 23-33). You are connecting what they just saw to the SaaSpocalypse from Session 1 and to the broader strategic implications.
 :::
 
 ---
 
-## Agent Loop Demo: The Result {.shrink}
-
-::: {.comparison-table}
-
-| Division | Top Customer | Top Customer Revenue | Division Total | Concentration |
-|---|---|---|---|---|
-| **Energy** | CAT Energy Services | $12.8M | $37.9M | **33.9%** |
-| Safety | Honeywell Safety Products | $1.7M | $12.2M | 13.8% |
-| Industrial | General Electric | $4.2M | $63.4M | 6.6% |
-
-:::
-
-::: {.highlight-box}
-**Energy division's top customer accounts for 34% of division revenue** --- 3x the accepted 10% threshold. If CAT Energy Services were lost, the Energy division loses one-third of its revenue.
-:::
-
-::: {.notes}
-Here is the final output. The agent merged the three query results in Python, computed concentration percentages, sorted by risk, and flagged the outlier. Energy's top customer represents 33.9 percent of division revenue --- three times the generally accepted 10 percent threshold for customer concentration risk. Safety is also above the threshold at 14 percent, while Industrial is well-diversified at 7 percent.
-
-What you just watched was the full agent loop: Step 1, system prompt loaded. Step 2, the agent planned its approach --- it decided it needed revenue by customer from three CRMs. Steps 3 through 5, tool calls to query each CRM. Step 6, Python code execution to merge and compute. Step 7, the agent reviewed the numbers and spotted the 34 percent outlier. Step 8, it delivered a narrative answer with a table and context. Seven tool calls, four loop rounds, one answer.
-:::
-
----
-
-## The Key Insight: Test and Review
-
-::: {.highlight-box}
-The agent doesn't just generate code and hope for the best. It **writes code, executes it, reviews the result**, and decides whether to **deliver or try again**.
-:::
-
-::: {.explainer}
-This is the same pattern a careful analyst follows: write a query, check the output, refine if something looks off, then present the final answer. The LLM automates that entire cycle.
-:::
-
-::: {.notes}
-After the demo, come back to this slide to reinforce the key insight. Say: "Here is what I want you to take away from what you just saw. The agent does not just generate code and hope for the best. It writes code, executes it, reviews the result, and decides whether to deliver or try again. That loop --- write, execute, review, decide --- is the fundamental pattern."
-
-"Think about how a careful analyst works. They write a query, look at the output, notice something is off, rewrite the query, check again, and only then present the results. The LLM automates that entire cycle. It is not magic --- it is a structured test-and-review process."
-
-"This is also why the agent sometimes takes a few seconds longer than you might expect. It is not slow --- it is reviewing its own work. And sometimes it runs through the loop two or three times before delivering an answer, because the first attempt did not look right."
-
-Ask the room: "Did anyone notice during Sessions 1 or 2 that the agent sometimes seemed to pause or take a moment before answering? That was the review step. It was checking its own work."
-:::
-
----
-
-## The Agent Loop in Pseudocode {.shrink}
-
-::: {.code-box}
-::: {.box-title}
-agent_loop.py --- The Core (~50 Lines)
-:::
-```
-def agent_loop(question, schema):
-    messages = [system_prompt(schema), user_message(question)]
-
-    for attempt in range(3):
-        response = llm.chat(messages)
-        if response.has_tool_call:
-            result = execute(response.tool)
-            messages.append(result)        # feed back
-        else:
-            return response.text           # done
-```
-:::
-
-::: {.notes}
-This slide shows the pseudocode for the core agent loop. Walk through it line by line. Say: "Here is the agent loop in pseudocode. This is a simplified version of what the XYZ app runs at its core. Let me walk through it."
-
-"First, we set up the messages list. It starts with two things: the system prompt, which contains the schema description, and the user's question. That is all the LLM needs to get started."
-
-"Then we enter a loop --- up to three attempts. On each pass, we send the messages to the LLM and get a response. If the response contains a tool call --- meaning the LLM wants to run some SQL or Python --- we execute it, take the result, and append it to the messages list. Now the LLM can see what happened. On the next iteration, it will either make another tool call or, if it is satisfied with the results, return a text response."
-
-"If the response does not contain a tool call, we are done --- the LLM is delivering its final answer."
-
-"That is it. That is the core. The real code has error handling, logging, and some other details, but the logic is this simple. About 50 lines of Python."
-
-Pause and let that sink in. Then say: "Now, the obvious question is: if it is this simple, why does deployment take months? We will get to that. But first, let me show you the piece that makes this whole thing work --- the system prompt."
-:::
-
----
-
-## The System Prompt Is the Secret {.section-divider}
-
-::: {.notes}
-This section divider opens the system prompt segment, which runs from roughly minute 30 to minute 45. Say: "The System Prompt Is the Secret." Then advance.
-
-This is a critical segment because it connects the technical architecture to something executives can directly influence. The system prompt is where business knowledge meets technology, and getting it right is the difference between an agent that works and one that does not.
-:::
-
----
-
-## Why the Prompt Matters
+## Remember the SaaSpocalypse?
 
 ::: {.two-cards}
 ::: {.card .card-dark}
 ::: {.card-title}
-Without Join Key Documentation
+What the Market Saw
 :::
-- LLM sees `orders` and `customers` tables
-- No information about shared keys
-- Agent can't figure out how to merge
-- Query fails or returns wrong results
-:::
-
-::: {.card .card-light}
-::: {.card-title}
-With Join Key Documentation
-:::
-- Prompt says: `orders.customer_id` links to `customers.id`
-- Agent writes correct JOIN
-- Merges work on first attempt
-- Accurate, complete answers
-:::
-:::
-
-::: {.notes}
-This slide sets up the live demo of prompt manipulation. This segment should take about 15 minutes total (minutes 30-45). Say: "The system prompt is the most important piece of the entire system. Let me show you why with a simple example."
-
-"On the left: without join key documentation. The LLM can see that there are two tables --- orders and customers --- but it has no information about how they relate. It does not know that orders.customer_id links to customers.id. Without that, it cannot write a correct JOIN, and either the query fails or it returns garbage."
-
-"On the right: with join key documentation. We add one line to the system prompt --- 'orders.customer_id links to customers.id' --- and suddenly the agent writes correct JOINs on the first attempt. Merges work. Answers are accurate."
-
-"This is not a hypothetical. Let me show you."
-
-DEMO INSTRUCTIONS: Switch to the demo environment. Show the system prompt with join key documentation. Ask a question that requires a join. Show it working. Then remove the join key documentation from the prompt. Ask the same question. Show it failing or returning wrong results. Add the documentation back. Show it working again. This is the "break it and fix it" demo described in the course design for minutes 30-45.
-
-After the demo, say: "That single line in the prompt made the difference between a working agent and a broken one. This is why I say the prompt is the secret."
-:::
-
----
-
-## Break/Fix Demo: The Prompt {.shrink}
-
-::: {.code-box}
-::: {.box-title}
-What the user typed (same question, both times)
-:::
-```
-Show me revenue and headcount by division
-```
-:::
-
-::: {.two-cards}
-::: {.card .card-dark}
-::: {.card-title}
-Conversation A: Full System Prompt
-:::
-Includes division-to-CRM mapping, cross-system join keys, and `dealstage = 'closedwon'` filter guidance
-:::
-::: {.card .card-light}
-::: {.card-title}
-Conversation B: Join Keys Removed
-:::
-Schema still lists all tables and columns, but no division mapping, no join hints, no filter guidance
-:::
-:::
-
-::: {.notes}
-Same question asked twice. In Conversation A, the system prompt includes the cross-system data challenges section --- which CRM belongs to which division, how to map employee IDs across systems, and that HubSpot deals should be filtered by dealstage equals closedwon. In Conversation B, that entire section has been deleted. The agent still sees all the tables and columns, but it has no guidance on how the systems relate to each other or which filters to apply.
-:::
-
----
-
-## Break/Fix Demo: Side-by-Side Results {.shrink}
-
-::: {.two-cards}
-::: {.card .card-dark}
-::: {.card-title}
-With Full Prompt (Correct)
-:::
-
-| Division | Revenue | Headcount | Rev/Employee |
-|---|---|---|---|
-| Industrial | $63.4M | 308 | $205,886 |
-| Energy | $37.9M | 220 | $172,234 |
-| Safety | $12.2M | 106 | $115,137 |
-
-*Sources: Salesforce, Legacy CRM, HubSpot (closedwon only), Workday*
+- AI agents querying enterprise data in plain English
+- Instant charts and narratives from a chat interface
+- Cross-system answers that used to require BI teams
+- [$2 trillion in software market cap erased]{.amber}
 :::
 
 ::: {.card .card-light}
 ::: {.card-title}
-Without Join Keys (Wrong)
+What You Just Saw
 :::
-
-| Division | Revenue | Headcount |
-|---|---|---|
-| Industrial | $81.2M | 308 |
-| Energy | $48.7M | 220 |
-| Safety | $17.9M | 106 |
-
-*Sources: NetSuite accruals (Ind/Energy), unfiltered HubSpot deals (Safety)*
+- The Meridian app answered in 30 seconds what took 3 weeks
+- Fuzzy matching across 3 CRMs with different naming conventions
+- Combined revenue view that no single dashboard could produce
+- [This is the technology behind the valuation collapse]{.accent}
 :::
 :::
 
 ::: {.notes}
-Look at the two tables side by side. On the left, the correct answer: revenue pulled from each division's CRM, filtered for completed orders and closed-won deals. On the right, the wrong answer: the agent went to NetSuite corporate actuals instead of the CRMs --- because it did not know which CRM maps to which division --- and pulled unfiltered HubSpot deals including open and lost opportunities. Every number on the right is wrong. Safety revenue is overstated by 47 percent. Industrial and Energy figures are accrual-based budget numbers, not order revenue. And the agent did not even compute revenue per employee because it was too busy just trying to get the numbers to appear.
+Say: "In Session 1, I told you about the SaaSpocalypse --- AI agents wiped $2 trillion from software company valuations because the market believes this technology will displace dashboards, reporting teams, and data integration tools."
+
+"What you just saw is the technology behind that belief. An AI agent querying enterprise data in plain English, merging results across systems that do not talk to each other, and delivering an instant answer with charts and narrative."
+
+"Now, whether the market is right about the magnitude --- that is debatable. But the capability is real. You just used it."
+
+Ask the room: "If anyone in your company could do what you just saw --- ask a question in English and get an instant answer from your enterprise systems --- what changes? What roles are affected? What processes become unnecessary?"
+
+Let 2-3 people respond. This is a rich discussion moment.
 :::
 
 ---
 
-## Break/Fix Demo: What Broke {.shrink}
-
-::: {.comparison-table}
-
-| Problem | With Full Prompt | Without Join Keys |
-|---|---|---|
-| **Revenue source** | CRM orders (correct) | Mixed: corporate actuals + unfiltered HubSpot |
-| **Safety revenue** | $12.2M (closed-won only) | $17.9M (all deals --- 47% overstated) |
-| **Industrial revenue** | $63.4M (Salesforce orders) | $81.2M (NetSuite accrual figure) |
-| **Rev/employee** | Computed and explained | Not computed |
-| **Source transparency** | Each system named | No source attribution |
-
-:::
-
-::: {.highlight-box}
-The broken answer looks professional --- clean table, confident language. **Every number is wrong.** This is the most dangerous failure mode: [plausible-looking wrong answers]{.accent}.
-:::
-
-::: {.notes}
-This table lays out exactly what broke and why. The root cause is simple: without the cross-system documentation, the agent did not know which CRM maps to which division. So it went to the financial consolidation system instead of querying each CRM directly. It did not know to filter HubSpot deals by closedwon. It could not reconcile the numbers because it had no mental model of how the ten systems fit together.
-
-And here is the critical point: the broken answer looks professional. The table is well-formatted. The language is confident. A busy executive reading this would have no reason to question it. This is the most dangerous failure mode in enterprise AI --- not errors that are obvious, but plausible-looking wrong answers that get used in decisions. The system prompt is not just documentation. It is the agent's understanding of the business.
-:::
-
----
-
-## The Prompt Is "Institutional Knowledge"
-
-::: {.explainer}
-The system prompt encodes everything the agent needs to know about your data: table names, column meanings, relationships, business rules, and formatting preferences.
-:::
-
-::: {.highlight-box}
-**Change the prompt, change the behavior.** Add a rule like "always filter to active customers" and every query respects it. Remove join documentation and merges break. The prompt is the most important piece of the system.
-:::
-
-::: {.notes}
-Say: "The system prompt is institutional knowledge. It is everything your agent needs to know about your data, encoded in plain English. Table names, column meanings, relationships between tables, business rules, formatting preferences --- all of it lives in the prompt."
-
-"And here is the powerful implication: change the prompt, change the behavior. Add a rule that says 'always filter to active customers' and every query the agent writes will respect that rule. Add a formatting preference that says 'always show dollar amounts with commas and two decimal places' and every response will follow it. Remove the join documentation and merges break."
-
-"This means that the people who write and maintain the system prompt are effectively the people who control the agent's behavior. In most organizations, that should be a collaboration between your data team --- who knows the schemas --- and your business leaders --- who know the rules and preferences. It is not a one-time setup. As your data changes, as business rules evolve, the prompt needs to evolve with it."
-
-Ask the room: "Think about your own organization for a moment. Who has the institutional knowledge about your data --- what tables exist, how they relate, what the business rules are? Is that knowledge documented anywhere, or does it live in people's heads?" Let a few people respond. Then transition: "That documentation problem is exactly what the system prompt forces you to solve. And that brings us to our next question: once the LLM has written the code, where does it actually run?"
-:::
-
----
-
-## Where Does the Code Run? {.section-divider}
-
-::: {.notes}
-This section divider opens the execution architecture segment, which runs from roughly minute 45 to minute 60. Say: "Where Does the Code Run?" Then advance.
-
-This is a lecture segment, not a demo. The key point is that the LLM generates code but something else has to execute it, and that "something else" is an architectural decision with security implications. This is the first of several deployment decisions executives need to understand --- it sets the stage for Session 5.
-:::
-
----
-
-## Three Architecture Options
+## The Implication
 
 ::: {.three-cards}
 ::: {.card .card-dark}
 ::: {.card-title}
-A. Cloud LLM Sandbox
+Dashboards
 :::
-- Vendor runs the code (OpenAI, Anthropic)
-- Simplest to set up
-- Data leaves your network
-- Fine for non-sensitive data
-:::
-
-::: {.card .card-light}
-::: {.card-title}
-B. Your Own Containers
-:::
-- Docker on your servers or cloud
-- Production answer for sensitive data
-- You control the execution environment
-- More infrastructure to manage
+- Pre-built views of pre-selected metrics
+- Cannot answer questions they were not designed for
+- Every new question requires a development cycle
 :::
 
 ::: {.card .card-light}
 ::: {.card-title}
-C. SQL-Only Mode
+BI Teams
 :::
-- No Python execution at all
-- LLM generates SQL, your DB runs it
-- Safest for regulated environments
-- Can't do in-memory merges or charts
+- Skilled analysts writing SQL and building reports
+- Bottleneck: 3-week turnaround for cross-system questions
+- High value, but limited bandwidth
+:::
+
+::: {.card .card-dark}
+::: {.card-title}
+AI Agents
+:::
+- Any question, any time, in plain English
+- Cross-system queries with automatic reconciliation
+- [Not a replacement --- a force multiplier]{.amber}
 :::
 :::
 
 ::: {.notes}
-Walk through each option. Say: "The LLM generates SQL and Python. Something has to execute it. There are three main options, and each involves a different tradeoff."
+Walk through each card. Say: "Dashboards are great for monitoring known metrics. But they cannot answer questions they were not designed for. Every new question requires a development cycle."
 
-"Option A: Cloud LLM Sandbox. This is the simplest. The vendor --- OpenAI, Anthropic, whoever --- runs the code on their servers. You send the query, they execute it, they send back the results. The advantage is simplicity: nothing to set up, nothing to maintain. The disadvantage is that your data leaves your network. The query results pass through the vendor's servers. For non-sensitive data or for prototyping, this is fine. That is what our XYZ demo uses --- synthetic data running through a cloud API."
+"BI teams are highly skilled. But they are a bottleneck. The 3-week email chain is not because anyone is bad at their job --- it is because there are too many questions and too few analysts."
 
-"Option B: Your Own Containers. This is the production answer for sensitive data. You run Docker containers on your own servers or in your own cloud environment. The LLM still generates the code, but the execution happens inside your infrastructure. Data never leaves your network. The tradeoff is more infrastructure to manage --- you need container orchestration, monitoring, security patching."
+"AI agents sit in a different category. Any question, any time, in plain English. But I want to be clear: this is not a replacement for dashboards or BI teams. It is a force multiplier. Dashboards still monitor KPIs. BI teams still build validated data models. The agent handles the ad hoc questions that today go unanswered or take weeks."
 
-"Option C: SQL-Only Mode. The LLM generates SQL queries, but it never runs Python at all. The SQL goes directly to your database, and the database executes it. This is the safest option for highly regulated environments because the only code that runs is SQL against your own database. The tradeoff is that you lose the ability to do in-memory merges, data transformations, and chart generation. Remember those cross-system merges from Session 2? Those required Python. In SQL-only mode, you cannot do them."
-
-Ask the room: "Which of these three options do you think would fit your organization? Think about your data sensitivity, your IT infrastructure, and your compliance requirements." Let a few people share quick thoughts, but do not let this become a long discussion --- save the deeper deployment conversation for Session 5.
+Transition: "Now it is your turn. Let me get you logged into the Meridian app."
 :::
 
 ---
 
-## Choosing the Right Option
+## Hands-On: Your First Enterprise Queries {.section-divider}
+
+::: {.notes}
+This opens the hands-on segment (minutes 33-53). This is the longest segment of the session --- 20 minutes. Students will log into the Meridian app and work through guided prompts, progressing from single-system to cross-system queries. Make sure login credentials are ready to share.
+:::
+
+---
+
+## Getting Started
+
+::: {.info-box}
+::: {.box-title}
+Log In Now
+:::
+1. Open your browser and navigate to the Meridian app URL (in chat)
+2. Log in with your provided credentials
+3. You should see a chat interface --- type your first question
+:::
+
+::: {.explainer}
+Start with single-system queries to get comfortable. Then we will push into cross-system territory.
+:::
+
+::: {.notes}
+Share the URL and credentials via Zoom chat. Give students 2 minutes to log in. Troubleshoot any access issues. Once most people are in, say: "Great. You should see a chat interface. This is the same tool I just demoed. You are going to work through a series of guided queries, starting simple and getting more complex."
+
+"Start with single-system queries to get comfortable. These hit one database at a time. Then we will push into cross-system territory, where the agent has to query multiple systems and merge results."
+:::
+
+---
+
+## Round 1: Single-System Queries
+
+::: {.three-cards}
+::: {.card .card-light}
+::: {.card-title}
+Salesforce (Industrial CRM)
+:::
+- "What is the total pipeline value for the Industrial division?"
+- "Who are the top 5 customers by revenue in 2025?"
+:::
+
+::: {.card .card-light}
+::: {.card-title}
+NetSuite (Finance)
+:::
+- "What was total revenue by quarter for 2025?"
+- "Show operating expenses by category for Q4"
+:::
+
+::: {.card .card-light}
+::: {.card-title}
+Workday (HR)
+:::
+- "How many employees does each division have?"
+- "What is the average tenure by department?"
+:::
+:::
+
+::: {.notes}
+Say: "Round 1 --- single-system queries. Each of these hits one database. Try at least two from different systems. I have suggested some prompts, but feel free to ask your own questions."
+
+Give students about 5-6 minutes on this round. Circulate (watch Zoom chat for questions). Point out interesting results if you see them. The goal is to build comfort with the interface before moving to cross-system queries.
+
+After 5-6 minutes: "Good. Now let us make it harder."
+:::
+
+---
+
+## Round 2: Cross-System Queries
+
+::: {.two-cards}
+::: {.card .card-dark}
+::: {.card-title}
+Try These
+:::
+- "Which customers buy from multiple divisions?"
+- "What is revenue per employee by division?"
+- "Compare support ticket volume to revenue by division"
+- "Which division's headcount grew fastest relative to revenue?"
+:::
+
+::: {.card .card-light}
+::: {.card-title}
+Watch For
+:::
+- The agent querying multiple systems sequentially
+- Python merge steps appearing in the response
+- Fuzzy name matching across CRMs
+- Narrative that synthesizes data from different sources
+:::
+:::
+
+::: {.notes}
+Say: "Round 2 --- cross-system queries. These require the agent to pull from multiple databases and merge the results. Watch what happens behind the scenes. You will see it query one system, then another, then use Python to combine the data."
+
+"Try the suggested prompts, or ask your own cross-system questions. The more specific your prompt, the better the output."
+
+Give students about 7-8 minutes. This is where the real "aha" moments happen.
+:::
+
+---
+
+## Demo Result: Revenue per Employee {.shrink}
 
 ::: {.comparison-table}
-|  | Cloud Sandbox | Your Containers | SQL-Only |
-|--|:---:|:---:|:---:|
-| **Setup effort** | Low | Medium | Low |
-| **Data stays on-prem** | No | Yes | Yes |
-| **Python/charting** | Yes | Yes | No |
-| **Best for** | Prototyping | Production | Regulated |
+
+| Division | 2025 Revenue | Headcount | Revenue / Employee |
+|---|---|---|---|
+| Energy | $52.1M | 134 | **$388,800** |
+| Industrial | $87.3M | 218 | **$400,500** |
+| Safety | $34.8M | 87 | **$400,000** |
+| **Company-wide** | **$174.2M** | **482** | **$361,400** |
+
+:::
+
+::: {.highlight-box}
+Company-wide average is **10% below** divisional averages because 43 Corporate HQ employees generate no direct revenue. All divisions cluster tightly around $390K-$401K per employee.
 :::
 
 ::: {.notes}
-Say: "Here is the summary table. Cloud sandbox is low effort but data leaves your network. Your own containers keep data on-prem and support Python, but require more setup. SQL-only is low effort and keeps data on-prem, but you lose charting and in-memory processing."
+Use this slide if students need a reference point, or to discuss the cross-system revenue-per-employee result. Say: "Here is what the revenue-per-employee query returns. Notice that this required data from two different types of systems --- CRM data for revenue and Workday for headcount. No single system has both."
 
-"For most organizations, the answer ends up being Option B for production --- your own containers. You prototype with Option A, prove the concept, and then move to containers when you are ready to connect to real data. Some regulated industries --- banking, healthcare --- might start and stay with Option C."
-
-"We will revisit this in much more depth in Session 5, when we talk about deployment architecture and data security. For now, the important thing is that you understand this is a decision that needs to be made, and it has real implications for what the agent can and cannot do."
-
-Transition: "Now let me address the elephant in the room. If the core is only 50 lines, why is this hard? Why does deployment take months? Why do vendors charge what they charge?"
+"The interesting finding: all three divisions cluster tightly around $390K to $401K per employee. The company-wide average is lower because 43 corporate employees generate no direct revenue. That context matters --- without it, you might conclude the company is underperforming."
 :::
 
 ---
 
-## The Complexity Iceberg {.section-divider}
+## Timed Challenge {.centered-statement}
+
+## 5 Minutes
+
+::: {.highlight-box}
+"Which division's top customer represents the greatest concentration risk --- and what does their support ticket history look like?"
+:::
+
+::: {.explainer}
+This requires CRM data (customer revenue) + Zendesk data (support tickets). Go.
+:::
 
 ::: {.notes}
-This section divider opens the complexity iceberg segment, which runs from roughly minute 60 to minute 72. Say: "The Complexity Iceberg." Then advance.
+Say: "Timed challenge. You have 5 minutes. The question is on screen: which division's top customer represents the greatest concentration risk, and what does their support ticket history look like?"
 
-This is a lecture and discussion segment. The goal is to calibrate expectations: the core is simple, but production is hard. This is the key insight that helps executives evaluate vendors and scope projects realistically.
+"This requires data from at least two systems --- CRM for customer revenue concentration, and Zendesk for support tickets. Ask the Meridian app and see what you get."
+
+Start a visible timer. After 5 minutes, ask: "Who got an answer? What did you find?" The expected answer is that Energy's top customer (CAT Energy Services) represents 34% of revenue --- a significant concentration risk. If students also surface the support ticket data, even better.
+
+Use this as a teaching moment about the value of cross-system questions.
 :::
 
 ---
 
-## Simple Core, Complex Deployment
+## Workshop: Your Company's Data Map {.section-divider}
+
+::: {.notes}
+This opens the data map workshop (minutes 53-63). Students shift from the Meridian simulation to thinking about their own companies. This work carries forward through the rest of the course and into the capstone.
+:::
+
+---
+
+## Map Your Systems
+
+::: {.info-box}
+::: {.box-title}
+Individual Exercise (10 minutes)
+:::
+1. **List your company's 3-5 core systems** (CRM, ERP, HR, finance, support, etc.)
+2. **For each system:** What data lives there? Who owns it? How do you access it today?
+3. **Identify one cross-system question** nobody can answer easily today
+4. **Estimate:** Who answers it now? How long does it take?
+:::
+
+::: {.explainer}
+This data map is the foundation for your capstone strategy. Be specific --- system names, not categories.
+:::
+
+::: {.notes}
+Say: "Now I want you to think about your own company. Take 10 minutes and map your data landscape. List your 3 to 5 core systems --- not categories like 'CRM,' but actual system names. Salesforce. SAP. Workday. Whatever your company uses."
+
+"For each system, note what data lives there and who owns it. Then identify one cross-system question that nobody can answer easily today. The kind of question that, like the CEO's question about multi-division customers, sounds simple but requires pulling data from multiple systems."
+
+"This data map carries forward. It becomes the foundation for your capstone strategy in Session 8. Be specific."
+
+Give students the full 10 minutes. Circulate and help anyone who is stuck.
+:::
+
+---
+
+## Data Map Template
+
+::: {.comparison-table}
+
+| System | Type | Key Data | Owner | Cross-System Link? |
+|---|---|---|---|---|
+| *e.g., Salesforce* | *CRM* | *Pipeline, customers, revenue* | *Sales Ops* | *Customer ID to ERP* |
+| *e.g., Workday* | *HR* | *Headcount, comp, org structure* | *HR* | *Employee ID to payroll* |
+| *e.g., SAP* | *ERP/Ops* | *Purchase orders, inventory, suppliers* | *Operations* | *Vendor ID to contracts* |
+| | | | | |
+| | | | | |
+
+:::
+
+::: {.highlight-box}
+**My cross-system question:** _______________________________________________
+:::
+
+::: {.notes}
+Display this template as a reference while students work. You do not need to narrate it --- just let them use it as a guide. If students ask what counts as a "cross-system link," explain: "It is any shared identifier that connects records across systems. A customer ID, an employee ID, a vendor number. If there is no shared identifier, that is worth noting too --- it means any cross-system analysis requires fuzzy matching, like we saw with the Meridian demo."
+:::
+
+---
+
+## Breakout: How Scattered Is Your Data? {.section-divider}
+
+::: {.notes}
+This opens the breakout discussion (minutes 63-78). Groups of 3-4 compare their data maps and look for patterns. Assign breakout rooms now.
+:::
+
+---
+
+## Breakout Discussion (15 minutes)
+
+::: {.two-cards}
+::: {.card .card-light}
+::: {.card-title}
+Compare Data Maps
+:::
+- What systems do you have in common?
+- Where is integration hardest?
+- What cross-system questions would have the most business value?
+:::
+
+::: {.card .card-dark}
+::: {.card-title}
+Report Back
+:::
+- **One common pattern** your group identified
+- **One surprising idiosyncrasy** unique to someone's company
+- What would the "3-week email chain" look like at your organizations?
+:::
+:::
+
+::: {.notes}
+Say: "Breakout time. Groups of 3 to 4. Compare your data maps. I want you to find what you have in common --- most of you will share some of the same systems --- and where you diverge. What cross-system questions would be most valuable at your companies?"
+
+"When we come back, each group reports: one common pattern and one surprising idiosyncrasy. You have 15 minutes."
+
+Send students to breakout rooms. After 12 minutes, broadcast a 3-minute warning. When groups return, take 3-4 minutes for report-backs. Common patterns often include: everyone has a CRM-to-finance gap; HR data is always siloed; customer naming is inconsistent everywhere.
+:::
+
+---
+
+## What We're Skipping {.section-divider}
+
+::: {.notes}
+This opens the expectations calibration segment (minutes 78-87). You are about to name everything the demo did NOT show --- the pre-work required before any agent can query real systems. This is critical for preventing the "we can do this on Monday" reaction.
+:::
+
+---
+
+## The 60-90 Days the Demo Didn't Show
+
+::: {.four-cards}
+::: {.card .card-dark}
+::: {.card-title}
+Data Cataloging
+:::
+- Inventory every table, column, and relationship
+- Document what each field actually means
+- Map data quality issues
+:::
+
+::: {.card .card-light}
+::: {.card-title}
+Schema Documentation
+:::
+- Write descriptions the LLM can understand
+- The system prompt is "institutional knowledge"
+- Gets it wrong? Fix the schema description
+:::
+
+::: {.card .card-dark}
+::: {.card-title}
+API Access
+:::
+- Provision read-only database connections
+- Set up authentication and rate limits
+- Security review for each system
+:::
+
+::: {.card .card-light}
+::: {.card-title}
+PII Classification
+:::
+- Identify sensitive fields (salary, SSN, health data)
+- Define access control rules per role
+- Decide what the LLM is allowed to see
+:::
+:::
+
+::: {.notes}
+Say: "Before we wrap, I need to calibrate expectations. Everything you saw today was impressive. But the Meridian demo hides something important: the 60 to 90 days of pre-work that happened before the first question was ever asked."
+
+Walk through each card: "Someone had to catalog every table and column. Someone had to write schema descriptions the LLM can understand --- that system prompt is not automatic, it is carefully authored institutional knowledge. Someone had to provision API access to each system with proper security. And someone had to classify every field for PII sensitivity and define access control rules."
+
+"This pre-work is real. It is not glamorous. And it is the difference between a demo and a production deployment. I name it now so that when you go back to your organizations and say 'I saw something amazing,' you also say 'and here is what it takes to get there.'"
+:::
+
+---
+
+## How Data Moves Today
+
+::: {.two-cards}
+::: {.card .card-light}
+::: {.card-title}
+The Traditional Answer: Data Warehouse
+:::
+- Move all data into one place (Snowflake, BigQuery, Redshift)
+- Cost: $500K--$5M+ to build
+- Timeline: 6--18 months
+- Advantage: one source of truth, fast queries
+- Downside: stale data, expensive, slow to change
+:::
+
+::: {.card .card-dark}
+::: {.card-title}
+The Alternative: Query Where It Lives
+:::
+- AI agent queries each system via API
+- No data movement --- always current
+- Cost: lower upfront, per-query costs
+- Advantage: fresh data, fast to deploy
+- Downside: slower queries, more complex orchestration
+:::
+:::
+
+::: {.case-quote}
+Most enterprises will use [both]{.amber} --- a warehouse for core reporting, agents for ad hoc cross-system questions.
+:::
+
+::: {.notes}
+Say: "There are two approaches to getting cross-system answers. The traditional answer is a data warehouse --- move everything into one place. This is proven technology. It works. But it costs $500K to $5 million, takes 6 to 18 months, and the data is always at least slightly stale."
+
+"The alternative is what you just saw: query each system where it lives. No data movement. Always current. Faster to deploy. But the queries are slower and the orchestration is more complex."
+
+"In practice, most enterprises will use both. A warehouse for core reporting and dashboards. Agents for ad hoc cross-system questions that the warehouse was not designed to answer."
+
+"We will dig deeper into deployment architecture in Session 5. For now, just know that both options exist and there are real tradeoffs."
+:::
+
+---
+
+## Homework {.section-divider}
+
+::: {.notes}
+Wrap-up segment (minutes 87-90). Assign homework and preview Session 4.
+:::
+
+---
+
+## This Week
+
+::: {.info-box}
+::: {.box-title}
+Homework for Session 4
+:::
+1. **Log into the Meridian app** and ask **10 business questions** --- at least 3 cross-system
+2. **Write down** one question the agent answered well and one where it was unsatisfying or wrong
+3. **Complete your data map:** at least 5 systems your company uses and the top 3 cross-system questions you cannot answer today
+4. Bring your best and worst Meridian answers to Session 4
+:::
+
+::: {.highlight-box}
+**Next session:** We go from asking questions to producing **complete deliverables** --- memos, reports, risk assessments. The agent becomes your reporting pipeline.
+:::
+
+::: {.notes}
+Say: "Homework. First, log into the Meridian app this week and ask at least 10 business questions. Push it. Ask at least 3 cross-system questions. Write down your best answer and your worst answer --- we will use both in Session 4."
+
+"Second, complete your data map. List at least 5 systems your company uses and the top 3 cross-system questions you cannot answer today. This carries forward to your capstone."
+
+"Next session, we go from asking questions to producing complete deliverables. Instead of getting a number or a chart, you will get a board-ready memo. See you Wednesday."
+:::
+
+---
+
+## Session 3 Summary {.centered-statement}
+
+## AI Meets Your Data
 
 ::: {.stat-cards}
 ::: {.stat-card}
 ::: {.stat-number}
-~50
+30 sec
 :::
 ::: {.stat-label}
-Lines of core agent logic
+vs. 3 weeks for a cross-system question
 :::
 :::
 
 ::: {.stat-card}
 ::: {.stat-number}
-3,000+
+10
 :::
 ::: {.stat-label}
-Lines in a production app
+enterprise systems in the Meridian simulation
 :::
 :::
 
 ::: {.stat-card}
 ::: {.stat-number}
-60x
+7 of 10
 :::
 ::: {.stat-label}
-Growth from prototype to production
+multi-division customers required fuzzy matching
 :::
 :::
 :::
 
 ::: {.notes}
-Let the numbers speak for themselves for a moment. Say: "Fifty lines of core agent logic. Three thousand lines in a production app. A sixty-times growth factor from prototype to production."
-
-"The 50 lines are the agent loop we just looked at. The 3,000-plus lines are the actual XYZ app you have been using for the past week. Same core pattern, but wrapped in everything you need to run it reliably, securely, and at scale."
-
-"This ratio --- roughly 60 to 1 --- is not unusual. It is typical of most software systems. The core logic of most applications is a small fraction of the total codebase. The rest is infrastructure, security, error handling, and operational tooling."
-
-"Why does this matter to you as executives? Because when a vendor tells you their AI agent product costs half a million dollars, you need to understand what you are paying for. You are not paying for the 50 lines. You are paying for the other 2,950 lines --- and the team that maintains them."
-:::
-
----
-
-## What the Other 2,950 Lines Do
-
-::: {.two-col}
-::: div
-**Security & Access**
-
-- Authentication (who are you?)
-- Authorization (what can you see?)
-- Row-level access control
-- Audit logging
-:::
-
-::: div
-**Reliability & Scale**
-
-- Error handling & retries
-- Rate limiting
-- Multi-tenancy
-- Monitoring & alerting
-- Failover & backup
-:::
-:::
-
-::: {.explainer}
-The core loop is elegant and simple. The production wrapper is where the engineering effort lives. This is why you **buy or build on a platform** rather than rolling your own from scratch.
-:::
-
-::: {.notes}
-Walk through both columns. Say: "Let me break down what those other 2,950 lines do. On the left: security and access. Authentication --- who are you? Authorization --- what are you allowed to see? Row-level access control --- the VP of Sales should see sales data but not HR compensation data, even though the agent can query both systems. And audit logging --- every query, every result, every access, recorded for compliance."
-
-"On the right: reliability and scale. Error handling and retries --- what happens when the database is slow or the LLM API times out? Rate limiting --- making sure one heavy user does not consume all the resources. Multi-tenancy --- supporting multiple users with different permissions. Monitoring and alerting --- knowing when something breaks before your users tell you. Failover and backup --- what happens when a server goes down."
-
-"None of this is glamorous. None of it is AI. It is all plain old software engineering. But it is absolutely essential for production, and it is where 95 percent of the effort goes."
-
-"This is why the advice for most organizations is: buy or build on a platform. Do not try to roll your own from scratch. The 50-line core is easy. The 3,000-line production wrapper is where the real investment lives."
-
-Discussion prompt: "For those of you who have IT teams: where does your organization's capability fit on this spectrum? Could your team build the 50-line core? Could they build the 3,000-line production wrapper? That gap is the build-versus-buy decision we will dig into in Session 5."
-
-Let a few people respond, then transition: "Now, let me prove to you just how simple the core really is. We are going to build an agent from scratch, right now, live."
-:::
-
----
-
-## Live Build {.section-divider}
-
-::: {.notes}
-This section divider opens the live build segment, which runs from roughly minute 72 to minute 85. Say: "Live Build." Then advance.
-
-Make sure the Linux server is ready. You should have a terminal open with SSH to the server, Claude Code running, and a sample database ready. This is the "your developer could do this" moment. The goal is demystification, not intimidation.
-
-If the live demo environment is not available, switch to the pre-recorded fallback and narrate over it.
-:::
-
----
-
-## Let's Build an Agent --- Right Now
-
-::: {.info-box}
-::: {.box-title}
-Live Demo Plan
-:::
-1. Start with a blank file and a sample database
-2. Write the system prompt describing the schema
-3. Add the agent loop (the ~50 lines)
-4. Ask a question and watch it work
-5. Break it (remove join docs) and watch it fail
-6. Fix it and watch it recover
-:::
-
-::: {.explainer}
-Your developer could do this. The point isn't that it's hard --- it's that it's *tractable*. The magic is in the prompt design and the execution architecture, not in thousands of lines of code.
-:::
-
-::: {.notes}
-This is the live build segment. It should take about 13 minutes (minutes 72-85). Walk through the demo plan on screen before switching to the terminal.
-
-Say: "We are going to build an agent from scratch, right now. I have a blank file and a sample database on the Linux server. I am going to use Claude Code --- the same AI coding assistant that is available on your server accounts --- and direct it in plain English. Here is the plan."
-
-Walk through the six steps on screen, then say: "The point of this demo is not to impress you with coding. The point is to show you that the core of these systems is tractable. Your developer could do this. The hard part is not the 50 lines --- it is everything else we just talked about. But the core? It is this simple."
-
-DEMO INSTRUCTIONS: Switch to the terminal. Start with a blank Python file. Tell Claude Code in English to build a simple agent: "Build a Python script that takes a question as input, sends it to Claude with a schema description of our sample database, gets back SQL, runs it, and returns the answer." Narrate each step as Claude Code writes the code. Once it is working, ask a question that requires a join. Show it working. Then remove the join key documentation from the system prompt. Ask the same question. Show it failing. Add the documentation back. Show it recovering.
-
-Key narration points during the demo: (1) "Notice that we are directing the AI in English, and it is writing the Python for us." (2) "Here is the system prompt --- this is the schema description we talked about." (3) "Here is the agent loop --- the same pattern we saw in the pseudocode." (4) "Now watch --- I am removing the join key documentation. Same question, but now the agent does not know how the tables relate." (5) "And now I add it back. Same question, correct answer. The prompt is the secret."
-
-If the live demo fails or the environment is not responsive, say: "Let me switch to the recorded version --- same demo, same steps, but pre-recorded so we do not lose time to connectivity issues." Play the fallback recording and narrate over it.
-:::
-
----
-
-## What You Just Saw
-
-::: {.highlight-box}
-A working AI agent, built from scratch in minutes, that can answer business questions by writing and executing SQL against a real database. **This pattern is at the core of most BI agents on the market.**
-:::
-
-::: {.notes}
-After the live build demo, come back to this slide to land the point. Say: "What you just saw was a working AI agent, built from scratch in minutes. It takes a question in English, writes SQL, runs it against a real database, and delivers the answer. That is it. That is the core pattern."
-
-"And here is the important part: this pattern is at the core of most BI agents on the market. Whether you are looking at Salesforce Agentforce, Microsoft Copilot, or any of the AI-native startups, they all use some version of this loop. The differences are in the production wrapper --- the security, the scale, the reliability, the user interface --- but the core is the same."
-
-"So when a vendor shows you a demo, you now know what is happening behind the scenes. And when they quote you a price, you know what you are paying for: not the 50 lines, but the 3,000 lines around them."
-
-Transition: "Let me recap what we covered today."
-:::
-
----
-
-## Session 3 Recap
-
-::: {.step-flow}
-::: {.step-card}
-::: {.step-icon}
-1
-:::
-::: {.step-title}
-Agent Loop
-:::
-::: {.step-desc}
-Prompt, generate, execute, review, deliver
-:::
-:::
-
-::: {.step-card}
-::: {.step-icon}
-2
-:::
-::: {.step-title}
-System Prompt
-:::
-::: {.step-desc}
-The institutional knowledge layer that makes it all work
-:::
-:::
-
-::: {.step-card}
-::: {.step-icon}
-3
-:::
-::: {.step-title}
-Execution
-:::
-::: {.step-desc}
-Cloud, containers, or SQL-only --- pick your tradeoff
-:::
-:::
-
-::: {.step-card}
-::: {.step-icon}
-4
-:::
-::: {.step-title}
-Iceberg
-:::
-::: {.step-desc}
-50-line core, 3,000-line production app
-:::
-:::
-:::
-
-::: {.notes}
-Walk through the recap quickly. Say: "Four things from today. First, the agent loop: prompt, generate, execute, review, deliver. It is a test-and-review cycle, not a one-shot generation. Second, the system prompt: the institutional knowledge layer that tells the agent about your data, your rules, and your preferences. Change the prompt, change the behavior. Third, execution: the code the LLM generates has to run somewhere, and you have three options --- cloud sandbox, your own containers, or SQL-only. Each has tradeoffs. Fourth, the iceberg: 50 lines of core logic, 3,000 lines in production. The core is simple. The production wrapper is where the effort lives."
-
-"These four concepts give you the vocabulary to evaluate any AI data agent on the market. You understand the pattern, you understand what the prompt does, you understand the deployment options, and you understand the gap between demo and production."
-:::
-
----
-
-## Before Next Session {.shrink}
-
-::: {.info-box}
-::: {.box-title}
-Homework
-:::
-
-- **Required:** For the use case you identified in Session 2, what data quality issues would you expect? What pre-work is needed before an agent could query your systems?
-- **Optional (hands-on):** SSH credentials are provided. Try Exercise 1 (hello-world agent) and Exercise 2 (multi-system agent) on the Linux server. Claude Code will help --- you direct it in English.
-- **Optional reading:** [a16z: "How 100 Enterprise CIOs Are Building and Buying Gen AI in 2025"](https://a16z.com/ai-enterprise-2025/) and [DUNNIXER vendor scorecard](https://www.dunnixer.com/insights/articles/the-six-dimensions-of-ai-vendor-evaluation-that-matter-most). Keep both --- you'll use them in Session 5.
-:::
-
-::: {.explainer}
-Wednesday's session: [From Data to Deliverable]{.accent} --- we chain agent steps into automated reporting pipelines.
-:::
-
-::: {.notes}
-Walk through the homework. Say: "For next session, one required item and two optional. The required item: go back to the use case you identified in Session 2 --- the cross-system question you want to answer. Now think about data quality. What issues would you expect? Are there duplicate records? Inconsistent naming? Missing fields? What pre-work would be needed before an agent could query your systems? This is the reality check on the demo we just saw."
-
-"Optional but recommended: the SSH credentials for the Linux server are in your course materials. Exercise 1 walks you through building the exact 50-line agent we just built. Exercise 2 extends it to query two systems and merge results. You do not need to know how to code --- Claude Code will write the Python for you. You just direct it in English, the same way I did in the demo. If you want to get your hands dirty, this is your chance."
-
-"Also optional: two readings for Session 5. The a16z survey on how enterprise CIOs are building and buying AI, and the DUNNIXER vendor evaluation scorecard. Keep both of these --- you will use the scorecard in Session 5 to evaluate vendors."
-
-"Wednesday we move from data to deliverable. Instead of just answering questions, we will chain agent steps into complete reporting pipelines --- from raw data to polished, board-ready documents. See you then."
-:::
-
----
-
-## Key Takeaway {.section-divider}
-
-::: {.notes}
-This is the final section divider. Say: "Key Takeaway." Then advance to the closing slide.
-:::
-
----
-
-## 50 lines and a good prompt. That's the core. {.centered-statement}
-
-## The other 3,000 lines are what [production]{.accent} requires.
-
-::: {.explainer}
-Knowing the difference is how you evaluate vendors, scope projects, and avoid overpaying.
-:::
-
-::: {.notes}
-Let the slide speak for a moment, then close with: "Fifty lines and a good prompt. That is the core. The other 3,000 lines are what production requires. Knowing the difference between these two things is how you evaluate vendors, scope projects, and avoid overpaying."
-
-"When someone tells you AI is magic, you now know it is not. It is a loop: prompt, generate, execute, review, deliver. When someone tells you AI is easy, you now know the core is easy but production is hard. And when someone quotes you a price, you can ask: what am I paying for? The 50 lines, or the 3,000?"
-
-"Have a good evening, and I will see you Wednesday."
+This is a recap slide to display as students leave. You do not need to present it unless you want a quick close. The key takeaways are visual: the speed difference, the scale of the simulation, and the fuzzy matching insight.
 :::
