@@ -686,23 +686,23 @@ When you come back, each group presents a three-minute governance framework. Tel
 Homework
 :::
 
-- **Read the Atherton Financial case study** (provided). A wealth management firm deployed document AI and hit chunking failures, access control gaps, and stale documents. Come prepared to discuss: what would you have done differently?
+- **Read the Atherton Financial case study** (provided). A wealth management firm deployed document AI and hit chunking failures, access control gaps, and stale documents. These governance failures apply broadly --- not just to document AI. Come prepared to discuss: what would you have done differently?
 - **Begin drafting your capstone strategy** using the template and evaluation rubric (provided). Cover: problem statement, proposed solution, deployment approach, 90-day pilot plan.
 - For your identified use case: write down the **3 most likely failure modes** and how you'd mitigate each.
 :::
 
 ::: {.explainer}
-Wednesday's session: [Document AI --- Answers from Your Own Files]{.accent} --- we add a second capability: retrieving answers from company documents with citations. The Atherton case shows what can go wrong.
+Wednesday's session: [Let the Data Predict]{.accent} --- we use AI to build predictive models. Classification, regression, and the question every checker should ask: does this prediction make business sense?
 :::
 
 ::: {.notes}
-Three homework items. First, read the Atherton Financial case study. This is a wealth management firm that deployed document AI --- the technology we are covering next session --- and hit real problems. Chunking failures where relevant passages were split across chunks. Access control gaps where junior staff could access senior client documents. And stale documents where outdated policies were still in the system and being cited as current. Come prepared to discuss what you would have done differently.
+Three homework items. First, read the Atherton Financial case study. This is a wealth management firm that deployed document AI and hit real problems. Chunking failures where relevant passages were split across chunks. Access control gaps where junior staff could access senior client documents. And stale documents where outdated policies were still in the system and being cited as current. These governance failures apply broadly --- not just to document AI. Come prepared to discuss what you would have done differently.
 
 Second, begin drafting your capstone strategy. You have the template and the evaluation rubric. By now you have the pieces: your data map from Session 3, your deployment profile from Session 5, and the governance framework you just designed. Start assembling them. The capstone covers problem statement, proposed solution, deployment approach, and a ninety-day pilot plan.
 
 Third, for your use case, write down the three most likely failure modes and how you would mitigate each. Think about the three failures we saw today. What is your equivalent of the unfiltered average, the date format trap, and the double count?
 
-Next session is about document AI. We are going to add a completely new capability: answering questions from company documents with page-level citations. Think policies, contracts, board minutes, compliance filings. The Atherton case is your preview of what can go wrong.
+Next session is about predictive modeling. We are going to use AI to build classification and regression models --- turning your data into forecasts and decisions. The Atherton case is your preview of governance failures that apply across all AI capabilities, not just document AI.
 
 If you have been working through the Linux server exercises, Exercise 4 on red-teaming directly applies to today's session. And Demo 5 in the recorded series shows red-teaming an agent and adding guardrails step by step.
 
@@ -734,7 +734,7 @@ AI will make mistakes with your data. You saw three of them today. They were pla
 
 Three things separate a demo from a deployment. Systems: the deployment architecture and data security you designed on Monday. Skills: the verification competency --- the checker's checklist --- that you learned today. And governance: the organizational framework of access controls, audit trails, failure protocols, and regulatory compliance that you just designed in the breakout.
 
-You now have all three. On Wednesday, we add a new capability: document AI. And the Atherton case will show you that everything we discussed today --- verification, governance, graceful failure --- applies to unstructured documents just as much as it applies to databases.
+You now have all three. On Wednesday, we move from querying data to predicting with it --- classification, regression, and the question every checker should ask: does this prediction make business sense? The Atherton case will show you that everything we discussed today --- verification, governance, graceful failure --- applies across all AI capabilities.
 
 See you Wednesday.
 

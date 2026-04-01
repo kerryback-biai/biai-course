@@ -1,5 +1,5 @@
 ---
-title: "Session 7: Document AI — Answers from Your Own Files"
+title: "Session 7: Let the Data Predict"
 subtitle: "Business Intelligence & AI"
 author: "Kerry Back, Rice University"
 format:
@@ -14,56 +14,50 @@ format:
     center: true
 ---
 
-## Last Session: Trust and Verification {.section-divider}
+## From "What Happened?" to "What Will Happen?" {.section-divider}
 
 ::: {.notes}
-Welcome back everyone. Last session we spent a full ninety minutes on trust and verification --- red-teaming agents, seeing how they fail, and building governance frameworks. That was all about structured data, databases, and SQL. Today we pivot to a different kind of company knowledge entirely. Over the past six sessions, you have learned to query databases, build reporting pipelines, and evaluate reliability. All of that was structured data --- rows and columns. But think about where the bulk of your company's knowledge actually lives. It is not in databases. It is in policies, contracts, board minutes, emails, and slide decks buried in SharePoint folders nobody can search. Today we add a second capability --- document AI --- and by the end of the session, you will have used it hands-on.
+Welcome back. Over the past six sessions you have learned to generate analyses with AI, query enterprise databases, build reporting pipelines, and evaluate reliability. All of that answers the question "what happened?" Today we add a fundamentally different capability: prediction. Instead of looking backward at your data, we ask it to look forward. By the end of this session, you will have built a predictive model yourself --- using AI to handle the code --- and you will know how to evaluate whether the predictions are trustworthy.
 
-Before we dive in, let me set the stage with a case study you read for homework. The Atherton case shows exactly what can go wrong when document AI is deployed without the right guardrails. Let's debrief that case first, and then everything we do today will be informed by those failure modes.
+Before we get into prediction, let us debrief the Atherton case you read for homework. The governance failures in that case connect directly to what we are doing today.
 
-[TIMING: This section divider is your opening. Spend about 1 minute here, then advance to the Atherton debrief. Total for bridge plus debrief is 10 minutes.]
+[TIMING: 1 minute. This is the opening section divider. Move immediately to the Atherton debrief.]
 :::
 
 ---
 
-## Bridge + Atherton Case Debrief {.shrink}
+## Atherton Case Debrief {.shrink}
 
 ::: {.two-cards}
 ::: {.card .card-dark}
 ::: {.card-title}
-What Atherton Deployed (composite case)
+Atherton's Document AI Failures
 :::
 
-- Document AI across compliance policies, vendor contracts, and HR handbooks
-- Employees could ask questions in plain English and get cited answers
-- Replaced a manual process of searching SharePoint and emailing Legal
+- **Chunking failures** --- long contract clauses split mid-sentence, answers cited incomplete text
+- **Access control gaps** --- junior analysts saw board-level compensation data
+- **Stale documents** --- system answered from a superseded compliance policy
 :::
 
 ::: {.card .card-light}
 ::: {.card-title}
-What Went Wrong
+The Parallel to Predictive Models
 :::
 
-- **Chunking failures** --- long contract clauses split mid-sentence, wrong answers returned
-- **Access control gaps** --- junior staff saw board-level compensation data
-- **Stale documents** --- system answered from a superseded policy version
+- Stale training data = stale predictions
+- Access control still matters --- who sees predicted churn scores? Predicted salaries?
+- Garbage in, garbage out applies to ML just as much as to document AI
 :::
-:::
-
-::: {.explainer}
-What would you have done differently? We'll return to each of these failure modes today.
 :::
 
 ::: {.notes}
-So Atherton Financial is a composite case, but every one of these failures comes from real deployments. Let me walk through the left card first. Atherton built a document AI system that covered compliance policies, vendor contracts, and HR handbooks. The promise was compelling --- employees could ask questions in plain English and get answers with citations, replacing a manual process where people searched SharePoint, gave up, and emailed the Legal department. Sound familiar? I bet most of you have some version of this at your companies.
+[ATHERTON DEBRIEF (8 minutes, minutes 0-8): Start by asking the room: "What was the most damaging failure in the Atherton case --- chunking, access control, or staleness?" Call on 3-4 students. Push for specificity: "You said staleness --- what specifically went wrong? What was the business impact of answering from a superseded policy?"
 
-Now look at the right card --- what went wrong. Three distinct failure modes. First, chunking failures. The system split long contract clauses mid-sentence. So when someone asked about indemnification terms, the system returned half the clause and gave an incomplete, actually dangerous answer. Second, access control gaps. Junior staff could suddenly see board-level compensation data because the RAG system did not inherit the document permissions from the file server. And third, stale documents. A policy was updated, but the old version was still in the index, so the system confidently delivered outdated information.
+Listen for the themes: (1) Atherton did not version their documents, so the system could not distinguish current from superseded policies. (2) Access controls that existed in SharePoint did not carry over to the AI system. (3) Chunking is a technical problem that has business consequences --- a contract clause split mid-sentence produces a wrong answer that looks right.
 
-Here is my question for you, and I want three or four quick reactions. If you had been advising Atherton before they deployed, what would you have done differently? Think about what we covered in Session 6 on governance. Drop your thoughts in the chat or unmute.
+Then make the bridge: "Every one of these failures has a direct parallel in predictive modeling. If your training data is stale --- say you trained a churn model on 2023 behavior but your pricing changed in 2024 --- your predictions are answering from a superseded version of reality. If anyone in the organization can see predicted attrition scores for individual employees, you have the same access control problem Atherton had. And if your input data is messy --- duplicate records, missing values, inconsistent formats --- that is the ML equivalent of chunking failures. The garbage goes in, and confident-looking predictions come out."]
 
-[TIMING: Spend about 2 minutes presenting the case, then 3-4 minutes on discussion. Aim to get 3-4 responses. Listen for themes around testing, access controls, and document management. When you hear good points, connect them forward: "Great --- we are going to see exactly that failure mode in our hands-on today." Wrap the debrief by minute 10.]
-
-Transition: Good. Those three failure modes --- chunking, access control, and freshness --- are the exact issues we will dig into today. But first, let me show you what document AI looks like when it works well.
+[TIMING: 8 minutes total. Then bridge to prediction with: "With that context, let us talk about what prediction actually means in a business setting."]
 :::
 
 ---
@@ -75,736 +69,1291 @@ Transition: Good. Those three failure modes --- chunking, access control, and fr
 By the end of this session, you will be able to:
 :::
 
-- Explain how AI answers questions from company documents --- with citations
-- Distinguish database AI from document AI and know when to use each
-- Experience RAG hands-on and understand key deployment decisions
+- Distinguish classification from regression and identify which applies to a business problem
+- Use AI to build and evaluate a gradient boosting model without writing code yourself
+- Interpret a confusion matrix, feature importance, and cross-validation scores
+- Apply the maker/checker framework to decide whether predictions are trustworthy
 :::
 
 ::: {.notes}
-Three objectives for today. First, you will understand the mechanics of how AI answers questions grounded in company documents, complete with citations pointing back to specific pages and sections. This is not the AI making things up --- it is retrieving actual passages from your files and synthesizing an answer. Second, you will be able to clearly distinguish database AI, which is everything we have done in Sessions 1 through 6, from document AI, which is today's focus. Knowing when to use each --- and when you need both --- is a critical skill. Third, you will experience this hands-on. You are going to query a real document collection and see for yourselves where it excels and where it breaks down.
+Four objectives today. First, you will learn the two types of prediction --- classification and regression --- and be able to categorize any business prediction problem. Second, you will use Claude to build a real predictive model. Third, you will learn to read the outputs that tell you whether the model is any good. And fourth, you will apply the same maker/checker framework from Session 2, but now to model evaluation instead of document verification.
 
-[TIMING: About 30 seconds on this slide. It is a signpost, not a lecture. Move on quickly.]
+The key insight for today: you do not need to understand the math. You need to understand what the model produces and how to evaluate it. AI handles the code; you handle the judgment.
+
+[TIMING: 1 minute. Move to the two types of prediction.]
 :::
 
 ---
 
-## Two Kinds of AI for Business {.shrink}
+## Two Types of Prediction {.section-divider}
+
+::: {.notes}
+Let us start with the most fundamental distinction in predictive modeling. Every business prediction falls into one of two categories, and knowing which one you are dealing with determines everything that follows --- the model you build, the metrics you use, and how you interpret the results.
+
+[TIMING: 15 seconds. Section divider --- advance immediately.]
+:::
+
+---
+
+## Classification vs. Regression
 
 ::: {.two-cards}
 ::: {.card .card-dark}
 ::: {.card-title}
-Database AI (Sessions 1--6)
+Classification: "Which category?"
 :::
 
-- Queries **structured data** in rows and columns
-- Writes SQL, runs it, returns results
-- Best for: numbers, trends, KPIs, comparisons
-- Source of truth: your transactional systems
-:::
-
-::: {.card .card-light}
-::: {.card-title}
-Document AI (Today)
-:::
-
-- Queries **unstructured text** in PDFs, Word docs, policies
-- Retrieves relevant passages, synthesizes an answer with citations
-- Best for: policies, contracts, procedures, meeting notes
-- Source of truth: your document repositories
-:::
-:::
-
-::: {.explainer}
-Most real business questions need [both]{.accent}. "What's our contractual commitment to GE, and how does their actual spending compare?" requires document AI for the contract and database AI for the spending data.
-:::
-
-::: {.notes}
-Let me frame what we are adding today. On the left is everything you already know --- database AI. It queries structured data in rows and columns, writes SQL, runs it, and returns numbers, charts, and narratives. That is Sessions 1 through 6 in a nutshell. On the right is document AI, which is today's focus. Instead of structured data, it works with unstructured text --- PDFs, Word documents, policies, contracts, meeting notes. Instead of writing SQL, it retrieves relevant passages from those documents and synthesizes an answer with citations.
-
-The key distinction is the source of truth. Database AI pulls from your transactional systems --- your CRM, your ERP, your financial systems. Document AI pulls from your document repositories --- SharePoint, shared drives, contract management systems. The data types are fundamentally different, and the retrieval mechanisms are fundamentally different. But here is the important point at the bottom of the slide. Most real business questions need both. Read that example in the explainer: "What is our contractual commitment to GE, and how does their actual spending compare?" The contract terms live in a PDF. The actual spending lives in a database. You need document AI for the first part and database AI for the second. We are going to see exactly that kind of combined question in our hands-on today.
-
-[TIMING: About 2 minutes on this slide. This completes the bridge segment. Transition to the demo next.]
-
-Transition: Alright, let me show you document AI in action. I am going to switch to the XYZ app and start asking questions of a real document collection.
-:::
-
----
-
-## Demo: Document Q&A with XYZ Corp {.section-divider}
-
-::: {.notes}
-[DEMO INSTRUCTIONS: Switch to the XYZ Corp app in your browser. You should have the document Q&A interface ready. This is a 12-minute demo from minute 10 to minute 22. Have your fallback recording cued up in case the app or API is down.]
-
-We are going to query the same XYZ Corp environment you have been using all course, but now we are going to ask it about documents instead of databases. XYZ has a pre-loaded document collection that mirrors what you would find at any mid-size company --- employee handbooks, vendor contracts, compliance policies, board minutes. Let me show you the collection first, and then we will start asking questions.
-
-[TIMING: Spend about 30 seconds on this divider slide, then advance to show the document collections.]
-:::
-
----
-
-## XYZ's Document Collections {.shrink}
-
-::: {.three-cards}
-::: {.card .card-dark}
-::: {.card-title}
-HR & Compliance
-:::
-
-- Employee handbook
-- Travel & expense policy
-- Code of conduct
-- Safety procedures
+- Will this customer churn? [Yes / No]{.amber}
+- Is this transaction fraudulent? [Fraud / Legitimate]{.amber}
+- Which segment does this lead belong to? [Hot / Warm / Cold]{.amber}
+- Will this employee leave within 12 months?
+- Will this loan default?
 :::
 
 ::: {.card .card-light}
 ::: {.card-title}
-Legal & Contracts
+Regression: "How much?"
 :::
 
-- Vendor agreements
-- Master service agreements
-- Non-disclosure agreements
-- SLA commitments
-:::
-
-::: {.card .card-light}
-::: {.card-title}
-Governance
-:::
-
-- Board meeting minutes
-- Compliance audit reports
-- Risk assessments
-- Strategic plans
+- How much will this customer spend next quarter? [$12,400]{.accent}
+- What will demand be in March? [4,200 units]{.accent}
+- What price maximizes margin? [$89.99]{.accent}
+- How many support tickets will we get next week?
+- What will Q3 revenue be?
 :::
 :::
 
 ::: {.explainer}
-These are the same kinds of documents trapped in SharePoint folders, shared drives, and email attachments at every company.
+Every business prediction is one of these two types. The type determines how you build the model and how you evaluate it.
 :::
 
 ::: {.notes}
-Before I start the live demo, let me orient you to what is in the document collection. Three categories. On the left, HR and Compliance --- employee handbook, travel and expense policy, code of conduct, safety procedures. In the middle, Legal and Contracts --- vendor agreements, master service agreements, NDAs, SLA commitments. On the right, Governance --- board meeting minutes, compliance audit reports, risk assessments, strategic plans.
+Here is the fundamental split. Classification predicts categories --- yes or no, fraud or legitimate, hot or warm or cold. Regression predicts continuous numbers --- dollar amounts, quantities, prices.
 
-Now, think about this for a moment. These are the same kinds of documents trapped in SharePoint folders, shared drives, and email attachments at every single company. How do people find information in these documents today? They search SharePoint, maybe get lucky with a keyword match, probably give up and email someone in Legal or HR or Compliance. That email sits in a queue for two days. That is the status quo we are about to replace.
+The distinction matters because the evaluation is completely different. For classification, you care about things like: how often does the model say "churn" when the customer actually stays? That is a false positive, and it has a business cost --- you might offer an unnecessary discount. For regression, you care about how far off the predictions are on average.
 
-[DEMO INSTRUCTIONS: Now switch to the live app. Ask these questions in sequence, pausing to point out the citations after each answer:
+Let me give you a quick exercise. I am going to name five business questions, and I want you to tell me: classification or regression?
 
-1. "What is XYZ's policy on remote work for the Energy Division?" --- Point out the citation with page number and quoted passage. Emphasize that this is not the AI making something up; it is retrieving and quoting from the actual document.
+[AUDIENCE EXERCISE (2 minutes): Read each question, pause for hands or shout-outs:
+1. "Will this prospect close?" --- Classification
+2. "What will this deal be worth?" --- Regression
+3. "Which customers are at risk of downgrading?" --- Classification
+4. "How many returns will we process in January?" --- Regression
+5. "Should we approve this credit application?" --- Classification
 
-2. "Which vendor contracts are up for renewal in Q2?" --- Show how it pulls from multiple contracts and synthesizes a list. Note the citations for each contract mentioned.
+After the exercise: "Good. Notice that the same business domain --- say, sales --- can have both types. 'Will this deal close?' is classification. 'What will it be worth?' is regression. The type depends on the question, not the domain."]
 
-3. "What did the board approve regarding the Safety Division expansion?" --- Show it pulling from board minutes. Point out that this information would normally require someone to read through pages of minutes.
-
-4. The combined question: "What is our contractual commitment to GE, and how does their actual spending compare?" --- This is the key demo moment. Show that RAG retrieves the contract terms while the database agent pulls the spending data. Two different retrieval paths, one synthesized answer.
-
-If the app is down, switch to the pre-recorded fallback and narrate over it.]
-
-Let me ask the first question. "What is XYZ's policy on remote work for the Energy Division?" Watch the answer --- and pay attention to the citations.
-
-[TIMING: This demo runs from minute 10 to minute 22. Spend about 2 minutes per question, with time for brief reactions between questions. The GE combined question should be the climax --- spend an extra minute showing how the two systems work together. If you are running long, you can skip question 3 about board minutes.]
-
-Transition: So you have seen document AI in action --- retrieval, synthesis, citations. Now let me explain how it actually works under the hood.
+[TIMING: 5 minutes total including the exercise. Move to gradient boosting.]
 :::
 
 ---
 
-## Document Q&A: Policy Lookup {.shrink}
+## Common Business Prediction Problems {.shrink}
 
-::: {.highlight-box}
-**Q: "What is XYZ's policy on remote work for the Energy Division?"**
-:::
+::: {.comparison-table}
 
-**General Policy:** Up to 2 days remote/week for corporate staff, subject to manager approval and 30-day trial *(Employee Handbook, Section 4.3, p. 28)*.
+| Problem | Type | Input Data | Business Value |
+|---|---|---|---|
+| Customer churn | Classification | Usage patterns, support tickets, tenure | Retain at-risk customers before they leave |
+| Lead scoring | Classification | Demographics, engagement, firmographics | Focus sales effort on highest-probability leads |
+| Fraud detection | Classification | Transaction amount, location, velocity | Block fraudulent transactions in real time |
+| Revenue forecasting | Regression | Historical revenue, pipeline, seasonality | Accurate budgeting and resource allocation |
+| Demand planning | Regression | Sales history, promotions, weather | Optimize inventory and reduce stockouts |
+| Dynamic pricing | Regression | Competitor prices, demand signals, elasticity | Maximize margin without losing volume |
 
-**Energy Division Exception:** Field operations, warehouse, and on-site technical roles are "location-essential" --- not eligible. Eligible staff (account managers, analysts, division finance) limited to **1 day/week** due to field-team coordination requirements *(Energy Division Addendum, Section 2, p. 3)*.
-
-**Approval:** Written VP approval, quarterly review, core hours 8 AM--3 PM CT *(Employee Handbook, Section 4.3, p. 29)*.
-
-::: {.explainer}
-Every claim traces to a specific document, section, and page. The agent synthesized across [two separate documents]{.accent} --- the handbook and the division addendum.
 :::
 
 ::: {.notes}
-This is the first demo question. Notice three things. First, every claim has a citation with a document name, section number, and page number. Second, the agent had to retrieve from two separate documents --- the general employee handbook and the Energy Division addendum --- and synthesize them into a coherent answer that accounts for the division-specific override. Third, the answer is structured clearly with the general rule, the exception, and the process. A keyword search for "remote work" might find the handbook but miss the addendum. The AI found both and reconciled them.
+This table shows six common prediction problems you will encounter in business. The left three are classification --- they predict categories. The right three are regression --- they predict numbers. Notice the pattern: classification problems tend to drive operational decisions (retain this customer, flag this transaction, prioritize this lead), while regression problems tend to drive planning decisions (how much to budget, how much to stock, what price to set).
+
+For your breakout later, you will identify prediction problems at your own company. Use this table as a starting point, but do not limit yourself to these six.
+
+[TIMING: 2 minutes. Move to gradient boosting.]
 :::
 
 ---
 
-## Document Q&A: Multi-Document Synthesis {.shrink}
-
-::: {.highlight-box}
-**Q: "What did the board approve regarding the Safety Division expansion?"**
-:::
-
-**Q4 2025 Board (Oct 17):** Approved in principle --- Houston distribution center (40K sq ft), 18 FTEs, Q3 2026 launch, projected $8.2M first-year revenue *(Board Minutes Q4 2025, Item 3, pp. 4--5)*.
-
-**Q1 2026 Board (Jan 22):** Final approval for **$3.4M capex** --- $1.8M warehouse fit-out, $0.9M fleet, $0.4M IT, $0.3M hiring *(Board Minutes Q1 2026, Item 2, pp. 2--3)*.
-
-**Gate review:** If Houston center does not reach 60% of projected revenue by Month 6, management must present revised plan or exit strategy.
-
-::: {.explainer}
-The agent assembled a narrative across [three documents and two time periods]{.accent} --- board minutes from two quarters plus the strategic plan. A keyword search would have found one; the AI found and connected all three.
-:::
+## Gradient Boosting: The One Method {.section-divider}
 
 ::: {.notes}
-This question required the agent to connect information across three separate documents spanning two quarters. The Q4 2025 board minutes had the initial approval and scope. The Q1 2026 minutes had the final capital expenditure authorization and the gate review requirement. The strategic plan provided additional context about this being a Horizon 1 initiative. No single document contains the full answer. This is the kind of question that, in most organizations, would require reading through dozens of pages of board minutes or asking someone who was in the room. The AI assembled the narrative in seconds, with citations to every source.
+We are not going to survey dozens of algorithms. There is one method that dominates tabular prediction --- meaning prediction from spreadsheet-style data with rows and columns --- and that is gradient boosting. This is what practitioners reach for first, what wins most Kaggle competitions on structured data, and what you will use today. Let me explain how it works conceptually.
+
+[TIMING: 15 seconds. Section divider --- advance immediately.]
 :::
 
 ---
 
-## How RAG Works {.shrink}
+## Why One Method? {.shrink}
 
-::: {.step-flow-5}
-::: {.step-card}
-::: {.step-icon}
-1
+::: {.stat-cards}
+::: {.stat-card}
+::: {.stat-number}
+70%+
 :::
-::: {.step-title}
-Chunk
-:::
-::: {.step-desc}
-Documents split into passages (paragraphs, sections, or clauses)
+::: {.stat-label}
+of Kaggle competition winners on tabular data use gradient boosting
 :::
 :::
-::: {.step-card}
-::: {.step-icon}
-2
+
+::: {.stat-card}
+::: {.stat-number}
+XGBoost
 :::
-::: {.step-title}
-Embed
-:::
-::: {.step-desc}
-Each chunk converted to a numerical vector by an embedding model
+::: {.stat-label}
+most popular implementation --- used by every major tech company
 :::
 :::
-::: {.step-card}
-::: {.step-icon}
-3
+
+::: {.stat-card}
+::: {.stat-number}
+#1
 :::
-::: {.step-title}
-Store
-:::
-::: {.step-desc}
-Vectors stored in a vector database for fast similarity search
-:::
-:::
-::: {.step-card}
-::: {.step-icon}
-4
-:::
-::: {.step-title}
-Query
-:::
-::: {.step-desc}
-User's question embedded the same way; top matching chunks retrieved
-:::
-:::
-::: {.step-card}
-::: {.step-icon}
-5
-:::
-::: {.step-title}
-Generate
-:::
-::: {.step-desc}
-LLM receives question + retrieved chunks and produces a cited answer
+::: {.stat-label}
+first choice for practitioners on real-world business data
 :::
 :::
 :::
 
 ::: {.explainer}
-**RAG = Retrieval-Augmented Generation.** The LLM only sees what the retrieval step finds. If retrieval fails, the answer fails --- no matter how smart the model is.
+Deep learning dominates images and language. For [structured business data]{.accent} --- the kind in your databases and spreadsheets --- gradient boosting wins.
 :::
 
 ::: {.notes}
-RAG stands for Retrieval-Augmented Generation. Let me walk you through the five steps. You do not need to memorize these, but understanding the pipeline will help you evaluate vendors and diagnose problems.
+Why are we teaching you one method instead of ten? Because gradient boosting dominates. Over seventy percent of Kaggle competition winners on tabular data --- meaning data that looks like a spreadsheet --- use some form of gradient boosting. XGBoost, LightGBM, and CatBoost are the three most popular implementations, and they are used by every major tech company.
 
-Step 1: Chunk. Your documents are split into passages --- paragraphs, sections, or clauses depending on the document type. This is where the Atherton chunking failure came from. If you split a contract clause in the middle of a sentence, you have already lost. Step 2: Embed. Each chunk is converted into a numerical vector by an embedding model. Think of this as translating text into a position in a high-dimensional space where similar meanings end up near each other. "Remote work policy" and "work from home guidelines" would end up close together even though they use different words. Step 3: Store. Those vectors go into a specialized database --- a vector database --- that is optimized for finding similar vectors quickly. Step 4: Query. When a user asks a question, that question goes through the same embedding process, and the vector database finds the stored chunks that are closest in meaning to the question. Step 5: Generate. The LLM receives the user's question plus the top matching chunks as context, and it produces an answer using only that retrieved context, with citations pointing back to the source documents.
+You have probably heard about deep learning and neural networks. Those dominate images, text, and language --- which is why ChatGPT and Claude are so impressive. But for structured business data --- rows and columns, the kind of data in your CRM, your ERP, your financial systems --- gradient boosting consistently outperforms neural networks. It handles messy real-world data well: missing values, mixed data types, skewed distributions.
 
-Here is the critical insight, and I want you to underline this in your mental model. Read the explainer at the bottom. The LLM only sees what the retrieval step finds. If retrieval fails, the answer fails --- no matter how smart the model is. You could have the most advanced language model in the world, and if step 4 hands it the wrong chunks, the answer will be wrong. RAG quality is retrieval quality. That is why chunking strategy, which we will discuss later, is the single highest-leverage decision in any document AI deployment.
+You do not need to master the implementation. Claude will write the code. But you need to understand the concept so you can evaluate vendor claims and ask the right questions when someone says "we built a machine learning model."
 
-[TIMING: Spend about 5 minutes on this slide, walking through each step. This is the conceptual heart of the session. Make sure people understand the pipeline before moving to hands-on. You should be at about minute 27.]
+[TIMING: 3 minutes. Move to the intuition slide.]
 :::
 
 ---
 
-## The Key Insight {.section-divider}
-
-::: {.notes}
-Let me make this point as starkly as possible. This is the single most important thing to understand about document AI.
-
-[TIMING: Pause on this divider for just a beat, then advance to the statement slide. The dramatic pause is intentional.]
-:::
-
----
-
-## The LLM doesn't read your documents. {.centered-statement}
-
-## It reads whatever the [retrieval system hands it]{.accent}.
-
-::: {.explainer}
-RAG quality is retrieval quality. If the retrieval step fails, the answer fails --- no matter how smart the model is.
-:::
-
-::: {.notes}
-I want you to internalize this. The LLM does not read your documents. It reads whatever the retrieval system hands it. This means that when you are evaluating a document AI vendor, or scoping a build, the question is not "which LLM are you using?" The question is "how good is your retrieval?" How do you chunk? How do you embed? How do you handle documents that span multiple topics? How do you handle updates? The retrieval pipeline is where the quality lives or dies.
-
-Think back to Atherton. Their LLM was fine. Their retrieval was broken. Contract clauses split mid-sentence, so the model got half a clause and produced a confident, dangerously incomplete answer. The model did exactly what it was supposed to do --- it answered based on the context it was given. The problem was upstream, in the chunking.
-
-[TIMING: About 1-2 minutes on this slide. Let it sink in. You should be at about minute 30. Transition to the hands-on rounds next.]
-
-Transition: Now it is your turn. You are going to query the XYZ document collection yourselves. We will do three rounds, each one more challenging than the last.
-:::
-
----
-
-## Hands-On Round 1: Simple Retrieval {.shrink}
-
-::: {.info-box}
-::: {.box-title}
-Round 1 --- Single-Document Questions
-:::
-
-- "What is XYZ's policy on remote work?"
-- "What are the expense approval thresholds?"
-- "How many vacation days do employees get after 5 years?"
-- Notice the **citations** --- each answer points back to a specific document and section
-:::
-
-::: {.explainer}
-Start simple. Ask questions that live in a single document. Pay attention to where the system says the answer came from.
-:::
-
-::: {.notes}
-Alright, Round 1. Open the XYZ app and switch to the document Q&A mode. I have three starter questions on the screen, but feel free to ask your own as well. "What is XYZ's policy on remote work?" "What are the expense approval thresholds?" "How many vacation days do employees get after 5 years?"
-
-These are intentionally simple --- each answer lives in a single document. The goal of this round is to get comfortable with the interface and, more importantly, to start noticing the citations. Every answer should point back to a specific document and section. When you get your answer, check the citation. Does it actually say what the AI claims it says? This is the verification habit we talked about in Session 6, applied to documents instead of data.
-
-You have about five minutes. Go ahead and start asking questions. I will be watching the chat for anything interesting.
-
-[TIMING: 5 minutes of hands-on time, from about minute 32 to minute 37. Monitor the chat. If someone finds an interesting result or a surprising answer, call it out to the group. Common things to watch for: questions where the citation is spot-on, questions where the phrasing matters (e.g., "PTO" vs. "vacation days"), and questions that return multiple citations from the same document.]
-
-After about 4 minutes: Alright, let me pull you back. Quick show of hands or reactions in chat --- did everyone get cited answers? Did anyone find a case where the citation did not quite match the answer? Good. Let's make it harder.
-:::
-
----
-
-## Hands-On Round 2: Cross-Document {.shrink}
-
-::: {.info-box}
-::: {.box-title}
-Round 2 --- Questions Spanning Multiple Documents
-:::
-
-- "What are our obligations under the GE contract, and are there any compliance risks flagged in the latest audit?"
-- "Does our travel policy align with what we committed to in the Apex Industries MSA?"
-- "What did the board say about vendor consolidation, and which contracts are up for renewal?"
-:::
-
-::: {.explainer}
-These questions require the system to retrieve from [multiple documents]{.accent} and synthesize. Watch for gaps where it finds one source but misses the other.
-:::
-
-::: {.notes}
-Round 2 gets more interesting. These questions deliberately span multiple documents. Look at the first one: "What are our obligations under the GE contract, and are there any compliance risks flagged in the latest audit?" That requires the system to retrieve from the GE vendor agreement and from the compliance audit report, then synthesize both into a coherent answer.
-
-The second question asks whether the travel policy aligns with what was committed in a vendor MSA. The third asks about board discussion on vendor consolidation cross-referenced with actual contract renewal dates. These are the kinds of questions that, in a normal company, would require someone to pull up three or four documents and read through them manually. That is a multi-hour task. Here, it should take seconds.
-
-But watch for gaps. The system might find one source and miss the other. It might retrieve the GE contract terms but fail to find the relevant section of the audit report. When that happens, you are seeing a retrieval miss in real time --- and that is exactly the failure mode we discussed. Pay attention to which citations appear and which are absent.
-
-You have about seven minutes. Try these questions and also try your own cross-document questions.
-
-[TIMING: 7 minutes of hands-on time, from about minute 37 to minute 44. This round often generates more discussion because students start seeing gaps and inconsistencies. Watch for: answers that only cite one document when two are needed, answers where the synthesis is good but shallow, and the inevitable question about why the system missed something obvious.]
-
-After about 6 minutes: Let me hear some reactions. Did anyone find a case where the system found one document but missed the other? That is a classic retrieval miss --- the answer exists in the collection, but the retrieval step did not surface it. This is why we said RAG quality is retrieval quality. One more round, and this one is the most powerful.
-:::
-
----
-
-## Hands-On Round 3: Cross-System {.shrink}
-
-::: {.info-box}
-::: {.box-title}
-Round 3 --- Document AI + Database AI Together
-:::
-
-- "What's our contractual commitment to GE, and how does their actual spending compare?"
-- "The board minutes mention expanding the Energy Division --- what do the sales numbers show?"
-- "Our vendor agreement with Apex caps annual spend at $2M --- are we on track to exceed it?"
-:::
-
-::: {.explainer}
-This is where it gets powerful. The system pulls the **contract language** from document AI and the **actual numbers** from database queries. Two systems, one answer.
-:::
-
-::: {.notes}
-This is where it all comes together. Round 3 combines document AI with database AI --- the same database querying you have been doing since Session 1. Look at the first question: "What is our contractual commitment to GE, and how does their actual spending compare?" The contractual commitment lives in a PDF --- that is document AI. The actual spending lives in the transactional database --- that is database AI. The system needs to use both retrieval paths and synthesize the results.
-
-The second question references board minutes about expanding the Energy Division and asks what the sales numbers show. The third checks whether actual vendor spending is on track to exceed a contractual cap. In each case, you need the document for the qualitative context and the database for the quantitative evidence. This is the full vision --- structured and unstructured company knowledge, accessible through one interface, answering questions that previously would have required multiple people, multiple systems, and multiple days.
-
-You have about eight minutes. Try these and see how the system handles the combination. Pay attention to whether both sources are cited --- the document and the database query.
-
-[TIMING: 8 minutes of hands-on time, from about minute 44 to minute 52. This is the climax of the hands-on portion. Students are often impressed by the combined answers. Watch for: moments where the combination works beautifully (call these out), moments where one path succeeds and the other fails, and students who start asking their own creative cross-system questions. Encourage experimentation.]
-
-After about 7 minutes: Let me bring everyone back. This is the vision we have been building toward across all eight sessions. Database AI for the numbers. Document AI for the context. Combined into answers that would have taken days to assemble manually. But --- and this is important --- it is not magic. Let me show you where it breaks down.
-:::
-
----
-
-## Cross-System Result: GE Commitment vs. Spending {.shrink}
-
-::: {.highlight-box}
-**Q: "What's our contractual commitment to GE, and how does their actual spending compare?"**
-:::
-
-**From Document AI (contract):** MSA #MSA-2023-0847 requires **$4.2M minimum annual purchase**. Shortfall forfeits Tier 2/3 pricing retroactively. Auto-renews June 30, 2026 *(GE MSA, Sections 3, 8, Exhibit B)*.
-
-**From Database AI (3 CRMs):**
-
-| Year | Industrial | Energy | Safety | Total | vs. $4.2M |
-|------|-----------|--------|--------|-------|-----------|
-| 2024 | $2.85M | $1.02M | $0.41M | **$4.28M** | +$83K (met) |
-| 2025 | $2.61M | $0.84M | $0.34M | **$3.80M** | **-$404K (missed)** |
-
-::: {.explainer}
-Neither source alone answers the question. The contract says what we promised; the database says what happened. The **$404K shortfall with a renewal deadline 92 days away** only emerges when [both systems are combined]{.accent}.
-:::
-
-::: {.notes}
-This is the cross-system synthesis in action. The agent retrieved contract terms from the document store --- the $4.2M minimum commitment, the shortfall penalty clause, the auto-renewal date --- and then queried three separate CRMs for actual spending by division. GE appears under different names across systems: General Electric in Salesforce, GE-related entries in the Legacy CRM and HubSpot. The punchline: 2025 spending fell $404K short of the contractual minimum, exposing XYZ to retroactive repricing that could cost approximately $160K. And the auto-renewal is 92 days away. This is the kind of insight that requires both document AI and database AI working together --- and the kind of finding that could easily be missed if these systems are queried separately.
-:::
-
----
-
-## When RAG Fails {.shrink}
-
-::: {.three-cards}
-::: {.card .card-dark}
-::: {.card-title}
-Retrieval Misses
-:::
-
-- Question phrased differently than source text
-- Relevant chunk not in top results
-- Result: correct answer exists but system can't find it
-:::
-
-::: {.card .card-light}
-::: {.card-title}
-Hallucinated Citations
-:::
-
-- LLM generates plausible-sounding references
-- Citation points to wrong section or nonexistent page
-- Result: answer looks authoritative but is wrong
-:::
-
-::: {.card .card-light}
-::: {.card-title}
-Stale Documents
-:::
-
-- Policy was updated but old version still indexed
-- System answers from superseded document
-- Result: confidently delivers outdated information
-:::
-:::
-
-::: {.explainer}
-**Live demo:** Watch what happens when a contract clause is split across two chunks. The system retrieves half the clause and gives a dangerously incomplete answer.
-:::
-
-::: {.notes}
-Now let me show you the failure modes. Three categories, and each one maps back to the Atherton case we discussed at the opening.
-
-First, retrieval misses. The answer exists in the document collection, but the retrieval step does not find it. This happens when the question is phrased differently than the source text, or when the relevant chunk does not rank high enough to make the top results. The answer is there --- the system just cannot find it. Some of you may have seen this in Round 2 when the system found one document but missed the other.
-
-Second, hallucinated citations. This is the most dangerous failure mode. The LLM generates a plausible-sounding reference --- it cites a specific page number, quotes what looks like a passage --- but when you go check, that passage does not actually say what the AI claims, or it does not exist at all. The answer looks authoritative, which makes it harder to catch. This is why we said in Session 6: always check the cited passage, not just the summary.
-
-Third, stale documents. A policy was updated, but the old version is still in the index. The system answers from the superseded document and confidently delivers outdated information. This was one of Atherton's failures, and it is incredibly common in real deployments because document management is one of those things nobody wants to own.
-
-[DEMO INSTRUCTIONS: Now run the chunking failure demo. Ask a question where you know a contract clause was split across two chunks. Show the partial answer. Explain that the system retrieved half the clause and gave a dangerously incomplete answer. This is the Atherton failure mode made visible. If the live demo is not cooperating, describe the failure mode verbally and reference what students may have seen in their own hands-on rounds.]
-
-Let me show you this live. I am going to ask a question where I know the relevant contract clause was split across two chunks during ingestion. Watch what happens.
-
-[TIMING: About 5 minutes total on this slide, from minute 52 to about minute 57. Spend 2 minutes on the three failure modes, then 3 minutes on the live chunking failure demo. The demo is the most impactful part --- students seeing a confident but incomplete answer in real time drives the point home.]
-
-Transition: So chunking failures, hallucinated citations, and stale documents. These are the risks. But there is one more constraint you need to understand before we talk about deployment.
-:::
-
----
-
-## Chunking Failure: The $1.53M Omission {.shrink}
-
-::: {.highlight-box}
-**Q: "What are the termination penalties in our Apex Industries contract?"**
-:::
-
-::: {.two-cards}
-::: {.card .card-dark}
-::: {.card-title}
-What the Agent Returned
-:::
-
-"Either party may terminate with **90 days' written notice**."
-
-*(Apex MSA, Section 12.1, p. 14)*
-
-- Factually correct, well-cited, confident tone
-- No hedging or uncertainty
-:::
-
-::: {.card .card-light}
-::: {.card-title}
-What It Missed
-:::
-
-Section 12.2 (p. 15) --- fell into a **different chunk**:
-
-"Terminating party shall pay **15% of remaining contract value**."
-
-- On a $6.8M contract with 18 months left = **$1.53M fee**
-- Chunk scored 0.64 --- below the 0.70 retrieval threshold
-:::
-:::
-
-::: {.explainer}
-The answer is correct, cited, and confident --- but missing the most expensive piece of information. The CFO who relies on this answer walks into a [$1.53M surprise]{.accent}.
-:::
-
-::: {.notes}
-This is the chunking failure made concrete. Someone asks about termination penalties in the Apex contract. The agent retrieves Section 12.1, which describes the 90-day notice requirement --- correct, well-cited, confidently stated. But Section 12.2, which specifies a 15% termination fee on remaining contract value, fell into a separate chunk at the page break between pages 14 and 15. That chunk scored 0.64 on relevance --- just below the 0.70 retrieval threshold --- because it references "Section 12.1" rather than repeating the word "termination penalty" directly. The result: a CFO relying on this answer would expect to walk away with just 90 days notice, and then get invoiced $1.53M. This is the worst kind of AI error --- one that looks exactly like a correct answer. There is no signal that anything is missing.
-:::
-
----
-
-## Context Window Limits {.centered-statement}
-
-## Even the best models have a ceiling
-
-::: {.explainer}
-If your question requires context from 50 pages of contracts, the model can only see what fits in its context window. Retrieval quality matters because you can't just dump everything in. Chunking strategy determines what the model gets to see.
-:::
-
-::: {.notes}
-One more technical constraint that is important for your mental model. Even the best language models have a context window --- a limit on how much text they can process at once. Today's frontier models can handle very long contexts, but there is still a ceiling. If your question requires context from fifty pages of contracts, the model cannot see all fifty pages at once. The retrieval step has to select which passages to include.
-
-This is why you cannot just dump all your documents into the LLM and skip the retrieval step. Some people ask, "Why not just send the entire contract to the model?" For a single short document, you can. But for a collection of hundreds of documents, or even for a single hundred-page contract, you need retrieval to select the relevant passages. Chunking strategy determines what the model gets to see, which means chunking strategy determines the quality of the answer. We keep coming back to the same point: retrieval quality is everything.
-
-[TIMING: About 2 minutes on this slide. You should be at about minute 59. Quick conceptual point, then move to deployment.]
-
-Transition: So now you understand how RAG works, you have used it hands-on, and you have seen where it fails. Let's talk about what it takes to deploy this in your organization.
-:::
-
----
-
-## Deploying RAG: Key Decisions {.shrink}
+## How Gradient Boosting Works {.shrink}
 
 ::: {.step-flow}
 ::: {.step-card}
 ::: {.step-icon}
-1
+🌳
 :::
 ::: {.step-title}
-Document Ingestion
+Tree 1
 :::
 ::: {.step-desc}
-PDF parsing, OCR for scans, handling tables and images
+Build a small decision tree. It gets some predictions right, some wrong.
 :::
 :::
+
 ::: {.step-card}
 ::: {.step-icon}
-2
+🎯
 :::
 ::: {.step-title}
-Chunking Strategy
+Find Errors
 :::
 ::: {.step-desc}
-By section for policies, by clause for contracts, by paragraph for memos
+Look at what Tree 1 got wrong. Focus on those mistakes.
 :::
 :::
+
 ::: {.step-card}
 ::: {.step-icon}
-3
+🌳🌳
 :::
 ::: {.step-title}
-Freshness
+Tree 2
 :::
 ::: {.step-desc}
-Re-index on update, version tracking, retire superseded docs
+Build a new tree that specifically corrects Tree 1's errors.
 :::
 :::
+
 ::: {.step-card}
 ::: {.step-icon}
-4
+🔄
 :::
 ::: {.step-title}
-Access Control
+Repeat
 :::
 ::: {.step-desc}
-Document-level permissions must carry over --- who can see what
+Keep adding trees. Each one fixes the remaining errors. Stop when improvement plateaus.
 :::
 :::
 :::
 
-::: {.explainer}
-Chunking is the single highest-leverage decision. Bad chunking = bad retrieval = bad answers, regardless of model quality.
+::: {.highlight-box}
+**The key insight:** No single tree is smart. But hundreds of trees, each correcting the previous one's mistakes, produce remarkably accurate predictions. This is [ensemble learning]{.accent} --- the wisdom of many weak learners.
 :::
 
 ::: {.notes}
-The deployment framework from Session 5 --- cloud versus on-premise, build versus buy --- still applies here, so we are not going to repeat those general principles. What is new for document AI are these four specific decisions.
+Here is the conceptual explanation. Gradient boosting builds many small decision trees sequentially. The first tree makes predictions --- some right, some wrong. The second tree does not start from scratch; it focuses specifically on the cases the first tree got wrong. The third tree corrects the remaining errors from tree two. And so on, for hundreds or thousands of trees.
 
-First, document ingestion. How do documents get into the system? You need PDF parsing that handles different formats. You need OCR for scanned documents. You need to handle tables and images, which are notoriously difficult for text extraction. If your company has contracts that are scanned PDFs of faxes from 2003, that is an ingestion challenge you need to plan for.
+No single tree is particularly smart. Each one is a "weak learner" --- it might be only slightly better than random guessing. But the combination of hundreds of weak learners, each correcting the previous one's mistakes, produces a model that is remarkably accurate. This is called ensemble learning.
 
-Second, chunking strategy, and I have been hammering this point because it is the single highest-leverage decision. The right chunking strategy depends on the document type. Policies should be chunked by section. Contracts should be chunked by clause --- you never want to split a clause across two chunks, which is exactly what happened at Atherton. Memos and meeting notes should be chunked by paragraph or topic. One size does not fit all, and the vendor that tells you otherwise is selling you something.
+Think of it like editing a document. The first draft has errors. A second pass catches some of those errors but might miss others. A third pass catches what the second missed. After enough passes, the document is polished. That is gradient boosting --- many passes, each one cleaning up what the previous pass missed.
 
-Third, freshness. When a policy is updated, the old version must be replaced, not duplicated. You need re-indexing on update, version tracking so you know which version the system is answering from, and a process to retire superseded documents. Atherton's stale document problem came from having no freshness management at all. The old policy and the new policy were both in the index, and the system returned whichever the retrieval step happened to find first.
+You do not need to remember any of this to use the technique. Claude will handle the implementation. But when a vendor tells you "we built a machine learning model for churn prediction," you now know enough to ask: "What algorithm? Gradient boosting? How many trees? What was the cross-validation score?" Those questions signal that you are not someone who can be sold a black box.
 
-Fourth, access control. The RAG system must enforce the same document permissions as your file server. If board minutes are restricted to senior leadership, the RAG system cannot show those passages to everyone. If HR policies are scoped by division, the system needs to respect those boundaries. Atherton's access control gap --- junior staff seeing board-level compensation data --- is the cautionary tale here.
-
-[TIMING: About 5 minutes on this slide, from about minute 62 to minute 67. Walk through each decision with enough detail that people understand the implications. Connect each one back to the Atherton case. This is lecture plus Q&A, so take a question or two if hands go up.]
+[TIMING: 5 minutes. Move to the ML workflow.]
 :::
 
 ---
 
-## Build vs. Buy {.shrink}
+## What Is a Decision Tree? {.shrink}
 
-::: {.comparison-table}
+::: {.highlight-box}
+A decision tree asks a series of yes/no questions about your data to reach a prediction:
+:::
 
-| | Turnkey Platforms | Custom Build |
-|---|---|---|
-| **Examples** | Glean, Guru, Microsoft Copilot for M365 | LangChain + vector DB + your infra |
-| **Setup time** | Days to weeks | Weeks to months |
-| **Customization** | Limited --- works with standard doc formats | Full control over chunking, retrieval, prompts |
-| **Access control** | Built-in (inherits from source system) | You build it |
-| **Cost model** | Per-user subscription | Infrastructure + engineering time |
-| **Best for** | Broad knowledge base across standard tools | Domain-specific docs, regulatory, proprietary formats |
-
+::: {.code-box}
+::: {.box-title}
+Example: Will this customer churn?
+:::
+Is monthly usage < 5 sessions?
+├── YES → Has tenure < 12 months?
+│   ├── YES → **CHURN** (85% confidence)
+│   └── NO  → Has open support ticket?
+│       ├── YES → **CHURN** (70% confidence)
+│       └── NO  → **STAY** (60% confidence)
+└── NO  → Has usage declined 3 months in a row?
+    ├── YES → **CHURN** (65% confidence)
+    └── NO  → **STAY** (90% confidence)
 :::
 
 ::: {.explainer}
-Most companies start with a turnkey platform for general knowledge and build custom RAG only where the domain requires it (legal, compliance, engineering specs).
+Each tree in gradient boosting is [small and simple]{.accent} --- maybe 4-8 questions deep. The power comes from combining hundreds of these simple trees.
 :::
 
 ::: {.notes}
-For document AI specifically, the build-versus-buy landscape looks like this. On the left, turnkey platforms --- Glean, Guru, Microsoft Copilot for M365. These handle ingestion and permissions out of the box. They connect to your existing document sources --- SharePoint, Google Drive, Confluence --- and they inherit the access controls from those systems. Setup time is days to weeks, and the cost model is typically per-user subscription. The tradeoff is limited customization. You get their chunking strategy, their retrieval approach, their prompts.
+Before we move on, let me make decision trees concrete. A decision tree is just a series of yes/no questions. Is monthly usage less than five sessions? If yes, go left. Has the customer been with us less than a year? If yes, predict churn with eighty-five percent confidence.
 
-On the right, custom builds using tools like LangChain with a vector database on your own infrastructure. This gives you full control over chunking, retrieval, and prompts. You can implement domain-specific chunking --- by clause for contracts, by regulation for compliance documents. But you build the access control yourself, and the setup time is weeks to months rather than days.
+Each individual tree in a gradient boosting model is deliberately kept small --- maybe four to eight questions deep. This is by design. A deep, complex tree would memorize the training data instead of learning generalizable patterns. By keeping each tree simple and combining hundreds of them, gradient boosting gets the best of both worlds: complexity in aggregate, simplicity in each component.
 
-The practical pattern I see most often is what the explainer describes. Companies start with a turnkey platform for general knowledge --- the employee handbook, standard policies, IT documentation. Then they build custom RAG only where the domain demands it --- legal contracts with specific clause structures, regulatory filings with complex cross-references, engineering specifications with tables and diagrams that standard chunking cannot handle.
+You will see this in action in a few minutes when we build a model with Claude.
 
-For your capstone strategies, think about where your company falls on this spectrum. Do you have standard documents that a turnkey platform could handle? Or do you have domain-specific documents that require custom chunking and retrieval?
-
-[TIMING: About 5 minutes on this slide, from about minute 67 to minute 72. Walk through the comparison table row by row. Take a question or two. Students often ask about Microsoft Copilot specifically --- have a brief answer ready about its strengths (tight Office 365 integration, built-in access controls) and limitations (less customization, dependent on Microsoft ecosystem).]
-
-Transition: Alright, you have seen document AI work, you understand the pipeline, you know the failure modes and deployment decisions. Now I want you to apply this to your own companies. Time for a breakout.
+[TIMING: 2 minutes. Move to the ML workflow section.]
 :::
 
 ---
 
-## Breakout: Where Is Knowledge Trapped? {.shrink}
+## The ML Workflow {.section-divider}
+
+::: {.notes}
+Now let us walk through the end-to-end workflow for building a predictive model. This is the sequence you will follow in the hands-on exercise, and it is the same sequence that data scientists follow in production. The difference is that you will have Claude write the code while you focus on evaluating the output.
+
+[TIMING: 15 seconds. Section divider --- advance immediately.]
+:::
+
+---
+
+## Five Steps to a Predictive Model
+
+::: {.step-flow-5}
+::: {.step-card}
+::: {.step-icon}
+📊
+:::
+::: {.step-title}
+Prepare Data
+:::
+::: {.step-desc}
+Clean, explore, handle missing values
+:::
+:::
+
+::: {.step-card}
+::: {.step-icon}
+✂️
+:::
+::: {.step-title}
+Split
+:::
+::: {.step-desc}
+Train set (80%) and test set (20%)
+:::
+:::
+
+::: {.step-card}
+::: {.step-icon}
+⚙️
+:::
+::: {.step-title}
+Fit Model
+:::
+::: {.step-desc}
+Train gradient boosting on the training set
+:::
+:::
+
+::: {.step-card}
+::: {.step-icon}
+🔮
+:::
+::: {.step-title}
+Predict
+:::
+::: {.step-desc}
+Apply model to the test set it has never seen
+:::
+:::
+
+::: {.step-card}
+::: {.step-icon}
+✅
+:::
+::: {.step-title}
+Evaluate
+:::
+::: {.step-desc}
+Confusion matrix, accuracy, feature importance
+:::
+:::
+:::
+
+::: {.highlight-box}
+**Why split the data?** If you evaluate a model on the same data it trained on, it is like grading a student on questions they already saw. The test set is the [final exam with new questions]{.accent}.
+:::
+
+::: {.notes}
+Here is the five-step workflow. Step one: prepare the data --- explore it, handle missing values, understand what each column means. Step two: split the data into a training set and a test set. The model learns from the training set and gets evaluated on the test set --- data it has never seen. Step three: fit the model --- this is where gradient boosting builds its hundreds of trees. Step four: predict --- apply the trained model to the test set. Step five: evaluate --- look at the confusion matrix, accuracy metrics, and feature importance.
+
+The most important concept here is the train/test split. Why do we split the data? Because if you evaluate a model on the same data it trained on, you are measuring memorization, not generalization. It is like giving a student the final exam, then grading them on the exact same questions. Of course they will score well --- they have seen the answers. The test set is a final exam with new questions. If the model performs well on data it has never seen, you can trust that it has learned real patterns, not just memorized the training data.
+
+Cross-validation takes this further. Instead of one split, it does five or ten different splits and averages the results. This gives you a more reliable estimate of how the model will perform on truly new data. Claude will handle cross-validation automatically when you ask for it.
+
+[TIMING: 3 minutes. Move to the simulated demo.]
+:::
+
+---
+
+## Demo: Prompting Claude to Build a Model {.shrink}
+
+::: {.code-box}
+::: {.box-title}
+Step 1: Explore the Data
+:::
+PROMPT: I have a CSV file with customer data. Each row is a customer.
+The columns include tenure, monthly_charges, total_charges,
+contract_type, payment_method, internet_service, and a column
+called "churn" that is Yes or No.
+
+Please explore this data: how many rows, any missing values,
+and what does the distribution of churn look like?
+:::
+
+::: {.notes}
+[DEMO INSTRUCTIONS: This is a live demo. Open Claude and upload the customer churn CSV dataset. If the live demo fails, use these slides as the walkthrough and narrate what Claude would produce.
+
+Start with this exact prompt. Claude will return a summary: number of rows, columns, missing values, and the class balance of the churn variable. Point out the class imbalance if it exists --- typically 70-75% stay vs. 25-30% churn. Explain why this matters: if 75% of customers stay, a model that always predicts "stay" would be 75% accurate but completely useless.]
+
+Let me walk you through what this looks like in practice. I am going to show you a conversation with Claude where we build a predictive model step by step. In the hands-on exercise, you will do this yourself.
+
+Step one: give Claude context about your data and ask it to explore. Notice I am not writing any code. I am describing the data in plain English and asking Claude to do the exploration. This is the same maker/checker pattern from Session 2 --- AI does the work, you evaluate the output.
+
+[TIMING: 2 minutes on this slide. Move to Claude's response.]
+:::
+
+---
+
+## Demo: Claude's Exploration Output {.shrink}
+
+::: {.code-box}
+::: {.box-title}
+Claude's Response (simulated)
+:::
+Here's what I found in your dataset:
+
+**Dataset overview:**
+- 7,043 customers, 21 columns
+- No missing values (after converting 11 blank TotalCharges to 0)
+
+**Churn distribution:**
+- Did not churn: 5,174 (73.5%)
+- Churned: 1,869 (26.5%)
+
+**Key observations:**
+- Month-to-month contracts churn at 42% vs. 11% for 2-year contracts
+- Customers with fiber optic internet churn at 42% vs. 25% overall
+- Average tenure for churned customers: 18 months vs. 38 months
+  for retained customers
+
+⚠️ The dataset is imbalanced (73/27 split). I'll account for
+this when building the model.
+:::
+
+::: {.notes}
+Here is what Claude produces. It found 7,043 customers with 21 columns. No missing values after cleaning. And here is the critical finding: the data is imbalanced. Seventy-three percent of customers did not churn, twenty-seven percent did.
+
+Why does imbalance matter? If I built a model that always predicts "no churn," it would be seventy-three percent accurate. That sounds decent, but it is completely useless --- it never identifies anyone who is actually at risk. Claude flags this and says it will account for it in the model. This is the kind of thing you need to watch for when evaluating model output.
+
+Also notice the early insights: month-to-month contracts churn at forty-two percent, and tenure for churned customers is half that of retained customers. These are not predictions yet --- they are patterns in the data that tell you the model has something to work with.
+
+[TIMING: 2 minutes. Move to the model-building prompt.]
+:::
+
+---
+
+## Demo: Building the Model {.shrink}
+
+::: {.code-box}
+::: {.box-title}
+Step 2: Build and Evaluate
+:::
+PROMPT: Build a gradient boosting classifier to predict churn.
+Use an 80/20 train-test split and 5-fold cross-validation.
+
+Show me:
+1. The confusion matrix on the test set
+2. Precision, recall, and F1 score
+3. The top 10 most important features
+4. Cross-validation scores
+
+Explain the results in business terms, not just statistics.
+:::
+
+::: {.notes}
+Step two: ask Claude to build the model. Notice the specificity of this prompt. I am not just saying "build a model." I am specifying the algorithm (gradient boosting), the split (80/20), the validation approach (5-fold cross-validation), and exactly what outputs I want. I am also asking Claude to explain results in business terms --- not just statistics.
+
+This is a skill you are developing: writing precise prompts that produce evaluable output. The more specific your request, the more useful the response. If you just say "predict churn," Claude might use any algorithm and show you outputs you cannot interpret. By specifying what you want, you set yourself up to evaluate the results.
+
+[TIMING: 1 minute. Move to Claude's model output.]
+:::
+
+---
+
+## Demo: Model Results {.shrink}
+
+::: {.code-box}
+::: {.box-title}
+Claude's Model Output (simulated)
+:::
+**Model:** GradientBoostingClassifier (200 trees, max depth 4)
+
+**Confusion Matrix (test set, 1,409 customers):**
+                Predicted Stay    Predicted Churn
+Actual Stay         896               139
+Actual Churn        102               272
+
+**Metrics:**
+- Accuracy: 82.9%
+- Precision (churn): 66.2%  — when we predict churn, we're right 66% of the time
+- Recall (churn): 72.7%     — we catch 73% of actual churners
+- F1 Score: 69.3%
+
+**Cross-validation:** 81.4% ± 1.8% (stable across folds)
+:::
+
+::: {.notes}
+Here are the results. The model achieves 82.9 percent accuracy on the test set. But accuracy alone is not enough --- remember, always predicting "stay" would give us 73.5 percent accuracy. We need to look deeper.
+
+The confusion matrix is the key output. Let me walk through it. Top-left: 896 customers who actually stayed and the model correctly predicted "stay." Top-right: 139 customers who actually stayed but the model predicted "churn" --- these are false positives. Bottom-left: 102 customers who actually churned but the model predicted "stay" --- these are false negatives, and they are the most dangerous. Bottom-right: 272 customers who actually churned and the model correctly caught them --- true positives.
+
+I will unpack the confusion matrix in detail on the next slide. For now, note the cross-validation score: 81.4 percent plus or minus 1.8 percent. This is stable across folds, which means the model is generalizing well, not just memorizing one particular train/test split.
+
+[TIMING: 3 minutes. Move to the confusion matrix explanation.]
+:::
+
+---
+
+## Evaluating Models {.section-divider}
+
+::: {.notes}
+Now that you have seen what a model produces, let us talk about how to evaluate it. This is where the maker/checker framework applies most directly. The AI built the model --- now you need to decide whether to trust it.
+
+[TIMING: 15 seconds. Section divider --- advance immediately.]
+:::
+
+---
+
+## Reading a Confusion Matrix {.shrink}
 
 ::: {.two-cards}
-::: {.card .card-dark}
+::: {.card .card-light}
 ::: {.card-title}
-Identify
+What the Matrix Tells You
 :::
 
-- Name 2--3 document collections at your company that would benefit from AI-powered Q&A
-- Think: policies, contracts, procedures, meeting notes, customer communications
-- Where do people currently go to find this information?
+- **True Positives (272):** Correctly predicted churn --- these are your wins
+- **True Negatives (896):** Correctly predicted stay --- no action needed
+- **False Positives (139):** Predicted churn, but customer stayed --- unnecessary retention spend
+- **False Negatives (102):** Predicted stay, but customer churned --- [missed opportunity, the costly error]{.accent}
+:::
+
+::: {.card .card-dark}
+::: {.card-title}
+The Business Question
+:::
+
+- What is the **cost** of each error type?
+- False positive: you offer a discount to someone who was staying anyway (~$50/customer?)
+- False negative: you lose a customer worth $1,200/year in revenue
+- [False negatives are 24x more costly]{.amber} --- optimize for recall
+:::
+:::
+
+::: {.notes}
+The confusion matrix is not just a statistics table --- it is a business decision tool. Let me show you why.
+
+We have two types of errors. False positives: 139 customers the model flagged as likely to churn, but they were actually going to stay. What is the cost? You might offer them a retention discount unnecessarily --- say fifty dollars each. That is about seven thousand dollars.
+
+False negatives: 102 customers the model predicted would stay, but they actually churned. What is the cost? Each lost customer represents maybe twelve hundred dollars per year in revenue. That is a hundred and twenty-two thousand dollars in lost revenue.
+
+False negatives are twenty-four times more costly than false positives in this example. That changes how you evaluate the model. You do not want the model with the highest accuracy --- you want the model that catches the most churners, even if it means more false alarms. This is the precision-recall tradeoff, and it is a business decision, not a statistical one.
+
+When you evaluate a model, the first question is not "what is the accuracy?" It is "what is the cost of each type of error?" That determines which metric matters most.
+
+[TIMING: 4 minutes. Move to precision vs recall.]
+:::
+
+---
+
+## Precision vs. Recall: A Business Tradeoff
+
+::: {.two-cards}
+::: {.card .card-light}
+::: {.card-title}
+Precision (66.2%)
+:::
+
+- "When we predict churn, how often are we right?"
+- 272 correct out of 411 churn predictions
+- Higher precision = fewer wasted retention offers
+- [Optimize for precision when false positives are expensive]{.accent}
+- Example: fraud alerts that freeze customer accounts
+:::
+
+::: {.card .card-dark}
+::: {.card-title}
+Recall (72.7%)
+:::
+
+- "Of all actual churners, how many did we catch?"
+- 272 caught out of 374 actual churners
+- Higher recall = fewer missed churners
+- [Optimize for recall when false negatives are expensive]{.amber}
+- Example: cancer screening, churn prevention, fraud in high-value accounts
+:::
+:::
+
+::: {.explainer}
+You cannot maximize both. Catching more churners (higher recall) means more false alarms (lower precision). The right balance depends on your business costs.
+:::
+
+::: {.notes}
+Precision and recall are inversely related --- you cannot maximize both simultaneously. Increasing recall means casting a wider net, which catches more true churners but also flags more customers who were not going to churn. Increasing precision means being more selective, which reduces false alarms but misses more actual churners.
+
+The right tradeoff depends entirely on your business context. For churn prevention, where a lost customer is worth far more than a wasted discount, you optimize for recall. For fraud detection where blocking a legitimate transaction angers a customer, you might balance more toward precision. For cancer screening, you overwhelmingly optimize for recall --- you never want to miss a true positive.
+
+This is a judgment call that AI cannot make for you. The model can give you any tradeoff you want by adjusting a threshold. Your job is deciding which tradeoff is right for the business.
+
+[TIMING: 3 minutes. Move to regression metrics.]
+:::
+
+---
+
+## Regression Metrics: R² and RMSE
+
+::: {.two-cards}
+::: {.card .card-light}
+::: {.card-title}
+R² (R-squared)
+:::
+
+- "How much of the variation does the model explain?"
+- R² = 0.85 means the model explains 85% of variation in the target
+- R² = 1.0 is a perfect model (suspicious --- probably data leakage)
+- R² = 0.0 means the model is no better than predicting the average
+- [Business rule of thumb: R² > 0.7 is usually useful for planning]{.accent}
+:::
+
+::: {.card .card-dark}
+::: {.card-title}
+RMSE (Root Mean Squared Error)
+:::
+
+- "On average, how far off are the predictions?"
+- RMSE = $4,200 means predictions are off by ~$4,200 on average
+- In the same units as the target variable (dollars, units, etc.)
+- [Ask: "Is this error margin acceptable for the business decision?"]{.amber}
+- RMSE of $4,200 on $50K deals is fine; on $8K deals, it is not
+:::
+:::
+
+::: {.notes}
+For regression problems --- predicting continuous numbers --- you use different metrics. R-squared tells you how much of the variation in the target your model explains. An R-squared of 0.85 means the model captures eighty-five percent of the variation in, say, quarterly revenue. The remaining fifteen percent is noise the model cannot explain.
+
+RMSE --- root mean squared error --- tells you how far off the predictions are on average, in the same units as your target. If you are predicting deal values and the RMSE is four thousand two hundred dollars, that means the model's predictions are off by about four thousand two hundred dollars on average.
+
+The business question for RMSE is always: is this error margin acceptable for the decision I am making? An RMSE of four thousand two hundred dollars on fifty-thousand-dollar deals is fine for forecasting. The same RMSE on eight-thousand-dollar deals means the model is off by more than fifty percent on average --- probably not useful.
+
+You will not build a regression model in today's exercise, but you will encounter these metrics when you or your team work on forecasting and demand planning.
+
+[TIMING: 3 minutes. Move to feature importance.]
+:::
+
+---
+
+## Feature Importance: What Drives Predictions? {.shrink}
+
+::: {.code-box}
+::: {.box-title}
+Top 10 Features (from our churn model)
+:::
+Feature                    Importance
+─────────────────────────────────────
+1. contract_type              0.231    ← Month-to-month is the #1 risk
+2. tenure                     0.189    ← New customers churn more
+3. monthly_charges            0.142    ← Higher bills → higher churn
+4. internet_service_fiber     0.098    ← Fiber customers churn more
+5. total_charges              0.074
+6. payment_method_electronic  0.062
+7. online_security_no         0.048
+8. tech_support_no            0.041
+9. online_backup_no           0.035
+10. paperless_billing         0.028
+:::
+
+::: {.highlight-box}
+**The maker/checker question:** Do these make business sense? Contract type and tenure as top predictors? [Yes --- that passes the smell test.]{.accent} If "customer_id" were the top feature, something is very wrong.
+:::
+
+::: {.notes}
+Feature importance tells you which variables the model relies on most. This is one of the most valuable outputs for business decision-making, separate from the predictions themselves.
+
+Look at this list. Contract type is the number one predictor of churn. Month-to-month customers churn at much higher rates than those on annual or two-year contracts. Tenure is second --- newer customers are more likely to leave. Monthly charges is third --- customers paying higher bills are more sensitive to competitors.
+
+Now apply the maker/checker framework. Do these features make business sense? Absolutely. If you asked any experienced sales or customer success leader "what drives churn?", they would say contract type, tenure, and price sensitivity. The model confirms domain expertise.
+
+But here is the red flag to watch for. If "customer_id" appeared as a top feature, that would mean the model is memorizing individual customers, not learning patterns. If "zip_code" appeared as number one, it might be exploiting a data artifact rather than a real business driver. Feature importance is your most powerful tool for catching models that are technically accurate but fundamentally flawed.
+
+[TIMING: 3 minutes. Move to the maker/checker framework for models.]
+:::
+
+---
+
+## The Maker/Checker Framework for Models
+
+::: {.three-cards}
+::: {.card .card-light}
+::: {.card-title}
+1. Better Than Baseline?
+:::
+
+- Does the model beat a naive approach?
+- Baseline for churn: predict "stay" for everyone → 73.5% accuracy
+- Our model: 82.9% accuracy
+- [9.4 percentage points better]{.accent} --- real improvement
+:::
+
+::: {.card .card-dark}
+::: {.card-title}
+2. Features Make Sense?
+:::
+
+- Do the top predictors match domain knowledge?
+- Contract type, tenure, charges → [makes sense]{.amber}
+- Customer ID, row number → [data leakage]{.amber}
+- Ask a domain expert: "Do these surprise you?"
 :::
 
 ::: {.card .card-light}
 ::: {.card-title}
-Evaluate
+3. Generalizes Well?
 :::
 
-- How often are these documents updated?
-- Who needs access --- and who shouldn't have it?
-- What's the cost of a wrong answer from stale or incomplete documents?
+- Cross-validation: 81.4% ± 1.8%
+- Training accuracy: 85.2%
+- Small gap → model is [generalizing]{.accent}
+- If train = 99% but CV = 60% → overfitting
 :::
-:::
-
-::: {.explainer}
-Report back: your top candidate document collection and the biggest deployment risk you foresee.
 :::
 
 ::: {.notes}
-[BREAKOUT INSTRUCTIONS: This is a 12-minute breakout from minute 75 to minute 87. Groups of 3-4. Assign breakout rooms in Zoom. Visit each room briefly during the breakout to listen and prompt discussion.]
+Here is your three-question checklist for evaluating any predictive model. You do not need to understand the math. You need to ask these three questions.
 
-Alright, breakout time. I am going to put you into groups of three or four. You have twelve minutes for this exercise. Here is what I want you to do.
+Question one: does the model beat a baseline? The simplest baseline for churn is "predict everyone stays" --- that gives you 73.5 percent accuracy for free. Our model gets 82.9 percent. That is a real improvement of 9.4 percentage points. If a model only beats the baseline by one or two points, it may not be worth the complexity.
 
-First, the Identify card on the left. Each person in the group should name two or three document collections at your company that would benefit from AI-powered Q&A. Think broadly --- policies, contracts, procedures, meeting notes, customer communications, regulatory filings, engineering specs. And for each one, talk about where people currently go to find this information. Is it a SharePoint search? An email to someone? A phone call? A folder that only one person knows about?
+Question two: do the important features make business sense? We already covered this. Contract type, tenure, and monthly charges as top predictors? That matches what any experienced manager would tell you. If the top features do not make sense, the model may be exploiting a data artifact.
 
-Second, the Evaluate card on the right. For your top candidates, assess three things. How often are these documents updated? This tells you about the freshness challenge. Who needs access and who should not have it? This tells you about the access control challenge. And what is the cost of a wrong answer from stale or incomplete documents? If the cost is low --- someone gets the wrong lunch menu --- maybe it is fine. If the cost is high --- someone gives a wrong answer about indemnification terms to a client --- that is a deployment risk you need to plan for.
+Question three: does the model generalize? Compare the cross-validation score to the training score. Our model gets 85.2 percent on training data and 81.4 percent on cross-validation. That is a small gap, which means the model learned real patterns, not memorized the training data. If you saw training accuracy of 99 percent but cross-validation accuracy of 60 percent, that model is memorizing, not learning. It will fail on new data.
 
-When you come back, each group should be ready to report: your top candidate document collection and the biggest deployment obstacle you foresee. I will be visiting your rooms to listen in. Off you go.
+Three questions. That is your entire evaluation framework. AI builds the model --- you ask these three questions.
 
-[TIMING: 12 minutes in breakout rooms. Visit 2-3 rooms during the breakout. Listen for patterns --- the same types of documents come up repeatedly (vendor contracts, internal policies, client communications). When groups return, spend about 3-5 minutes on report-backs. Call on 3-4 groups. Listen for: which document types came up most often, what access control challenges were identified, and whether groups leaned toward turnkey or custom solutions. Connect the themes back to the deployment framework.]
-
-Welcome back. Let me hear from a few groups. What was your top candidate document collection, and what is the biggest deployment obstacle? Let me start with Group 1.
-
-[After report-backs:] Great. I am hearing some common patterns. Vendor contracts and internal policies came up in almost every group. Access control is a universal concern. And most of you are thinking turnkey first, custom only where the domain demands it. Those are exactly the right instincts. Keep these ideas warm --- they may feed directly into your capstone strategy for next session.
+[TIMING: 3 minutes. Move to red flags.]
 :::
 
 ---
 
-## Before Next Session {.shrink}
+## Red Flags: When Not to Trust the Model {.shrink}
+
+::: {.four-cards}
+::: {.card .card-dark}
+::: {.card-title}
+🚩 Too Good to Be True
+:::
+
+- 99% accuracy usually means data leakage
+- The target variable leaked into the features
+- Example: including "cancellation_date" to predict churn
+:::
+
+::: {.card .card-light}
+::: {.card-title}
+🚩 Nonsense Features
+:::
+
+- Customer ID, row number, or timestamp as top features
+- The model is memorizing, not learning
+- Always check feature importance before trusting predictions
+:::
+
+::: {.card .card-dark}
+::: {.card-title}
+🚩 Big Train/Test Gap
+:::
+
+- Train accuracy: 98%
+- Test accuracy: 65%
+- The model memorized training data and fails on new data
+:::
+
+::: {.card .card-light}
+::: {.card-title}
+🚩 Unstable Cross-Val
+:::
+
+- Scores: 85%, 62%, 78%, 91%, 55%
+- High variance across folds
+- Model is sensitive to which data it sees --- not reliable
+:::
+:::
+
+::: {.notes}
+Four red flags that should make you stop and investigate before deploying a model.
+
+First: too good to be true. If you see 99 percent accuracy, do not celebrate --- investigate. Almost always, this means data leakage: information about the outcome leaked into the input features. The classic example is including "cancellation_date" as a feature when predicting churn. Of course the model is perfect --- it can see the answer in the input.
+
+Second: nonsense features at the top of the importance list. Customer ID, row number, account creation timestamp --- these should never be meaningful predictors. If they are, the model is memorizing specific customers rather than learning generalizable patterns.
+
+Third: a large gap between training and test performance. If the model gets 98 percent on training data but 65 percent on test data, it has memorized the training set. It learned the noise, not the signal.
+
+Fourth: unstable cross-validation scores. If the model gets 85 percent on one fold and 55 percent on another, it is highly sensitive to which data it sees. That is not a model you can rely on for business decisions.
+
+Any of these red flags means you need to go back and investigate before trusting the predictions.
+
+[TIMING: 3 minutes. Move to the hands-on exercise.]
+:::
+
+---
+
+## Hands-On: Build a Predictive Model {.section-divider}
+
+::: {.notes}
+Now it is your turn. You are going to use Claude to build a predictive model from start to finish. I will walk you through five guided steps, and you will work through them at your own pace. The goal is not just to get a result --- it is to practice the evaluation skills we just covered.
+
+[TIMING: 15 seconds. Section divider --- advance immediately.]
+:::
+
+---
+
+## Exercise Setup {.shrink}
 
 ::: {.info-box}
 ::: {.box-title}
-Homework --- Capstone
+What You Need
 :::
 
-- **Finalize your strategy document** (1--2 pages) using the capstone template. Cover all 8 sections: problem, solution, deployment, 90-day pilot, success metrics, risks, the ask, and Day 1 action.
-- **Prepare a 5-minute presentation** for Session 8. You will present to your breakout group, and the strongest strategies will advance to the full class.
-- Use the **evaluation rubric** to self-check: Is the pilot scoped tightly? Are success metrics measurable? Is the Day 1 action specific?
+- Open Claude at [claude.ai](https://claude.ai)
+- Download the customer churn dataset (link in chat)
+- Upload the CSV to Claude
+- Follow the five guided steps on the next slide
 :::
 
-::: {.explainer}
-Monday's final session: [Your AI Strategy]{.accent} --- you present, we synthesize, and you leave with a concrete plan.
+::: {.highlight-box}
+**Time:** 20 minutes. Work individually. I will circulate to help.
+
+**Goal:** Not just to build a model, but to [evaluate it]{.accent} using the framework we just learned. Can you answer the three maker/checker questions about your model?
 :::
 
 ::: {.notes}
-Let me walk you through what is due for our final session on Monday. Three things.
+[HANDS-ON SETUP: Post the dataset link in the Zoom chat. Give students 1 minute to download and open Claude. The dataset is a standard telecom customer churn dataset with about 7,000 rows and 21 columns. If students have trouble uploading, remind them to use the attachment/paperclip icon in Claude.]
 
-First, finalize your strategy document. One to two pages using the capstone template I shared with the Session 6 homework. It has eight sections: the problem, the solution, the deployment approach, a 90-day pilot plan, success metrics, risks and mitigations, the ask --- what you need in terms of budget and headcount --- and the Day 1 action. Every section matters, but let me highlight three that trip people up. The pilot should be scoped tightly --- one use case, one to three systems, a clear success metric. The success metrics should be measurable, not vague. "Reduce forecast time from 3 days to 2 hours" is strong. "Improve efficiency" is not. And the Day 1 action should be something that actually happens on Day 1 --- a specific person, a specific task, a specific date. Not "we should explore options."
+Here is how we will spend the next twenty minutes. You have a customer churn dataset. You are going to upload it to Claude and work through five guided steps. The goal is not just to build a model --- any prompt will produce a model. The goal is to evaluate it using the three-question framework: better than baseline, features make sense, and generalizes well.
 
-Second, prepare a five-minute presentation. On Monday, you will present to your breakout group first. Each group will vote on the strongest strategy, and those winning strategies will present to the full class. Everyone presents; five advance to the plenary.
+Work individually. I will circulate and help. If you get stuck on any step, raise your hand or post in chat.
 
-Third, use the evaluation rubric to self-check before you finalize. The rubric was included with the template. Run your strategy through each dimension and ask yourself honestly: would I fund this?
-
-If you want to go deeper on the technical side, the optional Demos 6 and 7 show building a RAG system from scratch and combining it with a database agent. They are linked in the homework materials.
-
-[TIMING: About 2 minutes on this slide. Be clear about expectations for Monday. You should be wrapping up at about minute 88.]
+[TIMING: 2 minutes for setup. Then advance to the guided steps.]
 :::
 
 ---
 
-## Key Takeaway {.section-divider}
+## Five Guided Steps {.shrink}
+
+::: {.step-flow-5}
+::: {.step-card}
+::: {.step-icon}
+1️⃣
+:::
+::: {.step-title}
+Explore
+:::
+::: {.step-desc}
+"Explore this data. How many rows? Missing values? What's the churn rate?"
+:::
+:::
+
+::: {.step-card}
+::: {.step-icon}
+2️⃣
+:::
+::: {.step-title}
+Build
+:::
+::: {.step-desc}
+"Build a gradient boosting classifier with 80/20 split and cross-validation."
+:::
+:::
+
+::: {.step-card}
+::: {.step-icon}
+3️⃣
+:::
+::: {.step-title}
+Evaluate
+:::
+::: {.step-desc}
+"Show me the confusion matrix. What's the false negative rate?"
+:::
+:::
+
+::: {.step-card}
+::: {.step-icon}
+4️⃣
+:::
+::: {.step-title}
+Interpret
+:::
+::: {.step-desc}
+"What are the top 10 features? Do they make business sense?"
+:::
+:::
+
+::: {.step-card}
+::: {.step-icon}
+5️⃣
+:::
+::: {.step-title}
+Challenge
+:::
+::: {.step-desc}
+"What would a skeptical VP push back on? How would you improve this?"
+:::
+:::
+:::
+
+::: {.highlight-box}
+**Bonus prompt:** "If I could only act on the top 200 highest-risk customers, which ones would you flag and why?"
+:::
 
 ::: {.notes}
-Let me close with one final thought. This is the through-line for everything we covered today.
+Here are your five steps. Step one: explore the data. Ask Claude to tell you what is in the dataset, how many rows, any missing values, and what the churn rate looks like. Step two: build the model. Ask for a gradient boosting classifier with an 80/20 train-test split and 5-fold cross-validation. Step three: evaluate. Ask for the confusion matrix and specifically the false negative rate --- how many churners is the model missing? Step four: interpret the feature importance. Do the top features make sense? Step five: challenge the model. Ask Claude what a skeptical VP would push back on. This is the maker/checker step.
 
-[TIMING: Brief pause on the divider, then advance to the closing statement.]
+The bonus prompt is my favorite: "If I could only act on the top 200 highest-risk customers, which ones would you flag and why?" This forces the model output into a concrete business action. It is not about accuracy in the abstract --- it is about which specific customers get a retention call.
+
+You have twenty minutes. Go.
+
+[TIMING: 18-20 minutes for the exercise. Circulate the room. Common issues: (1) Students who upload the CSV but do not describe it --- remind them to give Claude context. (2) Students who get a model but do not evaluate it --- push them to steps 3-5. (3) Students who get stuck on errors --- usually a Claude timeout on large code blocks, just ask Claude to try again.]
 :::
 
 ---
 
-## Your most valuable knowledge is buried in [documents nobody can search]{.accent}. {.centered-statement}
+## Example: Step 5 in Action {.shrink}
 
-::: {.explainer}
-RAG doesn't replace your experts. It makes their expertise accessible to everyone who needs it.
+::: {.code-box}
+::: {.box-title}
+Prompt: Challenge the Model
+:::
+PROMPT: What would a skeptical VP of Customer Success push back on
+if I presented this model? What are the weaknesses?
+:::
+
+::: {.code-box}
+::: {.box-title}
+Claude's Response (simulated)
+:::
+A skeptical VP would likely raise these concerns:
+
+1. **"We're missing 27% of churners."** The recall of 72.7% means
+   102 customers who churned were not flagged. If each lost customer
+   costs $1,200/year, that's $122K in missed revenue.
+
+2. **"Contract type is the top feature — we already know that."**
+   The model confirms what the team already suspects. The VP wants
+   to know: what does the model tell us that we DON'T already know?
+   → Look at features 4-10 for non-obvious insights.
+
+3. **"This is trained on historical data."** If we just changed our
+   pricing or launched a new product, past churn patterns may not
+   predict future behavior. The model needs retraining regularly.
+
+4. **"What do we DO with the predictions?"** A model is only useful
+   if it drives action. What's the intervention for flagged customers?
+   Who owns the follow-up?
 :::
 
 ::: {.notes}
-Your most valuable knowledge is buried in documents nobody can search. The policies that guide decisions, the contracts that define obligations, the board minutes that record strategy --- all of it sitting in folders that require you to know exactly where to look and exactly what to search for. Document AI changes that. It does not replace your experts. Your legal team still needs to interpret contract terms. Your compliance team still needs to make judgment calls. What document AI does is make their expertise accessible to everyone who needs it, on demand, with citations.
+This is what step five looks like in practice. When you ask Claude to play the role of a skeptical VP, it surfaces exactly the right concerns. The recall gap means we are missing a quarter of churners. The top features confirm existing intuition rather than revealing new insights. The model is trained on historical data that may not reflect current conditions. And most importantly: what do you actually do with the predictions?
 
-Think about what that means for your organization. The new hire who needs to understand the travel policy does not email HR and wait two days. The procurement manager who needs to check vendor contract terms does not call Legal and wait a week. The board member who wants to know what was decided six months ago does not search through email threads. The knowledge is there. It just becomes findable.
+That fourth point is the most important. A model that predicts churn is only valuable if someone acts on the predictions. Who gets the list of at-risk customers? What is the intervention? Is it an email, a phone call, a discount offer? How do you measure whether the intervention worked? These are business questions, not technical ones. The model is the easy part. The organizational response is the hard part.
 
-That is the promise. The Atherton case shows the risks. Today you have experienced both. On Monday, you bring it all together in your capstone strategy. See you then.
+[TIMING: This slide is shown during the exercise wrap-up, around minute 55. Spend 2-3 minutes on it before moving to the debrief.]
+:::
 
-[TIMING: About 1-2 minutes to close. End at minute 90. You are done.]
+---
+
+## Exercise Debrief
+
+::: {.info-box}
+::: {.box-title}
+Quick Show of Hands
+:::
+
+- Who got a model accuracy above 80%?
+- Who found that contract type was the top feature?
+- Who tried the bonus prompt about flagging specific customers?
+- Who found something in the feature importance that surprised them?
+:::
+
+::: {.explainer}
+The model is the easy part. The hard part is: [what do you do with the predictions?]{.accent}
+:::
+
+::: {.notes}
+[DEBRIEF (3-5 minutes): Quick show of hands for each question. Most students will have gotten accuracy above 80% --- the dataset is well-behaved. Most will have found contract type as the top feature. Push the conversation toward the fourth question: what surprised you in the feature importance?
+
+If time permits, ask 1-2 students: "What did Claude say when you asked what a skeptical VP would push back on?" Listen for whether students are starting to apply the maker/checker mindset to model output.
+
+Bridge to the breakout: "You just built a model for churn prediction. Now I want you to think about your own company. Where could prediction help? What would you predict, and what would you do with the predictions?"]
+:::
+
+---
+
+## Breakout: Prediction Opportunities {.section-divider}
+
+::: {.notes}
+Time for the breakout. You have practiced building and evaluating a model on someone else's data. Now I want you to think about your own organization. Where could prediction create value? What data would you need? And critically --- what would you do with the predictions?
+
+[TIMING: 15 seconds. Section divider --- advance immediately.]
+:::
+
+---
+
+## Breakout Instructions {.shrink}
+
+::: {.info-box}
+::: {.box-title}
+Breakout Exercise (10 minutes, groups of 3-4)
+:::
+
+Each person identifies 1-2 prediction problems at their company:
+
+1. **What would you predict?** (Be specific: "customer churn" not "make better predictions")
+2. **Classification or regression?**
+3. **What data would you need?** Do you have it? Where does it live?
+4. **What is the cost of a false positive vs. false negative?**
+5. **What would you DO with the predictions?** Who acts on them?
+:::
+
+::: {.highlight-box}
+**Report back:** Each group shares the most valuable prediction opportunity and the biggest data obstacle.
+:::
+
+::: {.notes}
+[BREAKOUT INSTRUCTIONS: Create breakout rooms of 3-4 people. Display this slide in the rooms. Each person should identify one or two prediction problems at their company and answer the five questions. The group then picks the most valuable opportunity and the biggest obstacle to share with the full class.
+
+TIMING: 10 minutes in breakout rooms. Then 5 minutes for report-back --- call on 3-4 groups. Push for specificity: "You said 'predict demand' --- demand for what? What data would you use? What would you do differently if the model said demand would spike next month?"
+
+Common patterns you will hear: churn prediction (most common), lead scoring, demand forecasting, employee attrition, equipment failure prediction. The most interesting discussions will be about question 4 (false positive vs. false negative costs) and question 5 (what action follows the prediction).
+
+Listen for the data obstacle theme: most students will discover that the data they need either does not exist in a clean form, lives in a system they cannot access, or would need to be combined from multiple sources. This connects back to Sessions 3-4 --- the data access problem is real.]
+:::
+
+---
+
+## Report Back
+
+::: {.three-cards}
+::: {.card .card-light}
+::: {.card-title}
+Most Valuable Predictions
+:::
+
+- What patterns emerged across groups?
+- Which prediction opportunities had the clearest ROI?
+- Did anyone identify a prediction that changes a decision process?
+:::
+
+::: {.card .card-dark}
+::: {.card-title}
+Biggest Data Obstacles
+:::
+
+- Data does not exist in clean form
+- Lives in systems you cannot access
+- Would need to combine multiple sources
+- [Sound familiar from Sessions 3-4?]{.amber}
+:::
+
+::: {.card .card-light}
+::: {.card-title}
+The Action Question
+:::
+
+- A prediction without action is a report
+- Who receives the predictions?
+- What decision changes?
+- [This is the capstone question]{.accent}
+:::
+:::
+
+::: {.notes}
+[REPORT-BACK: Call on 3-4 groups. Capture the themes on screen or verbally. The three columns on this slide will likely match what you hear: valuable opportunities, data obstacles, and the action question.
+
+Key teaching moment: emphasize the rightmost card. A prediction without action is just another report. The value of predictive modeling is not the model itself --- it is the decision that changes because of the model. "We predict this customer will churn" is only valuable if someone calls that customer, offers a retention deal, or escalates to account management. "We predict demand will spike" is only valuable if someone adjusts inventory, staffing, or marketing spend.
+
+This connects directly to the capstone. Students should be thinking: "In my capstone strategy, if I include predictive modeling, what specific decision does it improve and who acts on it?"
+
+TIMING: 5 minutes for report-back. Then bridge to capstone.]
+:::
+
+---
+
+## Bridge to Capstone {.section-divider}
+
+::: {.notes}
+We are in the home stretch. Let me connect everything we have done to where you are headed next session.
+
+[TIMING: 15 seconds. Section divider --- advance immediately.]
+:::
+
+---
+
+## Your Full Toolkit
+
+::: {.step-flow-6}
+::: {.step-card}
+::: {.step-icon}
+💬
+:::
+::: {.step-title}
+Sessions 1-2
+:::
+::: {.step-desc}
+Personal productivity: charts, docs, analysis
+:::
+:::
+
+::: {.step-card}
+::: {.step-icon}
+🗄️
+:::
+::: {.step-title}
+Session 3
+:::
+::: {.step-desc}
+Enterprise data: structured queries + document Q&A
+:::
+:::
+
+::: {.step-card}
+::: {.step-icon}
+📊
+:::
+::: {.step-title}
+Session 4
+:::
+::: {.step-desc}
+Reporting pipelines: data → analysis → deliverable
+:::
+:::
+
+::: {.step-card}
+::: {.step-icon}
+🏗️
+:::
+::: {.step-title}
+Session 5
+:::
+::: {.step-desc}
+Deployment: architecture, security, build vs. buy
+:::
+:::
+
+::: {.step-card}
+::: {.step-icon}
+🔍
+:::
+::: {.step-title}
+Session 6
+:::
+::: {.step-desc}
+Trust: failure modes, red-teaming, governance
+:::
+:::
+
+::: {.step-card}
+::: {.step-icon}
+🔮
+:::
+::: {.step-title}
+Session 7
+:::
+::: {.step-desc}
+Prediction: classification, regression, evaluation
+:::
+:::
+:::
+
+::: {.explainer}
+Your capstone strategy can draw on [any combination]{.accent} of these capabilities. Next session: you present.
+:::
+
+::: {.notes}
+Let me put today in context. Over seven sessions, you have built a comprehensive AI toolkit. Sessions 1 and 2 gave you personal productivity --- using AI to generate charts, documents, and analyses. Session 3 connected AI to enterprise data, both structured databases and document Q&A. Session 4 showed you how to build reporting pipelines. Session 5 covered deployment architecture and security. Session 6 gave you the tools to evaluate reliability and design governance. And today, Session 7, added predictive modeling.
+
+Your capstone strategy can draw on any combination of these capabilities. Maybe your use case is primarily personal productivity. Maybe it involves enterprise data access. Maybe it includes predictive modeling. Maybe it combines all three. The choice depends on your organization's needs, data readiness, and governance maturity.
+
+Next Monday is Session 8 --- you present. Let me tell you what that looks like and what you need to finalize this week.
+
+[TIMING: 3 minutes. Move to homework.]
+:::
+
+---
+
+## Capstone Preparation
+
+::: {.two-cards}
+::: {.card .card-dark}
+::: {.card-title}
+Your Strategy Document (1-2 pages)
+:::
+
+- Problem statement: what business problem does AI solve?
+- Proposed solution: which AI capabilities do you use?
+- Deployment approach: cloud, on-premise, or hybrid?
+- Governance plan: access controls, verification, compliance
+- 90-day pilot plan: concrete first steps
+:::
+
+::: {.card .card-light}
+::: {.card-title}
+Your Presentation (5 minutes)
+:::
+
+- Pitch to your executive team (your breakout group)
+- Breakout groups vote on strongest strategy
+- 5 winners present to full class
+- Instructor feedback on: scoped tightly enough? Business case credible? Governance adequate?
+:::
+:::
+
+::: {.highlight-box}
+**Self-check:** Use the evaluation rubric provided with the template. Does your Day 1 action actually happen on Day 1?
+:::
+
+::: {.notes}
+Here is what you need to finalize before next session. Your strategy document should be one to two pages using the capstone template. It covers five things: the problem you are solving, the AI capabilities you are using, the deployment approach, your governance plan, and a concrete 90-day pilot plan.
+
+Your presentation is five minutes. You are pitching to your executive team --- your breakout group plays that role. Each breakout group votes on the strongest strategy, and the five winners present to the full class. I will give feedback on whether the pilot is scoped tightly enough, whether the business case is credible, and whether the governance plan is adequate.
+
+The most important self-check: does your Day 1 action actually happen on Day 1? If your "first step" requires IT approval, budget allocation, and a vendor evaluation, it is not a Day 1 action. A real Day 1 action is something you can do Monday morning without asking anyone's permission.
+
+[TIMING: 3 minutes. Move to homework summary.]
+:::
+
+---
+
+## Homework {.shrink}
+
+::: {.info-box}
+::: {.box-title}
+Before Session 8 (Monday)
+:::
+
+1. **Finalize your strategy document** (1-2 pages using the capstone template)
+2. **Prepare your 5-minute presentation** --- use the evaluation rubric to self-check
+3. **Consider predictive modeling** --- if it fits your use case, add it to your strategy with specifics: what would you predict, what data would you need, what action would follow?
+:::
+
+::: {.highlight-box}
+**Optional:** Demos 6-7 show building a RAG system and combining it with a database agent. Relevant if your capstone includes document AI.
+:::
+
+::: {.notes}
+Three homework items. First, finalize your strategy document. Use the template and the rubric. Second, prepare your presentation --- five minutes, clear and concise. Third, consider whether predictive modeling belongs in your strategy. If it does, be specific: what would you predict, what data do you need, and what action follows the predictions? Vague statements like "we could use ML" will not score well on the rubric.
+
+The optional viewing is Demos 6 and 7, which show building a RAG system and combining it with a database agent. These are relevant if your capstone involves document AI or if you want to see how multiple AI capabilities integrate.
+
+[TIMING: 2 minutes. Move to the closing slide.]
+:::
+
+---
+
+## Key Takeaways {.section-divider}
+
+::: {.notes}
+Let me leave you with three takeaways from today.
+
+[TIMING: 15 seconds. Section divider --- advance immediately.]
+:::
+
+---
+
+## Three Things to Remember
+
+::: {.three-cards}
+::: {.card .card-dark}
+::: {.card-title}
+AI Builds the Model
+:::
+
+- You do not need to write code
+- You do not need to understand the math
+- You need to write clear prompts and [evaluate the output]{.amber}
+:::
+
+::: {.card .card-light}
+::: {.card-title}
+Three Questions to Ask
+:::
+
+- Better than baseline?
+- Features make business sense?
+- Generalizes to new data?
+- [If yes to all three, proceed with caution]{.accent}
+:::
+
+::: {.card .card-dark}
+::: {.card-title}
+Predictions Need Action
+:::
+
+- A model without action is just a report
+- Who receives predictions?
+- What decision changes?
+- [This is what separates strategy from spectacle]{.amber}
+:::
+:::
+
+::: {.notes}
+Three takeaways. First: AI builds the model, you evaluate it. You did this today --- you prompted Claude, it wrote the code, and you evaluated the confusion matrix, feature importance, and cross-validation scores. That is the workflow.
+
+Second: three questions. Does it beat the baseline? Do the features make sense? Does it generalize? If the answer to all three is yes, you have a model worth exploring further. If any answer is no, investigate before trusting the predictions.
+
+Third: predictions need action. This is the most important takeaway. A churn model is only valuable if someone calls the at-risk customers. A demand forecast is only valuable if someone adjusts inventory. Your capstone should specify not just what AI does, but what humans do differently because of it.
+
+See you Monday for your presentations. Come prepared --- this is your chance to synthesize everything from the past seven sessions into a strategy you can actually take back to your organization.
+
+[TIMING: 2 minutes. End of session.]
 :::

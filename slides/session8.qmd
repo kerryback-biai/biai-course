@@ -91,7 +91,7 @@ Can You Trust It? --- validation, governance, guardrails
 Session 7
 :::
 ::: {.timeline-desc}
-Document AI --- answers from your own files
+Let the Data Predict --- predictive modeling with AI
 :::
 :::
 ::: {.timeline-item}
@@ -108,7 +108,7 @@ Your AI Strategy --- capstone and synthesis
 :::
 
 ::: {.notes}
-Welcome to our final session. Before we dive into your presentations, let me take thirty seconds to remind you where we have been. Look at this timeline. In Session 1, you discovered what AI can do for you personally --- charts, documents, analyses in minutes. Session 2, you learned the maker/checker framework --- iterate, critique, and calibrate your trust. Session 3, AI met your enterprise data --- querying CRMs, ERPs, and HR systems in plain English. Session 4, you went from data to deliverable --- reporting pipelines and the agent loop. Session 5, deployment --- architecture, data security, build versus buy. Session 6, trust and verification --- red-teaming, governance, guardrails. Session 7, document AI --- retrieval-augmented generation for unstructured knowledge.
+Welcome to our final session. Before we dive into your presentations, let me take thirty seconds to remind you where we have been. Look at this timeline. In Session 1, you discovered what AI can do for you personally --- charts, documents, analyses in minutes. Session 2, you learned the maker/checker framework --- iterate, critique, and calibrate your trust. Session 3, AI met your enterprise data --- querying CRMs, ERPs, and HR systems in plain English. Session 4, you went from data to deliverable --- reporting pipelines and the agent loop. Session 5, deployment --- architecture, data security, build versus buy. Session 6, trust and verification --- red-teaming, governance, guardrails. Session 7, predictive modeling --- classification, regression, and letting the data predict.
 
 And today, Session 8, you bring it all together. Each of you has written a strategy document that draws on everything you have learned. Today you present it, get feedback, and leave with a concrete plan you can execute starting tomorrow. This is the session where the learning becomes action.
 
@@ -378,10 +378,10 @@ The technology is simpler than expected (50 lines of code) but production requir
 
 ::: {.card .card-dark}
 ::: {.card-title}
-Two Complementary Tools
+Three Complementary Tools
 :::
 
-Database AI for structured data (numbers, trends, KPIs). Document AI for unstructured text (policies, contracts, procedures). Most real questions need both.
+Database AI for structured data. Document AI for unstructured text. Predictive models for forecasting and classification. Together they cover the full spectrum of data-driven decisions.
 :::
 
 ::: {.card .card-dark}
@@ -402,7 +402,7 @@ Second, plain English equals enterprise data answers. AI agents turn natural lan
 
 Third, simple but not easy. In Session 4, you saw that a working agent is about fifty lines of code. The technology is simpler than most people expect. But production deployment requires governance, verification, and organizational readiness. The gap between a demo and a production system is not technical --- it is organizational. Who owns the data? Who validates the answers? Who approves deployment? Those are the hard questions, and several of the strategies we just heard addressed them well.
 
-Fourth, two complementary tools. Database AI for structured data --- numbers, trends, KPIs. Document AI for unstructured text --- policies, contracts, procedures. You learned database AI in Sessions 3 through 6 and document AI in Session 7. Most real business questions need both, and the most powerful strategies we heard today combined both capabilities.
+Fourth, three complementary tools. Database AI for structured data --- numbers, trends, KPIs. Document AI for unstructured text --- policies, contracts, procedures. And predictive models for forecasting and classification --- turning your data into forward-looking decisions. You learned database AI in Sessions 3 through 6, predictive modeling in Session 7, and document AI rounds out the picture. Together they cover the full spectrum of data-driven decisions, and the most powerful strategies we heard today combined multiple capabilities.
 
 Fifth, the critical skill. The human skill that matters most is not building AI tools. It is asking the right questions, iterating on output, and verifying the answers. The maker/checker mindset is the throughline of this entire course. If you ask a bad question, you get a bad answer faster. If you do not verify, you propagate errors at scale. The maker/checker framework is not optional --- it is essential.
 
@@ -623,10 +623,10 @@ Pick one team, one data source, 30 days. Build a prototype and test with real qu
 
 ::: {.card .card-dark}
 ::: {.card-title}
-D. Inventory Documents
+D. Identify Prediction Problems
 :::
 
-Where is knowledge trapped? Policies, contracts, procedures --- which collections would benefit from AI-powered Q&A?
+Identify 2--3 prediction problems in your business --- where could classification or regression help? Churn risk, demand forecasting, lead scoring, defect detection.
 :::
 
 ::: {.card .card-dark}
@@ -651,7 +651,7 @@ B: Audit your reporting workflows. Where do people wait for data? Which recurrin
 
 C: Scope a thirty-day discovery sprint. Pick one team, one data source, thirty days. Build a prototype and test it with real questions from real users. Not a proof of concept that sits on a shelf --- a working prototype that real people use and give feedback on. Several of the strategies we heard today are structured exactly this way.
 
-D: Inventory your document collections. Where is knowledge trapped? This was your breakout exercise in Session 7. Policies, contracts, procedures --- which collections would benefit from AI-powered Q&A? You probably already have a list from last session.
+D: Identify prediction problems. Where could classification or regression help your business? Churn risk, demand forecasting, lead scoring, defect detection --- these are the problems we tackled in Session 7. Pick two or three and ask: do we have the historical data to train a model, and would a prediction actually change a decision?
 
 E: Establish governance before shadow IT does it for you. Who validates AI output? Who approves deployment? If you do not define this, someone in your organization will deploy ChatGPT on sensitive company data without any guardrails, and you will be cleaning up the mess. Get ahead of it. This was the core message of Session 6.
 

@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.6.42">
 
   <meta name="author" content="Kerry Back, Rice University">
-  <title>Session 7: Document AI — Answers from Your Own Files</title>
+  <title>Session 7: Let the Data Predict</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -133,7 +133,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Session 7: Document AI — Answers from Your Own Files</h1>
+  <h1 class="title">Session 7: Let the Data Predict</h1>
   <p class="subtitle">Business Intelligence &amp; AI</p>
 
 <div class="quarto-title-authors">
@@ -145,12 +145,12 @@ Kerry Back, Rice University
 </div>
 
 </section>
-<section id="last-session-trust-and-verification" class="slide level2 section-divider center">
-<h2>Last Session: Trust and Verification</h2>
+<section id="from-what-happened-to-what-will-happen" class="slide level2 section-divider center">
+<h2>From “What Happened?” to “What Will Happen?”</h2>
 <aside class="notes">
-<p>Welcome back everyone. Last session we spent a full ninety minutes on trust and verification — red-teaming agents, seeing how they fail, and building governance frameworks. That was all about structured data, databases, and SQL. Today we pivot to a different kind of company knowledge entirely. Over the past six sessions, you have learned to query databases, build reporting pipelines, and evaluate reliability. All of that was structured data — rows and columns. But think about where the bulk of your company’s knowledge actually lives. It is not in databases. It is in policies, contracts, board minutes, emails, and slide decks buried in SharePoint folders nobody can search. Today we add a second capability — document AI — and by the end of the session, you will have used it hands-on.</p>
-<p>Before we dive in, let me set the stage with a case study you read for homework. The Atherton case shows exactly what can go wrong when document AI is deployed without the right guardrails. Let’s debrief that case first, and then everything we do today will be informed by those failure modes.</p>
-<p>[TIMING: This section divider is your opening. Spend about 1 minute here, then advance to the Atherton debrief. Total for bridge plus debrief is 10 minutes.]</p>
+<p>Welcome back. Over the past six sessions you have learned to generate analyses with AI, query enterprise databases, build reporting pipelines, and evaluate reliability. All of that answers the question “what happened?” Today we add a fundamentally different capability: prediction. Instead of looking backward at your data, we ask it to look forward. By the end of this session, you will have built a predictive model yourself — using AI to handle the code — and you will know how to evaluate whether the predictions are trustworthy.</p>
+<p>Before we get into prediction, let us debrief the Atherton case you read for homework. The governance failures in that case connect directly to what we are doing today.</p>
+<p>[TIMING: 1 minute. This is the opening section divider. Move immediately to the Atherton debrief.]</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -163,39 +163,35 @@ Kerry Back, Rice University
           display:block!important;
       }</style></aside>
 </section>
-<section id="bridge-atherton-case-debrief" class="slide level2 shrink center">
-<h2>Bridge + Atherton Case Debrief</h2>
+<section id="atherton-case-debrief" class="slide level2 shrink center">
+<h2>Atherton Case Debrief</h2>
 <div class="two-cards">
 <div class="card card-dark">
 <div class="card-title">
-<p>What Atherton Deployed (composite case)</p>
+<p>Atherton’s Document AI Failures</p>
 </div>
 <ul>
-<li>Document AI across compliance policies, vendor contracts, and HR handbooks</li>
-<li>Employees could ask questions in plain English and get cited answers</li>
-<li>Replaced a manual process of searching SharePoint and emailing Legal</li>
+<li><strong>Chunking failures</strong> — long contract clauses split mid-sentence, answers cited incomplete text</li>
+<li><strong>Access control gaps</strong> — junior analysts saw board-level compensation data</li>
+<li><strong>Stale documents</strong> — system answered from a superseded compliance policy</li>
 </ul>
 </div>
 <div class="card card-light">
 <div class="card-title">
-<p>What Went Wrong</p>
+<p>The Parallel to Predictive Models</p>
 </div>
 <ul>
-<li><strong>Chunking failures</strong> — long contract clauses split mid-sentence, wrong answers returned</li>
-<li><strong>Access control gaps</strong> — junior staff saw board-level compensation data</li>
-<li><strong>Stale documents</strong> — system answered from a superseded policy version</li>
+<li>Stale training data = stale predictions</li>
+<li>Access control still matters — who sees predicted churn scores? Predicted salaries?</li>
+<li>Garbage in, garbage out applies to ML just as much as to document AI</li>
 </ul>
 </div>
 </div>
-<div class="explainer">
-<p>What would you have done differently? We’ll return to each of these failure modes today.</p>
-</div>
 <aside class="notes">
-<p>So Atherton Financial is a composite case, but every one of these failures comes from real deployments. Let me walk through the left card first. Atherton built a document AI system that covered compliance policies, vendor contracts, and HR handbooks. The promise was compelling — employees could ask questions in plain English and get answers with citations, replacing a manual process where people searched SharePoint, gave up, and emailed the Legal department. Sound familiar? I bet most of you have some version of this at your companies.</p>
-<p>Now look at the right card — what went wrong. Three distinct failure modes. First, chunking failures. The system split long contract clauses mid-sentence. So when someone asked about indemnification terms, the system returned half the clause and gave an incomplete, actually dangerous answer. Second, access control gaps. Junior staff could suddenly see board-level compensation data because the RAG system did not inherit the document permissions from the file server. And third, stale documents. A policy was updated, but the old version was still in the index, so the system confidently delivered outdated information.</p>
-<p>Here is my question for you, and I want three or four quick reactions. If you had been advising Atherton before they deployed, what would you have done differently? Think about what we covered in Session 6 on governance. Drop your thoughts in the chat or unmute.</p>
-<p>[TIMING: Spend about 2 minutes presenting the case, then 3-4 minutes on discussion. Aim to get 3-4 responses. Listen for themes around testing, access controls, and document management. When you hear good points, connect them forward: “Great — we are going to see exactly that failure mode in our hands-on today.” Wrap the debrief by minute 10.]</p>
-<p>Transition: Good. Those three failure modes — chunking, access control, and freshness — are the exact issues we will dig into today. But first, let me show you what document AI looks like when it works well.</p>
+<p>[ATHERTON DEBRIEF (8 minutes, minutes 0-8): Start by asking the room: “What was the most damaging failure in the Atherton case — chunking, access control, or staleness?” Call on 3-4 students. Push for specificity: “You said staleness — what specifically went wrong? What was the business impact of answering from a superseded policy?”</p>
+<p>Listen for the themes: (1) Atherton did not version their documents, so the system could not distinguish current from superseded policies. (2) Access controls that existed in SharePoint did not carry over to the AI system. (3) Chunking is a technical problem that has business consequences — a contract clause split mid-sentence produces a wrong answer that looks right.</p>
+<p>Then make the bridge: “Every one of these failures has a direct parallel in predictive modeling. If your training data is stale — say you trained a churn model on 2023 behavior but your pricing changed in 2024 — your predictions are answering from a superseded version of reality. If anyone in the organization can see predicted attrition scores for individual employees, you have the same access control problem Atherton had. And if your input data is messy — duplicate records, missing values, inconsistent formats — that is the ML equivalent of chunking failures. The garbage goes in, and confident-looking predictions come out.”]</p>
+<p>[TIMING: 8 minutes total. Then bridge to prediction with: “With that context, let us talk about what prediction actually means in a business setting.”]</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -215,14 +211,16 @@ Kerry Back, Rice University
 <p>By the end of this session, you will be able to:</p>
 </div>
 <ul>
-<li>Explain how AI answers questions from company documents — with citations</li>
-<li>Distinguish database AI from document AI and know when to use each</li>
-<li>Experience RAG hands-on and understand key deployment decisions</li>
+<li>Distinguish classification from regression and identify which applies to a business problem</li>
+<li>Use AI to build and evaluate a gradient boosting model without writing code yourself</li>
+<li>Interpret a confusion matrix, feature importance, and cross-validation scores</li>
+<li>Apply the maker/checker framework to decide whether predictions are trustworthy</li>
 </ul>
 </div>
 <aside class="notes">
-<p>Three objectives for today. First, you will understand the mechanics of how AI answers questions grounded in company documents, complete with citations pointing back to specific pages and sections. This is not the AI making things up — it is retrieving actual passages from your files and synthesizing an answer. Second, you will be able to clearly distinguish database AI, which is everything we have done in Sessions 1 through 6, from document AI, which is today’s focus. Knowing when to use each — and when you need both — is a critical skill. Third, you will experience this hands-on. You are going to query a real document collection and see for yourselves where it excels and where it breaks down.</p>
-<p>[TIMING: About 30 seconds on this slide. It is a signpost, not a lecture. Move on quickly.]</p>
+<p>Four objectives today. First, you will learn the two types of prediction — classification and regression — and be able to categorize any business prediction problem. Second, you will use Claude to build a real predictive model. Third, you will learn to read the outputs that tell you whether the model is any good. And fourth, you will apply the same maker/checker framework from Session 2, but now to model evaluation instead of document verification.</p>
+<p>The key insight for today: you do not need to understand the math. You need to understand what the model produces and how to evaluate it. AI handles the code; you handle the judgment.</p>
+<p>[TIMING: 1 minute. Move to the two types of prediction.]</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -235,40 +233,61 @@ Kerry Back, Rice University
           display:block!important;
       }</style></aside>
 </section>
-<section id="two-kinds-of-ai-for-business" class="slide level2 shrink center">
-<h2>Two Kinds of AI for Business</h2>
+<section id="two-types-of-prediction" class="slide level2 section-divider center">
+<h2>Two Types of Prediction</h2>
+<aside class="notes">
+<p>Let us start with the most fundamental distinction in predictive modeling. Every business prediction falls into one of two categories, and knowing which one you are dealing with determines everything that follows — the model you build, the metrics you use, and how you interpret the results.</p>
+<p>[TIMING: 15 seconds. Section divider — advance immediately.]</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="classification-vs.-regression" class="slide level2 center">
+<h2>Classification vs.&nbsp;Regression</h2>
 <div class="two-cards">
 <div class="card card-dark">
 <div class="card-title">
-<p>Database AI (Sessions 1–6)</p>
+<p>Classification: “Which category?”</p>
 </div>
 <ul>
-<li>Queries <strong>structured data</strong> in rows and columns</li>
-<li>Writes SQL, runs it, returns results</li>
-<li>Best for: numbers, trends, KPIs, comparisons</li>
-<li>Source of truth: your transactional systems</li>
+<li>Will this customer churn? <span class="amber">Yes / No</span></li>
+<li>Is this transaction fraudulent? <span class="amber">Fraud / Legitimate</span></li>
+<li>Which segment does this lead belong to? <span class="amber">Hot / Warm / Cold</span></li>
+<li>Will this employee leave within 12 months?</li>
+<li>Will this loan default?</li>
 </ul>
 </div>
 <div class="card card-light">
 <div class="card-title">
-<p>Document AI (Today)</p>
+<p>Regression: “How much?”</p>
 </div>
 <ul>
-<li>Queries <strong>unstructured text</strong> in PDFs, Word docs, policies</li>
-<li>Retrieves relevant passages, synthesizes an answer with citations</li>
-<li>Best for: policies, contracts, procedures, meeting notes</li>
-<li>Source of truth: your document repositories</li>
+<li>How much will this customer spend next quarter? <span class="accent">$12,400</span></li>
+<li>What will demand be in March? <span class="accent">4,200 units</span></li>
+<li>What price maximizes margin? <span class="accent">$89.99</span></li>
+<li>How many support tickets will we get next week?</li>
+<li>What will Q3 revenue be?</li>
 </ul>
 </div>
 </div>
 <div class="explainer">
-<p>Most real business questions need <span class="accent">both</span>. “What’s our contractual commitment to GE, and how does their actual spending compare?” requires document AI for the contract and database AI for the spending data.</p>
+<p>Every business prediction is one of these two types. The type determines how you build the model and how you evaluate it.</p>
 </div>
 <aside class="notes">
-<p>Let me frame what we are adding today. On the left is everything you already know — database AI. It queries structured data in rows and columns, writes SQL, runs it, and returns numbers, charts, and narratives. That is Sessions 1 through 6 in a nutshell. On the right is document AI, which is today’s focus. Instead of structured data, it works with unstructured text — PDFs, Word documents, policies, contracts, meeting notes. Instead of writing SQL, it retrieves relevant passages from those documents and synthesizes an answer with citations.</p>
-<p>The key distinction is the source of truth. Database AI pulls from your transactional systems — your CRM, your ERP, your financial systems. Document AI pulls from your document repositories — SharePoint, shared drives, contract management systems. The data types are fundamentally different, and the retrieval mechanisms are fundamentally different. But here is the important point at the bottom of the slide. Most real business questions need both. Read that example in the explainer: “What is our contractual commitment to GE, and how does their actual spending compare?” The contract terms live in a PDF. The actual spending lives in a database. You need document AI for the first part and database AI for the second. We are going to see exactly that kind of combined question in our hands-on today.</p>
-<p>[TIMING: About 2 minutes on this slide. This completes the bridge segment. Transition to the demo next.]</p>
-<p>Transition: Alright, let me show you document AI in action. I am going to switch to the XYZ app and start asking questions of a real document collection.</p>
+<p>Here is the fundamental split. Classification predicts categories — yes or no, fraud or legitimate, hot or warm or cold. Regression predicts continuous numbers — dollar amounts, quantities, prices.</p>
+<p>The distinction matters because the evaluation is completely different. For classification, you care about things like: how often does the model say “churn” when the customer actually stays? That is a false positive, and it has a business cost — you might offer an unnecessary discount. For regression, you care about how far off the predictions are on average.</p>
+<p>Let me give you a quick exercise. I am going to name five business questions, and I want you to tell me: classification or regression?</p>
+<p>[AUDIENCE EXERCISE (2 minutes): Read each question, pause for hands or shout-outs: 1. “Will this prospect close?” — Classification 2. “What will this deal be worth?” — Regression 3. “Which customers are at risk of downgrading?” — Classification 4. “How many returns will we process in January?” — Regression 5. “Should we approve this credit application?” — Classification</p>
+<p>After the exercise: “Good. Notice that the same business domain — say, sales — can have both types. ‘Will this deal close?’ is classification. ‘What will it be worth?’ is regression. The type depends on the question, not the domain.”]</p>
+<p>[TIMING: 5 minutes total including the exercise. Move to gradient boosting.]</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -281,675 +300,68 @@ Kerry Back, Rice University
           display:block!important;
       }</style></aside>
 </section>
-<section id="demo-document-qa-with-xyz-corp" class="slide level2 section-divider center">
-<h2>Demo: Document Q&amp;A with XYZ Corp</h2>
-<aside class="notes">
-<p>[DEMO INSTRUCTIONS: Switch to the XYZ Corp app in your browser. You should have the document Q&amp;A interface ready. This is a 12-minute demo from minute 10 to minute 22. Have your fallback recording cued up in case the app or API is down.]</p>
-<p>We are going to query the same XYZ Corp environment you have been using all course, but now we are going to ask it about documents instead of databases. XYZ has a pre-loaded document collection that mirrors what you would find at any mid-size company — employee handbooks, vendor contracts, compliance policies, board minutes. Let me show you the collection first, and then we will start asking questions.</p>
-<p>[TIMING: Spend about 30 seconds on this divider slide, then advance to show the document collections.]</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="xyzs-document-collections" class="slide level2 shrink center">
-<h2>XYZ’s Document Collections</h2>
-<div class="three-cards">
-<div class="card card-dark">
-<div class="card-title">
-<p>HR &amp; Compliance</p>
-</div>
-<ul>
-<li>Employee handbook</li>
-<li>Travel &amp; expense policy</li>
-<li>Code of conduct</li>
-<li>Safety procedures</li>
-</ul>
-</div>
-<div class="card card-light">
-<div class="card-title">
-<p>Legal &amp; Contracts</p>
-</div>
-<ul>
-<li>Vendor agreements</li>
-<li>Master service agreements</li>
-<li>Non-disclosure agreements</li>
-<li>SLA commitments</li>
-</ul>
-</div>
-<div class="card card-light">
-<div class="card-title">
-<p>Governance</p>
-</div>
-<ul>
-<li>Board meeting minutes</li>
-<li>Compliance audit reports</li>
-<li>Risk assessments</li>
-<li>Strategic plans</li>
-</ul>
-</div>
-</div>
-<div class="explainer">
-<p>These are the same kinds of documents trapped in SharePoint folders, shared drives, and email attachments at every company.</p>
-</div>
-<aside class="notes">
-<p>Before I start the live demo, let me orient you to what is in the document collection. Three categories. On the left, HR and Compliance — employee handbook, travel and expense policy, code of conduct, safety procedures. In the middle, Legal and Contracts — vendor agreements, master service agreements, NDAs, SLA commitments. On the right, Governance — board meeting minutes, compliance audit reports, risk assessments, strategic plans.</p>
-<p>Now, think about this for a moment. These are the same kinds of documents trapped in SharePoint folders, shared drives, and email attachments at every single company. How do people find information in these documents today? They search SharePoint, maybe get lucky with a keyword match, probably give up and email someone in Legal or HR or Compliance. That email sits in a queue for two days. That is the status quo we are about to replace.</p>
-<p>[DEMO INSTRUCTIONS: Now switch to the live app. Ask these questions in sequence, pausing to point out the citations after each answer:</p>
-<ol type="1">
-<li><p>“What is XYZ’s policy on remote work for the Energy Division?” — Point out the citation with page number and quoted passage. Emphasize that this is not the AI making something up; it is retrieving and quoting from the actual document.</p></li>
-<li><p>“Which vendor contracts are up for renewal in Q2?” — Show how it pulls from multiple contracts and synthesizes a list. Note the citations for each contract mentioned.</p></li>
-<li><p>“What did the board approve regarding the Safety Division expansion?” — Show it pulling from board minutes. Point out that this information would normally require someone to read through pages of minutes.</p></li>
-<li><p>The combined question: “What is our contractual commitment to GE, and how does their actual spending compare?” — This is the key demo moment. Show that RAG retrieves the contract terms while the database agent pulls the spending data. Two different retrieval paths, one synthesized answer.</p></li>
-</ol>
-<p>If the app is down, switch to the pre-recorded fallback and narrate over it.]</p>
-<p>Let me ask the first question. “What is XYZ’s policy on remote work for the Energy Division?” Watch the answer — and pay attention to the citations.</p>
-<p>[TIMING: This demo runs from minute 10 to minute 22. Spend about 2 minutes per question, with time for brief reactions between questions. The GE combined question should be the climax — spend an extra minute showing how the two systems work together. If you are running long, you can skip question 3 about board minutes.]</p>
-<p>Transition: So you have seen document AI in action — retrieval, synthesis, citations. Now let me explain how it actually works under the hood.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="document-qa-policy-lookup" class="slide level2 shrink center">
-<h2>Document Q&amp;A: Policy Lookup</h2>
-<div class="highlight-box">
-<p><strong>Q: “What is XYZ’s policy on remote work for the Energy Division?”</strong></p>
-</div>
-<p><strong>General Policy:</strong> Up to 2 days remote/week for corporate staff, subject to manager approval and 30-day trial <em>(Employee Handbook, Section 4.3, p.&nbsp;28)</em>.</p>
-<p><strong>Energy Division Exception:</strong> Field operations, warehouse, and on-site technical roles are “location-essential” — not eligible. Eligible staff (account managers, analysts, division finance) limited to <strong>1 day/week</strong> due to field-team coordination requirements <em>(Energy Division Addendum, Section 2, p.&nbsp;3)</em>.</p>
-<p><strong>Approval:</strong> Written VP approval, quarterly review, core hours 8 AM–3 PM CT <em>(Employee Handbook, Section 4.3, p.&nbsp;29)</em>.</p>
-<div class="explainer">
-<p>Every claim traces to a specific document, section, and page. The agent synthesized across <span class="accent">two separate documents</span> — the handbook and the division addendum.</p>
-</div>
-<aside class="notes">
-<p>This is the first demo question. Notice three things. First, every claim has a citation with a document name, section number, and page number. Second, the agent had to retrieve from two separate documents — the general employee handbook and the Energy Division addendum — and synthesize them into a coherent answer that accounts for the division-specific override. Third, the answer is structured clearly with the general rule, the exception, and the process. A keyword search for “remote work” might find the handbook but miss the addendum. The AI found both and reconciled them.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="document-qa-multi-document-synthesis" class="slide level2 shrink center">
-<h2>Document Q&amp;A: Multi-Document Synthesis</h2>
-<div class="highlight-box">
-<p><strong>Q: “What did the board approve regarding the Safety Division expansion?”</strong></p>
-</div>
-<p><strong>Q4 2025 Board (Oct 17):</strong> Approved in principle — Houston distribution center (40K sq ft), 18 FTEs, Q3 2026 launch, projected $8.2M first-year revenue <em>(Board Minutes Q4 2025, Item 3, pp.&nbsp;4–5)</em>.</p>
-<p><strong>Q1 2026 Board (Jan 22):</strong> Final approval for <strong>$3.4M capex</strong> — $1.8M warehouse fit-out, $0.9M fleet, $0.4M IT, $0.3M hiring <em>(Board Minutes Q1 2026, Item 2, pp.&nbsp;2–3)</em>.</p>
-<p><strong>Gate review:</strong> If Houston center does not reach 60% of projected revenue by Month 6, management must present revised plan or exit strategy.</p>
-<div class="explainer">
-<p>The agent assembled a narrative across <span class="accent">three documents and two time periods</span> — board minutes from two quarters plus the strategic plan. A keyword search would have found one; the AI found and connected all three.</p>
-</div>
-<aside class="notes">
-<p>This question required the agent to connect information across three separate documents spanning two quarters. The Q4 2025 board minutes had the initial approval and scope. The Q1 2026 minutes had the final capital expenditure authorization and the gate review requirement. The strategic plan provided additional context about this being a Horizon 1 initiative. No single document contains the full answer. This is the kind of question that, in most organizations, would require reading through dozens of pages of board minutes or asking someone who was in the room. The AI assembled the narrative in seconds, with citations to every source.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="how-rag-works" class="slide level2 shrink center">
-<h2>How RAG Works</h2>
-<div class="step-flow-5">
-<div class="step-card">
-<div class="step-icon">
-<p>1</p>
-</div>
-<div class="step-title">
-<p>Chunk</p>
-</div>
-<div class="step-desc">
-<p>Documents split into passages (paragraphs, sections, or clauses)</p>
-</div>
-</div>
-<div class="step-card">
-<div class="step-icon">
-<p>2</p>
-</div>
-<div class="step-title">
-<p>Embed</p>
-</div>
-<div class="step-desc">
-<p>Each chunk converted to a numerical vector by an embedding model</p>
-</div>
-</div>
-<div class="step-card">
-<div class="step-icon">
-<p>3</p>
-</div>
-<div class="step-title">
-<p>Store</p>
-</div>
-<div class="step-desc">
-<p>Vectors stored in a vector database for fast similarity search</p>
-</div>
-</div>
-<div class="step-card">
-<div class="step-icon">
-<p>4</p>
-</div>
-<div class="step-title">
-<p>Query</p>
-</div>
-<div class="step-desc">
-<p>User’s question embedded the same way; top matching chunks retrieved</p>
-</div>
-</div>
-<div class="step-card">
-<div class="step-icon">
-<p>5</p>
-</div>
-<div class="step-title">
-<p>Generate</p>
-</div>
-<div class="step-desc">
-<p>LLM receives question + retrieved chunks and produces a cited answer</p>
-</div>
-</div>
-</div>
-<div class="explainer">
-<p><strong>RAG = Retrieval-Augmented Generation.</strong> The LLM only sees what the retrieval step finds. If retrieval fails, the answer fails — no matter how smart the model is.</p>
-</div>
-<aside class="notes">
-<p>RAG stands for Retrieval-Augmented Generation. Let me walk you through the five steps. You do not need to memorize these, but understanding the pipeline will help you evaluate vendors and diagnose problems.</p>
-<p>Step 1: Chunk. Your documents are split into passages — paragraphs, sections, or clauses depending on the document type. This is where the Atherton chunking failure came from. If you split a contract clause in the middle of a sentence, you have already lost. Step 2: Embed. Each chunk is converted into a numerical vector by an embedding model. Think of this as translating text into a position in a high-dimensional space where similar meanings end up near each other. “Remote work policy” and “work from home guidelines” would end up close together even though they use different words. Step 3: Store. Those vectors go into a specialized database — a vector database — that is optimized for finding similar vectors quickly. Step 4: Query. When a user asks a question, that question goes through the same embedding process, and the vector database finds the stored chunks that are closest in meaning to the question. Step 5: Generate. The LLM receives the user’s question plus the top matching chunks as context, and it produces an answer using only that retrieved context, with citations pointing back to the source documents.</p>
-<p>Here is the critical insight, and I want you to underline this in your mental model. Read the explainer at the bottom. The LLM only sees what the retrieval step finds. If retrieval fails, the answer fails — no matter how smart the model is. You could have the most advanced language model in the world, and if step 4 hands it the wrong chunks, the answer will be wrong. RAG quality is retrieval quality. That is why chunking strategy, which we will discuss later, is the single highest-leverage decision in any document AI deployment.</p>
-<p>[TIMING: Spend about 5 minutes on this slide, walking through each step. This is the conceptual heart of the session. Make sure people understand the pipeline before moving to hands-on. You should be at about minute 27.]</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="the-key-insight" class="slide level2 section-divider center">
-<h2>The Key Insight</h2>
-<aside class="notes">
-<p>Let me make this point as starkly as possible. This is the single most important thing to understand about document AI.</p>
-<p>[TIMING: Pause on this divider for just a beat, then advance to the statement slide. The dramatic pause is intentional.]</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="the-llm-doesnt-read-your-documents." class="slide level2 centered-statement center">
-<h2>The LLM doesn’t read your documents.</h2>
-</section>
-<section id="it-reads-whatever-the-retrieval-system-hands-it." class="slide level2 center">
-<h2>It reads whatever the <span class="accent">retrieval system hands it</span>.</h2>
-<div class="explainer">
-<p>RAG quality is retrieval quality. If the retrieval step fails, the answer fails — no matter how smart the model is.</p>
-</div>
-<aside class="notes">
-<p>I want you to internalize this. The LLM does not read your documents. It reads whatever the retrieval system hands it. This means that when you are evaluating a document AI vendor, or scoping a build, the question is not “which LLM are you using?” The question is “how good is your retrieval?” How do you chunk? How do you embed? How do you handle documents that span multiple topics? How do you handle updates? The retrieval pipeline is where the quality lives or dies.</p>
-<p>Think back to Atherton. Their LLM was fine. Their retrieval was broken. Contract clauses split mid-sentence, so the model got half a clause and produced a confident, dangerously incomplete answer. The model did exactly what it was supposed to do — it answered based on the context it was given. The problem was upstream, in the chunking.</p>
-<p>[TIMING: About 1-2 minutes on this slide. Let it sink in. You should be at about minute 30. Transition to the hands-on rounds next.]</p>
-<p>Transition: Now it is your turn. You are going to query the XYZ document collection yourselves. We will do three rounds, each one more challenging than the last.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="hands-on-round-1-simple-retrieval" class="slide level2 shrink center">
-<h2>Hands-On Round 1: Simple Retrieval</h2>
-<div class="info-box">
-<div class="box-title">
-<p>Round 1 — Single-Document Questions</p>
-</div>
-<ul>
-<li>“What is XYZ’s policy on remote work?”</li>
-<li>“What are the expense approval thresholds?”</li>
-<li>“How many vacation days do employees get after 5 years?”</li>
-<li>Notice the <strong>citations</strong> — each answer points back to a specific document and section</li>
-</ul>
-</div>
-<div class="explainer">
-<p>Start simple. Ask questions that live in a single document. Pay attention to where the system says the answer came from.</p>
-</div>
-<aside class="notes">
-<p>Alright, Round 1. Open the XYZ app and switch to the document Q&amp;A mode. I have three starter questions on the screen, but feel free to ask your own as well. “What is XYZ’s policy on remote work?” “What are the expense approval thresholds?” “How many vacation days do employees get after 5 years?”</p>
-<p>These are intentionally simple — each answer lives in a single document. The goal of this round is to get comfortable with the interface and, more importantly, to start noticing the citations. Every answer should point back to a specific document and section. When you get your answer, check the citation. Does it actually say what the AI claims it says? This is the verification habit we talked about in Session 6, applied to documents instead of data.</p>
-<p>You have about five minutes. Go ahead and start asking questions. I will be watching the chat for anything interesting.</p>
-<p>[TIMING: 5 minutes of hands-on time, from about minute 32 to minute 37. Monitor the chat. If someone finds an interesting result or a surprising answer, call it out to the group. Common things to watch for: questions where the citation is spot-on, questions where the phrasing matters (e.g., “PTO” vs.&nbsp;“vacation days”), and questions that return multiple citations from the same document.]</p>
-<p>After about 4 minutes: Alright, let me pull you back. Quick show of hands or reactions in chat — did everyone get cited answers? Did anyone find a case where the citation did not quite match the answer? Good. Let’s make it harder.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="hands-on-round-2-cross-document" class="slide level2 shrink center">
-<h2>Hands-On Round 2: Cross-Document</h2>
-<div class="info-box">
-<div class="box-title">
-<p>Round 2 — Questions Spanning Multiple Documents</p>
-</div>
-<ul>
-<li>“What are our obligations under the GE contract, and are there any compliance risks flagged in the latest audit?”</li>
-<li>“Does our travel policy align with what we committed to in the Apex Industries MSA?”</li>
-<li>“What did the board say about vendor consolidation, and which contracts are up for renewal?”</li>
-</ul>
-</div>
-<div class="explainer">
-<p>These questions require the system to retrieve from <span class="accent">multiple documents</span> and synthesize. Watch for gaps where it finds one source but misses the other.</p>
-</div>
-<aside class="notes">
-<p>Round 2 gets more interesting. These questions deliberately span multiple documents. Look at the first one: “What are our obligations under the GE contract, and are there any compliance risks flagged in the latest audit?” That requires the system to retrieve from the GE vendor agreement and from the compliance audit report, then synthesize both into a coherent answer.</p>
-<p>The second question asks whether the travel policy aligns with what was committed in a vendor MSA. The third asks about board discussion on vendor consolidation cross-referenced with actual contract renewal dates. These are the kinds of questions that, in a normal company, would require someone to pull up three or four documents and read through them manually. That is a multi-hour task. Here, it should take seconds.</p>
-<p>But watch for gaps. The system might find one source and miss the other. It might retrieve the GE contract terms but fail to find the relevant section of the audit report. When that happens, you are seeing a retrieval miss in real time — and that is exactly the failure mode we discussed. Pay attention to which citations appear and which are absent.</p>
-<p>You have about seven minutes. Try these questions and also try your own cross-document questions.</p>
-<p>[TIMING: 7 minutes of hands-on time, from about minute 37 to minute 44. This round often generates more discussion because students start seeing gaps and inconsistencies. Watch for: answers that only cite one document when two are needed, answers where the synthesis is good but shallow, and the inevitable question about why the system missed something obvious.]</p>
-<p>After about 6 minutes: Let me hear some reactions. Did anyone find a case where the system found one document but missed the other? That is a classic retrieval miss — the answer exists in the collection, but the retrieval step did not surface it. This is why we said RAG quality is retrieval quality. One more round, and this one is the most powerful.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="hands-on-round-3-cross-system" class="slide level2 shrink center">
-<h2>Hands-On Round 3: Cross-System</h2>
-<div class="info-box">
-<div class="box-title">
-<p>Round 3 — Document AI + Database AI Together</p>
-</div>
-<ul>
-<li>“What’s our contractual commitment to GE, and how does their actual spending compare?”</li>
-<li>“The board minutes mention expanding the Energy Division — what do the sales numbers show?”</li>
-<li>“Our vendor agreement with Apex caps annual spend at $2M — are we on track to exceed it?”</li>
-</ul>
-</div>
-<div class="explainer">
-<p>This is where it gets powerful. The system pulls the <strong>contract language</strong> from document AI and the <strong>actual numbers</strong> from database queries. Two systems, one answer.</p>
-</div>
-<aside class="notes">
-<p>This is where it all comes together. Round 3 combines document AI with database AI — the same database querying you have been doing since Session 1. Look at the first question: “What is our contractual commitment to GE, and how does their actual spending compare?” The contractual commitment lives in a PDF — that is document AI. The actual spending lives in the transactional database — that is database AI. The system needs to use both retrieval paths and synthesize the results.</p>
-<p>The second question references board minutes about expanding the Energy Division and asks what the sales numbers show. The third checks whether actual vendor spending is on track to exceed a contractual cap. In each case, you need the document for the qualitative context and the database for the quantitative evidence. This is the full vision — structured and unstructured company knowledge, accessible through one interface, answering questions that previously would have required multiple people, multiple systems, and multiple days.</p>
-<p>You have about eight minutes. Try these and see how the system handles the combination. Pay attention to whether both sources are cited — the document and the database query.</p>
-<p>[TIMING: 8 minutes of hands-on time, from about minute 44 to minute 52. This is the climax of the hands-on portion. Students are often impressed by the combined answers. Watch for: moments where the combination works beautifully (call these out), moments where one path succeeds and the other fails, and students who start asking their own creative cross-system questions. Encourage experimentation.]</p>
-<p>After about 7 minutes: Let me bring everyone back. This is the vision we have been building toward across all eight sessions. Database AI for the numbers. Document AI for the context. Combined into answers that would have taken days to assemble manually. But — and this is important — it is not magic. Let me show you where it breaks down.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="cross-system-result-ge-commitment-vs.-spending" class="slide level2 shrink center">
-<h2>Cross-System Result: GE Commitment vs.&nbsp;Spending</h2>
-<div class="highlight-box">
-<p><strong>Q: “What’s our contractual commitment to GE, and how does their actual spending compare?”</strong></p>
-</div>
-<p><strong>From Document AI (contract):</strong> MSA #MSA-2023-0847 requires <strong>$4.2M minimum annual purchase</strong>. Shortfall forfeits Tier 2/3 pricing retroactively. Auto-renews June 30, 2026 <em>(GE MSA, Sections 3, 8, Exhibit B)</em>.</p>
-<p><strong>From Database AI (3 CRMs):</strong></p>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th>Year</th>
-<th>Industrial</th>
-<th>Energy</th>
-<th>Safety</th>
-<th>Total</th>
-<th>vs.&nbsp;$4.2M</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>2024</td>
-<td>$2.85M</td>
-<td>$1.02M</td>
-<td>$0.41M</td>
-<td><strong>$4.28M</strong></td>
-<td>+$83K (met)</td>
-</tr>
-<tr class="even">
-<td>2025</td>
-<td>$2.61M</td>
-<td>$0.84M</td>
-<td>$0.34M</td>
-<td><strong>$3.80M</strong></td>
-<td><strong>-$404K (missed)</strong></td>
-</tr>
-</tbody>
-</table>
-<div class="explainer">
-<p>Neither source alone answers the question. The contract says what we promised; the database says what happened. The <strong>$404K shortfall with a renewal deadline 92 days away</strong> only emerges when <span class="accent">both systems are combined</span>.</p>
-</div>
-<aside class="notes">
-<p>This is the cross-system synthesis in action. The agent retrieved contract terms from the document store — the $4.2M minimum commitment, the shortfall penalty clause, the auto-renewal date — and then queried three separate CRMs for actual spending by division. GE appears under different names across systems: General Electric in Salesforce, GE-related entries in the Legacy CRM and HubSpot. The punchline: 2025 spending fell $404K short of the contractual minimum, exposing XYZ to retroactive repricing that could cost approximately $160K. And the auto-renewal is 92 days away. This is the kind of insight that requires both document AI and database AI working together — and the kind of finding that could easily be missed if these systems are queried separately.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="when-rag-fails" class="slide level2 shrink center">
-<h2>When RAG Fails</h2>
-<div class="three-cards">
-<div class="card card-dark">
-<div class="card-title">
-<p>Retrieval Misses</p>
-</div>
-<ul>
-<li>Question phrased differently than source text</li>
-<li>Relevant chunk not in top results</li>
-<li>Result: correct answer exists but system can’t find it</li>
-</ul>
-</div>
-<div class="card card-light">
-<div class="card-title">
-<p>Hallucinated Citations</p>
-</div>
-<ul>
-<li>LLM generates plausible-sounding references</li>
-<li>Citation points to wrong section or nonexistent page</li>
-<li>Result: answer looks authoritative but is wrong</li>
-</ul>
-</div>
-<div class="card card-light">
-<div class="card-title">
-<p>Stale Documents</p>
-</div>
-<ul>
-<li>Policy was updated but old version still indexed</li>
-<li>System answers from superseded document</li>
-<li>Result: confidently delivers outdated information</li>
-</ul>
-</div>
-</div>
-<div class="explainer">
-<p><strong>Live demo:</strong> Watch what happens when a contract clause is split across two chunks. The system retrieves half the clause and gives a dangerously incomplete answer.</p>
-</div>
-<aside class="notes">
-<p>Now let me show you the failure modes. Three categories, and each one maps back to the Atherton case we discussed at the opening.</p>
-<p>First, retrieval misses. The answer exists in the document collection, but the retrieval step does not find it. This happens when the question is phrased differently than the source text, or when the relevant chunk does not rank high enough to make the top results. The answer is there — the system just cannot find it. Some of you may have seen this in Round 2 when the system found one document but missed the other.</p>
-<p>Second, hallucinated citations. This is the most dangerous failure mode. The LLM generates a plausible-sounding reference — it cites a specific page number, quotes what looks like a passage — but when you go check, that passage does not actually say what the AI claims, or it does not exist at all. The answer looks authoritative, which makes it harder to catch. This is why we said in Session 6: always check the cited passage, not just the summary.</p>
-<p>Third, stale documents. A policy was updated, but the old version is still in the index. The system answers from the superseded document and confidently delivers outdated information. This was one of Atherton’s failures, and it is incredibly common in real deployments because document management is one of those things nobody wants to own.</p>
-<p>[DEMO INSTRUCTIONS: Now run the chunking failure demo. Ask a question where you know a contract clause was split across two chunks. Show the partial answer. Explain that the system retrieved half the clause and gave a dangerously incomplete answer. This is the Atherton failure mode made visible. If the live demo is not cooperating, describe the failure mode verbally and reference what students may have seen in their own hands-on rounds.]</p>
-<p>Let me show you this live. I am going to ask a question where I know the relevant contract clause was split across two chunks during ingestion. Watch what happens.</p>
-<p>[TIMING: About 5 minutes total on this slide, from minute 52 to about minute 57. Spend 2 minutes on the three failure modes, then 3 minutes on the live chunking failure demo. The demo is the most impactful part — students seeing a confident but incomplete answer in real time drives the point home.]</p>
-<p>Transition: So chunking failures, hallucinated citations, and stale documents. These are the risks. But there is one more constraint you need to understand before we talk about deployment.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="chunking-failure-the-1.53m-omission" class="slide level2 shrink center">
-<h2>Chunking Failure: The $1.53M Omission</h2>
-<div class="highlight-box">
-<p><strong>Q: “What are the termination penalties in our Apex Industries contract?”</strong></p>
-</div>
-<div class="two-cards">
-<div class="card card-dark">
-<div class="card-title">
-<p>What the Agent Returned</p>
-</div>
-<p>“Either party may terminate with <strong>90 days’ written notice</strong>.”</p>
-<p><em>(Apex MSA, Section 12.1, p.&nbsp;14)</em></p>
-<ul>
-<li>Factually correct, well-cited, confident tone</li>
-<li>No hedging or uncertainty</li>
-</ul>
-</div>
-<div class="card card-light">
-<div class="card-title">
-<p>What It Missed</p>
-</div>
-<p>Section 12.2 (p.&nbsp;15) — fell into a <strong>different chunk</strong>:</p>
-<p>“Terminating party shall pay <strong>15% of remaining contract value</strong>.”</p>
-<ul>
-<li>On a $6.8M contract with 18 months left = <strong>$1.53M fee</strong></li>
-<li>Chunk scored 0.64 — below the 0.70 retrieval threshold</li>
-</ul>
-</div>
-</div>
-<div class="explainer">
-<p>The answer is correct, cited, and confident — but missing the most expensive piece of information. The CFO who relies on this answer walks into a <span class="accent">$1.53M surprise</span>.</p>
-</div>
-<aside class="notes">
-<p>This is the chunking failure made concrete. Someone asks about termination penalties in the Apex contract. The agent retrieves Section 12.1, which describes the 90-day notice requirement — correct, well-cited, confidently stated. But Section 12.2, which specifies a 15% termination fee on remaining contract value, fell into a separate chunk at the page break between pages 14 and 15. That chunk scored 0.64 on relevance — just below the 0.70 retrieval threshold — because it references “Section 12.1” rather than repeating the word “termination penalty” directly. The result: a CFO relying on this answer would expect to walk away with just 90 days notice, and then get invoiced $1.53M. This is the worst kind of AI error — one that looks exactly like a correct answer. There is no signal that anything is missing.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="context-window-limits" class="slide level2 centered-statement center">
-<h2>Context Window Limits</h2>
-</section>
-<section id="even-the-best-models-have-a-ceiling" class="slide level2 center">
-<h2>Even the best models have a ceiling</h2>
-<div class="explainer">
-<p>If your question requires context from 50 pages of contracts, the model can only see what fits in its context window. Retrieval quality matters because you can’t just dump everything in. Chunking strategy determines what the model gets to see.</p>
-</div>
-<aside class="notes">
-<p>One more technical constraint that is important for your mental model. Even the best language models have a context window — a limit on how much text they can process at once. Today’s frontier models can handle very long contexts, but there is still a ceiling. If your question requires context from fifty pages of contracts, the model cannot see all fifty pages at once. The retrieval step has to select which passages to include.</p>
-<p>This is why you cannot just dump all your documents into the LLM and skip the retrieval step. Some people ask, “Why not just send the entire contract to the model?” For a single short document, you can. But for a collection of hundreds of documents, or even for a single hundred-page contract, you need retrieval to select the relevant passages. Chunking strategy determines what the model gets to see, which means chunking strategy determines the quality of the answer. We keep coming back to the same point: retrieval quality is everything.</p>
-<p>[TIMING: About 2 minutes on this slide. You should be at about minute 59. Quick conceptual point, then move to deployment.]</p>
-<p>Transition: So now you understand how RAG works, you have used it hands-on, and you have seen where it fails. Let’s talk about what it takes to deploy this in your organization.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="deploying-rag-key-decisions" class="slide level2 shrink center">
-<h2>Deploying RAG: Key Decisions</h2>
-<div class="step-flow">
-<div class="step-card">
-<div class="step-icon">
-<p>1</p>
-</div>
-<div class="step-title">
-<p>Document Ingestion</p>
-</div>
-<div class="step-desc">
-<p>PDF parsing, OCR for scans, handling tables and images</p>
-</div>
-</div>
-<div class="step-card">
-<div class="step-icon">
-<p>2</p>
-</div>
-<div class="step-title">
-<p>Chunking Strategy</p>
-</div>
-<div class="step-desc">
-<p>By section for policies, by clause for contracts, by paragraph for memos</p>
-</div>
-</div>
-<div class="step-card">
-<div class="step-icon">
-<p>3</p>
-</div>
-<div class="step-title">
-<p>Freshness</p>
-</div>
-<div class="step-desc">
-<p>Re-index on update, version tracking, retire superseded docs</p>
-</div>
-</div>
-<div class="step-card">
-<div class="step-icon">
-<p>4</p>
-</div>
-<div class="step-title">
-<p>Access Control</p>
-</div>
-<div class="step-desc">
-<p>Document-level permissions must carry over — who can see what</p>
-</div>
-</div>
-</div>
-<div class="explainer">
-<p>Chunking is the single highest-leverage decision. Bad chunking = bad retrieval = bad answers, regardless of model quality.</p>
-</div>
-<aside class="notes">
-<p>The deployment framework from Session 5 — cloud versus on-premise, build versus buy — still applies here, so we are not going to repeat those general principles. What is new for document AI are these four specific decisions.</p>
-<p>First, document ingestion. How do documents get into the system? You need PDF parsing that handles different formats. You need OCR for scanned documents. You need to handle tables and images, which are notoriously difficult for text extraction. If your company has contracts that are scanned PDFs of faxes from 2003, that is an ingestion challenge you need to plan for.</p>
-<p>Second, chunking strategy, and I have been hammering this point because it is the single highest-leverage decision. The right chunking strategy depends on the document type. Policies should be chunked by section. Contracts should be chunked by clause — you never want to split a clause across two chunks, which is exactly what happened at Atherton. Memos and meeting notes should be chunked by paragraph or topic. One size does not fit all, and the vendor that tells you otherwise is selling you something.</p>
-<p>Third, freshness. When a policy is updated, the old version must be replaced, not duplicated. You need re-indexing on update, version tracking so you know which version the system is answering from, and a process to retire superseded documents. Atherton’s stale document problem came from having no freshness management at all. The old policy and the new policy were both in the index, and the system returned whichever the retrieval step happened to find first.</p>
-<p>Fourth, access control. The RAG system must enforce the same document permissions as your file server. If board minutes are restricted to senior leadership, the RAG system cannot show those passages to everyone. If HR policies are scoped by division, the system needs to respect those boundaries. Atherton’s access control gap — junior staff seeing board-level compensation data — is the cautionary tale here.</p>
-<p>[TIMING: About 5 minutes on this slide, from about minute 62 to minute 67. Walk through each decision with enough detail that people understand the implications. Connect each one back to the Atherton case. This is lecture plus Q&amp;A, so take a question or two if hands go up.]</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="build-vs.-buy" class="slide level2 shrink center">
-<h2>Build vs.&nbsp;Buy</h2>
+<section id="common-business-prediction-problems" class="slide level2 shrink center">
+<h2>Common Business Prediction Problems</h2>
 <div class="comparison-table">
 <table class="caption-top">
 <colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
 </colgroup>
 <thead>
 <tr class="header">
-<th></th>
-<th>Turnkey Platforms</th>
-<th>Custom Build</th>
+<th>Problem</th>
+<th>Type</th>
+<th>Input Data</th>
+<th>Business Value</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>Examples</strong></td>
-<td>Glean, Guru, Microsoft Copilot for M365</td>
-<td>LangChain + vector DB + your infra</td>
+<td>Customer churn</td>
+<td>Classification</td>
+<td>Usage patterns, support tickets, tenure</td>
+<td>Retain at-risk customers before they leave</td>
 </tr>
 <tr class="even">
-<td><strong>Setup time</strong></td>
-<td>Days to weeks</td>
-<td>Weeks to months</td>
+<td>Lead scoring</td>
+<td>Classification</td>
+<td>Demographics, engagement, firmographics</td>
+<td>Focus sales effort on highest-probability leads</td>
 </tr>
 <tr class="odd">
-<td><strong>Customization</strong></td>
-<td>Limited — works with standard doc formats</td>
-<td>Full control over chunking, retrieval, prompts</td>
+<td>Fraud detection</td>
+<td>Classification</td>
+<td>Transaction amount, location, velocity</td>
+<td>Block fraudulent transactions in real time</td>
 </tr>
 <tr class="even">
-<td><strong>Access control</strong></td>
-<td>Built-in (inherits from source system)</td>
-<td>You build it</td>
+<td>Revenue forecasting</td>
+<td>Regression</td>
+<td>Historical revenue, pipeline, seasonality</td>
+<td>Accurate budgeting and resource allocation</td>
 </tr>
 <tr class="odd">
-<td><strong>Cost model</strong></td>
-<td>Per-user subscription</td>
-<td>Infrastructure + engineering time</td>
+<td>Demand planning</td>
+<td>Regression</td>
+<td>Sales history, promotions, weather</td>
+<td>Optimize inventory and reduce stockouts</td>
 </tr>
 <tr class="even">
-<td><strong>Best for</strong></td>
-<td>Broad knowledge base across standard tools</td>
-<td>Domain-specific docs, regulatory, proprietary formats</td>
+<td>Dynamic pricing</td>
+<td>Regression</td>
+<td>Competitor prices, demand signals, elasticity</td>
+<td>Maximize margin without losing volume</td>
 </tr>
 </tbody>
 </table>
 </div>
-<div class="explainer">
-<p>Most companies start with a turnkey platform for general knowledge and build custom RAG only where the domain requires it (legal, compliance, engineering specs).</p>
-</div>
 <aside class="notes">
-<p>For document AI specifically, the build-versus-buy landscape looks like this. On the left, turnkey platforms — Glean, Guru, Microsoft Copilot for M365. These handle ingestion and permissions out of the box. They connect to your existing document sources — SharePoint, Google Drive, Confluence — and they inherit the access controls from those systems. Setup time is days to weeks, and the cost model is typically per-user subscription. The tradeoff is limited customization. You get their chunking strategy, their retrieval approach, their prompts.</p>
-<p>On the right, custom builds using tools like LangChain with a vector database on your own infrastructure. This gives you full control over chunking, retrieval, and prompts. You can implement domain-specific chunking — by clause for contracts, by regulation for compliance documents. But you build the access control yourself, and the setup time is weeks to months rather than days.</p>
-<p>The practical pattern I see most often is what the explainer describes. Companies start with a turnkey platform for general knowledge — the employee handbook, standard policies, IT documentation. Then they build custom RAG only where the domain demands it — legal contracts with specific clause structures, regulatory filings with complex cross-references, engineering specifications with tables and diagrams that standard chunking cannot handle.</p>
-<p>For your capstone strategies, think about where your company falls on this spectrum. Do you have standard documents that a turnkey platform could handle? Or do you have domain-specific documents that require custom chunking and retrieval?</p>
-<p>[TIMING: About 5 minutes on this slide, from about minute 67 to minute 72. Walk through the comparison table row by row. Take a question or two. Students often ask about Microsoft Copilot specifically — have a brief answer ready about its strengths (tight Office 365 integration, built-in access controls) and limitations (less customization, dependent on Microsoft ecosystem).]</p>
-<p>Transition: Alright, you have seen document AI work, you understand the pipeline, you know the failure modes and deployment decisions. Now I want you to apply this to your own companies. Time for a breakout.</p>
+<p>This table shows six common prediction problems you will encounter in business. The left three are classification — they predict categories. The right three are regression — they predict numbers. Notice the pattern: classification problems tend to drive operational decisions (retain this customer, flag this transaction, prioritize this lead), while regression problems tend to drive planning decisions (how much to budget, how much to stock, what price to set).</p>
+<p>For your breakout later, you will identify prediction problems at your own company. Use this table as a starting point, but do not limit yourself to these six.</p>
+<p>[TIMING: 2 minutes. Move to gradient boosting.]</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -962,42 +374,612 @@ Kerry Back, Rice University
           display:block!important;
       }</style></aside>
 </section>
-<section id="breakout-where-is-knowledge-trapped" class="slide level2 shrink center">
-<h2>Breakout: Where Is Knowledge Trapped?</h2>
+<section id="gradient-boosting-the-one-method" class="slide level2 section-divider center">
+<h2>Gradient Boosting: The One Method</h2>
+<aside class="notes">
+<p>We are not going to survey dozens of algorithms. There is one method that dominates tabular prediction — meaning prediction from spreadsheet-style data with rows and columns — and that is gradient boosting. This is what practitioners reach for first, what wins most Kaggle competitions on structured data, and what you will use today. Let me explain how it works conceptually.</p>
+<p>[TIMING: 15 seconds. Section divider — advance immediately.]</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="why-one-method" class="slide level2 shrink center">
+<h2>Why One Method?</h2>
+<div class="stat-cards">
+<div class="stat-card">
+<div class="stat-number">
+<p>70%+</p>
+</div>
+<div class="stat-label">
+<p>of Kaggle competition winners on tabular data use gradient boosting</p>
+</div>
+</div>
+<div class="stat-card">
+<div class="stat-number">
+<p>XGBoost</p>
+</div>
+<div class="stat-label">
+<p>most popular implementation — used by every major tech company</p>
+</div>
+</div>
+<div class="stat-card">
+<div class="stat-number">
+<p>#1</p>
+</div>
+<div class="stat-label">
+<p>first choice for practitioners on real-world business data</p>
+</div>
+</div>
+</div>
+<div class="explainer">
+<p>Deep learning dominates images and language. For <span class="accent">structured business data</span> — the kind in your databases and spreadsheets — gradient boosting wins.</p>
+</div>
+<aside class="notes">
+<p>Why are we teaching you one method instead of ten? Because gradient boosting dominates. Over seventy percent of Kaggle competition winners on tabular data — meaning data that looks like a spreadsheet — use some form of gradient boosting. XGBoost, LightGBM, and CatBoost are the three most popular implementations, and they are used by every major tech company.</p>
+<p>You have probably heard about deep learning and neural networks. Those dominate images, text, and language — which is why ChatGPT and Claude are so impressive. But for structured business data — rows and columns, the kind of data in your CRM, your ERP, your financial systems — gradient boosting consistently outperforms neural networks. It handles messy real-world data well: missing values, mixed data types, skewed distributions.</p>
+<p>You do not need to master the implementation. Claude will write the code. But you need to understand the concept so you can evaluate vendor claims and ask the right questions when someone says “we built a machine learning model.”</p>
+<p>[TIMING: 3 minutes. Move to the intuition slide.]</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="how-gradient-boosting-works" class="slide level2 shrink center">
+<h2>How Gradient Boosting Works</h2>
+<div class="step-flow">
+<div class="step-card">
+<div class="step-icon">
+<p>🌳</p>
+</div>
+<div class="step-title">
+<p>Tree 1</p>
+</div>
+<div class="step-desc">
+<p>Build a small decision tree. It gets some predictions right, some wrong.</p>
+</div>
+</div>
+<div class="step-card">
+<div class="step-icon">
+<p>🎯</p>
+</div>
+<div class="step-title">
+<p>Find Errors</p>
+</div>
+<div class="step-desc">
+<p>Look at what Tree 1 got wrong. Focus on those mistakes.</p>
+</div>
+</div>
+<div class="step-card">
+<div class="step-icon">
+<p>🌳🌳</p>
+</div>
+<div class="step-title">
+<p>Tree 2</p>
+</div>
+<div class="step-desc">
+<p>Build a new tree that specifically corrects Tree 1’s errors.</p>
+</div>
+</div>
+<div class="step-card">
+<div class="step-icon">
+<p>🔄</p>
+</div>
+<div class="step-title">
+<p>Repeat</p>
+</div>
+<div class="step-desc">
+<p>Keep adding trees. Each one fixes the remaining errors. Stop when improvement plateaus.</p>
+</div>
+</div>
+</div>
+<div class="highlight-box">
+<p><strong>The key insight:</strong> No single tree is smart. But hundreds of trees, each correcting the previous one’s mistakes, produce remarkably accurate predictions. This is <span class="accent">ensemble learning</span> — the wisdom of many weak learners.</p>
+</div>
+<aside class="notes">
+<p>Here is the conceptual explanation. Gradient boosting builds many small decision trees sequentially. The first tree makes predictions — some right, some wrong. The second tree does not start from scratch; it focuses specifically on the cases the first tree got wrong. The third tree corrects the remaining errors from tree two. And so on, for hundreds or thousands of trees.</p>
+<p>No single tree is particularly smart. Each one is a “weak learner” — it might be only slightly better than random guessing. But the combination of hundreds of weak learners, each correcting the previous one’s mistakes, produces a model that is remarkably accurate. This is called ensemble learning.</p>
+<p>Think of it like editing a document. The first draft has errors. A second pass catches some of those errors but might miss others. A third pass catches what the second missed. After enough passes, the document is polished. That is gradient boosting — many passes, each one cleaning up what the previous pass missed.</p>
+<p>You do not need to remember any of this to use the technique. Claude will handle the implementation. But when a vendor tells you “we built a machine learning model for churn prediction,” you now know enough to ask: “What algorithm? Gradient boosting? How many trees? What was the cross-validation score?” Those questions signal that you are not someone who can be sold a black box.</p>
+<p>[TIMING: 5 minutes. Move to the ML workflow.]</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="what-is-a-decision-tree" class="slide level2 shrink center">
+<h2>What Is a Decision Tree?</h2>
+<div class="highlight-box">
+<p>A decision tree asks a series of yes/no questions about your data to reach a prediction:</p>
+</div>
+<div class="code-box">
+<div class="box-title">
+<p>Example: Will this customer churn?</p>
+</div>
+<p>Is monthly usage &lt; 5 sessions? ├── YES → Has tenure &lt; 12 months? │ ├── YES → <strong>CHURN</strong> (85% confidence) │ └── NO → Has open support ticket? │ ├── YES → <strong>CHURN</strong> (70% confidence) │ └── NO → <strong>STAY</strong> (60% confidence) └── NO → Has usage declined 3 months in a row? ├── YES → <strong>CHURN</strong> (65% confidence) └── NO → <strong>STAY</strong> (90% confidence)</p>
+</div>
+<div class="explainer">
+<p>Each tree in gradient boosting is <span class="accent">small and simple</span> — maybe 4-8 questions deep. The power comes from combining hundreds of these simple trees.</p>
+</div>
+<aside class="notes">
+<p>Before we move on, let me make decision trees concrete. A decision tree is just a series of yes/no questions. Is monthly usage less than five sessions? If yes, go left. Has the customer been with us less than a year? If yes, predict churn with eighty-five percent confidence.</p>
+<p>Each individual tree in a gradient boosting model is deliberately kept small — maybe four to eight questions deep. This is by design. A deep, complex tree would memorize the training data instead of learning generalizable patterns. By keeping each tree simple and combining hundreds of them, gradient boosting gets the best of both worlds: complexity in aggregate, simplicity in each component.</p>
+<p>You will see this in action in a few minutes when we build a model with Claude.</p>
+<p>[TIMING: 2 minutes. Move to the ML workflow section.]</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-ml-workflow" class="slide level2 section-divider center">
+<h2>The ML Workflow</h2>
+<aside class="notes">
+<p>Now let us walk through the end-to-end workflow for building a predictive model. This is the sequence you will follow in the hands-on exercise, and it is the same sequence that data scientists follow in production. The difference is that you will have Claude write the code while you focus on evaluating the output.</p>
+<p>[TIMING: 15 seconds. Section divider — advance immediately.]</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="five-steps-to-a-predictive-model" class="slide level2 center">
+<h2>Five Steps to a Predictive Model</h2>
+<div class="step-flow-5">
+<div class="step-card">
+<div class="step-icon">
+<p>📊</p>
+</div>
+<div class="step-title">
+<p>Prepare Data</p>
+</div>
+<div class="step-desc">
+<p>Clean, explore, handle missing values</p>
+</div>
+</div>
+<div class="step-card">
+<div class="step-icon">
+<p>✂️</p>
+</div>
+<div class="step-title">
+<p>Split</p>
+</div>
+<div class="step-desc">
+<p>Train set (80%) and test set (20%)</p>
+</div>
+</div>
+<div class="step-card">
+<div class="step-icon">
+<p>⚙️</p>
+</div>
+<div class="step-title">
+<p>Fit Model</p>
+</div>
+<div class="step-desc">
+<p>Train gradient boosting on the training set</p>
+</div>
+</div>
+<div class="step-card">
+<div class="step-icon">
+<p>🔮</p>
+</div>
+<div class="step-title">
+<p>Predict</p>
+</div>
+<div class="step-desc">
+<p>Apply model to the test set it has never seen</p>
+</div>
+</div>
+<div class="step-card">
+<div class="step-icon">
+<p>✅</p>
+</div>
+<div class="step-title">
+<p>Evaluate</p>
+</div>
+<div class="step-desc">
+<p>Confusion matrix, accuracy, feature importance</p>
+</div>
+</div>
+</div>
+<div class="highlight-box">
+<p><strong>Why split the data?</strong> If you evaluate a model on the same data it trained on, it is like grading a student on questions they already saw. The test set is the <span class="accent">final exam with new questions</span>.</p>
+</div>
+<aside class="notes">
+<p>Here is the five-step workflow. Step one: prepare the data — explore it, handle missing values, understand what each column means. Step two: split the data into a training set and a test set. The model learns from the training set and gets evaluated on the test set — data it has never seen. Step three: fit the model — this is where gradient boosting builds its hundreds of trees. Step four: predict — apply the trained model to the test set. Step five: evaluate — look at the confusion matrix, accuracy metrics, and feature importance.</p>
+<p>The most important concept here is the train/test split. Why do we split the data? Because if you evaluate a model on the same data it trained on, you are measuring memorization, not generalization. It is like giving a student the final exam, then grading them on the exact same questions. Of course they will score well — they have seen the answers. The test set is a final exam with new questions. If the model performs well on data it has never seen, you can trust that it has learned real patterns, not just memorized the training data.</p>
+<p>Cross-validation takes this further. Instead of one split, it does five or ten different splits and averages the results. This gives you a more reliable estimate of how the model will perform on truly new data. Claude will handle cross-validation automatically when you ask for it.</p>
+<p>[TIMING: 3 minutes. Move to the simulated demo.]</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="demo-prompting-claude-to-build-a-model" class="slide level2 shrink center">
+<h2>Demo: Prompting Claude to Build a Model</h2>
+<div class="code-box">
+<div class="box-title">
+<p>Step 1: Explore the Data</p>
+</div>
+<p>PROMPT: I have a CSV file with customer data. Each row is a customer. The columns include tenure, monthly_charges, total_charges, contract_type, payment_method, internet_service, and a column called “churn” that is Yes or No.</p>
+<p>Please explore this data: how many rows, any missing values, and what does the distribution of churn look like?</p>
+</div>
+<aside class="notes">
+<p>[DEMO INSTRUCTIONS: This is a live demo. Open Claude and upload the customer churn CSV dataset. If the live demo fails, use these slides as the walkthrough and narrate what Claude would produce.</p>
+<p>Start with this exact prompt. Claude will return a summary: number of rows, columns, missing values, and the class balance of the churn variable. Point out the class imbalance if it exists — typically 70-75% stay vs.&nbsp;25-30% churn. Explain why this matters: if 75% of customers stay, a model that always predicts “stay” would be 75% accurate but completely useless.]</p>
+<p>Let me walk you through what this looks like in practice. I am going to show you a conversation with Claude where we build a predictive model step by step. In the hands-on exercise, you will do this yourself.</p>
+<p>Step one: give Claude context about your data and ask it to explore. Notice I am not writing any code. I am describing the data in plain English and asking Claude to do the exploration. This is the same maker/checker pattern from Session 2 — AI does the work, you evaluate the output.</p>
+<p>[TIMING: 2 minutes on this slide. Move to Claude’s response.]</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="demo-claudes-exploration-output" class="slide level2 shrink center">
+<h2>Demo: Claude’s Exploration Output</h2>
+<div class="code-box">
+<div class="box-title">
+<p>Claude’s Response (simulated)</p>
+</div>
+<p>Here’s what I found in your dataset:</p>
+<p><strong>Dataset overview:</strong> - 7,043 customers, 21 columns - No missing values (after converting 11 blank TotalCharges to 0)</p>
+<p><strong>Churn distribution:</strong> - Did not churn: 5,174 (73.5%) - Churned: 1,869 (26.5%)</p>
+<p><strong>Key observations:</strong> - Month-to-month contracts churn at 42% vs.&nbsp;11% for 2-year contracts - Customers with fiber optic internet churn at 42% vs.&nbsp;25% overall - Average tenure for churned customers: 18 months vs.&nbsp;38 months for retained customers</p>
+<p>⚠️ The dataset is imbalanced (73/27 split). I’ll account for this when building the model.</p>
+</div>
+<aside class="notes">
+<p>Here is what Claude produces. It found 7,043 customers with 21 columns. No missing values after cleaning. And here is the critical finding: the data is imbalanced. Seventy-three percent of customers did not churn, twenty-seven percent did.</p>
+<p>Why does imbalance matter? If I built a model that always predicts “no churn,” it would be seventy-three percent accurate. That sounds decent, but it is completely useless — it never identifies anyone who is actually at risk. Claude flags this and says it will account for it in the model. This is the kind of thing you need to watch for when evaluating model output.</p>
+<p>Also notice the early insights: month-to-month contracts churn at forty-two percent, and tenure for churned customers is half that of retained customers. These are not predictions yet — they are patterns in the data that tell you the model has something to work with.</p>
+<p>[TIMING: 2 minutes. Move to the model-building prompt.]</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="demo-building-the-model" class="slide level2 shrink center">
+<h2>Demo: Building the Model</h2>
+<div class="code-box">
+<div class="box-title">
+<p>Step 2: Build and Evaluate</p>
+</div>
+<p>PROMPT: Build a gradient boosting classifier to predict churn. Use an 80/20 train-test split and 5-fold cross-validation.</p>
+<p>Show me: 1. The confusion matrix on the test set 2. Precision, recall, and F1 score 3. The top 10 most important features 4. Cross-validation scores</p>
+<p>Explain the results in business terms, not just statistics.</p>
+</div>
+<aside class="notes">
+<p>Step two: ask Claude to build the model. Notice the specificity of this prompt. I am not just saying “build a model.” I am specifying the algorithm (gradient boosting), the split (80/20), the validation approach (5-fold cross-validation), and exactly what outputs I want. I am also asking Claude to explain results in business terms — not just statistics.</p>
+<p>This is a skill you are developing: writing precise prompts that produce evaluable output. The more specific your request, the more useful the response. If you just say “predict churn,” Claude might use any algorithm and show you outputs you cannot interpret. By specifying what you want, you set yourself up to evaluate the results.</p>
+<p>[TIMING: 1 minute. Move to Claude’s model output.]</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="demo-model-results" class="slide level2 shrink center">
+<h2>Demo: Model Results</h2>
+<div class="code-box">
+<div class="box-title">
+<p>Claude’s Model Output (simulated)</p>
+</div>
+<p><strong>Model:</strong> GradientBoostingClassifier (200 trees, max depth 4)</p>
+<p><strong>Confusion Matrix (test set, 1,409 customers):</strong> Predicted Stay Predicted Churn Actual Stay 896 139 Actual Churn 102 272</p>
+<p><strong>Metrics:</strong> - Accuracy: 82.9% - Precision (churn): 66.2% — when we predict churn, we’re right 66% of the time - Recall (churn): 72.7% — we catch 73% of actual churners - F1 Score: 69.3%</p>
+<p><strong>Cross-validation:</strong> 81.4% ± 1.8% (stable across folds)</p>
+</div>
+<aside class="notes">
+<p>Here are the results. The model achieves 82.9 percent accuracy on the test set. But accuracy alone is not enough — remember, always predicting “stay” would give us 73.5 percent accuracy. We need to look deeper.</p>
+<p>The confusion matrix is the key output. Let me walk through it. Top-left: 896 customers who actually stayed and the model correctly predicted “stay.” Top-right: 139 customers who actually stayed but the model predicted “churn” — these are false positives. Bottom-left: 102 customers who actually churned but the model predicted “stay” — these are false negatives, and they are the most dangerous. Bottom-right: 272 customers who actually churned and the model correctly caught them — true positives.</p>
+<p>I will unpack the confusion matrix in detail on the next slide. For now, note the cross-validation score: 81.4 percent plus or minus 1.8 percent. This is stable across folds, which means the model is generalizing well, not just memorizing one particular train/test split.</p>
+<p>[TIMING: 3 minutes. Move to the confusion matrix explanation.]</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="evaluating-models" class="slide level2 section-divider center">
+<h2>Evaluating Models</h2>
+<aside class="notes">
+<p>Now that you have seen what a model produces, let us talk about how to evaluate it. This is where the maker/checker framework applies most directly. The AI built the model — now you need to decide whether to trust it.</p>
+<p>[TIMING: 15 seconds. Section divider — advance immediately.]</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="reading-a-confusion-matrix" class="slide level2 shrink center">
+<h2>Reading a Confusion Matrix</h2>
 <div class="two-cards">
-<div class="card card-dark">
+<div class="card card-light">
 <div class="card-title">
-<p>Identify</p>
+<p>What the Matrix Tells You</p>
 </div>
 <ul>
-<li>Name 2–3 document collections at your company that would benefit from AI-powered Q&amp;A</li>
-<li>Think: policies, contracts, procedures, meeting notes, customer communications</li>
-<li>Where do people currently go to find this information?</li>
+<li><strong>True Positives (272):</strong> Correctly predicted churn — these are your wins</li>
+<li><strong>True Negatives (896):</strong> Correctly predicted stay — no action needed</li>
+<li><strong>False Positives (139):</strong> Predicted churn, but customer stayed — unnecessary retention spend</li>
+<li><strong>False Negatives (102):</strong> Predicted stay, but customer churned — <span class="accent">missed opportunity, the costly error</span></li>
+</ul>
+</div>
+<div class="card card-dark">
+<div class="card-title">
+<p>The Business Question</p>
+</div>
+<ul>
+<li>What is the <strong>cost</strong> of each error type?</li>
+<li>False positive: you offer a discount to someone who was staying anyway (~$50/customer?)</li>
+<li>False negative: you lose a customer worth $1,200/year in revenue</li>
+<li><span class="amber">False negatives are 24x more costly</span> — optimize for recall</li>
+</ul>
+</div>
+</div>
+<aside class="notes">
+<p>The confusion matrix is not just a statistics table — it is a business decision tool. Let me show you why.</p>
+<p>We have two types of errors. False positives: 139 customers the model flagged as likely to churn, but they were actually going to stay. What is the cost? You might offer them a retention discount unnecessarily — say fifty dollars each. That is about seven thousand dollars.</p>
+<p>False negatives: 102 customers the model predicted would stay, but they actually churned. What is the cost? Each lost customer represents maybe twelve hundred dollars per year in revenue. That is a hundred and twenty-two thousand dollars in lost revenue.</p>
+<p>False negatives are twenty-four times more costly than false positives in this example. That changes how you evaluate the model. You do not want the model with the highest accuracy — you want the model that catches the most churners, even if it means more false alarms. This is the precision-recall tradeoff, and it is a business decision, not a statistical one.</p>
+<p>When you evaluate a model, the first question is not “what is the accuracy?” It is “what is the cost of each type of error?” That determines which metric matters most.</p>
+<p>[TIMING: 4 minutes. Move to precision vs recall.]</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="precision-vs.-recall-a-business-tradeoff" class="slide level2 center">
+<h2>Precision vs.&nbsp;Recall: A Business Tradeoff</h2>
+<div class="two-cards">
+<div class="card card-light">
+<div class="card-title">
+<p>Precision (66.2%)</p>
+</div>
+<ul>
+<li>“When we predict churn, how often are we right?”</li>
+<li>272 correct out of 411 churn predictions</li>
+<li>Higher precision = fewer wasted retention offers</li>
+<li><span class="accent">Optimize for precision when false positives are expensive</span></li>
+<li>Example: fraud alerts that freeze customer accounts</li>
+</ul>
+</div>
+<div class="card card-dark">
+<div class="card-title">
+<p>Recall (72.7%)</p>
+</div>
+<ul>
+<li>“Of all actual churners, how many did we catch?”</li>
+<li>272 caught out of 374 actual churners</li>
+<li>Higher recall = fewer missed churners</li>
+<li><span class="amber">Optimize for recall when false negatives are expensive</span></li>
+<li>Example: cancer screening, churn prevention, fraud in high-value accounts</li>
+</ul>
+</div>
+</div>
+<div class="explainer">
+<p>You cannot maximize both. Catching more churners (higher recall) means more false alarms (lower precision). The right balance depends on your business costs.</p>
+</div>
+<aside class="notes">
+<p>Precision and recall are inversely related — you cannot maximize both simultaneously. Increasing recall means casting a wider net, which catches more true churners but also flags more customers who were not going to churn. Increasing precision means being more selective, which reduces false alarms but misses more actual churners.</p>
+<p>The right tradeoff depends entirely on your business context. For churn prevention, where a lost customer is worth far more than a wasted discount, you optimize for recall. For fraud detection where blocking a legitimate transaction angers a customer, you might balance more toward precision. For cancer screening, you overwhelmingly optimize for recall — you never want to miss a true positive.</p>
+<p>This is a judgment call that AI cannot make for you. The model can give you any tradeoff you want by adjusting a threshold. Your job is deciding which tradeoff is right for the business.</p>
+<p>[TIMING: 3 minutes. Move to regression metrics.]</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="regression-metrics-r²-and-rmse" class="slide level2 center">
+<h2>Regression Metrics: R² and RMSE</h2>
+<div class="two-cards">
+<div class="card card-light">
+<div class="card-title">
+<p>R² (R-squared)</p>
+</div>
+<ul>
+<li>“How much of the variation does the model explain?”</li>
+<li>R² = 0.85 means the model explains 85% of variation in the target</li>
+<li>R² = 1.0 is a perfect model (suspicious — probably data leakage)</li>
+<li>R² = 0.0 means the model is no better than predicting the average</li>
+<li><span class="accent">Business rule of thumb: R² &gt; 0.7 is usually useful for planning</span></li>
+</ul>
+</div>
+<div class="card card-dark">
+<div class="card-title">
+<p>RMSE (Root Mean Squared Error)</p>
+</div>
+<ul>
+<li>“On average, how far off are the predictions?”</li>
+<li>RMSE = $4,200 means predictions are off by ~$4,200 on average</li>
+<li>In the same units as the target variable (dollars, units, etc.)</li>
+<li><span class="amber">Ask: “Is this error margin acceptable for the business decision?”</span></li>
+<li>RMSE of $4,200 on $50K deals is fine; on $8K deals, it is not</li>
+</ul>
+</div>
+</div>
+<aside class="notes">
+<p>For regression problems — predicting continuous numbers — you use different metrics. R-squared tells you how much of the variation in the target your model explains. An R-squared of 0.85 means the model captures eighty-five percent of the variation in, say, quarterly revenue. The remaining fifteen percent is noise the model cannot explain.</p>
+<p>RMSE — root mean squared error — tells you how far off the predictions are on average, in the same units as your target. If you are predicting deal values and the RMSE is four thousand two hundred dollars, that means the model’s predictions are off by about four thousand two hundred dollars on average.</p>
+<p>The business question for RMSE is always: is this error margin acceptable for the decision I am making? An RMSE of four thousand two hundred dollars on fifty-thousand-dollar deals is fine for forecasting. The same RMSE on eight-thousand-dollar deals means the model is off by more than fifty percent on average — probably not useful.</p>
+<p>You will not build a regression model in today’s exercise, but you will encounter these metrics when you or your team work on forecasting and demand planning.</p>
+<p>[TIMING: 3 minutes. Move to feature importance.]</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="feature-importance-what-drives-predictions" class="slide level2 shrink center">
+<h2>Feature Importance: What Drives Predictions?</h2>
+<div class="code-box">
+<div class="box-title">
+<p>Top 10 Features (from our churn model)</p>
+</div>
+<p>Feature Importance ───────────────────────────────────── 1. contract_type 0.231 ← Month-to-month is the #1 risk 2. tenure 0.189 ← New customers churn more 3. monthly_charges 0.142 ← Higher bills → higher churn 4. internet_service_fiber 0.098 ← Fiber customers churn more 5. total_charges 0.074 6. payment_method_electronic 0.062 7. online_security_no 0.048 8. tech_support_no 0.041 9. online_backup_no 0.035 10. paperless_billing 0.028</p>
+</div>
+<div class="highlight-box">
+<p><strong>The maker/checker question:</strong> Do these make business sense? Contract type and tenure as top predictors? <span class="accent">Yes — that passes the smell test.</span> If “customer_id” were the top feature, something is very wrong.</p>
+</div>
+<aside class="notes">
+<p>Feature importance tells you which variables the model relies on most. This is one of the most valuable outputs for business decision-making, separate from the predictions themselves.</p>
+<p>Look at this list. Contract type is the number one predictor of churn. Month-to-month customers churn at much higher rates than those on annual or two-year contracts. Tenure is second — newer customers are more likely to leave. Monthly charges is third — customers paying higher bills are more sensitive to competitors.</p>
+<p>Now apply the maker/checker framework. Do these features make business sense? Absolutely. If you asked any experienced sales or customer success leader “what drives churn?”, they would say contract type, tenure, and price sensitivity. The model confirms domain expertise.</p>
+<p>But here is the red flag to watch for. If “customer_id” appeared as a top feature, that would mean the model is memorizing individual customers, not learning patterns. If “zip_code” appeared as number one, it might be exploiting a data artifact rather than a real business driver. Feature importance is your most powerful tool for catching models that are technically accurate but fundamentally flawed.</p>
+<p>[TIMING: 3 minutes. Move to the maker/checker framework for models.]</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-makerchecker-framework-for-models" class="slide level2 center">
+<h2>The Maker/Checker Framework for Models</h2>
+<div class="three-cards">
+<div class="card card-light">
+<div class="card-title">
+<ol type="1">
+<li>Better Than Baseline?</li>
+</ol>
+</div>
+<ul>
+<li>Does the model beat a naive approach?</li>
+<li>Baseline for churn: predict “stay” for everyone → 73.5% accuracy</li>
+<li>Our model: 82.9% accuracy</li>
+<li><span class="accent">9.4 percentage points better</span> — real improvement</li>
+</ul>
+</div>
+<div class="card card-dark">
+<div class="card-title">
+<ol start="2" type="1">
+<li>Features Make Sense?</li>
+</ol>
+</div>
+<ul>
+<li>Do the top predictors match domain knowledge?</li>
+<li>Contract type, tenure, charges → <span class="amber">makes sense</span></li>
+<li>Customer ID, row number → <span class="amber">data leakage</span></li>
+<li>Ask a domain expert: “Do these surprise you?”</li>
 </ul>
 </div>
 <div class="card card-light">
 <div class="card-title">
-<p>Evaluate</p>
+<ol start="3" type="1">
+<li>Generalizes Well?</li>
+</ol>
 </div>
 <ul>
-<li>How often are these documents updated?</li>
-<li>Who needs access — and who shouldn’t have it?</li>
-<li>What’s the cost of a wrong answer from stale or incomplete documents?</li>
+<li>Cross-validation: 81.4% ± 1.8%</li>
+<li>Training accuracy: 85.2%</li>
+<li>Small gap → model is <span class="accent">generalizing</span></li>
+<li>If train = 99% but CV = 60% → overfitting</li>
 </ul>
 </div>
 </div>
-<div class="explainer">
-<p>Report back: your top candidate document collection and the biggest deployment risk you foresee.</p>
-</div>
 <aside class="notes">
-<p>[BREAKOUT INSTRUCTIONS: This is a 12-minute breakout from minute 75 to minute 87. Groups of 3-4. Assign breakout rooms in Zoom. Visit each room briefly during the breakout to listen and prompt discussion.]</p>
-<p>Alright, breakout time. I am going to put you into groups of three or four. You have twelve minutes for this exercise. Here is what I want you to do.</p>
-<p>First, the Identify card on the left. Each person in the group should name two or three document collections at your company that would benefit from AI-powered Q&amp;A. Think broadly — policies, contracts, procedures, meeting notes, customer communications, regulatory filings, engineering specs. And for each one, talk about where people currently go to find this information. Is it a SharePoint search? An email to someone? A phone call? A folder that only one person knows about?</p>
-<p>Second, the Evaluate card on the right. For your top candidates, assess three things. How often are these documents updated? This tells you about the freshness challenge. Who needs access and who should not have it? This tells you about the access control challenge. And what is the cost of a wrong answer from stale or incomplete documents? If the cost is low — someone gets the wrong lunch menu — maybe it is fine. If the cost is high — someone gives a wrong answer about indemnification terms to a client — that is a deployment risk you need to plan for.</p>
-<p>When you come back, each group should be ready to report: your top candidate document collection and the biggest deployment obstacle you foresee. I will be visiting your rooms to listen in. Off you go.</p>
-<p>[TIMING: 12 minutes in breakout rooms. Visit 2-3 rooms during the breakout. Listen for patterns — the same types of documents come up repeatedly (vendor contracts, internal policies, client communications). When groups return, spend about 3-5 minutes on report-backs. Call on 3-4 groups. Listen for: which document types came up most often, what access control challenges were identified, and whether groups leaned toward turnkey or custom solutions. Connect the themes back to the deployment framework.]</p>
-<p>Welcome back. Let me hear from a few groups. What was your top candidate document collection, and what is the biggest deployment obstacle? Let me start with Group 1.</p>
-<p>[After report-backs:] Great. I am hearing some common patterns. Vendor contracts and internal policies came up in almost every group. Access control is a universal concern. And most of you are thinking turnkey first, custom only where the domain demands it. Those are exactly the right instincts. Keep these ideas warm — they may feed directly into your capstone strategy for next session.</p>
+<p>Here is your three-question checklist for evaluating any predictive model. You do not need to understand the math. You need to ask these three questions.</p>
+<p>Question one: does the model beat a baseline? The simplest baseline for churn is “predict everyone stays” — that gives you 73.5 percent accuracy for free. Our model gets 82.9 percent. That is a real improvement of 9.4 percentage points. If a model only beats the baseline by one or two points, it may not be worth the complexity.</p>
+<p>Question two: do the important features make business sense? We already covered this. Contract type, tenure, and monthly charges as top predictors? That matches what any experienced manager would tell you. If the top features do not make sense, the model may be exploiting a data artifact.</p>
+<p>Question three: does the model generalize? Compare the cross-validation score to the training score. Our model gets 85.2 percent on training data and 81.4 percent on cross-validation. That is a small gap, which means the model learned real patterns, not memorized the training data. If you saw training accuracy of 99 percent but cross-validation accuracy of 60 percent, that model is memorizing, not learning. It will fail on new data.</p>
+<p>Three questions. That is your entire evaluation framework. AI builds the model — you ask these three questions.</p>
+<p>[TIMING: 3 minutes. Move to red flags.]</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1010,28 +992,256 @@ Kerry Back, Rice University
           display:block!important;
       }</style></aside>
 </section>
-<section id="before-next-session" class="slide level2 shrink center">
-<h2>Before Next Session</h2>
+<section id="red-flags-when-not-to-trust-the-model" class="slide level2 shrink center">
+<h2>Red Flags: When Not to Trust the Model</h2>
+<div class="four-cards">
+<div class="card card-dark">
+<div class="card-title">
+<p>🚩 Too Good to Be True</p>
+</div>
+<ul>
+<li>99% accuracy usually means data leakage</li>
+<li>The target variable leaked into the features</li>
+<li>Example: including “cancellation_date” to predict churn</li>
+</ul>
+</div>
+<div class="card card-light">
+<div class="card-title">
+<p>🚩 Nonsense Features</p>
+</div>
+<ul>
+<li>Customer ID, row number, or timestamp as top features</li>
+<li>The model is memorizing, not learning</li>
+<li>Always check feature importance before trusting predictions</li>
+</ul>
+</div>
+<div class="card card-dark">
+<div class="card-title">
+<p>🚩 Big Train/Test Gap</p>
+</div>
+<ul>
+<li>Train accuracy: 98%</li>
+<li>Test accuracy: 65%</li>
+<li>The model memorized training data and fails on new data</li>
+</ul>
+</div>
+<div class="card card-light">
+<div class="card-title">
+<p>🚩 Unstable Cross-Val</p>
+</div>
+<ul>
+<li>Scores: 85%, 62%, 78%, 91%, 55%</li>
+<li>High variance across folds</li>
+<li>Model is sensitive to which data it sees — not reliable</li>
+</ul>
+</div>
+</div>
+<aside class="notes">
+<p>Four red flags that should make you stop and investigate before deploying a model.</p>
+<p>First: too good to be true. If you see 99 percent accuracy, do not celebrate — investigate. Almost always, this means data leakage: information about the outcome leaked into the input features. The classic example is including “cancellation_date” as a feature when predicting churn. Of course the model is perfect — it can see the answer in the input.</p>
+<p>Second: nonsense features at the top of the importance list. Customer ID, row number, account creation timestamp — these should never be meaningful predictors. If they are, the model is memorizing specific customers rather than learning generalizable patterns.</p>
+<p>Third: a large gap between training and test performance. If the model gets 98 percent on training data but 65 percent on test data, it has memorized the training set. It learned the noise, not the signal.</p>
+<p>Fourth: unstable cross-validation scores. If the model gets 85 percent on one fold and 55 percent on another, it is highly sensitive to which data it sees. That is not a model you can rely on for business decisions.</p>
+<p>Any of these red flags means you need to go back and investigate before trusting the predictions.</p>
+<p>[TIMING: 3 minutes. Move to the hands-on exercise.]</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="hands-on-build-a-predictive-model" class="slide level2 section-divider center">
+<h2>Hands-On: Build a Predictive Model</h2>
+<aside class="notes">
+<p>Now it is your turn. You are going to use Claude to build a predictive model from start to finish. I will walk you through five guided steps, and you will work through them at your own pace. The goal is not just to get a result — it is to practice the evaluation skills we just covered.</p>
+<p>[TIMING: 15 seconds. Section divider — advance immediately.]</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="exercise-setup" class="slide level2 shrink center">
+<h2>Exercise Setup</h2>
 <div class="info-box">
 <div class="box-title">
-<p>Homework — Capstone</p>
+<p>What You Need</p>
 </div>
 <ul>
-<li><strong>Finalize your strategy document</strong> (1–2 pages) using the capstone template. Cover all 8 sections: problem, solution, deployment, 90-day pilot, success metrics, risks, the ask, and Day 1 action.</li>
-<li><strong>Prepare a 5-minute presentation</strong> for Session 8. You will present to your breakout group, and the strongest strategies will advance to the full class.</li>
-<li>Use the <strong>evaluation rubric</strong> to self-check: Is the pilot scoped tightly? Are success metrics measurable? Is the Day 1 action specific?</li>
+<li>Open Claude at <a href="https://claude.ai">claude.ai</a></li>
+<li>Download the customer churn dataset (link in chat)</li>
+<li>Upload the CSV to Claude</li>
+<li>Follow the five guided steps on the next slide</li>
+</ul>
+</div>
+<div class="highlight-box">
+<p><strong>Time:</strong> 20 minutes. Work individually. I will circulate to help.</p>
+<p><strong>Goal:</strong> Not just to build a model, but to <span class="accent">evaluate it</span> using the framework we just learned. Can you answer the three maker/checker questions about your model?</p>
+</div>
+<aside class="notes">
+<p>[HANDS-ON SETUP: Post the dataset link in the Zoom chat. Give students 1 minute to download and open Claude. The dataset is a standard telecom customer churn dataset with about 7,000 rows and 21 columns. If students have trouble uploading, remind them to use the attachment/paperclip icon in Claude.]</p>
+<p>Here is how we will spend the next twenty minutes. You have a customer churn dataset. You are going to upload it to Claude and work through five guided steps. The goal is not just to build a model — any prompt will produce a model. The goal is to evaluate it using the three-question framework: better than baseline, features make sense, and generalizes well.</p>
+<p>Work individually. I will circulate and help. If you get stuck on any step, raise your hand or post in chat.</p>
+<p>[TIMING: 2 minutes for setup. Then advance to the guided steps.]</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="five-guided-steps" class="slide level2 shrink center">
+<h2>Five Guided Steps</h2>
+<div class="step-flow-5">
+<div class="step-card">
+<div class="step-icon">
+<p>1️⃣</p>
+</div>
+<div class="step-title">
+<p>Explore</p>
+</div>
+<div class="step-desc">
+<p>“Explore this data. How many rows? Missing values? What’s the churn rate?”</p>
+</div>
+</div>
+<div class="step-card">
+<div class="step-icon">
+<p>2️⃣</p>
+</div>
+<div class="step-title">
+<p>Build</p>
+</div>
+<div class="step-desc">
+<p>“Build a gradient boosting classifier with 80/20 split and cross-validation.”</p>
+</div>
+</div>
+<div class="step-card">
+<div class="step-icon">
+<p>3️⃣</p>
+</div>
+<div class="step-title">
+<p>Evaluate</p>
+</div>
+<div class="step-desc">
+<p>“Show me the confusion matrix. What’s the false negative rate?”</p>
+</div>
+</div>
+<div class="step-card">
+<div class="step-icon">
+<p>4️⃣</p>
+</div>
+<div class="step-title">
+<p>Interpret</p>
+</div>
+<div class="step-desc">
+<p>“What are the top 10 features? Do they make business sense?”</p>
+</div>
+</div>
+<div class="step-card">
+<div class="step-icon">
+<p>5️⃣</p>
+</div>
+<div class="step-title">
+<p>Challenge</p>
+</div>
+<div class="step-desc">
+<p>“What would a skeptical VP push back on? How would you improve this?”</p>
+</div>
+</div>
+</div>
+<div class="highlight-box">
+<p><strong>Bonus prompt:</strong> “If I could only act on the top 200 highest-risk customers, which ones would you flag and why?”</p>
+</div>
+<aside class="notes">
+<p>Here are your five steps. Step one: explore the data. Ask Claude to tell you what is in the dataset, how many rows, any missing values, and what the churn rate looks like. Step two: build the model. Ask for a gradient boosting classifier with an 80/20 train-test split and 5-fold cross-validation. Step three: evaluate. Ask for the confusion matrix and specifically the false negative rate — how many churners is the model missing? Step four: interpret the feature importance. Do the top features make sense? Step five: challenge the model. Ask Claude what a skeptical VP would push back on. This is the maker/checker step.</p>
+<p>The bonus prompt is my favorite: “If I could only act on the top 200 highest-risk customers, which ones would you flag and why?” This forces the model output into a concrete business action. It is not about accuracy in the abstract — it is about which specific customers get a retention call.</p>
+<p>You have twenty minutes. Go.</p>
+<p>[TIMING: 18-20 minutes for the exercise. Circulate the room. Common issues: (1) Students who upload the CSV but do not describe it — remind them to give Claude context. (2) Students who get a model but do not evaluate it — push them to steps 3-5. (3) Students who get stuck on errors — usually a Claude timeout on large code blocks, just ask Claude to try again.]</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="example-step-5-in-action" class="slide level2 shrink center">
+<h2>Example: Step 5 in Action</h2>
+<div class="code-box">
+<div class="box-title">
+<p>Prompt: Challenge the Model</p>
+</div>
+<p>PROMPT: What would a skeptical VP of Customer Success push back on if I presented this model? What are the weaknesses?</p>
+</div>
+<div class="code-box">
+<div class="box-title">
+<p>Claude’s Response (simulated)</p>
+</div>
+<p>A skeptical VP would likely raise these concerns:</p>
+<ol type="1">
+<li><p><strong>“We’re missing 27% of churners.”</strong> The recall of 72.7% means 102 customers who churned were not flagged. If each lost customer costs $1,200/year, that’s $122K in missed revenue.</p></li>
+<li><p><strong>“Contract type is the top feature — we already know that.”</strong> The model confirms what the team already suspects. The VP wants to know: what does the model tell us that we DON’T already know? → Look at features 4-10 for non-obvious insights.</p></li>
+<li><p><strong>“This is trained on historical data.”</strong> If we just changed our pricing or launched a new product, past churn patterns may not predict future behavior. The model needs retraining regularly.</p></li>
+<li><p><strong>“What do we DO with the predictions?”</strong> A model is only useful if it drives action. What’s the intervention for flagged customers? Who owns the follow-up?</p></li>
+</ol>
+</div>
+<aside class="notes">
+<p>This is what step five looks like in practice. When you ask Claude to play the role of a skeptical VP, it surfaces exactly the right concerns. The recall gap means we are missing a quarter of churners. The top features confirm existing intuition rather than revealing new insights. The model is trained on historical data that may not reflect current conditions. And most importantly: what do you actually do with the predictions?</p>
+<p>That fourth point is the most important. A model that predicts churn is only valuable if someone acts on the predictions. Who gets the list of at-risk customers? What is the intervention? Is it an email, a phone call, a discount offer? How do you measure whether the intervention worked? These are business questions, not technical ones. The model is the easy part. The organizational response is the hard part.</p>
+<p>[TIMING: This slide is shown during the exercise wrap-up, around minute 55. Spend 2-3 minutes on it before moving to the debrief.]</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="exercise-debrief" class="slide level2 center">
+<h2>Exercise Debrief</h2>
+<div class="info-box">
+<div class="box-title">
+<p>Quick Show of Hands</p>
+</div>
+<ul>
+<li>Who got a model accuracy above 80%?</li>
+<li>Who found that contract type was the top feature?</li>
+<li>Who tried the bonus prompt about flagging specific customers?</li>
+<li>Who found something in the feature importance that surprised them?</li>
 </ul>
 </div>
 <div class="explainer">
-<p>Monday’s final session: <span class="accent">Your AI Strategy</span> — you present, we synthesize, and you leave with a concrete plan.</p>
+<p>The model is the easy part. The hard part is: <span class="accent">what do you do with the predictions?</span></p>
 </div>
 <aside class="notes">
-<p>Let me walk you through what is due for our final session on Monday. Three things.</p>
-<p>First, finalize your strategy document. One to two pages using the capstone template I shared with the Session 6 homework. It has eight sections: the problem, the solution, the deployment approach, a 90-day pilot plan, success metrics, risks and mitigations, the ask — what you need in terms of budget and headcount — and the Day 1 action. Every section matters, but let me highlight three that trip people up. The pilot should be scoped tightly — one use case, one to three systems, a clear success metric. The success metrics should be measurable, not vague. “Reduce forecast time from 3 days to 2 hours” is strong. “Improve efficiency” is not. And the Day 1 action should be something that actually happens on Day 1 — a specific person, a specific task, a specific date. Not “we should explore options.”</p>
-<p>Second, prepare a five-minute presentation. On Monday, you will present to your breakout group first. Each group will vote on the strongest strategy, and those winning strategies will present to the full class. Everyone presents; five advance to the plenary.</p>
-<p>Third, use the evaluation rubric to self-check before you finalize. The rubric was included with the template. Run your strategy through each dimension and ask yourself honestly: would I fund this?</p>
-<p>If you want to go deeper on the technical side, the optional Demos 6 and 7 show building a RAG system from scratch and combining it with a database agent. They are linked in the homework materials.</p>
-<p>[TIMING: About 2 minutes on this slide. Be clear about expectations for Monday. You should be wrapping up at about minute 88.]</p>
+<p>[DEBRIEF (3-5 minutes): Quick show of hands for each question. Most students will have gotten accuracy above 80% — the dataset is well-behaved. Most will have found contract type as the top feature. Push the conversation toward the fourth question: what surprised you in the feature importance?</p>
+<p>If time permits, ask 1-2 students: “What did Claude say when you asked what a skeptical VP would push back on?” Listen for whether students are starting to apply the maker/checker mindset to model output.</p>
+<p>Bridge to the breakout: “You just built a model for churn prediction. Now I want you to think about your own company. Where could prediction help? What would you predict, and what would you do with the predictions?”]</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1044,11 +1254,11 @@ Kerry Back, Rice University
           display:block!important;
       }</style></aside>
 </section>
-<section id="key-takeaway" class="slide level2 section-divider center">
-<h2>Key Takeaway</h2>
+<section id="breakout-prediction-opportunities" class="slide level2 section-divider center">
+<h2>Breakout: Prediction Opportunities</h2>
 <aside class="notes">
-<p>Let me close with one final thought. This is the through-line for everything we covered today.</p>
-<p>[TIMING: Brief pause on the divider, then advance to the closing statement.]</p>
+<p>Time for the breakout. You have practiced building and evaluating a model on someone else’s data. Now I want you to think about your own organization. Where could prediction create value? What data would you need? And critically — what would you do with the predictions?</p>
+<p>[TIMING: 15 seconds. Section divider — advance immediately.]</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1061,16 +1271,338 @@ Kerry Back, Rice University
           display:block!important;
       }</style></aside>
 </section>
-<section id="your-most-valuable-knowledge-is-buried-in-documents-nobody-can-search." class="slide level2 centered-statement center">
-<h2>Your most valuable knowledge is buried in <span class="accent">documents nobody can search</span>.</h2>
+<section id="breakout-instructions" class="slide level2 shrink center">
+<h2>Breakout Instructions</h2>
+<div class="info-box">
+<div class="box-title">
+<p>Breakout Exercise (10 minutes, groups of 3-4)</p>
+</div>
+<p>Each person identifies 1-2 prediction problems at their company:</p>
+<ol type="1">
+<li><strong>What would you predict?</strong> (Be specific: “customer churn” not “make better predictions”)</li>
+<li><strong>Classification or regression?</strong></li>
+<li><strong>What data would you need?</strong> Do you have it? Where does it live?</li>
+<li><strong>What is the cost of a false positive vs.&nbsp;false negative?</strong></li>
+<li><strong>What would you DO with the predictions?</strong> Who acts on them?</li>
+</ol>
+</div>
+<div class="highlight-box">
+<p><strong>Report back:</strong> Each group shares the most valuable prediction opportunity and the biggest data obstacle.</p>
+</div>
+<aside class="notes">
+<p>[BREAKOUT INSTRUCTIONS: Create breakout rooms of 3-4 people. Display this slide in the rooms. Each person should identify one or two prediction problems at their company and answer the five questions. The group then picks the most valuable opportunity and the biggest obstacle to share with the full class.</p>
+<p>TIMING: 10 minutes in breakout rooms. Then 5 minutes for report-back — call on 3-4 groups. Push for specificity: “You said ‘predict demand’ — demand for what? What data would you use? What would you do differently if the model said demand would spike next month?”</p>
+<p>Common patterns you will hear: churn prediction (most common), lead scoring, demand forecasting, employee attrition, equipment failure prediction. The most interesting discussions will be about question 4 (false positive vs.&nbsp;false negative costs) and question 5 (what action follows the prediction).</p>
+<p>Listen for the data obstacle theme: most students will discover that the data they need either does not exist in a clean form, lives in a system they cannot access, or would need to be combined from multiple sources. This connects back to Sessions 3-4 — the data access problem is real.]</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="report-back" class="slide level2 center">
+<h2>Report Back</h2>
+<div class="three-cards">
+<div class="card card-light">
+<div class="card-title">
+<p>Most Valuable Predictions</p>
+</div>
+<ul>
+<li>What patterns emerged across groups?</li>
+<li>Which prediction opportunities had the clearest ROI?</li>
+<li>Did anyone identify a prediction that changes a decision process?</li>
+</ul>
+</div>
+<div class="card card-dark">
+<div class="card-title">
+<p>Biggest Data Obstacles</p>
+</div>
+<ul>
+<li>Data does not exist in clean form</li>
+<li>Lives in systems you cannot access</li>
+<li>Would need to combine multiple sources</li>
+<li><span class="amber">Sound familiar from Sessions 3-4?</span></li>
+</ul>
+</div>
+<div class="card card-light">
+<div class="card-title">
+<p>The Action Question</p>
+</div>
+<ul>
+<li>A prediction without action is a report</li>
+<li>Who receives the predictions?</li>
+<li>What decision changes?</li>
+<li><span class="accent">This is the capstone question</span></li>
+</ul>
+</div>
+</div>
+<aside class="notes">
+<p>[REPORT-BACK: Call on 3-4 groups. Capture the themes on screen or verbally. The three columns on this slide will likely match what you hear: valuable opportunities, data obstacles, and the action question.</p>
+<p>Key teaching moment: emphasize the rightmost card. A prediction without action is just another report. The value of predictive modeling is not the model itself — it is the decision that changes because of the model. “We predict this customer will churn” is only valuable if someone calls that customer, offers a retention deal, or escalates to account management. “We predict demand will spike” is only valuable if someone adjusts inventory, staffing, or marketing spend.</p>
+<p>This connects directly to the capstone. Students should be thinking: “In my capstone strategy, if I include predictive modeling, what specific decision does it improve and who acts on it?”</p>
+<p>TIMING: 5 minutes for report-back. Then bridge to capstone.]</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="bridge-to-capstone" class="slide level2 section-divider center">
+<h2>Bridge to Capstone</h2>
+<aside class="notes">
+<p>We are in the home stretch. Let me connect everything we have done to where you are headed next session.</p>
+<p>[TIMING: 15 seconds. Section divider — advance immediately.]</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="your-full-toolkit" class="slide level2 center">
+<h2>Your Full Toolkit</h2>
+<div class="step-flow-6">
+<div class="step-card">
+<div class="step-icon">
+<p>💬</p>
+</div>
+<div class="step-title">
+<p>Sessions 1-2</p>
+</div>
+<div class="step-desc">
+<p>Personal productivity: charts, docs, analysis</p>
+</div>
+</div>
+<div class="step-card">
+<div class="step-icon">
+<p>🗄️</p>
+</div>
+<div class="step-title">
+<p>Session 3</p>
+</div>
+<div class="step-desc">
+<p>Enterprise data: structured queries + document Q&amp;A</p>
+</div>
+</div>
+<div class="step-card">
+<div class="step-icon">
+<p>📊</p>
+</div>
+<div class="step-title">
+<p>Session 4</p>
+</div>
+<div class="step-desc">
+<p>Reporting pipelines: data → analysis → deliverable</p>
+</div>
+</div>
+<div class="step-card">
+<div class="step-icon">
+<p>🏗️</p>
+</div>
+<div class="step-title">
+<p>Session 5</p>
+</div>
+<div class="step-desc">
+<p>Deployment: architecture, security, build vs.&nbsp;buy</p>
+</div>
+</div>
+<div class="step-card">
+<div class="step-icon">
+<p>🔍</p>
+</div>
+<div class="step-title">
+<p>Session 6</p>
+</div>
+<div class="step-desc">
+<p>Trust: failure modes, red-teaming, governance</p>
+</div>
+</div>
+<div class="step-card">
+<div class="step-icon">
+<p>🔮</p>
+</div>
+<div class="step-title">
+<p>Session 7</p>
+</div>
+<div class="step-desc">
+<p>Prediction: classification, regression, evaluation</p>
+</div>
+</div>
+</div>
 <div class="explainer">
-<p>RAG doesn’t replace your experts. It makes their expertise accessible to everyone who needs it.</p>
+<p>Your capstone strategy can draw on <span class="accent">any combination</span> of these capabilities. Next session: you present.</p>
 </div>
 <aside class="notes">
-<p>Your most valuable knowledge is buried in documents nobody can search. The policies that guide decisions, the contracts that define obligations, the board minutes that record strategy — all of it sitting in folders that require you to know exactly where to look and exactly what to search for. Document AI changes that. It does not replace your experts. Your legal team still needs to interpret contract terms. Your compliance team still needs to make judgment calls. What document AI does is make their expertise accessible to everyone who needs it, on demand, with citations.</p>
-<p>Think about what that means for your organization. The new hire who needs to understand the travel policy does not email HR and wait two days. The procurement manager who needs to check vendor contract terms does not call Legal and wait a week. The board member who wants to know what was decided six months ago does not search through email threads. The knowledge is there. It just becomes findable.</p>
-<p>That is the promise. The Atherton case shows the risks. Today you have experienced both. On Monday, you bring it all together in your capstone strategy. See you then.</p>
-<p>[TIMING: About 1-2 minutes to close. End at minute 90. You are done.]</p>
+<p>Let me put today in context. Over seven sessions, you have built a comprehensive AI toolkit. Sessions 1 and 2 gave you personal productivity — using AI to generate charts, documents, and analyses. Session 3 connected AI to enterprise data, both structured databases and document Q&amp;A. Session 4 showed you how to build reporting pipelines. Session 5 covered deployment architecture and security. Session 6 gave you the tools to evaluate reliability and design governance. And today, Session 7, added predictive modeling.</p>
+<p>Your capstone strategy can draw on any combination of these capabilities. Maybe your use case is primarily personal productivity. Maybe it involves enterprise data access. Maybe it includes predictive modeling. Maybe it combines all three. The choice depends on your organization’s needs, data readiness, and governance maturity.</p>
+<p>Next Monday is Session 8 — you present. Let me tell you what that looks like and what you need to finalize this week.</p>
+<p>[TIMING: 3 minutes. Move to homework.]</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="capstone-preparation" class="slide level2 center">
+<h2>Capstone Preparation</h2>
+<div class="two-cards">
+<div class="card card-dark">
+<div class="card-title">
+<p>Your Strategy Document (1-2 pages)</p>
+</div>
+<ul>
+<li>Problem statement: what business problem does AI solve?</li>
+<li>Proposed solution: which AI capabilities do you use?</li>
+<li>Deployment approach: cloud, on-premise, or hybrid?</li>
+<li>Governance plan: access controls, verification, compliance</li>
+<li>90-day pilot plan: concrete first steps</li>
+</ul>
+</div>
+<div class="card card-light">
+<div class="card-title">
+<p>Your Presentation (5 minutes)</p>
+</div>
+<ul>
+<li>Pitch to your executive team (your breakout group)</li>
+<li>Breakout groups vote on strongest strategy</li>
+<li>5 winners present to full class</li>
+<li>Instructor feedback on: scoped tightly enough? Business case credible? Governance adequate?</li>
+</ul>
+</div>
+</div>
+<div class="highlight-box">
+<p><strong>Self-check:</strong> Use the evaluation rubric provided with the template. Does your Day 1 action actually happen on Day 1?</p>
+</div>
+<aside class="notes">
+<p>Here is what you need to finalize before next session. Your strategy document should be one to two pages using the capstone template. It covers five things: the problem you are solving, the AI capabilities you are using, the deployment approach, your governance plan, and a concrete 90-day pilot plan.</p>
+<p>Your presentation is five minutes. You are pitching to your executive team — your breakout group plays that role. Each breakout group votes on the strongest strategy, and the five winners present to the full class. I will give feedback on whether the pilot is scoped tightly enough, whether the business case is credible, and whether the governance plan is adequate.</p>
+<p>The most important self-check: does your Day 1 action actually happen on Day 1? If your “first step” requires IT approval, budget allocation, and a vendor evaluation, it is not a Day 1 action. A real Day 1 action is something you can do Monday morning without asking anyone’s permission.</p>
+<p>[TIMING: 3 minutes. Move to homework summary.]</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="homework" class="slide level2 shrink center">
+<h2>Homework</h2>
+<div class="info-box">
+<div class="box-title">
+<p>Before Session 8 (Monday)</p>
+</div>
+<ol type="1">
+<li><strong>Finalize your strategy document</strong> (1-2 pages using the capstone template)</li>
+<li><strong>Prepare your 5-minute presentation</strong> — use the evaluation rubric to self-check</li>
+<li><strong>Consider predictive modeling</strong> — if it fits your use case, add it to your strategy with specifics: what would you predict, what data would you need, what action would follow?</li>
+</ol>
+</div>
+<div class="highlight-box">
+<p><strong>Optional:</strong> Demos 6-7 show building a RAG system and combining it with a database agent. Relevant if your capstone includes document AI.</p>
+</div>
+<aside class="notes">
+<p>Three homework items. First, finalize your strategy document. Use the template and the rubric. Second, prepare your presentation — five minutes, clear and concise. Third, consider whether predictive modeling belongs in your strategy. If it does, be specific: what would you predict, what data do you need, and what action follows the predictions? Vague statements like “we could use ML” will not score well on the rubric.</p>
+<p>The optional viewing is Demos 6 and 7, which show building a RAG system and combining it with a database agent. These are relevant if your capstone involves document AI or if you want to see how multiple AI capabilities integrate.</p>
+<p>[TIMING: 2 minutes. Move to the closing slide.]</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="key-takeaways" class="slide level2 section-divider center">
+<h2>Key Takeaways</h2>
+<aside class="notes">
+<p>Let me leave you with three takeaways from today.</p>
+<p>[TIMING: 15 seconds. Section divider — advance immediately.]</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="three-things-to-remember" class="slide level2 center">
+<h2>Three Things to Remember</h2>
+<div class="three-cards">
+<div class="card card-dark">
+<div class="card-title">
+<p>AI Builds the Model</p>
+</div>
+<ul>
+<li>You do not need to write code</li>
+<li>You do not need to understand the math</li>
+<li>You need to write clear prompts and <span class="amber">evaluate the output</span></li>
+</ul>
+</div>
+<div class="card card-light">
+<div class="card-title">
+<p>Three Questions to Ask</p>
+</div>
+<ul>
+<li>Better than baseline?</li>
+<li>Features make business sense?</li>
+<li>Generalizes to new data?</li>
+<li><span class="accent">If yes to all three, proceed with caution</span></li>
+</ul>
+</div>
+<div class="card card-dark">
+<div class="card-title">
+<p>Predictions Need Action</p>
+</div>
+<ul>
+<li>A model without action is just a report</li>
+<li>Who receives predictions?</li>
+<li>What decision changes?</li>
+<li><span class="amber">This is what separates strategy from spectacle</span></li>
+</ul>
+</div>
+</div>
+<aside class="notes">
+<p>Three takeaways. First: AI builds the model, you evaluate it. You did this today — you prompted Claude, it wrote the code, and you evaluated the confusion matrix, feature importance, and cross-validation scores. That is the workflow.</p>
+<p>Second: three questions. Does it beat the baseline? Do the features make sense? Does it generalize? If the answer to all three is yes, you have a model worth exploring further. If any answer is no, investigate before trusting the predictions.</p>
+<p>Third: predictions need action. This is the most important takeaway. A churn model is only valuable if someone calls the at-risk customers. A demand forecast is only valuable if someone adjusts inventory. Your capstone should specify not just what AI does, but what humans do differently because of it.</p>
+<p>See you Monday for your presentations. Come prepared — this is your chance to synthesize everything from the past seven sessions into a strategy you can actually take back to your organization.</p>
+<p>[TIMING: 2 minutes. End of session.]</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

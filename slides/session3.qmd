@@ -17,7 +17,7 @@ format:
 ## From Personal Productivity to Enterprise Data {.section-divider}
 
 ::: {.notes}
-This section divider opens the bridge segment (minutes 0-8). You are transitioning the class from "personal AI" mode --- where they spent a week generating charts, documents, and workflows with Claude --- into "enterprise AI" mode, where the same technology connects to corporate databases. Let the title land, then advance.
+This section divider opens the bridge segment (minutes 0-8). You are transitioning the class from "personal AI" mode --- where they spent a week generating charts, documents, and workflows with Claude --- into "enterprise AI" mode, where the same technology connects to corporate databases and company documents. Let the title land, then advance.
 :::
 
 ---
@@ -25,17 +25,17 @@ This section divider opens the bridge segment (minutes 0-8). You are transitioni
 ## The Shift
 
 ::: {.explainer}
-You have spent a week using AI for **personal productivity** --- charts, documents, workflows. Now we scale up. The same AI that drafts your memos can also **query your company's databases**.
+You have spent a week using AI for **personal productivity** --- charts, documents, workflows. Now we scale up. The same AI that drafts your memos can also **query your company's databases** and **search your company's documents**.
 :::
 
 ::: {.highlight-box}
-But enterprise data is scattered across 5, 10, sometimes 20 systems. Today we see what that looks like --- and what AI can do about it.
+But enterprise data is scattered across 5, 10, sometimes 20 systems --- and trapped in policies, contracts, and board minutes nobody can search. Today we see what that looks like and what AI can do about it.
 :::
 
 ::: {.notes}
-Say: "You have spent a week using AI for personal productivity --- charts, documents, workflows. You have iterated, critiqued, and built reusable prompts. Now we scale up. The same AI that drafts your memos can also query your company's databases. But enterprise data is scattered across many systems. Today we see what that looks like and what AI can do about it."
+Say: "You have spent a week using AI for personal productivity --- charts, documents, workflows. You have iterated, critiqued, and built reusable prompts. Now we scale up. The same AI that drafts your memos can also query your company's databases and search your company's documents."
 
-"By the end of this session, you will have queried enterprise databases in plain English, watched AI merge data across systems that don't talk to each other, and started mapping your own company's data landscape. Let's jump right in."
+"By the end of this session, you will have queried enterprise databases in plain English, watched AI merge data across systems that don't talk to each other, seen AI answer questions from company documents with page-number citations, and started mapping your own company's data landscape. Let's jump right in."
 
 Transition: advance to the cold open.
 :::
@@ -45,7 +45,7 @@ Transition: advance to the cold open.
 ## The 3-Week Email Chain {.section-divider}
 
 ::: {.notes}
-This is the cold open provocation (minutes 8-13). The goal is to create an emotional anchor: the frustration of waiting weeks for a simple cross-system question. You will present the scenario and then immediately contrast it with the XYZ Corp app demo.
+This is the cold open provocation (minutes 8-13). The goal is to create an emotional anchor: the frustration of waiting weeks for a simple cross-system question. You will present the scenario and then immediately contrast it with the Meridian Corp app demo.
 :::
 
 ---
@@ -89,12 +89,12 @@ Pause for responses. Then: "What I am about to show you takes about 30 seconds."
 ## Demo: Dashboard vs. Chat {.section-divider}
 
 ::: {.notes}
-This opens the live demo segment (minutes 13-23). Make sure the XYZ Corp app is open in another browser tab and ready. You are about to ask the same cross-system question and get an instant answer. This is the "wow" moment of the session.
+This opens the live demo segment (minutes 13-23). Make sure the Meridian Corp app is open in another browser tab and ready. You are about to ask the same cross-system question and get an instant answer. This is the "wow" moment of the session.
 :::
 
 ---
 
-## Introducing XYZ Corp
+## Introducing Meridian Corp
 
 ::: {.info-box}
 ::: {.box-title}
@@ -104,6 +104,7 @@ The Simulation Environment
 - **10 enterprise systems**: Salesforce, Legacy CRM, HubSpot, NetSuite, SAP, Oracle SCM, Workday, Zendesk, QuickBooks
 - **41 tables, 26,000+ rows, 3 years of data**
 - Realistic cross-system friction: different naming conventions, date formats, column styles
+- **Plus a document collection**: employee handbook, vendor contracts, board minutes, strategic plans
 :::
 
 ::: {.explainer}
@@ -111,13 +112,13 @@ You will log in and query this environment yourself in 15 minutes. First, watch 
 :::
 
 ::: {.notes}
-Briefly introduce the XYZ Corp simulation. Say: "This is the environment you will be working with for the rest of the course. XYZ Corp is a fictional $500M B2B industrial supplies distributor. It has three divisions --- Industrial, Energy, and Safety --- each with their own CRM, plus shared finance, HR, and support systems. Ten systems total. Forty-one database tables. Three years of realistic data."
+Briefly introduce the Meridian Corp simulation. Say: "This is the environment you will be working with for the rest of the course. Meridian Corp is a fictional $500M B2B industrial supplies distributor. It has three divisions --- Industrial, Energy, and Safety --- each with their own CRM, plus shared finance, HR, and support systems. Ten systems total. Forty-one database tables. Three years of realistic data."
+
+"It also has an internal document collection --- an employee handbook, vendor contracts, board minutes, and strategic plans. These are the kinds of unstructured documents that trap knowledge in every organization. You will query both databases and documents today."
 
 "The key word is realistic. The systems have different naming conventions. The Legacy CRM stores dates as text strings. Customers appear under different names across divisions --- General Electric in one system, GE Industrial Solutions in another. This is what real enterprise data looks like."
 
-"You will log in and query this yourself in a few minutes. But first, let me show you what happens when we ask it the CEO's question."
-
-Switch to the XYZ Corp app and prepare for the live demo.
+Switch to the Meridian Corp app and prepare for the live demo.
 :::
 
 ---
@@ -135,7 +136,7 @@ Show combined revenue and flag any name mismatches across systems.
 :::
 
 ::: {.notes}
-DEMO INSTRUCTIONS: Switch to the XYZ Corp app. Type the prompt above (or similar). As results load, narrate what is happening: "Watch --- it is querying Salesforce first, then the Legacy CRM, then HubSpot. Three separate queries. Now it is using Python to merge the results with fuzzy name matching."
+DEMO INSTRUCTIONS: Switch to the Meridian Corp app. Type the prompt above (or similar). As results load, narrate what is happening: "Watch --- it is querying Salesforce first, then the Legacy CRM, then HubSpot. Three separate queries. Now it is using Python to merge the results with fuzzy name matching."
 
 Let the full result appear. Point out key elements:
 - The table showing multi-division customers with combined revenue
@@ -268,7 +269,7 @@ What the Market Saw
 ::: {.card-title}
 What You Just Saw
 :::
-- The XYZ Corp app answered in 30 seconds what took 3 weeks
+- The Meridian Corp app answered in 30 seconds what took 3 weeks
 - Fuzzy matching across 3 CRMs with different naming conventions
 - Combined revenue view that no single dashboard could produce
 - [This is the technology behind the valuation collapse]{.accent}
@@ -327,7 +328,7 @@ Walk through each card. Say: "Dashboards are great for monitoring known metrics.
 
 "AI agents sit in a different category. Any question, any time, in plain English. But I want to be clear: this is not a replacement for dashboards or BI teams. It is a force multiplier. Dashboards still monitor KPIs. BI teams still build validated data models. The agent handles the ad hoc questions that today go unanswered or take weeks."
 
-Transition: "Now it is your turn. Let me get you logged into the XYZ Corp app."
+Transition: "Now it is your turn. Let me get you logged into the Meridian Corp app."
 :::
 
 ---
@@ -335,7 +336,7 @@ Transition: "Now it is your turn. Let me get you logged into the XYZ Corp app."
 ## Hands-On: Your First Enterprise Queries {.section-divider}
 
 ::: {.notes}
-This opens the hands-on segment (minutes 33-53). This is the longest segment of the session --- 20 minutes. Students will log into the XYZ Corp app and work through guided prompts, progressing from single-system to cross-system queries. Make sure login credentials are ready to share.
+This opens the hands-on segment (minutes 33-53). This is the longest segment of the session --- 20 minutes. Students will log into the Meridian Corp app and work through guided prompts, progressing from single-system to cross-system queries. Make sure login credentials are ready to share.
 :::
 
 ---
@@ -346,7 +347,7 @@ This opens the hands-on segment (minutes 33-53). This is the longest segment of 
 ::: {.box-title}
 Log In Now
 :::
-1. Open your browser and navigate to the XYZ Corp app URL (in chat)
+1. Open your browser and navigate to the Meridian Corp app URL (in chat)
 2. Log in with your provided credentials
 3. You should see a chat interface --- type your first question
 :::
@@ -475,7 +476,7 @@ This requires CRM data (customer revenue) + Zendesk data (support tickets). Go.
 ::: {.notes}
 Say: "Timed challenge. You have 5 minutes. The question is on screen: which division's top customer represents the greatest concentration risk, and what does their support ticket history look like?"
 
-"This requires data from at least two systems --- CRM for customer revenue concentration, and Zendesk for support tickets. Ask the XYZ Corp app and see what you get."
+"This requires data from at least two systems --- CRM for customer revenue concentration, and Zendesk for support tickets. Ask the Meridian Corp app and see what you get."
 
 Start a visible timer. After 5 minutes, ask: "Who got an answer? What did you find?" The expected answer is that Energy's top customer (CAT Energy Services) represents 34% of revenue --- a significant concentration risk. If students also surface the support ticket data, even better.
 
@@ -484,115 +485,15 @@ Use this as a teaching moment about the value of cross-system questions.
 
 ---
 
-## Workshop: Your Company's Data Map {.section-divider}
-
-::: {.notes}
-This opens the data map workshop (minutes 53-63). Students shift from the XYZ Corp simulation to thinking about their own companies. This work carries forward through the rest of the course and into the capstone.
-:::
-
----
-
-## Map Your Systems
-
-::: {.info-box}
-::: {.box-title}
-Individual Exercise (10 minutes)
-:::
-1. **List your company's 3-5 core systems** (CRM, ERP, HR, finance, support, etc.)
-2. **For each system:** What data lives there? Who owns it? How do you access it today?
-3. **Identify one cross-system question** nobody can answer easily today
-4. **Estimate:** Who answers it now? How long does it take?
-:::
-
-::: {.explainer}
-This data map is the foundation for your capstone strategy. Be specific --- system names, not categories.
-:::
-
-::: {.notes}
-Say: "Now I want you to think about your own company. Take 10 minutes and map your data landscape. List your 3 to 5 core systems --- not categories like 'CRM,' but actual system names. Salesforce. SAP. Workday. Whatever your company uses."
-
-"For each system, note what data lives there and who owns it. Then identify one cross-system question that nobody can answer easily today. The kind of question that, like the CEO's question about multi-division customers, sounds simple but requires pulling data from multiple systems."
-
-"This data map carries forward. It becomes the foundation for your capstone strategy in Session 8. Be specific."
-
-Give students the full 10 minutes. Circulate and help anyone who is stuck.
-:::
-
----
-
-## Data Map Template
-
-::: {.comparison-table}
-
-| System | Type | Key Data | Owner | Cross-System Link? |
-|---|---|---|---|---|
-| *e.g., Salesforce* | *CRM* | *Pipeline, customers, revenue* | *Sales Ops* | *Customer ID to ERP* |
-| *e.g., Workday* | *HR* | *Headcount, comp, org structure* | *HR* | *Employee ID to payroll* |
-| *e.g., SAP* | *ERP/Ops* | *Purchase orders, inventory, suppliers* | *Operations* | *Vendor ID to contracts* |
-| | | | | |
-| | | | | |
-
-:::
-
-::: {.highlight-box}
-**My cross-system question:** _______________________________________________
-:::
-
-::: {.notes}
-Display this template as a reference while students work. You do not need to narrate it --- just let them use it as a guide. If students ask what counts as a "cross-system link," explain: "It is any shared identifier that connects records across systems. A customer ID, an employee ID, a vendor number. If there is no shared identifier, that is worth noting too --- it means any cross-system analysis requires fuzzy matching, like we saw with the XYZ Corp demo."
-:::
-
----
-
-## Breakout: How Scattered Is Your Data? {.section-divider}
-
-::: {.notes}
-This opens the breakout discussion (minutes 63-78). Groups of 3-4 compare their data maps and look for patterns. Assign breakout rooms now.
-:::
-
----
-
-## Breakout Discussion (15 minutes)
-
-::: {.two-cards}
-::: {.card .card-light}
-::: {.card-title}
-Compare Data Maps
-:::
-- What systems do you have in common?
-- Where is integration hardest?
-- What cross-system questions would have the most business value?
-:::
-
-::: {.card .card-dark}
-::: {.card-title}
-Report Back
-:::
-- **One common pattern** your group identified
-- **One surprising idiosyncrasy** unique to someone's company
-- What would the "3-week email chain" look like at your organizations?
-:::
-:::
-
-::: {.notes}
-Say: "Breakout time. Groups of 3 to 4. Compare your data maps. I want you to find what you have in common --- most of you will share some of the same systems --- and where you diverge. What cross-system questions would be most valuable at your companies?"
-
-"When we come back, each group reports: one common pattern and one surprising idiosyncrasy. You have 15 minutes."
-
-Send students to breakout rooms. After 12 minutes, broadcast a 3-minute warning. When groups return, take 3-4 minutes for report-backs. Common patterns often include: everyone has a CRM-to-finance gap; HR data is always siloed; customer naming is inconsistent everywhere.
-:::
-
----
-
 ## What We're Skipping {.section-divider}
 
 ::: {.notes}
-This opens the expectations calibration segment (minutes 78-87). You are about to name everything the demo did NOT show --- the pre-work required before any agent can query real systems. This is critical for preventing the "we can do this on Monday" reaction.
+This opens the expectations calibration segment (minutes 53-58). You are naming the pre-work required before any agent can query real systems. This is critical for preventing the "we can do this on Monday" reaction. Compressed to 5 minutes --- hit the key points and move on.
 :::
 
 ---
 
-## The 60-90 Days the Demo Didn't Show
+## The 60-90 Days the Demo Didn't Show {.shrink}
 
 ::: {.four-cards}
 ::: {.card .card-dark}
@@ -633,53 +534,389 @@ PII Classification
 :::
 
 ::: {.notes}
-Say: "Before we wrap, I need to calibrate expectations. Everything you saw today was impressive. But the XYZ Corp demo hides something important: the 60 to 90 days of pre-work that happened before the first question was ever asked."
+Say: "Before we move to the next demo, I need to calibrate expectations. Everything you have seen today was impressive. But the Meridian Corp demo hides something important: the 60 to 90 days of pre-work that happened before the first question was ever asked."
 
-Walk through each card: "Someone had to catalog every table and column. Someone had to write schema descriptions the LLM can understand --- that system prompt is not automatic, it is carefully authored institutional knowledge. Someone had to provision API access to each system with proper security. And someone had to classify every field for PII sensitivity and define access control rules."
+Walk through each card quickly: "Someone had to catalog every table and column. Someone had to write schema descriptions the LLM can understand. Someone had to provision API access with proper security. And someone had to classify every field for PII sensitivity."
 
-"This pre-work is real. It is not glamorous. And it is the difference between a demo and a production deployment. I name it now so that when you go back to your organizations and say 'I saw something amazing,' you also say 'and here is what it takes to get there.'"
+"This pre-work is real. It is not glamorous. And it is the difference between a demo and a production deployment. I name it now so that when you go back to your organizations, you also know what it takes to get there."
+
+"We will dig deeper into deployment architecture and data security in Session 5. Now --- let me show you something different. Not all company knowledge lives in databases."
+
+Transition: advance to the document AI demo.
 :::
 
 ---
 
-## How Data Moves Today
+## Not All Knowledge Lives in Databases {.section-divider}
+
+::: {.notes}
+This opens the document AI / RAG introduction (minutes 58-68). You are pivoting from structured data (databases) to unstructured data (documents). This is a natural extension of the "scattered data" theme --- the same company that has 10 database systems also has hundreds of policies, contracts, and procedures trapped in PDFs and SharePoint folders.
+:::
+
+---
+
+## The Other Half of Enterprise Knowledge
+
+::: {.explainer}
+You have seen AI query **databases** --- rows, columns, SQL. But think about where the bulk of your company's knowledge actually lives.
+:::
+
+::: {.stat-cards}
+::: {.stat-card}
+::: {.stat-number}
+80%
+:::
+::: {.stat-label}
+of enterprise data is unstructured --- policies, contracts, emails, reports
+:::
+:::
+
+::: {.stat-card}
+::: {.stat-number}
+0%
+:::
+::: {.stat-label}
+of that is accessible through a dashboard
+:::
+:::
+
+::: {.stat-card}
+::: {.stat-number}
+?
+:::
+::: {.stat-label}
+How many critical answers are trapped in PDFs nobody can search?
+:::
+:::
+:::
+
+::: {.notes}
+Say: "Everything we have done so far has been structured data --- rows, columns, SQL queries. But think about where the bulk of your company's knowledge actually lives. It is not in databases. It is in policies nobody has read since onboarding. Contracts buried in a shared drive. Board minutes from last quarter. Procedures documented in PDFs that SharePoint's search function cannot meaningfully query."
+
+"Industry estimates say 80% of enterprise data is unstructured. Zero percent of that shows up in your dashboards. AI can search these documents too --- and it can do something a keyword search cannot: understand what you are asking and synthesize answers across multiple documents."
+
+"Let me show you what that looks like."
+:::
+
+---
+
+## Demo: Document-Based Q&A {.shrink}
+
+::: {.code-box}
+::: {.box-title}
+Prompt 1 --- Policy Lookup
+:::
+```
+What is our policy on remote work for the Energy Division?
+```
+:::
+
+::: {.notes}
+DEMO INSTRUCTIONS: Switch to the Meridian Corp app's document collection. Type the prompt above. As the result loads, narrate: "Watch --- it is searching the document corpus, not a database. It is looking for passages relevant to remote work policy."
+
+Let the full result appear. Point out key elements:
+- The answer cites specific documents, sections, and page numbers
+- The agent found a division-specific override in the Energy Division policies that differs from the general handbook
+- It synthesized across two sources to give a complete answer
+
+Say: "Notice the citations. Every claim traces to a specific document, section, and page number. This is what makes document AI usable in a corporate setting --- the user can verify. It is not just giving you an answer. It is showing you where that answer came from."
+
+"Also notice: the Energy Division has a specific override to the general remote work policy. The agent found both the general policy and the override, and synthesized them. A keyword search for 'remote work' might have found one; the AI found and connected both."
+:::
+
+---
+
+## Demo Result: Policy Lookup with Citations
 
 ::: {.two-cards}
 ::: {.card .card-light}
 ::: {.card-title}
-The Traditional Answer: Data Warehouse
+What the Agent Found
 :::
-- Move all data into one place (Snowflake, BigQuery, Redshift)
-- Cost: $500K--$5M+ to build
-- Timeline: 6--18 months
-- Advantage: one source of truth, fast queries
-- Downside: stale data, expensive, slow to change
+- **General policy** (Employee Handbook, Section 4.2, p. 12): Up to 2 days/week remote for eligible roles
+- **Energy Division override** (Energy Division Policies, Section 2.1, p. 3): Field operations staff exempt; office staff limited to 1 day/week during Q4 operational reviews
+- Agent synthesized both sources into a complete answer
 :::
 
 ::: {.card .card-dark}
 ::: {.card-title}
-The Alternative: Query Where It Lives
+Why This Matters
 :::
-- AI agent queries each system via API
-- No data movement --- always current
-- Cost: lower upfront, per-query costs
-- Advantage: fresh data, fast to deploy
-- Downside: slower queries, more complex orchestration
+- [Every claim has a citation]{.accent} --- document, section, page number
+- Cross-document reasoning: two sources, one answer
+- A keyword search would likely find one source, not both
+- The user can verify every claim against the original documents
 :::
-:::
-
-::: {.case-quote}
-Most enterprises will use [both]{.amber} --- a warehouse for core reporting, agents for ad hoc cross-system questions.
 :::
 
 ::: {.notes}
-Say: "There are two approaches to getting cross-system answers. The traditional answer is a data warehouse --- move everything into one place. This is proven technology. It works. But it costs $500K to $5 million, takes 6 to 18 months, and the data is always at least slightly stale."
+Say: "Here is the result. The agent found the general remote work policy in the Employee Handbook and a division-specific override in the Energy Division Policies. It synthesized both into one answer with full citations."
 
-"The alternative is what you just saw: query each system where it lives. No data movement. Always current. Faster to deploy. But the queries are slower and the orchestration is more complex."
+"This is the first key point about document AI: citations matter. In a corporate setting, you need to know where an answer came from so you can verify it. The agent is not just retrieving --- it is citing."
 
-"In practice, most enterprises will use both. A warehouse for core reporting and dashboards. Agents for ad hoc cross-system questions that the warehouse was not designed to answer."
+"The second key point: cross-document reasoning. The question required connecting information from two different documents. A keyword search in SharePoint might have found the general policy. The AI found both the general policy and the exception, and told you how they interact."
+:::
 
-"We will dig deeper into deployment architecture in Session 5. For now, just know that both options exist and there are real tradeoffs."
+---
+
+## Demo: Structured Data Extraction {.shrink}
+
+::: {.code-box}
+::: {.box-title}
+Prompt 2 --- Vendor Renewals
+:::
+```
+Which vendor contracts are up for renewal in the next 6 months?
+What are the key terms and required notice periods?
+```
+:::
+
+::: {.notes}
+DEMO INSTRUCTIONS: Type the second prompt. As results load, narrate: "This is a different kind of document query. Instead of a policy question, we are asking for structured information trapped inside contract documents."
+
+Point out:
+- The agent extracted tabular data from a vendor registry document
+- It pulled renewal dates, notice periods, and auto-renewal clauses
+- It flagged a procedural requirement from a separate policy document (120-day review requirement)
+- It noted that one contract had already auto-renewed because the review window was missed
+
+Say: "This is structured data extraction from unstructured documents. The contract terms exist in PDFs and Word documents --- not in a database. The agent pulled them out, organized them into a table, and added procedural context from a separate policy."
+
+"Notice it flagged that one contract already auto-renewed because the 120-day review window passed. That is the kind of insight that gets lost when policies live in unread PDFs."
+:::
+
+---
+
+## Demo: Combining Documents + Database {.shrink}
+
+::: {.code-box}
+::: {.box-title}
+Prompt 3 --- Cross-System Synthesis
+:::
+```
+What's our contractual commitment to GE, and how does their
+actual spending compare?
+```
+:::
+
+::: {.notes}
+DEMO INSTRUCTIONS: This is the most powerful demo of the session. Type the prompt. Narrate: "Watch what happens here. This question cannot be answered by either the document collection or the database alone. The agent needs both."
+
+As results load: "It is retrieving the GE Master Service Agreement from the document collection for the contractual commitment. Now it is querying the CRM databases for actual spending across divisions."
+
+Let the result appear. Point out:
+- The contract says $4.2M minimum annual commitment with discount tiers and a shortfall clause
+- The database shows actual spending: $4.28M in 2024 (just barely met), $3.80M in 2025 (below commitment)
+- The agent calculated a $404K shortfall with a renewal deadline 92 days away
+- The insight only emerges when both sources are combined
+
+Say: "Neither source alone answers this question. The contract says what we promised. The database says what actually happened. The insight --- a $404K shortfall with a renewal deadline 92 days away --- only emerges when both are combined."
+
+"This is the real value of enterprise AI. Most valuable business questions span structured data and unstructured documents. An AI that can only do one is half-useful."
+:::
+
+---
+
+## Demo Result: Documents + Database Combined
+
+::: {.comparison-table}
+
+| Capability | Source | What it provided |
+|---|---|---|
+| Document AI (RAG) | GE Master Service Agreement | $4.2M minimum commitment, discount tiers, shortfall clause, renewal terms |
+| Database AI (SQL) | Salesforce + Legacy CRM + HubSpot | Actual spending by division and year: $4.28M (2024), $3.80M (2025) |
+
+:::
+
+::: {.highlight-box}
+Neither source alone answers the question. The contract says what we [promised]{.accent}. The database says what actually [happened]{.amber}. The insight --- a **$404K shortfall** with a renewal deadline **92 days away** --- only emerges when both are combined.
+:::
+
+::: {.notes}
+Say: "This slide summarizes what you just saw. Document AI retrieved the contract terms. Database AI retrieved the spending data. The agent combined them and calculated the gap."
+
+"Cross-system identity resolution still matters here. GE appears as 'General Electric' in Salesforce, 'GE Industrial Solutions' in the contract, and 'GE Safety Division' in HubSpot. The agent had to reconcile all of these."
+
+"The output was not just retrieval --- it calculated the gap, identified the penalty exposure, flagged the declining trend, and noted the 90-day renewal window. This is what separates useful AI from a search engine."
+
+"A decision-maker can verify both sides independently. The response cites the specific MSA section for the commitment and identifies which CRM system produced each spending figure."
+:::
+
+---
+
+## How RAG Works {.shrink}
+
+::: {.step-flow-5}
+::: {.step-card}
+::: {.step-icon}
+1
+:::
+::: {.step-title}
+Chunk
+:::
+::: {.step-desc}
+Documents split into passages (paragraphs, sections, or clauses)
+:::
+:::
+
+::: {.step-card}
+::: {.step-icon}
+2
+:::
+::: {.step-title}
+Embed
+:::
+::: {.step-desc}
+Each chunk converted to a numerical vector by an embedding model
+:::
+:::
+
+::: {.step-card}
+::: {.step-icon}
+3
+:::
+::: {.step-title}
+Store
+:::
+::: {.step-desc}
+Vectors stored in a vector database for fast similarity search
+:::
+:::
+
+::: {.step-card}
+::: {.step-icon}
+4
+:::
+::: {.step-title}
+Query
+:::
+::: {.step-desc}
+User's question is embedded and matched against stored chunks
+:::
+:::
+
+::: {.step-card}
+::: {.step-icon}
+5
+:::
+::: {.step-title}
+Generate
+:::
+::: {.step-desc}
+Top matches sent to LLM as context; LLM answers with citations
+:::
+:::
+:::
+
+::: {.explainer}
+**RAG** = Retrieval-Augmented Generation. The LLM does not memorize your documents --- it [searches them at query time]{.accent} and answers using only what it retrieves.
+:::
+
+::: {.notes}
+Say: "Let me pull back the curtain on how that document Q&A actually works. The technique is called RAG --- Retrieval-Augmented Generation. Here is the pipeline in five steps."
+
+Walk through each step: "First, your documents are split into chunks --- paragraphs, sections, or clauses. Second, each chunk is converted into a numerical vector by an embedding model --- essentially, a mathematical fingerprint of the text's meaning. Third, those vectors are stored in a vector database optimized for similarity search."
+
+"When a user asks a question, their question is embedded the same way and matched against stored chunks --- step four. The closest matches are retrieved. Step five: those matches are sent to the LLM as context, and the LLM generates an answer using only the retrieved passages, with citations back to the originals."
+
+"The key concept here is chunking --- how you split your documents determines what the AI can and cannot find. Chunk too large and retrieval is noisy. Chunk too small and you lose context. We will see a chunking failure in the Atherton case you will read before Session 6 --- a $1.5 million contract clause was split across two chunks, and the second half fell below the retrieval threshold. The agent returned a confident, well-cited answer that was missing a critical penalty. That is the kind of failure you need to know about."
+
+"For now, the essential takeaway: the LLM does not memorize your documents. It searches them at query time and answers using only what it retrieves."
+:::
+
+---
+
+## Breakout: How Scattered Is Your Data? {.section-divider}
+
+::: {.notes}
+This opens the breakout discussion (minutes 73-82). Groups of 3-4 compare their data landscapes. The key difference from earlier versions: this breakout now includes both database systems AND document collections. Assign breakout rooms now.
+:::
+
+---
+
+## Breakout Discussion (9 minutes)
+
+::: {.two-cards}
+::: {.card .card-light}
+::: {.card-title}
+Map Your Landscape
+:::
+- **3-5 core systems** (CRM, ERP, HR, finance, support)
+- **2-3 document collections** that trap important knowledge (policies, contracts, procedures, board materials)
+- Where is integration hardest?
+- What cross-system questions would have the most business value?
+:::
+
+::: {.card .card-dark}
+::: {.card-title}
+Report Back
+:::
+- **One common pattern** your group identified
+- **One surprising idiosyncrasy** unique to someone's company
+- Where does the most valuable knowledge live --- [databases or documents]{.accent}?
+:::
+:::
+
+::: {.notes}
+Say: "Breakout time. Groups of 3 to 4. I want you to map your company's data landscape --- and this time, include both systems and documents."
+
+"List your 3 to 5 core database systems --- not categories, but actual system names. Salesforce. SAP. Workday. Then add 2 to 3 document collections that trap important knowledge. The contracts folder on SharePoint. The compliance policies in a shared drive. The board materials that only executives can access."
+
+"Compare: what do you have in common? Where is integration hardest? What cross-system questions would be most valuable? And here is a new question based on what you just saw: where does the most valuable knowledge live --- in your databases or in your documents?"
+
+"When we come back, each group reports: one common pattern and one surprising idiosyncrasy. You have 9 minutes."
+
+Send students to breakout rooms. After 7 minutes, broadcast a 2-minute warning. When groups return, take 3-4 minutes for report-backs. Common patterns: everyone has a CRM-to-finance gap; HR data is always siloed; contract terms are trapped in PDFs; customer naming is inconsistent everywhere. The document collection insight is new --- many students will realize their most critical knowledge is not in databases at all.
+
+This data map carries forward --- it becomes the foundation for the capstone strategy in Session 8.
+:::
+
+---
+
+## Bridge to Session 4 {.section-divider}
+
+::: {.notes}
+This is the bridge to the next session (minutes 82-87). You are previewing the transition from asking questions to producing complete deliverables.
+:::
+
+---
+
+## What Comes Next
+
+::: {.two-cards}
+::: {.card .card-light}
+::: {.card-title}
+Today: Asking Questions
+:::
+- Single-system queries to databases
+- Cross-system queries with fuzzy matching
+- Document Q&A with citations
+- Combined document + database queries
+:::
+
+::: {.card .card-dark}
+::: {.card-title}
+Session 4: Producing Deliverables
+:::
+- Data → charts → narrative → board-ready memo
+- The full reporting pipeline in a single prompt
+- Automated weekly reports and executive summaries
+- [The agent becomes your reporting pipeline]{.amber}
+:::
+:::
+
+::: {.explainer}
+You have seen AI **answer questions**. Next session: the same agent **produces complete deliverables** --- memos, reports, risk assessments. The difference between a chat reply and a board presentation.
+:::
+
+::: {.notes}
+Say: "Let me preview what comes next. Today was about asking questions --- querying databases, searching documents, combining both. Next session, we go from asking questions to producing complete deliverables."
+
+"Instead of getting a number or a chart, you will get a board-ready memo. Instead of a table of results, you will get an executive summary with traffic-light formatting. The same agent that answers questions can produce the entire reporting pipeline --- from raw data to finished document."
+
+"We will also look at how these pipelines can run on schedules --- automated Monday morning dashboards, monthly board decks, weekly sales forecasts. And we will see a real-world example: HPE's CFO used an AI agent to replace a 100-slide weekly performance review."
+
+"But that is Wednesday. For now --- homework."
 :::
 
 ---
@@ -687,7 +924,7 @@ Say: "There are two approaches to getting cross-system answers. The traditional 
 ## Homework {.section-divider}
 
 ::: {.notes}
-Wrap-up segment (minutes 87-90). Assign homework and preview Session 4.
+Wrap-up segment (minutes 87-90). Assign homework and close.
 :::
 
 ---
@@ -698,10 +935,10 @@ Wrap-up segment (minutes 87-90). Assign homework and preview Session 4.
 ::: {.box-title}
 Homework for Session 4
 :::
-1. **Log into the XYZ Corp app** and ask **10 business questions** --- at least 3 cross-system
-2. **Write down** one question the agent answered well and one where it was unsatisfying or wrong
-3. **Complete your data map:** at least 5 systems your company uses and the top 3 cross-system questions you cannot answer today
-4. Bring your best and worst XYZ Corp answers to Session 4
+1. **Log into the Meridian Corp app** and ask **10 business questions** --- at least 3 cross-system and at least 2 from the document collection
+2. **Write down** one question the agent answered well and one where it was unsatisfying or wrong --- bring both to Session 4
+3. **Complete your data map:** at least 5 systems your company uses, the top 3 cross-system questions you cannot answer today, and 2-3 document collections that trap important knowledge
+4. *Optional viewing:* Demos 6-7 show building a RAG system from scratch and combining it with a database agent --- deeper context for the document Q&A introduced today
 :::
 
 ::: {.highlight-box}
@@ -709,9 +946,11 @@ Homework for Session 4
 :::
 
 ::: {.notes}
-Say: "Homework. First, log into the XYZ Corp app this week and ask at least 10 business questions. Push it. Ask at least 3 cross-system questions. Write down your best answer and your worst answer --- we will use both in Session 4."
+Say: "Homework. First, log into the Meridian Corp app this week and ask at least 10 business questions. Push it. Ask at least 3 cross-system questions and at least 2 from the document collection. Write down your best answer and your worst answer --- we will use both in Session 4."
 
-"Second, complete your data map. List at least 5 systems your company uses and the top 3 cross-system questions you cannot answer today. This carries forward to your capstone."
+"Second, complete your data map. List at least 5 systems your company uses, the top 3 cross-system questions you cannot answer today, and 2 to 3 document collections that trap important knowledge. This carries forward to your capstone."
+
+"If you want to go deeper on how the document Q&A works, Demos 6 and 7 on the course site show how to build a RAG system from scratch and combine it with a database agent. These are optional but give you a behind-the-scenes look at what you used today."
 
 "Next session, we go from asking questions to producing complete deliverables. Instead of getting a number or a chart, you will get a board-ready memo. See you Wednesday."
 :::
@@ -734,23 +973,23 @@ vs. 3 weeks for a cross-system question
 
 ::: {.stat-card}
 ::: {.stat-number}
-10
+80%
 :::
 ::: {.stat-label}
-enterprise systems in the XYZ Corp simulation
+of enterprise data is unstructured --- policies, contracts, documents
 :::
 :::
 
 ::: {.stat-card}
 ::: {.stat-number}
-7 of 10
+2 paths
 :::
 ::: {.stat-label}
-multi-division customers required fuzzy matching
+Database AI + Document AI = the full picture
 :::
 :::
 :::
 
 ::: {.notes}
-This is a recap slide to display as students leave. You do not need to present it unless you want a quick close. The key takeaways are visual: the speed difference, the scale of the simulation, and the fuzzy matching insight.
+This is a recap slide to display as students leave. You do not need to present it unless you want a quick close. The key takeaways are visual: the speed difference for structured data, the 80% of enterprise knowledge trapped in documents, and the power of combining both retrieval paths.
 :::

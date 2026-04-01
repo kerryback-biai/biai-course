@@ -79,15 +79,15 @@ Tell Claude Code to build a script that queries revenue by division, compares to
 **Demo 5: "Red-Teaming Your Agent" (~15 min)** — *pairs with Session 6*
 Start from the Demo 2 agent (no guardrails). Try SQL injection, ask for salary data, ask about nonexistent divisions. Show what fails — the agent returns individual salaries, doesn't validate SQL, hallucinates when data doesn't exist. Then add guardrails one by one: SQL validation, row limits, access control checks, "I don't know" responses. Guardrails aren't automatic — seeing the vulnerabilities firsthand makes the Session 6 governance discussion real.
 
-**Demo 6: "Building a RAG System" (~20 min)** — *pairs with Session 7*
+**Demo 6: "Building a RAG System" (~20 min)** — *pairs with Session 3*
 Start fresh with a folder of Meridian Corp documents (employee handbook, vendor contracts, compliance policies). Tell Claude Code to build a document Q&A system: chunk the PDFs, embed them, store in a vector database, and answer questions with cited passages. Show the full pipeline: PDF parsing → chunking → embedding → vector store. Ask questions and get answers with page citations. Then show a failure: a question where chunking split a relevant passage, demonstrating how chunk size affects retrieval quality.
 
-**Demo 7: "Combining Database + Document AI" (~15 min)** — *pairs with Session 7*
+**Demo 7: "Combining Database + Document AI" (~15 min)** — *pairs with Session 3*
 Combine the Demo 2 database agent with the Demo 6 RAG system. Ask: "What's our contractual commitment to GE, and how does their actual spending compare?" RAG retrieves the contract terms; the database agent pulls spending data; the LLM synthesizes both. Show the orchestration: two retrieval paths (vector search vs. SQL), results merged by the LLM. This is the full vision — structured and unstructured company knowledge, accessible through one interface.
 
 ### Instructor Note: Demo Fallbacks
 
-Pre-record fallback versions of the highest-risk live demos (Session 1 SaaSpocalypse chart generation, Session 3 Cross-System Merge, Session 4 Full Pipeline, Session 7 RAG Q&A). If Claude or the Meridian app is down during a Zoom session, switch to the recording and narrate over it.
+Pre-record fallback versions of the highest-risk live demos (Session 1 SaaSpocalypse chart generation, Session 3 Cross-System Merge and RAG Q&A, Session 4 Full Pipeline, Session 7 Predictive Modeling). If Claude or the Meridian app is down during a Zoom session, switch to the recording and narrate over it.
 
 ---
 
@@ -146,11 +146,12 @@ Pre-record fallback versions of the highest-risk live demos (Session 1 SaaSpocal
 ---
 
 ### SESSION 3: "AI Meets Your Data"
-**Monday, May 11 — Enterprise Data Access**
+**Monday, May 11 — Structured and Unstructured Data**
 
 **Learning objectives:**
 - Experience conversational data access vs. traditional dashboards on enterprise systems
 - Watch AI query multiple systems and merge results in real time
+- Understand how AI retrieves answers from company documents with citations (RAG basics)
 - Map their own company's data landscape and identify high-value use cases
 
 **Session flow:**
@@ -162,12 +163,14 @@ Pre-record fallback versions of the highest-risk live demos (Session 1 SaaSpocal
 | 13-23 | **Demo: Dashboard vs. Chat.** Open the Meridian Corp app and ask the same question. Get an instant answer. Ask follow-ups the dashboard can't handle. Students see SQL, charts, narrative — all from a chat interface. | Live demo |
 | 23-33 | **The Business Lens.** Connect the demo back to the SaaSpocalypse from Session 1. The technology you just saw — querying enterprise data in plain English, getting instant charts and narratives — is what the market believes will displace dashboards, reporting teams, and data integration tools. If anyone in your company could do what you just saw, what changes? | Lecture + discussion |
 | 33-53 | **Hands-on: Your First Enterprise Queries.** Students log into the Meridian app and work through guided prompts. Start with single-system queries — Salesforce pipeline, NetSuite financials, Workday headcount. Then cross-system: "Which customers buy from multiple divisions?" Watch the agent query Salesforce, Legacy CRM, HubSpot separately, merge with Python using fuzzy matching. Then: "Revenue per employee by division?" — queries CRMs + Workday, merges. Include a timed challenge: "Which division's top customer is most at risk of churning?" (requires CRM + Zendesk data). | Hands-on |
-| 53-63 | **Workshop: Your Company's Data Map.** Each student sketches their company's 3-5 core systems and identifies one cross-system question nobody can answer easily today. Who answers it now? How long does it take? This data map carries forward — it becomes the foundation for your capstone strategy. | Individual work |
-| 63-78 | **Breakout: How Scattered Is Your Data? (groups of 3-4).** Compare data maps. What systems do you have in common? Where is integration hardest? What cross-system questions would have the most business value? Each group reports: one common pattern and one surprising idiosyncrasy. | Breakout rooms |
-| 78-87 | **What We're Skipping.** Before any agent can query real systems, someone must: catalog the data, document schemas, provision API access, classify PII. This is 60-90 days of pre-work that the demo does not show. Name it now so expectations are calibrated. Also: how data moves today — APIs, integration platforms (MuleSoft), ETL/data warehouses, CSV exports. The traditional answer is a warehouse ($500K-5M, 6-18 months). The alternative: query each system where it lives. Both have tradeoffs. | Lecture |
+| 53-58 | **What We're Skipping (Structured Data).** Before any agent can query real systems, someone must: catalog the data, document schemas, provision API access, classify PII. This is 60-90 days of pre-work that the demo does not show. Name it now so expectations are calibrated. Also: how data moves today — APIs, integration platforms (MuleSoft), ETL/data warehouses, CSV exports. The traditional answer is a warehouse ($500K-5M, 6-18 months). The alternative: query each system where it lives. Both have tradeoffs. | Lecture |
+| 58-68 | **Demo: Document-Based Q&A.** "Not all company knowledge lives in databases. Policies, contracts, board minutes, procedures — these are unstructured text. AI can search them too." Open the Meridian document collection and ask: "What is our policy on remote work for the Energy Division?" Show the answer with citations — page numbers and quoted passages. Then a combined question: "What's our contractual commitment to GE, and how does their actual spending compare?" — document AI for the contract, database agent for the spending. Two retrieval paths, one answer. | Live demo |
+| 68-73 | **How RAG Works (Essentials).** The pipeline in one slide: (1) documents are chunked into passages, (2) chunks are converted to numerical vectors by an embedding model, (3) the user's question is embedded the same way and matched against stored chunks, (4) top matches are sent to the LLM as context, (5) the LLM answers using only the retrieved context with citations. Key concept: *chunking* — how you split documents determines what the AI can find. Chunk too large, retrieval is noisy; chunk too small, context is lost. We'll see chunking failures in the Atherton case (Session 6 pre-reading). | Lecture |
+| 73-82 | **Breakout: How Scattered Is Your Data? (groups of 3-4).** Each student sketches their company's 3-5 core systems AND 2-3 document collections that trap important knowledge. Compare: what systems and document types do you have in common? Where is integration hardest? What cross-system questions would have the most business value? Each group reports: one common pattern and one surprising idiosyncrasy. This data map carries forward — it becomes the foundation for your capstone strategy. | Breakout rooms |
+| 82-87 | **Bridge to Deliverables.** "You've seen AI query databases and search documents. Next session: the full pipeline — from raw data to board-ready deliverables. The same agent that answers questions can produce charts, memos, and automated reports." | Lecture |
 | 87-90 | Homework | Wrap |
 
-**Homework:** (1) Log into the Meridian app and ask 10 business questions — at least 3 cross-system. Write down one question the agent answered well and one where it was unsatisfying or wrong. Bring both to Session 4. (2) Complete your data map: list at least 5 systems your company uses and the top 3 cross-system questions you can't answer today.
+**Homework:** (1) Log into the Meridian app and ask 10 business questions — at least 3 cross-system and at least 2 from the document collection. Write down one question the agent answered well and one where it was unsatisfying or wrong. Bring both to Session 4. (2) Complete your data map: list at least 5 systems your company uses, the top 3 cross-system questions you can't answer today, and 2-3 document collections that trap important knowledge. *Optional viewing: Demos 6-7 show building a RAG system from scratch and combining it with a database agent — deeper context for the document Q&A introduced today.*
 
 ---
 
@@ -236,7 +239,7 @@ Students arrive having read the deployment options, data security approaches, an
 **Wednesday, May 20 — Red-Teaming, Reliability, and Governance**
 
 **Learning objectives:**
-- Identify failure modes of AI agents (hallucination, wrong joins, misleading aggregations, overconfident document citations)
+- Identify failure modes of AI agents (hallucination, wrong joins, misleading aggregations)
 - Apply the maker/checker framework from Session 2 to enterprise data scenarios
 - Understand data governance and regulatory requirements for AI agents
 
@@ -254,32 +257,37 @@ Students arrive having read the deployment options, data security approaches, an
 | 73-85 | **Breakout: Your Governance Requirements (groups of 3-4).** Given your industry and regulatory environment, what guardrails would you require before deploying an AI agent? What's the minimum viable governance framework? Each group reports: what governance requirements were universal vs. industry-specific? Where would adoption stall without executive air cover? | Breakout rooms |
 | 85-90 | Homework | Wrap |
 
-**Homework:** (1) Read the Atherton Financial case study (provided). A wealth management firm deployed document AI and hit chunking, access control, and staleness failures. Come prepared to discuss: what would you have done differently? (2) Begin drafting your capstone strategy (template and evaluation rubric provided): problem statement, proposed solution, deployment approach, 90-day pilot plan. (3) For your identified use case: write down the three most likely failure modes and how you'd mitigate each. *Optional: Linux server Exercise 4 (red-teaming) directly applies to today's session. Optional viewing: Demo 5.*
+**Homework:** (1) **Pre-reading for Session 7:** Read the Atherton Financial case study (provided). A wealth management firm deployed document AI and hit chunking, access control, and staleness failures. Come prepared to discuss: what would you have done differently? The governance failures in this case apply broadly — not just to document AI but to any AI system that operates on enterprise data. (2) Begin drafting your capstone strategy (template and evaluation rubric provided): problem statement, proposed solution, deployment approach, 90-day pilot plan. (3) For your identified use case: write down the three most likely failure modes and how you'd mitigate each. *Optional: Linux server Exercise 4 (red-teaming) directly applies to today's session. Optional viewing: Demo 5.*
 
 ---
 
-### SESSION 7: "Document AI — Answers from Your Own Files"
-**Wednesday, May 27 — Retrieval-Augmented Generation (RAG)**
+### SESSION 7: "Let the Data Predict"
+**Wednesday, May 27 — Predictive Modeling with AI**
 
 **Learning objectives:**
-- Understand how AI can answer questions grounded in company documents with citations
-- Distinguish database AI (structured data queries) from document AI (unstructured text retrieval)
-- Experience RAG hands-on and understand deployment decisions
+- Understand classification vs. regression and when each applies
+- Use AI to build and evaluate predictive models without writing code yourself
+- Interpret model output and know when to trust predictions
+
+**Key concepts:** gradient boosting (the one method explained in detail), classification and regression, cross-validation, fit and predict, confusion matrices, feature importance.
+
+**Framing:** AI as backstop — you don't need to understand the math behind gradient boosting, you need to understand what models do and how to evaluate them. The maker/checker framework applies: AI builds the model, you evaluate whether predictions make business sense.
 
 **Session flow:**
 
 | Min | Segment | Format |
 |---|---|---|
-| 0-10 | **Bridge + Atherton Case Debrief.** "You've learned to deploy agents (Session 5) and verify their output (Session 6). Both sessions focused on structured data — databases and SQL. But most company knowledge isn't in databases. It's in policies, contracts, emails, and slide decks. Today we add a second capability — and the Atherton case shows what can go wrong." Quick debrief: Atherton deployed document AI and hit chunking failures, access control gaps, and stale documents. What would you have done differently? | Lecture + discussion |
-| 10-22 | **Demo: Document-Based Q&A.** Pre-loaded document collection for Meridian Corp: employee handbook, vendor contracts, compliance policies, board minutes. Ask: "What is our policy on remote work for the Energy Division?" "Which vendor contracts are up for renewal in Q2?" "What did the board approve regarding the Safety Division expansion?" Answers come with citations — page numbers and quoted passages. Then the combined question: "What's our contractual commitment to GE, and how does their actual spending compare?" — RAG for the contract, database agent for the spending. | Live demo |
-| 22-32 | **How RAG Works.** The retrieval-augmented generation pipeline: (1) documents are chunked into passages, (2) an embedding model converts each chunk into a numerical vector, (3) chunks are stored in a vector database, (4) the user's question is embedded the same way and matched against stored chunks, (5) the top matches are sent to the LLM as context, (6) the LLM answers using only the retrieved context. Compare to database agents: RAG handles *unstructured* text; database agents handle *structured* data. Both are tools in the same toolkit. | Lecture |
-| 32-52 | **Hands-on: Query the Document Collection.** Students ask questions of the Meridian document set. Three rounds: (1) Simple retrieval — "What are the safety training requirements?" "What's the PTO policy for the Energy Division?" (2) Cross-document — "How do the vendor contract terms for our top 3 suppliers compare?" (3) Cross-system — "Does our vendor contract with Acme align with what we're actually ordering from them?" (combining document AI with database queries). Students note which answers include citations and which don't. | Hands-on |
-| 52-62 | **Reliability of Document AI.** RAG-specific failure modes: retrieval misses (the answer exists but wasn't retrieved), hallucinated citations (the AI cites a passage that doesn't say what it claims), context window limits, and stale documents. Live demo: ask a question where chunking split a relevant passage — show the partial answer and explain why. Verification protocol: always check the cited passage, not just the summary. The maker/checker framework applies to documents just as it does to data. | Lecture + demo |
-| 62-75 | **Deploying RAG.** The deployment framework from Session 5 applies — we won't repeat it. What's new for document AI: **Document ingestion** — PDF parsing, chunking strategy (by section for policies, by clause for contracts — not one-size-fits-all), and freshness management. **Access control** — the RAG system must enforce the same document permissions as your file server. Atherton's oversharing problem is the cautionary tale. **Build-vs-buy for document AI:** turnkey RAG platforms (Glean, Guru, Microsoft Copilot for M365) handle ingestion and permissions out of the box but limit customization. Custom builds offer more control but require engineering resources. | Lecture + Q&A |
-| 75-87 | **Breakout: Where Is Knowledge Trapped? (groups of 3-4).** What knowledge in your company is trapped in documents — policies, contracts, procedures, regulatory filings, past analyses? Each person names 2-3 document collections that would benefit from AI-powered Q&A. Compare: what types of documents came up repeatedly? What access control challenges are common? Each group reports: the most valuable document AI use case and the biggest deployment obstacle. | Breakout rooms |
-| 87-90 | Capstone preview and homework | Wrap |
+| 0-10 | **Bridge + Atherton Debrief.** "You've learned to deploy agents (Session 5), verify their output (Session 6), and access both structured data and documents (Session 3). Today we add a new capability: prediction. Instead of asking 'what happened?' we ask 'what will happen?'" Quick Atherton debrief: the case shows what happens when document AI is deployed without proper access controls and freshness management. What would you have done differently? Governance lessons apply to predictive models too — a model that predicts on stale data is just as dangerous as a RAG system citing stale documents. | Lecture + discussion |
+| 10-20 | **Classification vs. Regression.** Two types of prediction: *classification* (will this customer churn? yes/no) and *regression* (how much will this customer spend next quarter?). Every business prediction falls into one of these categories. Quick audience exercise: classify 5 business questions as classification or regression. | Lecture + discussion |
+| 20-35 | **Demo: Building a Predictive Model with AI.** Live walkthrough: prompt Claude to build a gradient boosting classifier for customer churn prediction from a provided dataset. Show the full conversation: describe the data → ask for a model → get code → run it → review results. The AI handles the code; the human evaluates the output. Walk through what the model produces: predictions, a confusion matrix (true positives, false positives, etc.), feature importance (which variables matter most), and cross-validation scores (how well does the model generalize?). Key insight: you didn't write the code, but you need to understand these four outputs to decide if the model is trustworthy. | Live demo |
+| 35-42 | **Gradient Boosting: The One Method.** We won't survey dozens of algorithms. Gradient boosting is the workhorse of tabular prediction — it wins most Kaggle competitions on structured data and is what practitioners reach for first. How it works (conceptual): builds many small decision trees sequentially, each one correcting the errors of the previous ones. You don't need to tune it manually — AI handles hyperparameter selection — but you need to know it exists so you can evaluate vendor claims and ask the right questions. | Lecture |
+| 42-55 | **Hands-on: Build Your Own Model.** Students use Claude to build a predictive model from a provided dataset (customer churn or sales forecasting — student chooses). Guided steps: (1) Upload the data and ask Claude to explore it. (2) Ask Claude to build a gradient boosting model and evaluate it. (3) Review the confusion matrix — what's the false positive rate? What's the business cost of each type of error? (4) Review feature importance — do the top features make business sense? (5) Ask Claude: "What would a skeptical VP of Sales push back on?" | Hands-on |
+| 55-65 | **When to Trust Predictions.** The maker/checker framework for predictive models. Three questions: (1) Does the model perform better than a simple baseline (e.g., "predict everyone churns")? (2) Do the important features make business sense, or is the model exploiting a data artifact? (3) How does cross-validation performance compare to training performance — is the model memorizing or generalizing? Red flags: a model that's "too good" (99% accuracy usually means data leakage), features that shouldn't be predictive (e.g., customer ID), and performance that drops sharply on new data. | Lecture + discussion |
+| 65-78 | **Breakout: Prediction Opportunities (groups of 3-4).** Each student identifies 1-2 prediction problems at their company: what would you predict, what data would you need, and what would you do with the predictions? For each: is it classification or regression? What's the cost of a false positive vs. a false negative? Each group reports: the most valuable prediction opportunity and the biggest data obstacle. | Breakout rooms |
+| 78-85 | **Bridge to Capstone.** "You now have the full toolkit: personal productivity (Sessions 1-2), enterprise data queries (Sessions 3-4), document Q&A (Session 3), deployment and governance (Sessions 5-6), and predictive modeling (today). Your capstone strategy can draw on any combination. Next session: you present." | Lecture |
+| 85-90 | Capstone finalization and homework | Wrap |
 
-**Homework:** Finalize your strategy document (1-2 pages using the capstone template). Prepare a 5-minute presentation. The evaluation rubric is included with the template — use it to self-check before presenting. *Optional viewing: Demos 6-7 show building a RAG system and combining it with a database agent.*
+**Homework:** Finalize your strategy document (1-2 pages using the capstone template). Prepare a 5-minute presentation. The evaluation rubric is included with the template — use it to self-check before presenting. Consider whether predictive modeling fits your use case — if so, add it to your strategy. *Optional viewing: Demos 6-7 show building a RAG system and combining it with a database agent (relevant if your capstone includes document AI).*
 
 ---
 
@@ -298,9 +306,9 @@ Students arrive having read the deployment options, data security approaches, an
 | 0-3 | **Setup.** You are presenting to your executive team. Your breakout group is your board of advisors. | Framing |
 | 3-30 | **Breakout pitches.** 5 groups of 6. Each person gives a 2-minute pitch to their group, followed by 1 minute of quick feedback. Group then votes on the strongest strategy to represent them in the plenary. (Every student presents; 5 advance to the full class.) | Breakout rooms |
 | 30-70 | **Plenary presentations.** 5 winning strategies presented to the full class (5 min each + 3 min Q&A/feedback). Instructor feedback on: is the pilot scoped tightly enough? Is the business case credible? Is the governance plan adequate? Does the Day 1 action actually happen on Day 1? | Presentations |
-| 70-78 | **Synthesis: What You Now Know.** (1) AI is a personal productivity multiplier — charts, documents, analyses, automated workflows — available to you right now. (2) AI agents turn plain English into enterprise data answers — replacing dashboards, manual reports, and the wait for analyst time. (3) The technology is simpler than you expected (50 lines), but production requires governance, verification, and organizational readiness. (4) Document AI and database AI are complementary — together they cover structured and unstructured company knowledge. (5) The critical skill is not building AI tools — it's asking the right questions, iterating on output, and verifying the answers. The maker/checker mindset is the throughline. | Lecture |
+| 70-78 | **Synthesis: What You Now Know.** (1) AI is a personal productivity multiplier — charts, documents, analyses, automated workflows — available to you right now. (2) AI agents turn plain English into enterprise data answers — replacing dashboards, manual reports, and the wait for analyst time. (3) The technology is simpler than you expected (50 lines), but production requires governance, verification, and organizational readiness. (4) Database AI, document AI, and predictive modeling are complementary — together they cover structured data, unstructured knowledge, and forward-looking predictions. (5) The critical skill is not building AI tools — it's asking the right questions, iterating on output, and verifying the answers. The maker/checker mindset is the throughline. | Lecture |
 | 78-86 | **Beyond Data: AI as Thinking Partner.** One final capability. Live demo: ask the Meridian app not "What were Q4 sales?" but "I'm considering expanding the Energy Division into the Southeast — based on our pipeline, customer concentration, and support ticket trends, what are the top 3 risks?" Watch the agent reason across multiple systems. Then push back: "You're assuming our supply chain can handle Southeast volume — what if it can't?" The agent adjusts its analysis. Key insight: AI will anchor on whatever framing you provide. The same data with different framing produces different recommendations. The human role is providing context, challenging assumptions, and deciding — not outsourcing judgment. | Live demo + discussion |
-| 86-88 | **Monday Morning Actions.** Five things every participant can do regardless of role: (a) Use AI for your personal workflow — the tools from Sessions 1-2 are available now, no IT approval needed. (b) Audit your reporting workflows — which ones follow the data → analysis → deliverable pattern and could be automated? (c) Scope a 30-day discovery sprint on one data access use case. (d) Inventory the document collections that would benefit from AI-powered Q&A. (e) Establish an AI governance framework before shadow IT does it for you. | Lecture |
+| 86-88 | **Monday Morning Actions.** Five things every participant can do regardless of role: (a) Use AI for your personal workflow — the tools from Sessions 1-2 are available now, no IT approval needed. (b) Audit your reporting workflows — which ones follow the data → analysis → deliverable pattern and could be automated? (c) Scope a 30-day discovery sprint on one data access use case. (d) Identify one prediction problem where AI-assisted modeling could drive better decisions. (e) Establish an AI governance framework before shadow IT does it for you. | Lecture |
 | 88-90 | Close. Resources for continued learning. Optional 30-day follow-up session to report on progress. | Wrap |
 
 ---
@@ -311,36 +319,36 @@ Students arrive having read the deployment options, data security approaches, an
 |---|---|---|---|
 | 1 | What AI Can Do for You | Claude artifacts: charts, docs, calculators | Personal productivity |
 | 2 | Iterate, Critique, Trust | Maker/checker framework + reusable workflows | Iteration and calibrated trust |
-| 3 | AI Meets Your Data | Meridian app: single + cross-system queries | Enterprise data access |
+| 3 | AI Meets Your Data | Meridian app: structured queries + RAG document Q&A | Structured and unstructured data |
 | 4 | From Data to Deliverable | Full pipeline demo + agent loop + hands-on reporting | Reporting pipelines |
 | 5 | What Does Deployment Look Like? | LLM deployment + data security + build vs. buy | Architecture and deployment |
 | 6 | Can You Trust It? | Failure demos + red-teaming + governance | Reliability and compliance |
-| 7 | Document AI | RAG demo + hands-on document Q&A + RAG deployment | Unstructured knowledge |
+| 7 | Let the Data Predict | Predictive modeling with AI: classification, regression, gradient boosting | Prediction and evaluation |
 | 8 | Your AI Strategy | Capstone presentations + synthesis | Integration |
 
 ## Course Arc
 
 - **Week 1 (Sessions 1-2): What AI Can Do for You** — Personal productivity with AI. Generate charts, documents, Excel analyses. Iterate and critique. The maker/checker mindset from day one.
-- **Week 2 (Sessions 3-4): AI Meets Your Data** — Meridian Corp simulation and enterprise data. Cross-system queries, reporting pipelines, the agent loop.
+- **Week 2 (Sessions 3-4): AI Meets Your Data** — Meridian Corp simulation. Structured data (cross-system queries) and unstructured data (RAG document Q&A). Reporting pipelines and the agent loop.
 - **Week 3 (Sessions 5-6): Deployment and Trust** — Architecture, data security, build vs. buy, red-teaming, governance.
-- **Week 4 (Sessions 7-8): Document AI and Strategy** — RAG, capstone presentations.
+- **Week 4 (Sessions 7-8): Prediction and Strategy** — Predictive modeling with AI, capstone presentations.
 
 ## Recurring Elements
 
-- **Maker/Checker Thread:** Introduced in Session 1 (preview), formalized in Session 2 (calibrated trust framework), applied in Session 4 (enterprise data verification), deepened in Session 6 (red-teaming and governance), extended in Session 7 (document AI verification). This is the throughline of the course.
+- **Maker/Checker Thread:** Introduced in Session 1 (preview), formalized in Session 2 (calibrated trust framework), applied in Session 4 (enterprise data verification), deepened in Session 6 (red-teaming and governance), extended in Session 7 (evaluating predictive model output). This is the throughline of the course.
 - **Data Map → Capstone:** Students sketch their company's data landscape in Session 3 and build on it through the capstone strategy in Session 8.
 - **Breakout Rooms:** Sessions 1, 2, 3, 5, 6, 7, 8. Sessions 3/5/6/7 use a "how does this work at your company?" format where students compare corporate realities and report patterns back to the group.
-- **Hands-on:** Every session includes hands-on interaction — Claude.ai in Sessions 1-2, the Meridian app in Sessions 3-4 and 6-7, individual work in Sessions 5 and 8.
+- **Hands-on:** Every session includes hands-on interaction — Claude.ai in Sessions 1-2, the Meridian app in Sessions 3-4 and 6, Claude for predictive modeling in Session 7, individual work in Sessions 5 and 8.
 - **Linux Server:** Available throughout for self-paced exploration; live build demo in Session 4; exercises are optional homework.
 - **Iteration Skills:** Introduced with Claude.ai in Session 1, formalized in Session 2 (self-critique, reusable prompts), applied to enterprise data in Sessions 3-4, applied to governance in Session 6.
-- **Deployment Architecture Thread:** Code execution preview (Session 4), LLM deployment and data security (Session 5), RAG deployment (Session 7) — builds a complete picture of what production requires.
-- **Case Studies:** Morgan Stanley AI Assistant (Session 5 — deployment decisions in regulated finance), Atherton Financial RAG deployment (Session 7 — document AI challenges). Each assigned as pre-reading and debriefed at the start of the paired session.
+- **Deployment Architecture Thread:** Code execution preview (Session 4), LLM deployment and data security (Session 5) — builds a complete picture of what production requires.
+- **Case Studies:** Morgan Stanley AI Assistant (Session 5 — deployment decisions in regulated finance), Atherton Financial RAG deployment (Session 7 — document AI governance failures). Each assigned as pre-reading and debriefed at the start of the paired session.
 - **HPE Success Story:** Session 4 — Marie Myers / "Alfred" agent replacing 100-slide weekly review. Provides a real-world benchmark for automated reporting pipelines.
 
 ## Capstone Template (provided to students)
 
 1. **The Problem:** What question can't be answered today? What's the business impact?
-2. **The Solution:** Personal AI productivity, database AI, document AI, or a combination — which tools, systems, and document collections; build/buy/extend decision
+2. **The Solution:** Personal AI productivity, database AI, document AI, predictive modeling, or a combination — which tools, systems, and document collections; build/buy/extend decision
 3. **Deployment Approach:** Cloud vs. on-premise vs. hybrid; data security approach; for document AI, managed platform vs. custom build
 4. **The 90-Day Pilot:** Team (who), data (which systems/documents), timeline (week-by-week), governance minimum
 5. **Success Metrics:** Time-to-insight, decisions enabled, error reduction, adoption rate
@@ -368,9 +376,10 @@ Students arrive having read the deployment options, data security approaches, an
 | Analyze data and produce reports using AI agents | Sessions 3-4 (enterprise queries, reporting pipelines) |
 | Connect AI to corporate databases | Session 4 (agent loop, code execution, database connections) |
 | Build automated reporting pipelines | Session 4 (full pipeline, hands-on report building, HPE case) |
-| Deploy document-based AI with citations | Session 7 (RAG implementation, hands-on, deployment) |
+| Deploy document-based AI with citations | Session 3 (RAG basics, document Q&A demo and hands-on) |
 | Evaluate reliability, compliance, and governance | Session 6 (red-teaming, governance), Session 2 (calibrated trust) |
-| Understand deployment and data security | Session 4 (code execution preview), Session 5 (LLM deployment, data security, build vs. buy), Session 7 (RAG deployment) |
+| Understand deployment and data security | Session 4 (code execution preview), Session 5 (LLM deployment, data security, build vs. buy) |
+| Build and evaluate predictive models with AI | Session 7 (gradient boosting, classification/regression, model evaluation) |
 
 ## Supplementary Materials
 
@@ -397,14 +406,14 @@ Optional (assigned Session 4, useful by Session 5):
 
 #### Before Session 7 (assigned in Session 6 homework)
 
-- **Atherton Financial Case Study** (provided) — A wealth management firm deployed document AI and hit chunking failures, access control gaps, and stale documents. Composite case based on real deployments.
+- **Atherton Financial Case Study** (provided) — A wealth management firm deployed document AI and hit chunking failures, access control gaps, and stale documents. Composite case based on real deployments. Illustrates governance failures that apply broadly — not just to document AI but to any AI system operating on enterprise data.
 
 ### Case Studies
 
 | Case Study | Session | Theme |
 |---|---|---|
 | Morgan Stanley AI Assistant | 5 | Deployment decisions in regulated finance |
-| Atherton Financial (composite) | 7 | Document AI deployment challenges |
+| Atherton Financial (composite) | 7 | Document AI governance failures (access control, staleness, chunking) |
 
 ### Recorded Demo Videos
 
@@ -415,5 +424,5 @@ Optional (assigned Session 4, useful by Session 5):
 | 3 | Wrapping It in a Web App | 15 min | Session 4 |
 | 4 | Building a Reporting Pipeline | 20 min | Session 4 |
 | 5 | Red-Teaming Your Agent | 15 min | Session 6 |
-| 6 | Building a RAG System | 20 min | Session 7 |
-| 7 | Combining Database + Document AI | 15 min | Session 7 |
+| 6 | Building a RAG System | 20 min | Session 3 |
+| 7 | Combining Database + Document AI | 15 min | Session 3 |
