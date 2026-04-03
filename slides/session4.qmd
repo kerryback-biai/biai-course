@@ -665,13 +665,13 @@ The reporting pipeline produces a **document** --- a PDF, a memo, a deck. But wh
 :::
 
 ::: {.highlight-box}
-One prompt to Claude Code: "Build a Streamlit dashboard that shows revenue by division with filters for date range and product category." Working app in under **5 minutes**.
+One prompt to Claude Code: "Build an interactive dashboard that shows revenue by division with filters for date range and product category." Working app in under **5 minutes**.
 :::
 
 ::: {.notes}
 Say: "The pipeline we just built produces a static deliverable --- a document. That is the right output for a board memo or a quarterly review. But some use cases need something interactive. A sales manager wants to filter by region. A VP wants to toggle between divisions. That is a dashboard."
 
-"Here is the key insight: the same AI tools that build reporting pipelines can also build interactive applications. One prompt to Claude Code, and you have a working Streamlit dashboard. Let me show you."
+"Here is the key insight: the same AI tools that build reporting pipelines can also build interactive applications. One prompt to Claude Code, and you have a working dashboard. Let me show you."
 
 Transition to the demo walkthrough.
 :::
@@ -685,7 +685,7 @@ Transition to the demo walkthrough.
 The prompt (typed into Claude Code on the AI+Code Lab)
 :::
 ```
-Build a Streamlit dashboard that visualizes XYZ Corp data.
+Build an interactive dashboard that visualizes XYZ Corp data.
 Include: revenue by division (bar chart), a trend line for
 monthly revenue, dropdown filters for date range and product
 category, and a downloadable CSV of the filtered data.
@@ -696,7 +696,7 @@ category, and a downloadable CSV of the filtered data.
 ::: {.box-title}
 What Claude Code Produces
 :::
-- A single Python file (~80 lines) with Streamlit, Pandas, and Plotly
+- A single Python file (~80 lines) using a web framework, Pandas, and Plotly
 - Data loading from the XYZ Corp dataset
 - Interactive dropdown filters for division, date range, and product category
 - Bar chart of revenue by division, trend line of monthly revenue
@@ -705,11 +705,11 @@ What Claude Code Produces
 :::
 
 ::: {.notes}
-Say: "This is what I typed into Claude Code on the AI+Code Lab. It produced a working Streamlit app in about 3 minutes. Let me walk you through what it built."
+Say: "This is what I typed into Claude Code on the AI+Code Lab. It produced a working web app in about 3 minutes. Let me walk you through what it built."
 
-"The output is a single Python file --- about 80 lines. It loads the XYZ Corp data, creates dropdown filters for division, date range, and product category, generates a bar chart and a trend line, and includes a download button for the filtered data. You run it with one command --- 'streamlit run dashboard.py' --- and you have an interactive web app."
+"The output is a single Python file --- about 80 lines. Claude Code chose the framework --- it might pick Streamlit, Gradio, or FastAPI depending on the task. It loads the XYZ Corp data, creates dropdown filters for division, date range, and product category, generates a bar chart and a trend line, and includes a download button for the filtered data. One command to run it, and you have an interactive web app."
 
-"Notice: no HTML, no CSS, no JavaScript, no front-end framework. Streamlit handles all of that. Claude Code wrote the data logic and the layout. The entire thing took less time than formatting a PowerPoint slide."
+"The point is: you describe what you want, and the AI picks the right tools and builds it. The entire thing took less time than formatting a PowerPoint slide."
 
 If doing this live, switch to the AI+Code Lab and show the running app. If not, describe the result and show a screenshot.
 :::
