@@ -21,10 +21,10 @@ website:
   search: false
   navbar:
     search: false
-    title: Business Intelligence & AI
+    title: false
     left:
       - href: index.qmd
-        text: Home
+        icon: house-fill
       - href: slides.qmd
         text: Slides
 

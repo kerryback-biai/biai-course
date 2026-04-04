@@ -1,5 +1,5 @@
 
-## Business Intelligence & AI<br>Summer 2026<br><br>![](RiceBusiness-transparent-logo-sm.png){width=40%}
+## From BI to AI: Making Data-Driven Decisions with Agentic AI<br>Summer 2026<br><br>![](RiceBusiness-transparent-logo-sm.png){width=40%}
 
 
 ### Instructor
@@ -9,4 +9,4 @@ J. Howard Creekmore Professor of Finance and Professor of Economics
 
 ### Course Description
 
-This course explores how AI agents are transforming business intelligence — from querying databases in plain English to building automated reporting pipelines, deploying document AI, and developing enterprise AI strategy.
+AI agents that understand plain English are transforming how professionals work — generating charts, writing documents, building analyses, and querying enterprise data. In this four-week program, you will use AI tools to boost your personal productivity from day one, then extend those skills to enterprise data systems, deployment architecture, predictive modeling, and governance. You will leave equipped with tools you can immediately use in your daily work and a concrete strategy for bringing AI-powered capabilities to your organization.
