@@ -21,16 +21,18 @@ website:
   search: false
   navbar:
     search: false
-    title: false
+    title: ""
     left:
       - href: index.qmd
         icon: house-fill
       - href: slides.qmd
         text: Slides
-      - href: https://ai-lab.rice-business.org
-        text: AI Lab
-      - href: https://xyzcorp.rice-business.org
-        text: XYZ Corp
+      - text: AI Lab
+        href: https://ai-lab.rice-business.org
+        target: _blank
+      - text: XYZ Corp
+        href: https://xyzcorp.rice-business.org
+        target: _blank
 
 format:
   html:
