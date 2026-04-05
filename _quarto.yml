@@ -27,6 +27,10 @@ website:
         icon: house-fill
       - href: slides.qmd
         text: Slides
+      - href: https://ai-lab.rice-business.org
+        text: AI Lab
+      - href: https://xyzcorp.rice-business.org
+        text: XYZ Corp
 
 format:
   html:
