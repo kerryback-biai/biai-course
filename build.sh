@@ -1,5 +1,5 @@
 #!/bin/bash
-# Render the Quarto site, then encrypt all HTML files with StatiCrypt.
+# Render the Quarto site, then encrypt slides.html with StatiCrypt.
 # Usage: bash build.sh
 
 set -e
@@ -7,8 +7,8 @@ set -e
 echo "Rendering Quarto site..."
 quarto render
 
-echo "Encrypting HTML files..."
-staticrypt docs/*.html docs/slides/*.html -r -d docs -p "execed@rice" \
+echo "Encrypting slides page..."
+staticrypt docs/slides.html -r -d docs -p "execed@rice" \
     --remember 90 --short \
     --template-title "From BI to AI" \
     --template-instructions "Enter the course password." \
@@ -18,4 +18,4 @@ staticrypt docs/*.html docs/slides/*.html -r -d docs -p "execed@rice" \
     --template-color-primary "#00205B" \
     --template-color-secondary "#7C7E7F"
 
-echo "Done. Site rendered and encrypted."
+echo "Done. Site rendered and slides page encrypted."
