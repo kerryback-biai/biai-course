@@ -22,7 +22,7 @@ website:
   navbar:
     search: false
     title: "BI to AI"
-    left:
+    right:
       - href: slides.qmd
         text: Slides
       - text: AI Lab
